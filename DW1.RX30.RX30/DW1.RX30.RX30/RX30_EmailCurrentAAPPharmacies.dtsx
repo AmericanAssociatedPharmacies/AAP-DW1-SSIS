@@ -1,0 +1,815 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/21/2017 1:52:30 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{65F3DE88-7162-4933-95EB-B2DA1990A7FB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RX30_EmailCurrentAAPPharmacies"
+  DTS:PackageType="5"
+  DTS:VersionBuild="30"
+  DTS:VersionGUID="{A6C4A8E2-F8E8-45AA-8611-5F8A1C59CDB5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Archive]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{A377D18F-9DE9-4965-8BE1-6BBE63C4AAFA}"
+      DTS:ObjectName="Archive">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varArchiveFilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\Archive\AAP_ActiveRX_20201218.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ServiceProviderID"
+              DTS:DTSID="{135501DF-18F7-488B-BBC3-B88F62B672B7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AccountName"
+              DTS:DTSID="{DA087690-5D89-4976-ADFA-FD95C25B98C7}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB1 Email]"
+      DTS:CreationName="SMTP"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{92B6DD8E-BE49-4D13-B5EB-48D69ED543D4}"
+      DTS:ObjectName="DB1 Email">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=ws1.aap.local;UseWindowsAuthentication=False;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[EmailedFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{C91B708E-CA93-4B29-9EFD-260337FF5A7E}"
+      DTS:ObjectName="EmailedFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varFilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\AAP_ActiveRX_20201218.CSV">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ServiceProviderID"
+              DTS:DTSID="{07F52DD4-5F07-41E6-81F2-B28B6BF58AF7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AccountName"
+              DTS:DTSID="{9867F2DF-0315-4C63-BB40-F21E5EED4497}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C8EA74FB-EE33-40C3-A60D-ECE8D6608E09}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\fs1.aap.local\\Server\\IT Department\\RX30\\ServiceProvider\\Archive\\AAP_ActiveRX_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate()) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate()), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate()), 2) +&quot;.CSV&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varArchiveFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\Archive\AAP_ActiveRX_20201218.CSV</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3B4E899D-D1EA-42D6-A65B-18D6C860F846}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varFileDir] +  @[User::varFile]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFile">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FB8C8254-478B-4A91-BF2E-2D5DAA25A7DE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileDir">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5B1A1B7C-E717-4B79-B3BF-E7562270A8D0}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;\\\\fs1.aap.local\\Server\\IT Department\\RX30\\ServiceProvider\\AAP_ActiveRX_&quot; + (DT_STR,4,1252)DATEPART( &quot;yyyy&quot; , getdate()) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;mm&quot; , getdate()), 2) + RIGHT(&quot;0&quot; + (DT_STR,4,1252)DATEPART( &quot;dd&quot; , getdate()), 2) +&quot;.CSV&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\AAP_ActiveRX_20201218.CSV</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3F39F9A4-7989-4B50-B329-4CB4B209A6D1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFullFileName">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Email CSV File"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{082DFE9F-ADA6-4214-A692-3EABD73C67B2}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Email CSV File"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{9458C6FE-3D7A-46B1-A28E-EA7BDA42439B}"
+          SQLTask:SqlStatementSource="&#x9;EXEC msdb.dbo.sp_send_dbmail  &#xA;    &#xA;    @recipients = 'scott.edwards@rxaap.com&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;; padams@rx30.com&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;; syreeta.sarpong@rxaap.com'&#xA;&#x9;, @body = 'This email has an attachment of the active AAP Pharmcies.'&#xA;&#x9;, @subject = 'AAP Active Pharmacies'&#xA;&#x9;, @file_attachments = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::varFilePath"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Export Active Service Providers"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B6F4C532-9E9B-44B6-B678-D706B5C93AEC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Export Active Service Providers"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Export Active Service Providers\Archive"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Archive"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Export Active Service Providers\Archive.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Archive]"
+                  connectionManagerRefId="Package.ConnectionManagers[Archive]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input].Columns[ServiceProviderID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ServiceProviderID"
+                      externalMetadataColumnId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input].ExternalColumns[ServiceProviderID]"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServiceProviderID]" />
+                    <inputColumn
+                      refId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input].Columns[AccountName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="65"
+                      cachedName="AccountName"
+                      externalMetadataColumnId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input].ExternalColumns[AccountName]"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input].ExternalColumns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ServiceProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="AccountName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Export Active Service Providers\EmailedFile"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="EmailedFile"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Export Active Service Providers\EmailedFile.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[EmailedFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[EmailedFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input].Columns[ServiceProviderID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ServiceProviderID"
+                      externalMetadataColumnId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input].ExternalColumns[ServiceProviderID]"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServiceProviderID]" />
+                    <inputColumn
+                      refId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input].Columns[AccountName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="65"
+                      cachedName="AccountName"
+                      externalMetadataColumnId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input].ExternalColumns[AccountName]"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input].ExternalColumns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ServiceProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="AccountName" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Export Active Service Providers\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Export Active Service Providers\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Export Active Service Providers\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Export Active Service Providers\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Export Active Service Providers\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Export Active Service Providers\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Export Active Service Providers\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Export Active Service Providers\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Export Active Service Providers\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[usp_Active_AAP_RX30]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Export Active Service Providers\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{FC1D7E98-B7F5-4A84-832C-E8131CB2168C}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[DB1.PharmacyMaster]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServiceProviderID]"
+                      length="50"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServiceProviderID]"
+                      name="ServiceProviderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      length="65"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      name="AccountName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ServiceProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="65"
+                      name="AccountName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServiceProviderID]"
+                      name="ServiceProviderID" />
+                    <outputColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="65"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      name="AccountName" />
+                    <outputColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Export Active Service Providers.Paths[Multicast Output 1]"
+              endId="Package\Export Active Service Providers\EmailedFile.Inputs[Flat File Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\Export Active Service Providers\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Export Active Service Providers.Paths[Multicast Output 2]"
+              endId="Package\Export Active Service Providers\Archive.Inputs[Flat File Destination Input]"
+              name="Multicast Output 2"
+              startId="Package\Export Active Service Providers\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Export Active Service Providers.Paths[OLE DB Source Output]"
+              endId="Package\Export Active Service Providers\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Export Active Service Providers\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{D70596E6-0A7C-4A84-989E-AE03174FCDB2}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{3988ACBB-3742-4A88-A65C-9B87DCA57E6D}"
+        DTS:ObjectName="{3988ACBB-3742-4A88-A65C-9B87DCA57E6D}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::varFileDir]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="\\fs1.aap.local\Server\IT Department\RX30\ServiceProvider\" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="2" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Delete Previous Emailed"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{883A2D05-8634-4B1B-A16F-443DB60214DE}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete Previous Emailed"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteFile"
+              TaskSourcePath="User::varFullFileName"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{E5B690A8-BB12-405C-8FC3-0F89F7E0240F}"
+          DTS:ObjectName="{E5B690A8-BB12-405C-8FC3-0F89F7E0240F}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varFullFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D1FF3BDD-8F7E-44C8-B85A-D62889F31426}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Export Active Service Providers" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{1DC92828-477A-4505-8CE0-E9F0C5ADB8BB}"
+      DTS:From="Package\Export Active Service Providers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Email CSV File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="146,42"
+          Id="Package\Email CSV File"
+          TopLeft="463,378" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Export Active Service Providers"
+          TopLeft="424,296" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Foreach Loop Container\Delete Previous Emailed"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="169,103"
+          Size="169,146"
+          Id="Package\Foreach Loop Container"
+          TopLeft="450,105" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="535.5,251">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="536.25,338">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40"
+              Start="0,0"
+              End="0,32.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Export Active Service Providers">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Export Active Service Providers\Multicast"
+          TopLeft="433,269" />
+        <NodeLayout
+          Size="132,42"
+          Id="Package\Export Active Service Providers\EmailedFile"
+          TopLeft="313,352" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Export Active Service Providers\OLE DB Source"
+          TopLeft="418,191" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Export Active Service Providers\Archive"
+          TopLeft="552,352" />
+        <EdgeLayout
+          Id="Package\Export Active Service Providers.Paths[OLE DB Source Output]"
+          TopLeft="493,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36"
+              Start="0,0"
+              End="0,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Export Active Service Providers.Paths[Multicast Output 2]"
+          TopLeft="511.666666666667,311">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.8333333333334,41"
+              Start="0,0"
+              End="96.8333333333334,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.7236842105263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.7236842105263"
+                    Point2="0,16.7236842105263"
+                    Point3="4,16.7236842105263" />
+                  <mssgle:LineSegment
+                    End="92.8333333333334,16.7236842105263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92.8333333333334,16.7236842105263"
+                    Point2="96.8333333333334,16.7236842105263"
+                    Point3="96.8333333333334,20.7236842105263" />
+                  <mssgle:LineSegment
+                    End="96.8333333333334,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Export Active Service Providers.Paths[Multicast Output 1]"
+          TopLeft="474.333333333333,311">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-95.3333333333333,41"
+              Start="0,0"
+              End="-95.3333333333333,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.7236842105263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.7236842105263"
+                    Point2="0,16.7236842105263"
+                    Point3="-4,16.7236842105263" />
+                  <mssgle:LineSegment
+                    End="-91.3333333333333,16.7236842105263" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-91.3333333333333,16.7236842105263"
+                    Point2="-95.3333333333333,16.7236842105263"
+                    Point3="-95.3333333333333,20.7236842105263" />
+                  <mssgle:LineSegment
+                    End="-95.3333333333333,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Export Active Service Providers\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

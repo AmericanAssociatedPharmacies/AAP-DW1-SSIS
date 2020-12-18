@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/6/2018 10:13:30 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{0BB62CB7-E047-4CFB-94FF-23E583DB2625}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{2AB46FB2-8FBA-4E7A-9062-44A2AC34B502}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Rx30AAPClaimsLoad20180903.gz]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{82DC9667-933F-44F4-947A-668130587207}"
+      DTS:ObjectName="Rx30AAPClaimsLoad20180903.gz">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="\\fs1.aap.local\Server\IT Department\RX30\Staging\Rx30AAPClaimsLoad20180903.gz" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D0242CEE-7A1A-466C-B3CC-92F4461BE572}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDestination">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\Staging\Rx30AAPClaimsLoad20180903.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{FAE387FB-7BD2-4912-A5FA-78EACAFCF46B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileDir">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\Staging\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2B3A0C2A-5C57-43F8-9A29-BB31D98D25F0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varSource">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\RX30\Staging\Rx30AAPClaimsLoad20180903.gz</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Unzip Task"
+      DTS:CreationName="SSIS.ReplacementTask"
+      DTS:DelayValidation="True"
+      DTS:Description="Unzip Task"
+      DTS:DTSID="{334B6CCC-C285-4707-936E-1A0734BFE0D1}"
+      DTS:ExecutableType="SSIS.ReplacementTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Unzip Task"
+      DTS:TaskContact="Marc Potters and Joost van Rossum, Ilionx.">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <UnzipTask
+          FireInformationMessages="False"
+          DeleteSource="False"
+          FilePathSource=""
+          HasConnectionmanagerSource="False"
+          HasVariableSource="True"
+          SelectedConnectionManagerIDSource=""
+          SelectedVariableIDSource="{2B3A0C2A-5C57-43F8-9A29-BB31D98D25F0}"
+          FilePathDestination=""
+          HasConnectionmanagerDestination="False"
+          HasVariableDestination="True"
+          SelectedConnectionManagerIDDestination=""
+          SelectedVariableIDDestination="{FAE387FB-7BD2-4912-A5FA-78EACAFCF46B}"
+          Filter="*.gz"
+          RegexFilter=".*\.*$"
+          TraverseSubfolder="False"
+          WildcardSelected="True"
+          IgnoreCase="False"
+          OverwriteFile="True"
+          ZipPassword=""
+          SelectedVariableIDZipPassword=""
+          SelectedVariableIDUnZippedFile="{2B3A0C2A-5C57-43F8-9A29-BB31D98D25F0}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Unzip Task"
+          TopLeft="248,92" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

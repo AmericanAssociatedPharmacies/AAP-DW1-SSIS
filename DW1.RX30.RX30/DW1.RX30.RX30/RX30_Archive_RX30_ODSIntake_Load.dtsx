@@ -1,0 +1,2473 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/13/2018 9:52:08 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{004C6F71-E66A-470F-A879-3528B4CC62A2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="RX30_Archive_RX30_ODSIntake_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{853CF948-4109-4EAF-82EC-236079BB0076}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Archive RX30"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{515EFD86-0A7D-4814-BDCC-21DBF77CEB70}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Archive RX30"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Archive RX30\Archive RX30"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Archive RX30"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Archive].[Rx30Claims]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Archive RX30\Archive RX30.Connections[OleDbConnection]"
+                  connectionManagerID="{9458C6FE-3D7A-46B1-A28E-EA7BDA42439B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[FileRowID]"
+                      cachedDataType="i4"
+                      cachedName="FileRowID"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FileRowID]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PharmID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PharmID"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PharmID]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PharmID]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[BINNbr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="BINNbr"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[BINNbr]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BINNbr]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PCN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PCN"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCN]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCN]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[GroupNbr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GroupNbr"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[GroupNbr]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[GroupNbr]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[Submitted]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Submitted"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[Submitted]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Submitted]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RxDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RxDate"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxDate]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxDate]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[QtyDispensed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="QtyDispensed"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[QtyDispensed]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[QtyDispensed]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[DaySupply]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DaySupply"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DaySupply]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DaySupply]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[NDCDispensed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="NDCDispensed"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[NDCDispensed]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NDCDispensed]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[FeeSubmitted]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="FeeSubmitted"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FeeSubmitted]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FeeSubmitted]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[CostSubmitted]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CostSubmitted"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[CostSubmitted]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CostSubmitted]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[FeePaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="FeePaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FeePaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FeePaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[CostPaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CostPaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[CostPaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CostPaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PlanAmount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PlanAmount"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PlanAmount]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PlanAmount]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[CoPayAmount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CoPayAmount"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[CoPayAmount]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CoPayAmount]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[UandC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="UandC"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[UandC]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[UandC]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[TotalPrice]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="TotalPrice"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[TotalPrice]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TotalPrice]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[BS]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="BS"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[BS]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BS]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[BR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="BR"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[BR]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BR]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[OI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="OI"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[OI]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[OI]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[DAW]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DAW"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DAW]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DAW]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[DAWDesc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DAWDesc"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DAWDesc]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DAWDesc]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PatientPaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PatientPaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PatientPaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PatientPaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[GrossAmtDue]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GrossAmtDue"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[GrossAmtDue]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[GrossAmtDue]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PlanID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PlanID"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PlanID]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PlanID]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RejCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RejCode"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RejCode]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RejCode]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[MessageResponse]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="MessageResponse"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[MessageResponse]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[MessageResponse]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[TxResponse]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="TxResponse"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[TxResponse]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TxResponse]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RxNbr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RxNbr"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxNbr]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxNbr]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RfNbr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RfNbr"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RfNbr]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RfNbr]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PID_Q]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PID_Q"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PID_Q]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PID_Q]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PID"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PID]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PID]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[DoctorName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DoctorName"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DoctorName]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DoctorName]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RA"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RA]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RA]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[NDCWritten]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="NDCWritten"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[NDCWritten]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NDCWritten]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[OtherAmount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="OtherAmount"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[OtherAmount]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[OtherAmount]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[TYPE]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="TYPE"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[TYPE]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TYPE]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[Rx30Lic]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Rx30Lic"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[Rx30Lic]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Rx30Lic]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[Compound]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Compound"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[Compound]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Compound]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[NetworkReimbID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="NetworkReimbID"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[NetworkReimbID]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NetworkReimbID]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PrescriberPhone]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PrescriberPhone"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberPhone]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PrescriberPhone]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RxSource]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RxSource"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxSource]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxSource]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[DRDEA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DRDEA"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DRDEA]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DRDEA]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[UnitAWP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="UnitAWP"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[UnitAWP]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[UnitAWP]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[FlatTaxPaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="FlatTaxPaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FlatTaxPaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FlatTaxPaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PCTTaxPaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PCTTaxPaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCTTaxPaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxPaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PCTTaxRate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PCTTaxRate"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCTTaxRate]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxRate]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PCTTaxBasis]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PCTTaxBasis"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCTTaxBasis]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxBasis]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[IncentiveFeePaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="IncentiveFeePaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveFeePaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[IncentiveFeePaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[ProfFeePaid]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ProfFeePaid"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[ProfFeePaid]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[ProfFeePaid]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[PrescriberNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PrescriberNPI"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberNPI]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PrescriberNPI]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RxDiscount]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="RxDiscount"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxDiscount]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxDiscount]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[ClaimAuthNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ClaimAuthNumber"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[ClaimAuthNumber]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[ClaimAuthNumber]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[FileProcessed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="FileProcessed"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FileProcessed]" />
+                    <inputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].Columns[RowCreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowCreatedDate"
+                      externalMetadataColumnId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RowCreatedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                      dataType="i4"
+                      name="FileRowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PharmID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PharmID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[BINNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BINNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCN" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[GroupNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GroupNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[Submitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Submitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[QtyDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="QtyDispensed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DaySupply]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DaySupply" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[NDCDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDCDispensed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FeeSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="FeeSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[CostSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CostSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="FeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[CostPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CostPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PlanAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PlanAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[CoPayAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CoPayAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[UandC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UandC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[TotalPrice]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TotalPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[BS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BS" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[BR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BR" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[OI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OI" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DAW" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DAWDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DAWDesc" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PatientPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PatientPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[GrossAmtDue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GrossAmtDue" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PlanID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RejCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RejCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="MessageResponse" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[TxResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TxResponse" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RfNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RfNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PID_Q]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PID_Q" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DoctorName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RA" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDCWritten" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[OtherAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OtherAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[TYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[Rx30Lic]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Rx30Lic" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[Compound]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Compound" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[NetworkReimbID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NetworkReimbID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberPhone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PrescriberPhone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxSource" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[DRDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DRDEA" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[UnitAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UnitAWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FlatTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="FlatTaxPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCTTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCTTaxPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCTTaxRate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCTTaxRate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PCTTaxBasis]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCTTaxBasis" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="IncentiveFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[ProfFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ProfFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PrescriberNPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RxDiscount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[ClaimAuthNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ClaimAuthNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Archive RX30\Archive RX30.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive RX30\Archive RX30.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Archive RX30.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive RX30\Archive RX30.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Archive RX30\Staging RX30"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging RX30"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[Rx30Claims]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Archive RX30\Staging RX30.Connections[OleDbConnection]"
+                  connectionManagerID="{9458C6FE-3D7A-46B1-A28E-EA7BDA42439B}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FileRowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FileRowID]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FileRowID]"
+                      name="FileRowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PharmID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PharmID]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PharmID]"
+                      name="PharmID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BINNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[BINNbr]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BINNbr]"
+                      name="BINNbr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCN]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCN]"
+                      name="PCN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[GroupNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[GroupNbr]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[GroupNbr]"
+                      name="GroupNbr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Submitted]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[Submitted]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Submitted]"
+                      name="Submitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxDate]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxDate]"
+                      name="RxDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[QtyDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[QtyDispensed]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[QtyDispensed]"
+                      name="QtyDispensed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DaySupply]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DaySupply]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DaySupply]"
+                      name="DaySupply"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NDCDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[NDCDispensed]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NDCDispensed]"
+                      name="NDCDispensed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FeeSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FeeSubmitted]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FeeSubmitted]"
+                      name="FeeSubmitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CostSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[CostSubmitted]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CostSubmitted]"
+                      name="CostSubmitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FeePaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FeePaid]"
+                      name="FeePaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CostPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[CostPaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CostPaid]"
+                      name="CostPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PlanAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PlanAmount]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PlanAmount]"
+                      name="PlanAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CoPayAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[CoPayAmount]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[CoPayAmount]"
+                      name="CoPayAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[UandC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[UandC]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[UandC]"
+                      name="UandC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TotalPrice]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[TotalPrice]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TotalPrice]"
+                      name="TotalPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BS]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[BS]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BS]"
+                      name="BS"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[BR]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[BR]"
+                      name="BR"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[OI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[OI]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[OI]"
+                      name="OI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DAW]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DAW]"
+                      name="DAW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DAWDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DAWDesc]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DAWDesc]"
+                      name="DAWDesc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PatientPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PatientPaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PatientPaid]"
+                      name="PatientPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[GrossAmtDue]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[GrossAmtDue]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[GrossAmtDue]"
+                      name="GrossAmtDue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PlanID]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PlanID]"
+                      name="PlanID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RejCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RejCode]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RejCode]"
+                      name="RejCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[MessageResponse]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[MessageResponse]"
+                      name="MessageResponse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TxResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[TxResponse]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TxResponse]"
+                      name="TxResponse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxNbr]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxNbr]"
+                      name="RxNbr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RfNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RfNbr]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RfNbr]"
+                      name="RfNbr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PID_Q]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PID_Q]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PID_Q]"
+                      name="PID_Q"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PID]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PID]"
+                      name="PID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DoctorName]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DoctorName]"
+                      name="DoctorName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RA]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RA]"
+                      name="RA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[NDCWritten]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NDCWritten]"
+                      name="NDCWritten"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[OtherAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[OtherAmount]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[OtherAmount]"
+                      name="OtherAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[TYPE]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[TYPE]"
+                      name="TYPE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Rx30Lic]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[Rx30Lic]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Rx30Lic]"
+                      name="Rx30Lic"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Compound]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[Compound]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[Compound]"
+                      name="Compound"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NetworkReimbID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[NetworkReimbID]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[NetworkReimbID]"
+                      name="NetworkReimbID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PrescriberPhone]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PrescriberPhone]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PrescriberPhone]"
+                      name="PrescriberPhone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxSource]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxSource]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxSource]"
+                      name="RxSource"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DRDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DRDEA]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DRDEA]"
+                      name="DRDEA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[UnitAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[UnitAWP]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[UnitAWP]"
+                      name="UnitAWP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FlatTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FlatTaxPaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FlatTaxPaid]"
+                      name="FlatTaxPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCTTaxPaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxPaid]"
+                      name="PCTTaxPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxRate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCTTaxRate]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxRate]"
+                      name="PCTTaxRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxBasis]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCTTaxBasis]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PCTTaxBasis]"
+                      name="PCTTaxBasis"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[IncentiveFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[IncentiveFeePaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[IncentiveFeePaid]"
+                      name="IncentiveFeePaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[ProfFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[ProfFeePaid]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[ProfFeePaid]"
+                      name="ProfFeePaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PrescriberNPI]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[PrescriberNPI]"
+                      name="PrescriberNPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxDiscount]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxDiscount]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RxDiscount]"
+                      name="RxDiscount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[ClaimAuthNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[ClaimAuthNumber]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[ClaimAuthNumber]"
+                      name="ClaimAuthNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      length="1000"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      name="FileProcessed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DateSold]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DateSold]"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].Columns[DateSold]"
+                      name="DateSold"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FileRowID]"
+                      dataType="i4"
+                      name="FileRowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PharmID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PharmID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[BINNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BINNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCN" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[GroupNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GroupNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[Submitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Submitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[QtyDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="QtyDispensed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DaySupply]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DaySupply" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[NDCDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDCDispensed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FeeSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="FeeSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[CostSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CostSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="FeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[CostPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CostPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PlanAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PlanAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[CoPayAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CoPayAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[UandC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UandC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[TotalPrice]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TotalPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[BS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BS" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[BR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BR" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[OI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OI" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DAW" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DAWDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DAWDesc" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PatientPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PatientPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[GrossAmtDue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GrossAmtDue" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PlanID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RejCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RejCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="MessageResponse" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[TxResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TxResponse" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RfNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RfNbr" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PID_Q]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PID_Q" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DoctorName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RA" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDCWritten" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[OtherAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OtherAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[TYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TYPE" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[Rx30Lic]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Rx30Lic" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[Compound]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Compound" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[NetworkReimbID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NetworkReimbID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PrescriberPhone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PrescriberPhone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxSource" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DRDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DRDEA" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[UnitAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UnitAWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FlatTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="FlatTaxPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCTTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCTTaxPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCTTaxRate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCTTaxRate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PCTTaxBasis]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PCTTaxBasis" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[IncentiveFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="IncentiveFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[ProfFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ProfFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PrescriberNPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RxDiscount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="RxDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[ClaimAuthNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ClaimAuthNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output].ExternalColumns[DateSold]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DateSold" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FileRowID]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FileRowID]"
+                      name="FileRowID" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PharmID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PharmID]"
+                      name="PharmID" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[BINNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[BINNbr]"
+                      name="BINNbr" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCN]"
+                      name="PCN" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[GroupNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[GroupNbr]"
+                      name="GroupNbr" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[Submitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[Submitted]"
+                      name="Submitted" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxDate]"
+                      name="RxDate" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[QtyDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[QtyDispensed]"
+                      name="QtyDispensed" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DaySupply]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DaySupply]"
+                      name="DaySupply" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[NDCDispensed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[NDCDispensed]"
+                      name="NDCDispensed" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FeeSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FeeSubmitted]"
+                      name="FeeSubmitted" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[CostSubmitted]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[CostSubmitted]"
+                      name="CostSubmitted" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FeePaid]"
+                      name="FeePaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[CostPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[CostPaid]"
+                      name="CostPaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PlanAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PlanAmount]"
+                      name="PlanAmount" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[CoPayAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[CoPayAmount]"
+                      name="CoPayAmount" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[UandC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[UandC]"
+                      name="UandC" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[TotalPrice]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[TotalPrice]"
+                      name="TotalPrice" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[BS]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[BS]"
+                      name="BS" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[BR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[BR]"
+                      name="BR" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[OI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[OI]"
+                      name="OI" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DAW]"
+                      name="DAW" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DAWDesc]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DAWDesc]"
+                      name="DAWDesc" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PatientPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PatientPaid]"
+                      name="PatientPaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[GrossAmtDue]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[GrossAmtDue]"
+                      name="GrossAmtDue" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PlanID]"
+                      name="PlanID" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RejCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RejCode]"
+                      name="RejCode" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[MessageResponse]"
+                      name="MessageResponse" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[TxResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[TxResponse]"
+                      name="TxResponse" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxNbr]"
+                      name="RxNbr" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RfNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RfNbr]"
+                      name="RfNbr" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PID_Q]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PID_Q]"
+                      name="PID_Q" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PID]"
+                      name="PID" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DoctorName]"
+                      name="DoctorName" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RA]"
+                      name="RA" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[NDCWritten]"
+                      name="NDCWritten" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[OtherAmount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[OtherAmount]"
+                      name="OtherAmount" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[TYPE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[TYPE]"
+                      name="TYPE" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[Rx30Lic]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[Rx30Lic]"
+                      name="Rx30Lic" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[Compound]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[Compound]"
+                      name="Compound" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[NetworkReimbID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[NetworkReimbID]"
+                      name="NetworkReimbID" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PrescriberPhone]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PrescriberPhone]"
+                      name="PrescriberPhone" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxSource]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxSource]"
+                      name="RxSource" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DRDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DRDEA]"
+                      name="DRDEA" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[UnitAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[UnitAWP]"
+                      name="UnitAWP" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FlatTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FlatTaxPaid]"
+                      name="FlatTaxPaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCTTaxPaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCTTaxPaid]"
+                      name="PCTTaxPaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCTTaxRate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCTTaxRate]"
+                      name="PCTTaxRate" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCTTaxBasis]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PCTTaxBasis]"
+                      name="PCTTaxBasis" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[IncentiveFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[IncentiveFeePaid]"
+                      name="IncentiveFeePaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ProfFeePaid]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ProfFeePaid]"
+                      name="ProfFeePaid" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[PrescriberNPI]"
+                      name="PrescriberNPI" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxDiscount]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RxDiscount]"
+                      name="RxDiscount" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ClaimAuthNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ClaimAuthNumber]"
+                      name="ClaimAuthNumber" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      name="FileProcessed" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DateSold]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[DateSold]"
+                      name="DateSold" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Archive RX30.Paths[OLE DB Source Output]"
+              endId="Package\Load Archive RX30\Archive RX30.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Archive RX30\Staging RX30.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Load Archive RX30"
+          TopLeft="208,47" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Archive RX30">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Load Archive RX30\Staging RX30"
+          TopLeft="215,53" />
+        <NodeLayout
+          Size="141,42"
+          Id="Package\Load Archive RX30\Archive RX30"
+          TopLeft="312,155" />
+        <EdgeLayout
+          Id="Package\Load Archive RX30.Paths[OLE DB Source Output]"
+          TopLeft="286,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.5,60"
+              Start="0,0"
+              End="96.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="92.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92.5,30"
+                    Point2="96.5,30"
+                    Point3="96.5,34" />
+                  <mssgle:LineSegment
+                    End="96.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Archive RX30\Staging RX30">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Archive RX30\Archive RX30">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

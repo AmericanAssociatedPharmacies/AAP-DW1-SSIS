@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DB1.PharmacyMaster"
+  DTS:DTSID="{FC1D7E98-B7F5-4A84-832C-E8131CB2168C}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=DB1;Initial Catalog=PharmacyMaster;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
