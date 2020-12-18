@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "DW1.CAH.CAHFormularyFiles", "DW1.CAH.CAHFormularyFiles\DW1.CAH.CAHFormularyFiles.dtproj", "{4C4BE2AC-F0D4-48D0-B37C-F35C2F56B4C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C4BE2AC-F0D4-48D0-B37C-F35C2F56B4C6}.Development|Default.ActiveCfg = Development
+		{4C4BE2AC-F0D4-48D0-B37C-F35C2F56B4C6}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

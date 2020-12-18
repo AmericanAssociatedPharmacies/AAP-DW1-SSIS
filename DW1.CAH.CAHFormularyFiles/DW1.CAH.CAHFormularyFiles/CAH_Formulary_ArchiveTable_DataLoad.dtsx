@@ -1,0 +1,1101 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/20/2018 8:08:45 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{A8D12A5D-22A3-4C60-A6D2-DB213FA182F9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CAH_Formulary_ArchiveTable_DataLoad"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{B747B4F8-0E54-4FB2-AECE-F391C01A9484}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D5EFA29C-6D2C-4C5D-8AD5-481C65209845}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Archive CAH Formulary table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C8CF4A46-C2E0-49B1-80C6-3BC948CBE631}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Archive CAH Formulary table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Archive CAH Formulary table\Archive"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Archive"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Archive].[CAH_FormularyFile]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Archive CAH Formulary table\Archive.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[FileRowID]"
+                      cachedDataType="i4"
+                      cachedName="FileRowID"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[FileRowID]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[CAHFileType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CAHFileType"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CAHFileType]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CAHFileType]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[CIN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CIN"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CIN]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CIN]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[Size]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Size"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Size]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Size]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[AAPSell]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="AAPSell"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[AAPSell]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[AAPSell]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[Supplier]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Supplier"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Supplier]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Supplier]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[BrandName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="BrandName"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[BrandName]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[BrandName]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[Form]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Form"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Form]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Form]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[NDCUPC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="NDCUPC"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[NDCUPC]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[NDCUPC]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[DPNum]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DPNum"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DPNum]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[DPNum]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[UOM]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="UOM"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[UOM]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[UOM]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[PricePerUnit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="PricePerUnit"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[PricePerUnit]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[PricePerUnit]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[GPIID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GPIID"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GPIID]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GPIID]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[GCN]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GCN"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GCN]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GCN]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[GCNSEQ]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GCNSEQ"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GCNSEQ]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GCNSEQ]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[Color]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Color"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Color]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Color]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[FileProcessed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="FileProcessed"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[FileProcessed]" />
+                    <inputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].Columns[CorrectedNDCUPC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CorrectedNDCUPC"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CorrectedNDCUPC]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CorrectedNDCUPC]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                      dataType="i4"
+                      name="FileRowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CAHFileType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CAHFileType" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CIN" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Size]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Size" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[AAPSell]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="AAPSell" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Supplier" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[NDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDCUPC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DPNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DPNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[UOM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UOM" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[PricePerUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PricePerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GPIID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GPIID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GCN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GCN" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GCNSEQ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GCNSEQ" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Color]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Color" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CorrectedNDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CorrectedNDCUPC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Archive CAH Formulary table\Archive.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive CAH Formulary table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive CAH Formulary table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Archive CAH Formulary table\Staging"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CAH_FormularyFile]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Archive CAH Formulary table\Staging.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[FileRowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileRowID]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[FileRowID]"
+                      name="FileRowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CAHFileType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CAHFileType]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CAHFileType]"
+                      name="CAHFileType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CIN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CIN]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CIN]"
+                      name="CIN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Size]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Size]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Size]"
+                      name="Size"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[AAPSell]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[AAPSell]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[AAPSell]"
+                      name="AAPSell"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Supplier]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Supplier]"
+                      name="Supplier"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[BrandName]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[BrandName]"
+                      name="BrandName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Form]"
+                      name="Form"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[NDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[NDCUPC]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[NDCUPC]"
+                      name="NDCUPC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[DPNum]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DPNum]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[DPNum]"
+                      name="DPNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[UOM]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[UOM]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[UOM]"
+                      name="UOM"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[PricePerUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[PricePerUnit]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[PricePerUnit]"
+                      name="PricePerUnit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GPIID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GPIID]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GPIID]"
+                      name="GPIID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GCN]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GCN]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GCN]"
+                      name="GCN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GCNSEQ]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GCNSEQ]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[GCNSEQ]"
+                      name="GCNSEQ"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Color]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[Color]"
+                      name="Color"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      length="1000"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      name="FileProcessed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CorrectedNDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CorrectedNDCUPC]"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].Columns[CorrectedNDCUPC]"
+                      name="CorrectedNDCUPC"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileRowID]"
+                      dataType="i4"
+                      name="FileRowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CAHFileType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CAHFileType" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CIN" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Size]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Size" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[AAPSell]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="AAPSell" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Supplier" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[NDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDCUPC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DPNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DPNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[UOM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UOM" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[PricePerUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="PricePerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GPIID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GPIID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GCN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GCN" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GCNSEQ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GCNSEQ" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Color" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CorrectedNDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CorrectedNDCUPC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[FileRowID]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[FileRowID]"
+                      name="FileRowID" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[CAHFileType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[CAHFileType]"
+                      name="CAHFileType" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[CIN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[CIN]"
+                      name="CIN" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Size]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Size]"
+                      name="Size" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[AAPSell]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[AAPSell]"
+                      name="AAPSell" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Supplier]"
+                      name="Supplier" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[BrandName]"
+                      name="BrandName" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      name="Form" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[NDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[NDCUPC]"
+                      name="NDCUPC" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[DPNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[DPNum]"
+                      name="DPNum" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[UOM]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[UOM]"
+                      name="UOM" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[PricePerUnit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[PricePerUnit]"
+                      name="PricePerUnit" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[GPIID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[GPIID]"
+                      name="GPIID" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[GCN]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[GCN]"
+                      name="GCN" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[GCNSEQ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[GCNSEQ]"
+                      name="GCNSEQ" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Color]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[Color]"
+                      name="Color" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      name="FileProcessed" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[CorrectedNDCUPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[CorrectedNDCUPC]"
+                      name="CorrectedNDCUPC" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Archive CAH Formulary table.Paths[OLE DB Source Output]"
+              endId="Package\Load Archive CAH Formulary table\Archive.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Archive CAH Formulary table\Staging.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Load Archive CAH Formulary table"
+          TopLeft="510,148" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Archive CAH Formulary table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Load Archive CAH Formulary table\Staging"
+          TopLeft="360,113" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Load Archive CAH Formulary table\Archive"
+          TopLeft="434,260" />
+        <EdgeLayout
+          Id="Package\Load Archive CAH Formulary table.Paths[OLE DB Source Output]"
+          TopLeft="417,155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="73.5,105"
+              Start="0,0"
+              End="73.5,97.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48.5"
+                    Point2="0,52.5"
+                    Point3="4,52.5" />
+                  <mssgle:LineSegment
+                    End="69.5,52.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="69.5,52.5"
+                    Point2="73.5,52.5"
+                    Point3="73.5,56.5" />
+                  <mssgle:LineSegment
+                    End="73.5,97.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Archive CAH Formulary table\Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Archive CAH Formulary table\Archive">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
