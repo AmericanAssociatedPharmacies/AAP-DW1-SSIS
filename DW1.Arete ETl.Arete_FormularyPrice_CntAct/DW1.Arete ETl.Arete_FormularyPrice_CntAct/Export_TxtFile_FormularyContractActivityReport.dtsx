@@ -1,0 +1,1054 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/29/2020 12:10:07 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N149"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:Description="DTS Wizard-generated package"
+  DTS:DTSID="{319D9D8A-97AF-410E-8C81-1BC1201FEDA9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="Export_TxtFile_FormularyContractActivityReport"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{BB985C4A-56A9-494F-B6D5-F8F72E0DEC45}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.Pricing]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8283B91E-5BB2-492C-A40D-229CF19B1C26}"
+      DTS:ObjectName="AAPDW1.Pricing">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=Pricing;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=false;Packet Size=32767;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DestinationConnectionFlatFile]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{3A43AD07-9F39-46F4-A4CE-364A3B4B928F}"
+      DTS:ObjectName="DestinationConnectionFlatFile">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varFileDir]+(DT_STR,4,1252)DATEPART( "yyyy" , getdate() ) + RIGHT("0" + (DT_STR,4,1252)DATEPART( "mm" , getdate() ), 2) + RIGHT("0" + (DT_STR,4,1252)DATEPART( "dd" , getdate() ), 2) +".txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\fs1.aap.local\Server\IT Department\Arete\FormularyContractActivityReport\FormularyContractActivityReport_20201218.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ItemNbr"
+              DTS:DTSID="{ED1DE5B8-34F7-4BD0-B43C-D2F9D6C774FE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="13"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ChangeType"
+              DTS:DTSID="{926E1F44-9BAA-4A02-BD28-511AAA85B25E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="500"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Description"
+              DTS:DTSID="{4AD89AEE-F784-4F2B-A2AA-FB0073158402}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Form"
+              DTS:DTSID="{605062A8-FD95-45AE-B21F-45FF2E017DF7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Unit"
+              DTS:DTSID="{1189052D-1D29-4C1F-A455-D8BF5BCB056C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Supplier"
+              DTS:DTSID="{5B392856-50C6-4032-932F-F864695ED59B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NDC"
+              DTS:DTSID="{9527BA53-BB36-4277-B922-01181D8EF4F5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="22"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="APIOldPricePerUnit"
+              DTS:DTSID="{12927805-BF0E-4BC7-8291-53D20C9563B8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="22"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="APINewPricePerUnit"
+              DTS:DTSID="{52CC2263-5CD4-4D6D-A446-4991476DC008}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="22"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="APIOldPrice"
+              DTS:DTSID="{9DF5A419-7483-4CA0-B31E-55061D9A16C0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="22"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="APINewPrice"
+              DTS:DTSID="{31BB986D-824C-491C-B648-B3DE5BB93329}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="31"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WAC"
+              DTS:DTSID="{A5C58840-97A1-4E3D-B53A-55C5FB3D614E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BrandName"
+              DTS:DTSID="{7A1A65E6-5F22-43D7-B427-B29E72A74630}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ReasonCode"
+              DTS:DTSID="{83A460D3-02F9-47FE-BBF9-8BD5D90EFB84}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="30"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EffectiveDate"
+              DTS:DTSID="{AD29A4CA-331A-43DF-9A10-B3B6D496B9BC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Usage"
+              DTS:DTSID="{D8D83E57-AD33-4B02-A72D-FD5CED19DEB3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GCN"
+              DTS:DTSID="{0A5EA636-FDB9-41B5-AB51-945D87D696D2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Size"
+              DTS:DTSID="{0975F836-9051-4EA8-9663-E25ADF2DF03F}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BDA87F5B-6264-4C3B-BB7A-9DFBCA389804}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileDir">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\Arete\FormularyContractActivityReport\FormularyContractActivityReport_</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\File Export"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{773F6036-3886-4105-B7A6-C925A9605319}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:FailPackageOnFailure="True"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="File Export"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          defaultBufferSize="3145728"
+          version="1">
+          <components>
+            <component
+              refId="Package\File Export\FormularyContractActivityReport Flat File"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="FormularyContractActivityReport Flat File"
+              validateExternalMetadata="False">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\File Export\FormularyContractActivityReport Flat File.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DestinationConnectionFlatFile]"
+                  connectionManagerRefId="Package.ConnectionManagers[DestinationConnectionFlatFile]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[ItemNbr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="ItemNbr"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[ItemNbr]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ItemNbr]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[ChangeType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="ChangeType"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[ChangeType]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ChangeType]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[Form]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Form"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Form]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Form]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[Unit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Unit"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Unit]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Unit]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[Supplier]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Supplier"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Supplier]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Supplier]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[APIOldPrice]"
+                      cachedDataType="cy"
+                      cachedName="APIOldPrice"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APIOldPrice]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APIOldPrice]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[APINewPrice]"
+                      cachedDataType="cy"
+                      cachedName="APINewPrice"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APINewPrice]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APINewPrice]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[WAC]"
+                      cachedDataType="numeric"
+                      cachedName="WAC"
+                      cachedPrecision="13"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[WAC]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[WAC]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[BrandName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="BrandName"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[BrandName]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[BrandName]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[ReasonCode]"
+                      cachedDataType="i4"
+                      cachedName="ReasonCode"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[ReasonCode]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ReasonCode]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[EffectiveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveDate"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[EffectiveDate]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[EffectiveDate]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[Usage]"
+                      cachedDataType="i4"
+                      cachedName="Usage"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Usage]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Usage]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[GCN]"
+                      cachedDataType="i4"
+                      cachedName="GCN"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[GCN]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[GCN]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[Size]"
+                      cachedDataType="i4"
+                      cachedName="Size"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Size]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Size]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[APIOldPricePerUnit]"
+                      cachedDataType="cy"
+                      cachedName="APIOldPricePerUnit"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APIOldPricePerUnit]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APIOldPricePerUnit]" />
+                    <inputColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].Columns[APINewPricePerUnit]"
+                      cachedDataType="cy"
+                      cachedName="APINewPricePerUnit"
+                      externalMetadataColumnId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APINewPricePerUnit]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APINewPricePerUnit]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[ItemNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="ItemNbr" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[ChangeType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="ChangeType" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Unit" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Supplier" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APIOldPrice]"
+                      dataType="cy"
+                      name="APIOldPrice" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APINewPrice]"
+                      dataType="cy"
+                      name="APINewPrice" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[WAC]"
+                      dataType="numeric"
+                      name="WAC"
+                      precision="38" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[ReasonCode]"
+                      dataType="i4"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveDate" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Usage]"
+                      dataType="i4"
+                      name="Usage" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[GCN]"
+                      dataType="i4"
+                      name="GCN" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[Size]"
+                      dataType="i4"
+                      name="Size" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APIOldPricePerUnit]"
+                      dataType="cy"
+                      name="APIOldPricePerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input].ExternalColumns[APINewPricePerUnit]"
+                      dataType="cy"
+                      name="APINewPricePerUnit" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\File Export\Pricing db on DW1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Pricing db on DW1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[usp_Arete_FormularyContractActivityReport]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\File Export\Pricing db on DW1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ItemNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[ItemNbr]"
+                      length="11"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ItemNbr]"
+                      name="ItemNbr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ChangeType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[ChangeType]"
+                      length="13"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ChangeType]"
+                      name="ChangeType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="500"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      length="4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Form]"
+                      name="Form"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Unit]"
+                      length="2"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Unit]"
+                      name="Unit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Supplier]"
+                      length="30"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Supplier]"
+                      name="Supplier"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="11"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APIOldPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APIOldPrice]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APIOldPrice]"
+                      name="APIOldPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APINewPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APINewPrice]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APINewPrice]"
+                      name="APINewPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[WAC]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[WAC]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[WAC]"
+                      name="WAC"
+                      precision="13"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[BrandName]"
+                      length="25"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[BrandName]"
+                      name="BrandName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      name="ReasonCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[EffectiveDate]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[EffectiveDate]"
+                      name="EffectiveDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Usage]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Usage]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Usage]"
+                      name="Usage"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[GCN]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[GCN]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[GCN]"
+                      name="GCN"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Size]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Size]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[Size]"
+                      name="Size"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APIOldPricePerUnit]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APIOldPricePerUnit]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APIOldPricePerUnit]"
+                      name="APIOldPricePerUnit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APINewPricePerUnit]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APINewPricePerUnit]"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].Columns[APINewPricePerUnit]"
+                      name="APINewPricePerUnit"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[ItemNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="ItemNbr" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[ChangeType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="ChangeType" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Unit" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Supplier" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APIOldPrice]"
+                      dataType="cy"
+                      name="APIOldPrice" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APINewPrice]"
+                      dataType="cy"
+                      name="APINewPrice" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[WAC]"
+                      dataType="numeric"
+                      name="WAC"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      dataType="i4"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveDate" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Usage]"
+                      dataType="i4"
+                      name="Usage" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[GCN]"
+                      dataType="i4"
+                      name="GCN" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[Size]"
+                      dataType="i4"
+                      name="Size" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APIOldPricePerUnit]"
+                      dataType="cy"
+                      name="APIOldPricePerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output].ExternalColumns[APINewPricePerUnit]"
+                      dataType="cy"
+                      name="APINewPricePerUnit" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ItemNbr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ItemNbr]"
+                      name="ItemNbr" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ChangeType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ChangeType]"
+                      name="ChangeType" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      name="Form" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Unit]"
+                      name="Unit" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Supplier]"
+                      name="Supplier" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APIOldPricePerUnit]"
+                      dataType="cy"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APIOldPricePerUnit]"
+                      name="APIOldPricePerUnit" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APINewPricePerUnit]"
+                      dataType="cy"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APINewPricePerUnit]"
+                      name="APINewPricePerUnit" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APIOldPrice]"
+                      dataType="cy"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APIOldPrice]"
+                      name="APIOldPrice" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APINewPrice]"
+                      dataType="cy"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[APINewPrice]"
+                      name="APINewPrice" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[WAC]"
+                      dataType="numeric"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[WAC]"
+                      name="WAC"
+                      precision="13"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[BrandName]"
+                      name="BrandName" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      dataType="i4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      name="ReasonCode" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[EffectiveDate]"
+                      name="EffectiveDate" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Usage]"
+                      dataType="i4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Usage]"
+                      name="Usage" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[GCN]"
+                      dataType="i4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[GCN]"
+                      name="GCN" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Size]"
+                      dataType="i4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[Size]"
+                      name="Size" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\File Export.Paths[OLE DB Source Output]"
+              endId="Package\File Export\FormularyContractActivityReport Flat File.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\File Export\Pricing db on DW1.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="129,42"
+          Id="Package\File Export"
+          TopLeft="492.5,141.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\File Export">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="271,42"
+          Id="Package\File Export\FormularyContractActivityReport Flat File"
+          TopLeft="5.50000000000003,107.5" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\File Export\Pricing db on DW1"
+          TopLeft="113,5.5" />
+        <EdgeLayout
+          Id="Package\File Export.Paths[OLE DB Source Output]"
+          TopLeft="196.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-55.5,60"
+              Start="0,0"
+              End="-55.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="-4,30" />
+                  <mssgle:LineSegment
+                    End="-51.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-51.5,30"
+                    Point2="-55.5,30"
+                    Point3="-55.5,34" />
+                  <mssgle:LineSegment
+                    End="-55.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\File Export\Pricing db on DW1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

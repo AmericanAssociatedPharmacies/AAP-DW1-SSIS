@@ -1,0 +1,1012 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/12/2019 2:36:05 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N097"
+  DTS:CreatorName="AAP\yhaile"
+  DTS:DTSID="{2A511146-D5EC-4DF1-9EEA-3DA426BD39D5}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Export_TxtFile_FormularyPricing"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{3D152CBB-6E6E-4992-86FB-2E8DD2F757AD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6B5B223C-4A4F-49FD-9E02-E2AF2C4235C1}"
+      DTS:ObjectName="AAPDW1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=32767;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{C3503476-B40A-4FF6-BD2B-A6473C2762B4}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varFileDir]+(DT_STR,4,1252)DATEPART( "yyyy" , getdate() ) + RIGHT("0" + (DT_STR,4,1252)DATEPART( "mm" , getdate() ), 2) + RIGHT("0" + (DT_STR,4,1252)DATEPART( "dd" , getdate() ), 2) +".txt"</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="\\fs1.aap.local\Server\IT Department\Arete\FormularyPricing\FormularyPricing_20201218.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="11"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NDC "
+              DTS:DTSID="{A1020F43-0945-4D69-BEED-B7DA90DB2157}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Description"
+              DTS:DTSID="{B84BDF61-5BD7-4BD8-AC2E-BDA1B55ACE4B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Unit"
+              DTS:DTSID="{93778418-EE04-4BBD-B313-E9112503B19A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Size"
+              DTS:DTSID="{DF60C333-767C-4E4E-9BA7-8A41167E5B8B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Contract"
+              DTS:DTSID="{CFA69416-BC25-471B-AB55-7DC79C14E7C6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="6"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Price"
+              DTS:DTSID="{31EF9072-30CD-4F83-896C-0A2324D83C1C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="13"
+              DTS:DataScale="5"
+              DTS:TextQualified="True"
+              DTS:ObjectName="APINewPricePerUnit"
+              DTS:DTSID="{EFAB8914-8BAB-49A5-82AF-24D22B5F9360}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="25"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="API_ItemNumber"
+              DTS:DTSID="{3EF9C941-84F2-4492-964C-0164B8E49417}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DateOfLastPriceChange"
+              DTS:DTSID="{023765D2-A661-485D-8CC8-7D6E0E6809B6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="UnitofMeasure"
+              DTS:DTSID="{A66E3300-EA27-4CCE-9220-A886A14C05EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="76"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BillableSize"
+              DTS:DTSID="{42981596-625A-48BD-929C-A7F43575EFAE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Supplier"
+              DTS:DTSID="{BCBABD78-FF3B-4135-8DBF-835A60C8EC93}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="100"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BrandName"
+              DTS:DTSID="{4178D4CB-F4F1-4CBB-819C-7DFED6B489FD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Form"
+              DTS:DTSID="{A0E0B2DF-20C0-42FF-89B3-3AC13549054C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Color"
+              DTS:DTSID="{94ECF0B4-541E-4BE8-AA8E-FB3C9D9CBF41}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DP#"
+              DTS:DTSID="{01D377F4-D47C-4E6A-B705-E9A93C17E83D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="GPI"
+              DTS:DTSID="{6518A946-C209-4790-B116-4350AC2B3702}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{560C8B93-F67B-4EEE-9485-66B2918D55F0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileDir">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\Arete\FormularyPricing\FormularyPricing_</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Formulary Pricing"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{63058F70-A3B2-4E88-8C39-1B7AB7134081}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Formulary Pricing"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Formulary Pricing\Flat File Destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Flat File Destination">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Formulary Pricing\Flat File Destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Unit]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="Unit"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Unit]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Unit]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Size]"
+                      cachedDataType="i4"
+                      cachedName="Size"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Size]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Size]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Contract]"
+                      cachedDataType="i4"
+                      cachedName="Contract"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Contract]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Contract]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Price]"
+                      cachedDataType="cy"
+                      cachedName="Price"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Price]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Price]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[API_ItemNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="API_ItemNumber"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[API_ItemNumber]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[API_ItemNumber]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[DateOfLastPriceChange]"
+                      cachedDataType="i4"
+                      cachedName="DateOfLastPriceChange"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DateOfLastPriceChange]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfLastPriceChange]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[UnitofMeasure]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="UnitofMeasure"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[UnitofMeasure]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnitofMeasure]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[BillableSize]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="76"
+                      cachedName="BillableSize"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BillableSize]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[BillableSize]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Supplier]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Supplier"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Supplier]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Supplier]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[BrandName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="BrandName"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BrandName]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[BrandName]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Form]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Form"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Form]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Form]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[Color]"
+                      cachedDataType="i4"
+                      cachedName="Color"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Color]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Color]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[DP#]"
+                      cachedDataType="i4"
+                      cachedName="DP#"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DP#]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DP#]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[GPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="GPI"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GPI]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[GPI]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NDC ]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].Columns[APINewPricePerUnit]"
+                      cachedDataType="cy"
+                      cachedName="APINewPricePerUnit"
+                      externalMetadataColumnId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[APINewPricePerUnit]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[APINewPricePerUnit]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Unit" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Size]"
+                      dataType="i4"
+                      name="Size" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Contract]"
+                      dataType="i4"
+                      name="Contract" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Price]"
+                      dataType="cy"
+                      name="Price" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[API_ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="API_ItemNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DateOfLastPriceChange]"
+                      dataType="i4"
+                      name="DateOfLastPriceChange" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="UnitofMeasure" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BillableSize]"
+                      codePage="1252"
+                      dataType="str"
+                      length="76"
+                      name="BillableSize" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Supplier" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[Color]"
+                      dataType="i4"
+                      name="Color" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DP#]"
+                      dataType="i4"
+                      name="DP#" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="GPI" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NDC ]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC " />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[APINewPricePerUnit]"
+                      dataType="numeric"
+                      name="APINewPricePerUnit"
+                      precision="13"
+                      scale="5" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Formulary Pricing\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Pricing.dbo.usp_Arete_FormularyPricing</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Formulary Pricing\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="11"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="1000"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Unit]"
+                      length="2"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Unit]"
+                      name="Unit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Size]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Size]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Size]"
+                      name="Size"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Contract]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Contract]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Contract]"
+                      name="Contract"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Price]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Price]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Price]"
+                      name="Price"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[API_ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API_ItemNumber]"
+                      length="25"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[API_ItemNumber]"
+                      name="API_ItemNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfLastPriceChange]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateOfLastPriceChange]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfLastPriceChange]"
+                      name="DateOfLastPriceChange"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UnitofMeasure]"
+                      length="2"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnitofMeasure]"
+                      name="UnitofMeasure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[BillableSize]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BillableSize]"
+                      length="76"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[BillableSize]"
+                      name="BillableSize"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Supplier]"
+                      length="50"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Supplier]"
+                      name="Supplier"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BrandName]"
+                      length="100"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[BrandName]"
+                      name="BrandName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      length="4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Form]"
+                      name="Form"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Color]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[Color]"
+                      name="Color"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DP#]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DP#]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DP#]"
+                      name="DP#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GPI]"
+                      length="14"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[GPI]"
+                      name="GPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[APINewPricePerUnit]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[APINewPricePerUnit]"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[APINewPricePerUnit]"
+                      name="APINewPricePerUnit"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="Unit" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Size]"
+                      dataType="i4"
+                      name="Size" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Contract]"
+                      dataType="i4"
+                      name="Contract" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Price]"
+                      dataType="numeric"
+                      name="Price"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[API_ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="API_ItemNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateOfLastPriceChange]"
+                      dataType="i4"
+                      name="DateOfLastPriceChange" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="UnitofMeasure" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BillableSize]"
+                      codePage="1252"
+                      dataType="str"
+                      length="37"
+                      name="BillableSize" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Supplier" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BrandName" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Color]"
+                      dataType="i4"
+                      name="Color" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DP#]"
+                      dataType="i4"
+                      name="DP#" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="GPI" />
+                    <externalMetadataColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[APINewPricePerUnit]"
+                      dataType="cy"
+                      name="APINewPricePerUnit" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Unit]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Unit]"
+                      name="Unit" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Size]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Size]"
+                      name="Size" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Contract]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Contract]"
+                      name="Contract" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Price]"
+                      dataType="numeric"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Price]"
+                      name="Price"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[APINewPricePerUnit]"
+                      dataType="cy"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[APINewPricePerUnit]"
+                      name="APINewPricePerUnit" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API_ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[API_ItemNumber]"
+                      name="API_ItemNumber" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateOfLastPriceChange]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateOfLastPriceChange]"
+                      name="DateOfLastPriceChange" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UnitofMeasure]"
+                      name="UnitofMeasure" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BillableSize]"
+                      codePage="1252"
+                      dataType="str"
+                      length="37"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BillableSize]"
+                      name="BillableSize" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Supplier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Supplier]"
+                      name="Supplier" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BrandName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[BrandName]"
+                      name="BrandName" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      name="Form" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Color]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Color]"
+                      name="Color" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DP#]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DP#]"
+                      name="DP#" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[GPI]"
+                      name="GPI" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Formulary Pricing.Paths[OLE DB Source Output]"
+              endId="Package\Formulary Pricing\Flat File Destination.Inputs[Flat File Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Formulary Pricing\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Formulary Pricing"
+          TopLeft="430,126" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Formulary Pricing">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Formulary Pricing\OLE DB Source"
+          TopLeft="499,146" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Formulary Pricing\Flat File Destination"
+          TopLeft="493,284" />
+        <EdgeLayout
+          Id="Package\Formulary Pricing.Paths[OLE DB Source Output]"
+          TopLeft="576.5,188">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,96"
+              Start="0,0"
+              End="0,88.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,88.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Formulary Pricing\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
