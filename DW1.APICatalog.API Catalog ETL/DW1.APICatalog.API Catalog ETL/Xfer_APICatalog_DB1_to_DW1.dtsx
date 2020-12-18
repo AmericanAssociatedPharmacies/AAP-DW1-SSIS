@@ -1,0 +1,619 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/11/2020 1:08:13 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N149"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{FD84B8DC-2AC1-4610-8DBF-CFA45069B9DA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Xfer_APICatalog_DB1_to_DW1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{E040F32B-1152-4A1E-B224-664C1A54270D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.DrugMaster]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{75D838A5-1CCD-4F04-AB4F-C1F4C915F9D0}"
+      DTS:ObjectName="AAPDW1.DrugMaster">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=DrugMaster;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB1.Reports]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{D065C133-723D-4E38-AA4B-5F8F88D8AFBD}"
+      DTS:ObjectName="DB1.Reports">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=Reports;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Xfer from DB1 to DW1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BF8C0E3F-76AF-40C1-A2D3-DA03DF715145}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Xfer from DB1 to DW1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Xfer from DB1 to DW1\DB1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[vwAPICatalogETL]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Xfer from DB1 to DW1\DB1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB1.Reports]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB1.Reports]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[RowId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowId]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[RowId]"
+                      name="RowId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="15"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[APIItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[APIItemNum]"
+                      length="13"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[APIItemNum]"
+                      name="APIItemNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Tier1Item]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[Tier1Item]"
+                      length="6"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Tier1Item]"
+                      name="Tier1Item"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Tier2Item]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[Tier2Item]"
+                      length="6"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Tier2Item]"
+                      name="Tier2Item"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[GroupID]"
+                      length="10"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[GroupID]"
+                      name="GroupID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[ProductHandlingStatusCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[ProductHandlingStatusCode]"
+                      length="25"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[ProductHandlingStatusCode]"
+                      name="ProductHandlingStatusCode"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowId]"
+                      dataType="i4"
+                      name="RowId" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[APIItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="APIItemNum" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[Tier1Item]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Tier1Item" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[Tier2Item]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Tier2Item" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="GroupID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[ProductHandlingStatusCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProductHandlingStatusCode" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[RowId]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[RowId]"
+                      name="RowId" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[APIItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[APIItemNum]"
+                      name="APIItemNum" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[Tier1Item]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[Tier1Item]"
+                      name="Tier1Item" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[Tier2Item]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[Tier2Item]"
+                      name="Tier2Item" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[GroupID]"
+                      name="GroupID" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ProductHandlingStatusCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ProductHandlingStatusCode]"
+                      name="ProductHandlingStatusCode" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Xfer from DB1 to DW1\DW1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[APICatalog]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Xfer from DB1 to DW1\DW1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.DrugMaster]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.DrugMaster]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[RowId]"
+                      cachedDataType="i4"
+                      cachedName="RowId"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowId]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[RowId]" />
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="15"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[APIItemNum]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="APIItemNum"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[APIItemNum]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[APIItemNum]" />
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[Tier1Item]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Tier1Item"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Tier1Item]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Tier1Item]" />
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[Tier2Item]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Tier2Item"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Tier2Item]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Tier2Item]" />
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[GroupID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="GroupID"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[GroupID]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[GroupID]" />
+                    <inputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[ProductHandlingStatusCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="ProductHandlingStatusCode"
+                      externalMetadataColumnId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ProductHandlingStatusCode]"
+                      lineageId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[ProductHandlingStatusCode]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowId]"
+                      dataType="i4"
+                      name="RowId" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[APIItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="APIItemNum" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Tier1Item]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Tier1Item" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Tier2Item]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="Tier2Item" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="GroupID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ProductHandlingStatusCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProductHandlingStatusCode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Xfer from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Xfer from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Xfer from DB1 to DW1.Paths[OLE DB Source Output]"
+              endId="Package\Xfer from DB1 to DW1\DW1.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Xfer from DB1 to DW1\DB1.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Xfer from DB1 to DW1"
+          TopLeft="455,70" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Xfer from DB1 to DW1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Xfer from DB1 to DW1\DW1"
+          TopLeft="534,297" />
+        <NodeLayout
+          Size="98,42"
+          Id="Package\Xfer from DB1 to DW1\DB1"
+          TopLeft="470,103" />
+        <EdgeLayout
+          Id="Package\Xfer from DB1 to DW1.Paths[OLE DB Source Output]"
+          TopLeft="519,145">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="66,152"
+              Start="0,0"
+              End="66,144.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,72"
+                    Point2="0,76"
+                    Point3="4,76" />
+                  <mssgle:LineSegment
+                    End="62,76" />
+                  <mssgle:CubicBezierSegment
+                    Point1="62,76"
+                    Point2="66,76"
+                    Point3="66,80" />
+                  <mssgle:LineSegment
+                    End="66,144.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Xfer from DB1 to DW1\DB1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Xfer from DB1 to DW1\DW1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
