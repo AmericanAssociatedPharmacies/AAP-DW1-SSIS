@@ -1,0 +1,1372 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/15/2018 3:25:31 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{D9F898BF-FFBA-4FA6-B09C-809939DA5888}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="PharmacyMaster_pm_rebates_highvolume_New_ODSIntake_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{70EE92AF-2663-4127-974C-9DDB7AD34860}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{11B89192-0021-4316-86D7-BDC24BF5B386}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB1.PharmacyMaster]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C6C5E3ED-EF03-4D55-A5EF-121D6416EB4E}"
+      DTS:ObjectName="DB1.PharmacyMaster">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=PharmacyMaster;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4B13F01F-4F16-487D-85B1-8705B3E868BA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Xfer data from DB1 to DW1 pm_rebates_highvolume_New"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DB1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[pm_rebates_highvolume_New]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DB1.PharmacyMaster]"
+                  connectionManagerRefId="Package.ConnectionManagers[DB1.PharmacyMaster]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowID]"
+                      name="RowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[date]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[date]"
+                      name="date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[rebate_type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[rebate_type]"
+                      length="31"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[rebate_type]"
+                      name="rebate_type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[PMID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[PMID]"
+                      name="PMID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP#]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP#]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP#]"
+                      name="AAP#"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[API acct]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[API acct]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[API acct]"
+                      name="API acct"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Customer Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Customer Name]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Customer Name]"
+                      name="Customer Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[ST]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[ST]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[ST]"
+                      name="ST"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Bs Class]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Bs Class]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Bs Class]"
+                      name="Bs Class"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Month]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Month]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Month]"
+                      name="Month"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Current Est Mo Sales]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Current Est Mo Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Current Est Mo Sales]"
+                      name="Current Est Mo Sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Mo API Volume]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Mo API Volume]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Mo API Volume]"
+                      name="Mo API Volume"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[CAH off Contract-LTC Volume]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[CAH off Contract-LTC Volume]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[CAH off Contract-LTC Volume]"
+                      name="CAH off Contract-LTC Volume"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Net Sales]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP Net Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Net Sales]"
+                      name="AAP Net Sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Mo Comb Volume]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Mo Comb Volume]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Mo Comb Volume]"
+                      name="Mo Comb Volume"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Sales- COG Applied]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP Sales- COG Applied]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Sales- COG Applied]"
+                      name="AAP Sales- COG Applied"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Brand RX Sales]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP Brand RX Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Brand RX Sales]"
+                      name="AAP Brand RX Sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Current CA COG]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Current CA COG]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Current CA COG]"
+                      name="Current CA COG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Base]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Base]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Base]"
+                      name="Base"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Brand RX@WAC]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Brand RX@WAC]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Brand RX@WAC]"
+                      name="Brand RX@WAC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Brand RX Saved]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Brand RX Saved]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Brand RX Saved]"
+                      name="Brand RX Saved"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[High Volume Incentive]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[High Volume Incentive]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[High Volume Incentive]"
+                      name="High Volume Incentive"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Total Saved]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Total Saved]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Total Saved]"
+                      name="Total Saved"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[ECOG]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[ECOG]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[ECOG]"
+                      name="ECOG"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[COG Reduction]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[COG Reduction]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[COG Reduction]"
+                      name="COG Reduction"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Generic Source]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Generic Source]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Generic Source]"
+                      name="Generic Source"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[1% Generic Admin]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[1% Generic Admin]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[1% Generic Admin]"
+                      name="1% Generic Admin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Incentive from AAP Net Sales]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Incentive from AAP Net Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Incentive from AAP Net Sales]"
+                      name="Incentive from AAP Net Sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[A/P Payment Mode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[A/P Payment Mode]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[A/P Payment Mode]"
+                      name="A/P Payment Mode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Group]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Group]"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Group]"
+                      name="Group"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowUpdatedDate]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowUpdatedDate]"
+                      name="RowUpdatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowversionID]"
+                      dataType="bytes"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowversionID]"
+                      length="8"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowversionID]"
+                      name="RowversionID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[date]"
+                      dataType="dbTimeStamp"
+                      name="date" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[rebate_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="31"
+                      name="rebate_type" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PMID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP#]"
+                      dataType="wstr"
+                      length="255"
+                      name="AAP#" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[API acct]"
+                      dataType="wstr"
+                      length="255"
+                      name="API acct" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Customer Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Customer Name" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="255"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[ST]"
+                      dataType="wstr"
+                      length="255"
+                      name="ST" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Bs Class]"
+                      dataType="wstr"
+                      length="255"
+                      name="Bs Class" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="255"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Current Est Mo Sales]"
+                      dataType="cy"
+                      name="Current Est Mo Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Mo API Volume]"
+                      dataType="cy"
+                      name="Mo API Volume" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[CAH off Contract-LTC Volume]"
+                      dataType="cy"
+                      name="CAH off Contract-LTC Volume" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP Net Sales]"
+                      dataType="cy"
+                      name="AAP Net Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Mo Comb Volume]"
+                      dataType="cy"
+                      name="Mo Comb Volume" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP Sales- COG Applied]"
+                      dataType="cy"
+                      name="AAP Sales- COG Applied" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[AAP Brand RX Sales]"
+                      dataType="cy"
+                      name="AAP Brand RX Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Current CA COG]"
+                      dataType="r8"
+                      name="Current CA COG" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Base]"
+                      dataType="r8"
+                      name="Base" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Brand RX@WAC]"
+                      dataType="cy"
+                      name="Brand RX@WAC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Brand RX Saved]"
+                      dataType="cy"
+                      name="Brand RX Saved" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[High Volume Incentive]"
+                      dataType="cy"
+                      name="High Volume Incentive" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Total Saved]"
+                      dataType="cy"
+                      name="Total Saved" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[ECOG]"
+                      dataType="r8"
+                      name="ECOG" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[COG Reduction]"
+                      dataType="r8"
+                      name="COG Reduction" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Generic Source]"
+                      dataType="cy"
+                      name="Generic Source" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[1% Generic Admin]"
+                      dataType="cy"
+                      name="1% Generic Admin" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Incentive from AAP Net Sales]"
+                      dataType="cy"
+                      name="Incentive from AAP Net Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[A/P Payment Mode]"
+                      dataType="wstr"
+                      length="255"
+                      name="A/P Payment Mode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="Group" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowUpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowversionID]"
+                      dataType="bytes"
+                      length="8"
+                      name="RowversionID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      dataType="i4"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      name="RowID" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[date]"
+                      name="date" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[rebate_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="31"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[rebate_type]"
+                      name="rebate_type" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                      name="PMID" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP#]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP#]"
+                      name="AAP#" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[API acct]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[API acct]"
+                      name="API acct" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Customer Name]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Customer Name]"
+                      name="Customer Name" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ST]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ST]"
+                      name="ST" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Bs Class]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Bs Class]"
+                      name="Bs Class" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Month]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Month]"
+                      name="Month" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Current Est Mo Sales]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Current Est Mo Sales]"
+                      name="Current Est Mo Sales" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Mo API Volume]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Mo API Volume]"
+                      name="Mo API Volume" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[CAH off Contract-LTC Volume]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[CAH off Contract-LTC Volume]"
+                      name="CAH off Contract-LTC Volume" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP Net Sales]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP Net Sales]"
+                      name="AAP Net Sales" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Mo Comb Volume]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Mo Comb Volume]"
+                      name="Mo Comb Volume" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP Sales- COG Applied]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP Sales- COG Applied]"
+                      name="AAP Sales- COG Applied" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP Brand RX Sales]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[AAP Brand RX Sales]"
+                      name="AAP Brand RX Sales" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Current CA COG]"
+                      dataType="r8"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Current CA COG]"
+                      name="Current CA COG" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Base]"
+                      dataType="r8"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Base]"
+                      name="Base" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Brand RX@WAC]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Brand RX@WAC]"
+                      name="Brand RX@WAC" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Brand RX Saved]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Brand RX Saved]"
+                      name="Brand RX Saved" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[High Volume Incentive]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[High Volume Incentive]"
+                      name="High Volume Incentive" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Total Saved]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Total Saved]"
+                      name="Total Saved" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ECOG]"
+                      dataType="r8"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ECOG]"
+                      name="ECOG" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[COG Reduction]"
+                      dataType="r8"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[COG Reduction]"
+                      name="COG Reduction" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Generic Source]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Generic Source]"
+                      name="Generic Source" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[1% Generic Admin]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[1% Generic Admin]"
+                      name="1% Generic Admin" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Incentive from AAP Net Sales]"
+                      dataType="cy"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Incentive from AAP Net Sales]"
+                      name="Incentive from AAP Net Sales" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[A/P Payment Mode]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[A/P Payment Mode]"
+                      name="A/P Payment Mode" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[Group]"
+                      name="Group" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowUpdatedDate]"
+                      name="RowUpdatedDate" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowversionID]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[RowversionID]"
+                      name="RowversionID" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DW1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[pm_rebates_highvolume_New]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[RowID]"
+                      cachedDataType="i4"
+                      cachedName="RowID"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowID]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="date"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[date]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[date]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[rebate_type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="31"
+                      cachedName="rebate_type"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[rebate_type]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[rebate_type]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[PMID]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PMID"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[PMID]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[AAP#]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="AAP#"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP#]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP#]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[API acct]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="API acct"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[API acct]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[API acct]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Customer Name]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Customer Name"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Customer Name]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Customer Name]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[ST]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="ST"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ST]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[ST]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Bs Class]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Bs Class"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Bs Class]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Bs Class]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Month]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Month"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Month]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Current Est Mo Sales]"
+                      cachedDataType="cy"
+                      cachedName="Current Est Mo Sales"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Current Est Mo Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Current Est Mo Sales]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Mo API Volume]"
+                      cachedDataType="cy"
+                      cachedName="Mo API Volume"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Mo API Volume]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Mo API Volume]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[CAH off Contract-LTC Volume]"
+                      cachedDataType="cy"
+                      cachedName="CAH off Contract-LTC Volume"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[CAH off Contract-LTC Volume]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[CAH off Contract-LTC Volume]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[AAP Net Sales]"
+                      cachedDataType="cy"
+                      cachedName="AAP Net Sales"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP Net Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Net Sales]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Mo Comb Volume]"
+                      cachedDataType="cy"
+                      cachedName="Mo Comb Volume"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Mo Comb Volume]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Mo Comb Volume]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[AAP Sales- COG Applied]"
+                      cachedDataType="cy"
+                      cachedName="AAP Sales- COG Applied"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP Sales- COG Applied]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Sales- COG Applied]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[AAP Brand RX Sales]"
+                      cachedDataType="cy"
+                      cachedName="AAP Brand RX Sales"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP Brand RX Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[AAP Brand RX Sales]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Current CA COG]"
+                      cachedDataType="r8"
+                      cachedName="Current CA COG"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Current CA COG]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Current CA COG]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Base]"
+                      cachedDataType="r8"
+                      cachedName="Base"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Base]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Base]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Brand RX@WAC]"
+                      cachedDataType="cy"
+                      cachedName="Brand RX@WAC"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Brand RX@WAC]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Brand RX@WAC]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Brand RX Saved]"
+                      cachedDataType="cy"
+                      cachedName="Brand RX Saved"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Brand RX Saved]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Brand RX Saved]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[High Volume Incentive]"
+                      cachedDataType="cy"
+                      cachedName="High Volume Incentive"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[High Volume Incentive]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[High Volume Incentive]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Total Saved]"
+                      cachedDataType="cy"
+                      cachedName="Total Saved"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Total Saved]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Total Saved]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[ECOG]"
+                      cachedDataType="r8"
+                      cachedName="ECOG"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ECOG]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[ECOG]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[COG Reduction]"
+                      cachedDataType="r8"
+                      cachedName="COG Reduction"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[COG Reduction]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[COG Reduction]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Generic Source]"
+                      cachedDataType="cy"
+                      cachedName="Generic Source"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Generic Source]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Generic Source]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[1% Generic Admin]"
+                      cachedDataType="cy"
+                      cachedName="1% Generic Admin"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[1% Generic Admin]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[1% Generic Admin]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Incentive from AAP Net Sales]"
+                      cachedDataType="cy"
+                      cachedName="Incentive from AAP Net Sales"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Incentive from AAP Net Sales]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Incentive from AAP Net Sales]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[A/P Payment Mode]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="A/P Payment Mode"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[A/P Payment Mode]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[A/P Payment Mode]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Group"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Group]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[Group]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[RowCreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowCreatedDate"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowCreatedDate]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[RowUpdatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowUpdatedDate"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowUpdatedDate]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowUpdatedDate]" />
+                    <inputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].Columns[RowversionID]"
+                      cachedDataType="bytes"
+                      cachedLength="8"
+                      cachedName="RowversionID"
+                      externalMetadataColumnId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID]"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output].Columns[RowversionID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[date]"
+                      dataType="dbTimeStamp"
+                      name="date" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[rebate_type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="31"
+                      name="rebate_type" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      dataType="wstr"
+                      length="255"
+                      name="PMID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP#]"
+                      dataType="wstr"
+                      length="255"
+                      name="AAP#" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[API acct]"
+                      dataType="wstr"
+                      length="255"
+                      name="API acct" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Customer Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Customer Name" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="255"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ST]"
+                      dataType="wstr"
+                      length="255"
+                      name="ST" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Bs Class]"
+                      dataType="wstr"
+                      length="255"
+                      name="Bs Class" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Month]"
+                      dataType="wstr"
+                      length="255"
+                      name="Month" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Current Est Mo Sales]"
+                      dataType="cy"
+                      name="Current Est Mo Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Mo API Volume]"
+                      dataType="cy"
+                      name="Mo API Volume" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[CAH off Contract-LTC Volume]"
+                      dataType="cy"
+                      name="CAH off Contract-LTC Volume" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP Net Sales]"
+                      dataType="cy"
+                      name="AAP Net Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Mo Comb Volume]"
+                      dataType="cy"
+                      name="Mo Comb Volume" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP Sales- COG Applied]"
+                      dataType="cy"
+                      name="AAP Sales- COG Applied" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[AAP Brand RX Sales]"
+                      dataType="cy"
+                      name="AAP Brand RX Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Current CA COG]"
+                      dataType="r8"
+                      name="Current CA COG" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Base]"
+                      dataType="r8"
+                      name="Base" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Brand RX@WAC]"
+                      dataType="cy"
+                      name="Brand RX@WAC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Brand RX Saved]"
+                      dataType="cy"
+                      name="Brand RX Saved" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[High Volume Incentive]"
+                      dataType="cy"
+                      name="High Volume Incentive" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Total Saved]"
+                      dataType="cy"
+                      name="Total Saved" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ECOG]"
+                      dataType="r8"
+                      name="ECOG" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[COG Reduction]"
+                      dataType="r8"
+                      name="COG Reduction" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Generic Source]"
+                      dataType="cy"
+                      name="Generic Source" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[1% Generic Admin]"
+                      dataType="cy"
+                      name="1% Generic Admin" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Incentive from AAP Net Sales]"
+                      dataType="cy"
+                      name="Incentive from AAP Net Sales" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[A/P Payment Mode]"
+                      dataType="wstr"
+                      length="255"
+                      name="A/P Payment Mode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="Group" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowUpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID]"
+                      dataType="bytes"
+                      length="8"
+                      name="RowversionID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New.Paths[OLE DB Source Output]"
+              endId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="354,42"
+          Id="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New"
+          TopLeft="306,72" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="98,42"
+          Id="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1"
+          TopLeft="424.5,64.5" />
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1"
+          TopLeft="480,187" />
+        <EdgeLayout
+          Id="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New.Paths[OLE DB Source Output]"
+          TopLeft="473.5,106.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="57.5,80.5"
+              Start="0,0"
+              End="57.5,73">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.25"
+                    Point2="0,40.25"
+                    Point3="4,40.25" />
+                  <mssgle:LineSegment
+                    End="53.5,40.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="53.5,40.25"
+                    Point2="57.5,40.25"
+                    Point3="57.5,44.25" />
+                  <mssgle:LineSegment
+                    End="57.5,73" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DB1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Xfer data from DB1 to DW1 pm_rebates_highvolume_New\DW1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
