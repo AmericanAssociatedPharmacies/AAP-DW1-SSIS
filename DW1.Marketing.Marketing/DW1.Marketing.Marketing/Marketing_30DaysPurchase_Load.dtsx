@@ -1,0 +1,740 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/21/2018 1:10:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{B8DDC27D-0BB7-4092-8A97-9C5E157CB24B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Marketing_30DaysPurchase_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{7E5FF4C3-ABD6-4999-A802-07D007AC6100}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.Reports]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F4CA9824-5AA1-4482-8705-306F6AB06F9A}"
+      DTS:ObjectName="AAPDW1.Reports">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=Reports;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Prod Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A3D9E6ED-C4F2-428A-A45B-DA338FAA7C32}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Prod Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Prod Table\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load Prod Table\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Prod Table\Data Conversion.Inputs[Data Conversion Input].Columns[SalesYTD]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="SalesYTD"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[SalesYTD]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load Prod Table\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SalesYTD]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SalesYTD]"
+                      name="Copy of SalesYTD"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[SalesYTD]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load Prod Table\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Prod Table\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[30DayPurchase]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Prod Table\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Reports]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Reports]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AccountName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="65"
+                      cachedName="AccountName"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AccountName]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[AccountName]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Territory]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Territory"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Territory]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Territory]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastPurchaseDate]"
+                      cachedDataType="dbDate"
+                      cachedName="LastPurchaseDate"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastPurchaseDate]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[LastPurchaseDate]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DaysSinceLastPurchase]"
+                      cachedDataType="i4"
+                      cachedName="DaysSinceLastPurchase"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DaysSinceLastPurchase]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[DaysSinceLastPurchase]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Status]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="32"
+                      cachedName="Status"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Status]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of SalesYTD]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Copy of SalesYTD"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesYTD]"
+                      lineageId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of SalesYTD]" />
+                    <inputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PMID]"
+                      cachedDataType="i4"
+                      cachedName="PMID"
+                      externalMetadataColumnId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[PMID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="AccountName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Territory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Territory" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastPurchaseDate]"
+                      dataType="dbDate"
+                      name="LastPurchaseDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesYTD]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="SalesYTD" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DaysSinceLastPurchase]"
+                      dataType="i4"
+                      name="DaysSinceLastPurchase" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      dataType="i4"
+                      name="PMID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Prod Table\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Prod Table\Sproc"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Sproc"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[usp_30daysLastPurchase]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Prod Table\Sproc.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Reports]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Reports]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      length="65"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[AccountName]"
+                      name="AccountName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Territory]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[Territory]"
+                      length="4"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Territory]"
+                      name="Territory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[LastPurchaseDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[LastPurchaseDate]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[LastPurchaseDate]"
+                      name="LastPurchaseDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[SalesYTD]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[SalesYTD]"
+                      length="4000"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[SalesYTD]"
+                      name="SalesYTD"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[DaysSinceLastPurchase]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DaysSinceLastPurchase]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[DaysSinceLastPurchase]"
+                      name="DaysSinceLastPurchase"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="255"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      length="32"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[Status]"
+                      name="Status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[PMID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].Columns[PMID]"
+                      name="PMID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="65"
+                      name="AccountName" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[Territory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Territory" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[LastPurchaseDate]"
+                      dataType="dbDate"
+                      name="LastPurchaseDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[SalesYTD]"
+                      dataType="wstr"
+                      length="4000"
+                      name="SalesYTD" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DaysSinceLastPurchase]"
+                      dataType="i4"
+                      name="DaysSinceLastPurchase" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="Status" />
+                    <externalMetadataColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                      dataType="i4"
+                      name="PMID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                      name="PMID" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="65"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[AccountName]"
+                      name="AccountName" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[Territory]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[Territory]"
+                      name="Territory" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[LastPurchaseDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[LastPurchaseDate]"
+                      name="LastPurchaseDate" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[SalesYTD]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[SalesYTD]"
+                      name="SalesYTD" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[DaysSinceLastPurchase]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[DaysSinceLastPurchase]"
+                      name="DaysSinceLastPurchase" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[Status]"
+                      name="Status" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Prod Table.Paths[Data Conversion Output]"
+              endId="Package\Load Prod Table\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Load Prod Table\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load Prod Table.Paths[OLE DB Source Output]"
+              endId="Package\Load Prod Table\Data Conversion.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Prod Table\Sproc.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Load Prod Table"
+          TopLeft="423,100" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Prod Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Prod Table\OLE DB Destination"
+          TopLeft="485,307" />
+        <NodeLayout
+          Size="105,42"
+          Id="Package\Load Prod Table\Sproc"
+          TopLeft="367,94" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Load Prod Table\Data Conversion"
+          TopLeft="411,184" />
+        <EdgeLayout
+          Id="Package\Load Prod Table.Paths[OLE DB Source Output]"
+          TopLeft="419.5,136">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.5,48"
+              Start="0,0"
+              End="69.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="65.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="65.5,24"
+                    Point2="69.5,24"
+                    Point3="69.5,28" />
+                  <mssgle:LineSegment
+                    End="69.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Prod Table.Paths[Data Conversion Output]"
+          TopLeft="489,226">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.5,81"
+              Start="0,0"
+              End="81.5,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.5"
+                    Point2="0,40.5"
+                    Point3="4,40.5" />
+                  <mssgle:LineSegment
+                    End="77.5,40.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="77.5,40.5"
+                    Point2="81.5,40.5"
+                    Point3="81.5,44.5" />
+                  <mssgle:LineSegment
+                    End="81.5,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Prod Table\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Prod Table\Sproc">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
