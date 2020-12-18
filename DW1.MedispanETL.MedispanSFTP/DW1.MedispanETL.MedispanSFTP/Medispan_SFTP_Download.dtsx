@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/5/2019 9:25:43 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N097"
+  DTS:CreatorName="AAP\yhaile"
+  DTS:DTSID="{4D7492F1-1561-41E1-A586-CC353CD31928}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="0"
+  DTS:ObjectName="Medispan_SFTP_Download"
+  DTS:PackageType="5"
+  DTS:VersionBuild="56"
+  DTS:VersionGUID="{6DBC3B83-E333-465A-AEF2-AA1A6F072FCD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{66E482A0-BD47-4990-8399-DE400D321475}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ftpPassword">
+      <DTS:VariableValue
+        DTS:DataType="8">frkqZyE2</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EB322DDA-9FDF-40D4-BDE9-15E8F12A86CE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ftpSite">
+      <DTS:VariableValue
+        DTS:DataType="8">sftp.medispan.com</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{084DB499-B07E-44B0-A9C7-9237FBF1A50E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ftpUsername">
+      <DTS:VariableValue
+        DTS:DataType="8">1407711049</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F2C6D486-B736-463F-88DF-A4CEB5BA9CB3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="localPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{031E741A-105E-433E-A9C5-05C4CA0610C0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="remoteFTPDirectory">
+      <DTS:VariableValue
+        DTS:DataType="8">/Medispan/1407711049</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED6B6614-3F62-4EF7-AB1F-808ABDA48B72}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sshKey">
+      <DTS:VariableValue
+        DTS:DataType="8">ssh-rsa 2048 IegJnKB7u1L95eCuAVMS7WkXuDqJBekbRfci1cx1x/c=</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EF055565-94EB-4AF0-8A0A-633D998458FB}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varErrorLogDbName">
+      <DTS:VariableValue
+        DTS:DataType="8">ODSIntake</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2412FE52-BE14-4906-B0F8-6E53EAC3EBFA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varErrorLogServer">
+      <DTS:VariableValue
+        DTS:DataType="8">AAPDW1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2DEFB625-1A75-49AD-8B9E-C491A8941975}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileLogDbName">
+      <DTS:VariableValue
+        DTS:DataType="8">ODSIntake</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E51792FE-0775-4234-B69B-92B90E34865B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileLogServer">
+      <DTS:VariableValue
+        DTS:DataType="8">AAPDW1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{68BD7FD1-D2AC-455E-84A8-AC264C47E33F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varProcess">
+      <DTS:VariableValue
+        DTS:DataType="8">Medispan</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A7B69A15-8C80-4905-AB75-8D33CD956F6E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="winSCPLog">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{22312826-8178-4A76-AC26-7AF316BD26AF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="winSCPLogPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\WINscp\WINscpLog.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A97B8E2F-D9B1-4017-8CB3-D0E22AA785A4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="winSCPPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Program Files (x86)\WinSCP\winscp.com</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Download ZIP file usig WinSCP"
+      DTS:CreationName="Microsoft.ExecuteProcess"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{2A187BBD-5594-4CC7-8E6F-6103FA6479CD}"
+      DTS:ExecutableType="Microsoft.ExecuteProcess"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download ZIP file usig WinSCP"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">"/command \"open sftp://" + @[User::ftpUsername]+":"+ @[User::ftpPassword]+"@"+ @[User::ftpSite]+" -hostkey=\"\""+ @[User::sshKey]+"\"\"\" \"get " + @[User::remoteFTPDirectory]+"/*.zip \"\""+ @[User::localPath]+"\\"+"\"\"\"" +" "+"\"exit\""</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[User::winSCPPath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Program Files (x86)\WinSCP\winscp.com"
+          Arguments="/command &quot;open sftp://1407711049:frkqZyE2@sftp.medispan.com -hostkey=&quot;&quot;ssh-rsa 2048 IegJnKB7u1L95eCuAVMS7WkXuDqJBekbRfci1cx1x/c=&quot;&quot;&quot; &quot;get /Medispan/1407711049/*.zip &quot;&quot;\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload\&quot;&quot;&quot; &quot;exit&quot;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Download ZIP file usig WinSCP"
+          TopLeft="288,72" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
