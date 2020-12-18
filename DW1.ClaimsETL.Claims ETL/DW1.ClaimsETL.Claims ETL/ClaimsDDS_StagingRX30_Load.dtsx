@@ -1,0 +1,2272 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/6/2018 2:10:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{49692977-93A3-4A9D-BE72-7761254E79BB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ClaimsDDS_StagingRX30_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{7E3B1E00-EC1F-473D-8107-4AF2340127B1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7B0F6AB6-154B-43A4-B1E4-8B910ED66895}"
+      DTS:ObjectName="AAPDW1.ClaimsDDS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ClaimsDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load StagingRX30"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6BCDEDBC-57E0-419F-8EAB-2D37695E726C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load StagingRX30"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load StagingRX30\Sproc"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Sproc"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[vwRX30]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Staging.usp_Staging_RX30_Load</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load StagingRX30\Sproc.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ServiceProviderID]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ServiceProviderID]"
+                      name="ServiceProviderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BINNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[BINNumber]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BINNumber]"
+                      name="BINNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProcessorControlNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProcessorControlNumber]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProcessorControlNumber]"
+                      name="ProcessorControlNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[GroupID]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[GroupID]"
+                      name="GroupID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ClaimSubmittedDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ClaimSubmittedDate]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ClaimSubmittedDate]"
+                      name="ClaimSubmittedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateOfService]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DateOfService]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateOfService]"
+                      name="DateOfService"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[QuantityDispensed]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[QuantityDispensed]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[QuantityDispensed]"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DaysSupply]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DaysSupply]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DaysSupply]"
+                      name="DaysSupply"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeeSubmitted]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]"
+                      name="DispensingFeeSubmitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostSubmitted]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]"
+                      name="IngredientCostSubmitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeePaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]"
+                      name="DispensingFeePaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]"
+                      name="IngredientCostPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TotalAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[TotalAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TotalAmountPaid]"
+                      name="TotalAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[AmountOfCopay]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[AmountOfCopay]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[AmountOfCopay]"
+                      name="AmountOfCopay"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[UsualandCustomaryCharge]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[UsualandCustomaryCharge]"
+                      name="UsualandCustomaryCharge"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TotalPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[TotalPrice]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TotalPrice]"
+                      name="TotalPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BasisofReimbursementDetermination]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[BasisofReimbursementDetermination]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BasisofReimbursementDetermination]"
+                      name="BasisofReimbursementDetermination"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[OtherCoverageCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[OtherCoverageCode]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[OtherCoverageCode]"
+                      name="OtherCoverageCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DAW]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DAW]"
+                      name="DAW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DAWDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DAWDescription]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DAWDescription]"
+                      name="DAWDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PatientPayAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PatientPayAmount]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PatientPayAmount]"
+                      name="PatientPayAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[GrossAmountDue]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[GrossAmountDue]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[GrossAmountDue]"
+                      name="GrossAmountDue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PlanID]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PlanID]"
+                      name="PlanID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RejectCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RejectCode]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RejectCode]"
+                      name="RejectCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[MessageResponse]"
+                      length="8000"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[MessageResponse]"
+                      name="MessageResponse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TransactionResponseStatus]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[TransactionResponseStatus]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TransactionResponseStatus]"
+                      name="TransactionResponseStatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriptionNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriptionNumber]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriptionNumber]"
+                      name="PrescriptionNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProviderIDQualifier]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProviderIDQualifier]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProviderIDQualifier]"
+                      name="ProviderIDQualifier"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProviderID]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProviderID]"
+                      name="ProviderID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DoctorName]"
+                      length="500"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DoctorName]"
+                      name="DoctorName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NumberofRefillsAuthorized]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NumberofRefillsAuthorized]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NumberofRefillsAuthorized]"
+                      name="NumberofRefillsAuthorized"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NDCWritten]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NDCWritten]"
+                      name="NDCWritten"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[OtherAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[OtherAmount]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[OtherAmount]"
+                      name="OtherAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PharmacySystemLicenseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PharmacySystemLicenseNumber]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PharmacySystemLicenseNumber]"
+                      name="PharmacySystemLicenseNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[CompoundCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[CompoundCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[CompoundCode]"
+                      name="CompoundCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NetworkReimbursementID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NetworkReimbursementID]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NetworkReimbursementID]"
+                      name="NetworkReimbursementID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriberPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriberPhoneNumber]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriberPhoneNumber]"
+                      name="PrescriberPhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriptionOriginCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriptionOriginCode]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriptionOriginCode]"
+                      name="PrescriptionOriginCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[UnitAWP]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[UnitAWP]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[UnitAWP]"
+                      name="UnitAWP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[FlatSalesTaxAmountPaid]"
+                      name="FlatSalesTaxAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxAmountPaid]"
+                      name="PercentageSalesTaxAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxRate]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxRate]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxRate]"
+                      name="PercentageSalesTaxRate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxBasisPaid]"
+                      name="PercentageSalesTaxBasisPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[IncentiveAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IncentiveAmountPaid]"
+                      name="IncentiveAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProfessionalFeePaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProfessionalFeePaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProfessionalFeePaid]"
+                      name="ProfessionalFeePaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriberNPI]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriberNPI]"
+                      name="PrescriberNPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RXDiscount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RXDiscount]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RXDiscount]"
+                      name="RXDiscount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[AuthorizationNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[AuthorizationNumber]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[AuthorizationNumber]"
+                      name="AuthorizationNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      length="1000"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      name="FileProcessed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateSold]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DateSold]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateSold]"
+                      name="DateSold"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RowversionID]"
+                      dataType="bytes"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RowversionID]"
+                      length="8"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RowversionID]"
+                      name="RowversionID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BasisOfSubmission]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[BasisOfSubmission]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BasisOfSubmission]"
+                      name="BasisOfSubmission"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PayerType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PayerType]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PayerType]"
+                      name="PayerType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RefillNumberCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RefillNumberCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RefillNumberCode]"
+                      name="RefillNumberCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PhysicianDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PhysicianDEA]"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PhysicianDEA]"
+                      name="PhysicianDEA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PharmacyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PharmacyKey]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PharmacyKey]"
+                      name="PharmacyKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ServiceProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[BINNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BINNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProcessorControlNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProcessorControlNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="GroupID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ClaimSubmittedDate]"
+                      dataType="dbDate"
+                      name="ClaimSubmittedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DateOfService]"
+                      dataType="dbDate"
+                      name="DateOfService" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[QuantityDispensed]"
+                      dataType="numeric"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DaysSupply]"
+                      dataType="i4"
+                      name="DaysSupply" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      name="DispensingFeeSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      name="IngredientCostSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeePaid]"
+                      dataType="cy"
+                      name="DispensingFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostPaid]"
+                      dataType="cy"
+                      name="IngredientCostPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[TotalAmountPaid]"
+                      dataType="cy"
+                      name="TotalAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[AmountOfCopay]"
+                      dataType="cy"
+                      name="AmountOfCopay" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      name="UsualandCustomaryCharge" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[TotalPrice]"
+                      dataType="cy"
+                      name="TotalPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[BasisofReimbursementDetermination]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BasisofReimbursementDetermination" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[OtherCoverageCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="OtherCoverageCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DAW" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DAWDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DAWDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PatientPayAmount]"
+                      dataType="cy"
+                      name="PatientPayAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[GrossAmountDue]"
+                      dataType="cy"
+                      name="GrossAmountDue" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PlanID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RejectCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="RejectCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="MessageResponse" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[TransactionResponseStatus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="TransactionResponseStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriptionNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriptionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProviderIDQualifier]"
+                      dataType="i4"
+                      name="ProviderIDQualifier" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DoctorName" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NumberofRefillsAuthorized]"
+                      dataType="i4"
+                      name="NumberofRefillsAuthorized" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="NDCWritten" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[OtherAmount]"
+                      dataType="cy"
+                      name="OtherAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PharmacySystemLicenseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PharmacySystemLicenseNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[CompoundCode]"
+                      dataType="i4"
+                      name="CompoundCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[NetworkReimbursementID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="NetworkReimbursementID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriberPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriberPhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriptionOriginCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriptionOriginCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[UnitAWP]"
+                      dataType="cy"
+                      name="UnitAWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="FlatSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxRate]"
+                      dataType="cy"
+                      name="PercentageSalesTaxRate" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxBasisPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      name="IncentiveAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[ProfessionalFeePaid]"
+                      dataType="cy"
+                      name="ProfessionalFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriberNPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RXDiscount]"
+                      dataType="cy"
+                      name="RXDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[AuthorizationNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="AuthorizationNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[DateSold]"
+                      dataType="dbDate"
+                      name="DateSold" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RowversionID]"
+                      dataType="bytes"
+                      length="8"
+                      name="RowversionID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[BasisOfSubmission]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BasisOfSubmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PayerType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PayerType" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[RefillNumberCode]"
+                      dataType="i4"
+                      name="RefillNumberCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PhysicianDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PhysicianDEA" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].ExternalColumns[PharmacyKey]"
+                      dataType="i4"
+                      name="PharmacyKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ServiceProviderID]"
+                      name="ServiceProviderID" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[BINNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[BINNumber]"
+                      name="BINNumber" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProcessorControlNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProcessorControlNumber]"
+                      name="ProcessorControlNumber" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[GroupID]"
+                      name="GroupID" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ClaimSubmittedDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ClaimSubmittedDate]"
+                      name="ClaimSubmittedDate" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DateOfService]"
+                      dataType="dbDate"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DateOfService]"
+                      name="DateOfService" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[QuantityDispensed]"
+                      dataType="numeric"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[QuantityDispensed]"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DaysSupply]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DaysSupply]"
+                      name="DaysSupply" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[BasisOfSubmission]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[BasisOfSubmission]"
+                      name="BasisOfSubmission" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DispensingFeeSubmitted]"
+                      name="DispensingFeeSubmitted" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[IngredientCostSubmitted]"
+                      name="IngredientCostSubmitted" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DispensingFeePaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DispensingFeePaid]"
+                      name="DispensingFeePaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[IngredientCostPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[IngredientCostPaid]"
+                      name="IngredientCostPaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[TotalAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[TotalAmountPaid]"
+                      name="TotalAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[AmountOfCopay]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[AmountOfCopay]"
+                      name="AmountOfCopay" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[UsualandCustomaryCharge]"
+                      name="UsualandCustomaryCharge" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[TotalPrice]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[TotalPrice]"
+                      name="TotalPrice" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[BasisofReimbursementDetermination]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[BasisofReimbursementDetermination]"
+                      name="BasisofReimbursementDetermination" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[OtherCoverageCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[OtherCoverageCode]"
+                      name="OtherCoverageCode" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DAW]"
+                      name="DAW" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DAWDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DAWDescription]"
+                      name="DAWDescription" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PatientPayAmount]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PatientPayAmount]"
+                      name="PatientPayAmount" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[GrossAmountDue]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[GrossAmountDue]"
+                      name="GrossAmountDue" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PlanID]"
+                      name="PlanID" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RejectCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RejectCode]"
+                      name="RejectCode" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[MessageResponse]"
+                      name="MessageResponse" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[TransactionResponseStatus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[TransactionResponseStatus]"
+                      name="TransactionResponseStatus" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriptionNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriptionNumber]"
+                      name="PrescriptionNumber" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RefillNumberCode]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RefillNumberCode]"
+                      name="RefillNumberCode" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProviderIDQualifier]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProviderIDQualifier]"
+                      name="ProviderIDQualifier" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProviderID]"
+                      name="ProviderID" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DoctorName]"
+                      name="DoctorName" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NumberofRefillsAuthorized]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NumberofRefillsAuthorized]"
+                      name="NumberofRefillsAuthorized" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NDCWritten]"
+                      name="NDCWritten" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[OtherAmount]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[OtherAmount]"
+                      name="OtherAmount" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PayerType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PayerType]"
+                      name="PayerType" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PharmacySystemLicenseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PharmacySystemLicenseNumber]"
+                      name="PharmacySystemLicenseNumber" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[CompoundCode]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[CompoundCode]"
+                      name="CompoundCode" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NetworkReimbursementID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[NetworkReimbursementID]"
+                      name="NetworkReimbursementID" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriberPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriberPhoneNumber]"
+                      name="PrescriberPhoneNumber" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriptionOriginCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriptionOriginCode]"
+                      name="PrescriptionOriginCode" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PhysicianDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PhysicianDEA]"
+                      name="PhysicianDEA" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[UnitAWP]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[UnitAWP]"
+                      name="UnitAWP" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[FlatSalesTaxAmountPaid]"
+                      name="FlatSalesTaxAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxAmountPaid]"
+                      name="PercentageSalesTaxAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxRate]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxRate]"
+                      name="PercentageSalesTaxRate" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxBasisPaid]"
+                      name="PercentageSalesTaxBasisPaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[IncentiveAmountPaid]"
+                      name="IncentiveAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProfessionalFeePaid]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ProfessionalFeePaid]"
+                      name="ProfessionalFeePaid" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PrescriberNPI]"
+                      name="PrescriberNPI" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RXDiscount]"
+                      dataType="cy"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RXDiscount]"
+                      name="RXDiscount" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[AuthorizationNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[AuthorizationNumber]"
+                      name="AuthorizationNumber" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      name="FileProcessed" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DateSold]"
+                      dataType="dbDate"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[DateSold]"
+                      name="DateSold" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RowversionID]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[RowversionID]"
+                      name="RowversionID" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PharmacyKey]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[PharmacyKey]"
+                      name="PharmacyKey" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load StagingRX30\StagingRX30"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="StagingRX30"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[Rx30]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load StagingRX30\StagingRX30.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[ServiceProviderID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="ServiceProviderID"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ServiceProviderID]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ServiceProviderID]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[BINNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="BINNumber"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[BINNumber]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BINNumber]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[ProcessorControlNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="ProcessorControlNumber"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProcessorControlNumber]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProcessorControlNumber]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[GroupID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="GroupID"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[GroupID]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[GroupID]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[ClaimSubmittedDate]"
+                      cachedDataType="dbDate"
+                      cachedName="ClaimSubmittedDate"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ClaimSubmittedDate]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ClaimSubmittedDate]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DateOfService]"
+                      cachedDataType="dbDate"
+                      cachedName="DateOfService"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DateOfService]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateOfService]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[QuantityDispensed]"
+                      cachedDataType="numeric"
+                      cachedName="QuantityDispensed"
+                      cachedPrecision="15"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[QuantityDispensed]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[QuantityDispensed]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DaysSupply]"
+                      cachedDataType="i4"
+                      cachedName="DaysSupply"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DaysSupply]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DaysSupply]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DispensingFeeSubmitted]"
+                      cachedDataType="cy"
+                      cachedName="DispensingFeeSubmitted"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeeSubmitted]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[IngredientCostSubmitted]"
+                      cachedDataType="cy"
+                      cachedName="IngredientCostSubmitted"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostSubmitted]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DispensingFeePaid]"
+                      cachedDataType="cy"
+                      cachedName="DispensingFeePaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeePaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[IngredientCostPaid]"
+                      cachedDataType="cy"
+                      cachedName="IngredientCostPaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[TotalAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="TotalAmountPaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TotalAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[AmountOfCopay]"
+                      cachedDataType="cy"
+                      cachedName="AmountOfCopay"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[AmountofCopay]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[AmountOfCopay]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[UsualandCustomaryCharge]"
+                      cachedDataType="cy"
+                      cachedName="UsualandCustomaryCharge"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[UsualandCustomaryCharge]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[UsualandCustomaryCharge]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[TotalPrice]"
+                      cachedDataType="cy"
+                      cachedName="TotalPrice"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[TotalPrice]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TotalPrice]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[BasisofReimbursementDetermination]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="BasisofReimbursementDetermination"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[BasisofReimbursementDetermination]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BasisofReimbursementDetermination]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[OtherCoverageCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="OtherCoverageCode"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[OtherCoverageCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[OtherCoverageCode]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DAW]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DAW"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DAW]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DAW]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DAWDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DAWDescription"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DAWDescription]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DAWDescription]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PatientPayAmount]"
+                      cachedDataType="cy"
+                      cachedName="PatientPayAmount"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PatientPayAmount]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PatientPayAmount]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[GrossAmountDue]"
+                      cachedDataType="cy"
+                      cachedName="GrossAmountDue"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[GrossAmountDue]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[GrossAmountDue]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PlanID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PlanID"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PlanID]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PlanID]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[RejectCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="RejectCode"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RejectCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RejectCode]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[MessageResponse]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8000"
+                      cachedName="MessageResponse"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[MessageResponse]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[MessageResponse]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[TransactionResponseStatus]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="TransactionResponseStatus"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[TransactionResponseStatus]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[TransactionResponseStatus]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PrescriptionNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PrescriptionNumber"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriptionNumber]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriptionNumber]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[ProviderIDQualifier]"
+                      cachedDataType="i4"
+                      cachedName="ProviderIDQualifier"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProviderIDQualifier]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProviderIDQualifier]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[ProviderID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="ProviderID"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProviderID]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProviderID]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DoctorName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DoctorName"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DoctorName]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DoctorName]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[NumberofRefillsAuthorized]"
+                      cachedDataType="i4"
+                      cachedName="NumberofRefillsAuthorized"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NumberofRefillsAuthorized]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NumberofRefillsAuthorized]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[NDCWritten]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="NDCWritten"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NDCWritten]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NDCWritten]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[OtherAmount]"
+                      cachedDataType="cy"
+                      cachedName="OtherAmount"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[OtherAmount]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[OtherAmount]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PharmacySystemLicenseNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PharmacySystemLicenseNumber"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PharmacySystemLicenseNumber]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PharmacySystemLicenseNumber]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[CompoundCode]"
+                      cachedDataType="i4"
+                      cachedName="CompoundCode"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[CompoundCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[CompoundCode]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[NetworkReimbursementID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="NetworkReimbursementID"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NetworkReimbursementID]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[NetworkReimbursementID]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PrescriberPhoneNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PrescriberPhoneNumber"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberPhoneNumber]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriberPhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PrescriptionOriginCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PrescriptionOriginCode"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriptionOriginCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriptionOriginCode]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[UnitAWP]"
+                      cachedDataType="cy"
+                      cachedName="UnitAWP"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[UnitAWP]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[UnitAWP]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[FlatSalesTaxAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="FlatSalesTaxAmountPaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[FlatSalesTaxAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PercentageSalesTaxAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="PercentageSalesTaxAmountPaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PercentageSalesTaxRate]"
+                      cachedDataType="cy"
+                      cachedName="PercentageSalesTaxRate"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxRate]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxRate]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PercentageSalesTaxBasisPaid]"
+                      cachedDataType="cy"
+                      cachedName="PercentageSalesTaxBasisPaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxBasisPaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[IncentiveAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="IncentiveAmountPaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveAmountPaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[IncentiveAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[ProfessionalFeePaid]"
+                      cachedDataType="cy"
+                      cachedName="ProfessionalFeePaid"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProfessionalFeePaid]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[ProfessionalFeePaid]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PrescriberNPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PrescriberNPI"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberNPI]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PrescriberNPI]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[RXDiscount]"
+                      cachedDataType="cy"
+                      cachedName="RXDiscount"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RXDiscount]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RXDiscount]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[AuthorizationNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="AuthorizationNumber"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[AuthorizationNumber]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[AuthorizationNumber]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[FileProcessed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="FileProcessed"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[FileProcessed]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[DateSold]"
+                      cachedDataType="dbDate"
+                      cachedName="DateSold"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DateSold]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[DateSold]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[RowversionID]"
+                      cachedDataType="bytes"
+                      cachedLength="8"
+                      cachedName="RowversionID"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionID]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RowversionID]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[BasisOfSubmission]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="BasisOfSubmission"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[BasisOfSubmission]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[BasisOfSubmission]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PayerType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PayerType"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PayerType]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PayerType]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[RefillNumberCode]"
+                      cachedDataType="i4"
+                      cachedName="RefillNumberCode"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RefillNumberCode]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[RefillNumberCode]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PhysicianDEA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="PhysicianDEA"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PhysicianDEA]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PhysicianDEA]" />
+                    <inputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].Columns[PharmacyKey]"
+                      cachedDataType="i4"
+                      cachedName="PharmacyKey"
+                      externalMetadataColumnId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PharmacyKey]"
+                      lineageId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output].Columns[PharmacyKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ServiceProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ServiceProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[BINNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BINNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProcessorControlNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProcessorControlNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[GroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="GroupID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ClaimSubmittedDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ClaimSubmittedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DateOfService]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DateOfService" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[QuantityDispensed]"
+                      dataType="numeric"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DaysSupply]"
+                      dataType="i4"
+                      name="DaysSupply" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[BasisOfSubmission]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BasisOfSubmission" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      name="DispensingFeeSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      name="IngredientCostSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeePaid]"
+                      dataType="cy"
+                      name="DispensingFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostPaid]"
+                      dataType="cy"
+                      name="IngredientCostPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmountPaid]"
+                      dataType="cy"
+                      name="TotalAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[AmountofCopay]"
+                      dataType="cy"
+                      name="AmountofCopay" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      name="UsualandCustomaryCharge" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[TotalPrice]"
+                      dataType="cy"
+                      name="TotalPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[BasisofReimbursementDetermination]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="BasisofReimbursementDetermination" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[OtherCoverageCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="OtherCoverageCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DAW]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DAW" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DAWDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="DAWDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PatientPayAmount]"
+                      dataType="cy"
+                      name="PatientPayAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[GrossAmountDue]"
+                      dataType="cy"
+                      name="GrossAmountDue" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PlanID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PlanID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RejectCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="RejectCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[MessageResponse]"
+                      codePage="1252"
+                      dataType="str"
+                      length="8000"
+                      name="MessageResponse" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[TransactionResponseStatus]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="TransactionResponseStatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriptionNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriptionNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RefillNumberCode]"
+                      dataType="i4"
+                      name="RefillNumberCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProviderIDQualifier]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProviderIDQualifier" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProviderID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="ProviderID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DoctorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DoctorName" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NumberofRefillsAuthorized]"
+                      dataType="i4"
+                      name="NumberofRefillsAuthorized" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NDCWritten]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="NDCWritten" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[OtherAmount]"
+                      dataType="cy"
+                      name="OtherAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PayerType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PayerType" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PharmacySystemLicenseNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PharmacySystemLicenseNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[CompoundCode]"
+                      dataType="i4"
+                      name="CompoundCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[NetworkReimbursementID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="NetworkReimbursementID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberPhoneNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriberPhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriptionOriginCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PrescriptionOriginCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[UnitAWP]"
+                      dataType="cy"
+                      name="UnitAWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="FlatSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxRate]"
+                      dataType="numeric"
+                      name="PercentageSalesTaxRate"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      dataType="numeric"
+                      name="PercentageSalesTaxBasisPaid"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      name="IncentiveAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[ProfessionalFeePaid]"
+                      dataType="cy"
+                      name="ProfessionalFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PrescriberNPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="PrescriberNPI" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[AuthorizationNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="AuthorizationNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RowVersionID]"
+                      dataType="bytes"
+                      length="8"
+                      name="RowVersionID" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[DateSold]"
+                      dataType="dbDate"
+                      name="DateSold" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[RXDiscount]"
+                      dataType="cy"
+                      name="RXDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PhysicianDEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="PhysicianDEA" />
+                    <externalMetadataColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input].ExternalColumns[PharmacyKey]"
+                      dataType="i4"
+                      name="PharmacyKey" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load StagingRX30\StagingRX30.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\StagingRX30.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load StagingRX30\StagingRX30.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load StagingRX30\StagingRX30.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load StagingRX30.Paths[OLE DB Source Output]"
+              endId="Package\Load StagingRX30\StagingRX30.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load StagingRX30\Sproc.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Load StagingRX30"
+          TopLeft="468,158" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load StagingRX30">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Load StagingRX30\StagingRX30"
+          TopLeft="417,227" />
+        <NodeLayout
+          Size="105,42"
+          Id="Package\Load StagingRX30\Sproc"
+          TopLeft="352,111" />
+        <EdgeLayout
+          Id="Package\Load StagingRX30.Paths[OLE DB Source Output]"
+          TopLeft="404.5,153">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="82,74"
+              Start="0,0"
+              End="82,66.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33"
+                    Point2="0,37"
+                    Point3="4,37" />
+                  <mssgle:LineSegment
+                    End="78,37" />
+                  <mssgle:CubicBezierSegment
+                    Point1="78,37"
+                    Point2="82,37"
+                    Point3="82,41" />
+                  <mssgle:LineSegment
+                    End="82,66.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load StagingRX30\Sproc">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">View</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load StagingRX30\StagingRX30">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1156 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/5/2018 2:02:11 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{D2C21E17-5D02-4666-9F3A-2ED1AD4687EB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ClaimsDDS_ClaimFactRX30_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{DFC4038B-4F45-4CE5-A3E0-0E90F1F1E45C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{B7A4DF5F-B3FA-4586-B499-988D35AFAD7A}"
+      DTS:ObjectName="AAPDW1.ClaimsDDS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ClaimsDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load dboClaimFactRX30"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7DE9076F-0003-4B3A-8BE5-FF104BD19DA4}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load dboClaimFactRX30"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load dboClaimFactRX30\dbo"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="dbo"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ClaimFactRX30]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load dboClaimFactRX30\dbo.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[DateOfServiceKey]"
+                      cachedDataType="i4"
+                      cachedName="DateOfServiceKey"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DateOfServiceKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DateOfServiceKey]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[PharmacyKey]"
+                      cachedDataType="i4"
+                      cachedName="PharmacyKey"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PharmacyKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PharmacyKey]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[EventKey]"
+                      cachedDataType="i4"
+                      cachedName="EventKey"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[EventKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[EventKey]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[DrugKey]"
+                      cachedDataType="i4"
+                      cachedName="DrugKey"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DrugKey]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[DispensingFeeSubmitted]"
+                      cachedDataType="cy"
+                      cachedName="DispensingFeeSubmitted"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeeSubmitted]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[IngredientCostSubmitted]"
+                      cachedDataType="cy"
+                      cachedName="IngredientCostSubmitted"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostSubmitted]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[DispensingFeePaid]"
+                      cachedDataType="cy"
+                      cachedName="DispensingFeePaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeePaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[IngredientCostPaid]"
+                      cachedDataType="cy"
+                      cachedName="IngredientCostPaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[TotalAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="TotalAmountPaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TotalAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[AmountofCopay]"
+                      cachedDataType="cy"
+                      cachedName="AmountofCopay"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[AmountofCopay]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[AmountofCopay]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[UsualandCustomaryCharge]"
+                      cachedDataType="cy"
+                      cachedName="UsualandCustomaryCharge"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[UsualandCustomaryCharge]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[UsualandCustomaryCharge]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[TotalPrice]"
+                      cachedDataType="cy"
+                      cachedName="TotalPrice"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[TotalPrice]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TotalPrice]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[PatientPayAmount]"
+                      cachedDataType="cy"
+                      cachedName="PatientPayAmount"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PatientPayAmount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PatientPayAmount]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[GrossAmountDue]"
+                      cachedDataType="cy"
+                      cachedName="GrossAmountDue"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[GrossAmountDue]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[GrossAmountDue]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[OtherAmount]"
+                      cachedDataType="cy"
+                      cachedName="OtherAmount"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[OtherAmount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[OtherAmount]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[FlatSalesTaxAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="FlatSalesTaxAmountPaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[FlatSalesTaxAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[PercentageSalesTaxAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="PercentageSalesTaxAmountPaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[PercentageSalesTaxRate]"
+                      cachedDataType="numeric"
+                      cachedName="PercentageSalesTaxRate"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxRate]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxRate]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[PercentageSalesTaxBasisPaid]"
+                      cachedDataType="cy"
+                      cachedName="PercentageSalesTaxBasisPaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxBasisPaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[IncentiveAmountPaid]"
+                      cachedDataType="cy"
+                      cachedName="IncentiveAmountPaid"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IncentiveAmountPaid]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[AWPUnitPrice]"
+                      cachedDataType="numeric"
+                      cachedName="AWPUnitPrice"
+                      cachedPrecision="13"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[AWPUnitPrice]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[AWPUnitPrice]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[CardinalPharmacyCost]"
+                      cachedDataType="cy"
+                      cachedName="CardinalPharmacyCost"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[CardinalPharmacyCost]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[CardinalPharmacyCost]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[APIPharmacyCost]"
+                      cachedDataType="cy"
+                      cachedName="APIPharmacyCost"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[APIPharmacyCost]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[APIPharmacyCost]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[UnitOfSale]"
+                      cachedDataType="cy"
+                      cachedName="UnitOfSale"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[UnitOfSale]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[UnitOfSale]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[TransactionCount]"
+                      cachedDataType="ui1"
+                      cachedName="TransactionCount"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TransactionCount]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[RxDiscount]"
+                      cachedDataType="cy"
+                      cachedName="RxDiscount"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[RxDiscount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[RxDiscount]" />
+                    <inputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].Columns[QuantityDispensed]"
+                      cachedDataType="numeric"
+                      cachedName="QuantityDispensed"
+                      cachedPrecision="15"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[QuantityDispensed]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[QuantityDispensed]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DateOfServiceKey]"
+                      dataType="i4"
+                      name="DateOfServiceKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PharmacyKey]"
+                      dataType="i4"
+                      name="PharmacyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[EventKey]"
+                      dataType="i4"
+                      name="EventKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      name="DispensingFeeSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      name="IngredientCostSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeePaid]"
+                      dataType="cy"
+                      name="DispensingFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostPaid]"
+                      dataType="cy"
+                      name="IngredientCostPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[TotalAmountPaid]"
+                      dataType="cy"
+                      name="TotalAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[AmountofCopay]"
+                      dataType="cy"
+                      name="AmountofCopay" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      name="UsualandCustomaryCharge" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[TotalPrice]"
+                      dataType="cy"
+                      name="TotalPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PatientPayAmount]"
+                      dataType="cy"
+                      name="PatientPayAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[GrossAmountDue]"
+                      dataType="cy"
+                      name="GrossAmountDue" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[OtherAmount]"
+                      dataType="cy"
+                      name="OtherAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="FlatSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxRate]"
+                      dataType="numeric"
+                      name="PercentageSalesTaxRate"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxBasisPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      name="IncentiveAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[AWPUnitPrice]"
+                      dataType="numeric"
+                      name="AWPUnitPrice"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[CardinalPharmacyCost]"
+                      dataType="cy"
+                      name="CardinalPharmacyCost" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[APIPharmacyCost]"
+                      dataType="cy"
+                      name="APIPharmacyCost" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[UnitOfSale]"
+                      dataType="cy"
+                      name="UnitOfSale" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCount]"
+                      dataType="ui1"
+                      name="TransactionCount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[RxDiscount]"
+                      dataType="cy"
+                      name="RxDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input].ExternalColumns[QuantityDispensed]"
+                      dataType="numeric"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load dboClaimFactRX30\dbo.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\dbo.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\dbo.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\dbo.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load dboClaimFactRX30\Staging"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[ClaimFactRX30]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load dboClaimFactRX30\Staging.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DateOfServiceKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DateOfServiceKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DateOfServiceKey]"
+                      name="DateOfServiceKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PharmacyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PharmacyKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PharmacyKey]"
+                      name="PharmacyKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[EventKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[EventKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[EventKey]"
+                      name="EventKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      name="DrugKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeeSubmitted]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]"
+                      name="DispensingFeeSubmitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostSubmitted]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]"
+                      name="IngredientCostSubmitted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeePaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]"
+                      name="DispensingFeePaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]"
+                      name="IngredientCostPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TotalAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[TotalAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TotalAmountPaid]"
+                      name="TotalAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[AmountofCopay]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[AmountofCopay]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[AmountofCopay]"
+                      name="AmountofCopay"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[UsualandCustomaryCharge]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[UsualandCustomaryCharge]"
+                      name="UsualandCustomaryCharge"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TotalPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[TotalPrice]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TotalPrice]"
+                      name="TotalPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PatientPayAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PatientPayAmount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PatientPayAmount]"
+                      name="PatientPayAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[GrossAmountDue]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[GrossAmountDue]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[GrossAmountDue]"
+                      name="GrossAmountDue"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[OtherAmount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[OtherAmount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[OtherAmount]"
+                      name="OtherAmount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[FlatSalesTaxAmountPaid]"
+                      name="FlatSalesTaxAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxAmountPaid]"
+                      name="PercentageSalesTaxAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxRate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxRate]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxRate]"
+                      name="PercentageSalesTaxRate"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[PercentageSalesTaxBasisPaid]"
+                      name="PercentageSalesTaxBasisPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[IncentiveAmountPaid]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[IncentiveAmountPaid]"
+                      name="IncentiveAmountPaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[AWPUnitPrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[AWPUnitPrice]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[AWPUnitPrice]"
+                      name="AWPUnitPrice"
+                      precision="13"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[CardinalPharmacyCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[CardinalPharmacyCost]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[CardinalPharmacyCost]"
+                      name="CardinalPharmacyCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[APIPharmacyCost]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[APIPharmacyCost]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[APIPharmacyCost]"
+                      name="APIPharmacyCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[UnitOfSale]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[UnitOfSale]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[UnitOfSale]"
+                      name="UnitOfSale"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TransactionCount]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[TransactionCount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[TransactionCount]"
+                      name="TransactionCount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[RxDiscount]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[RxDiscount]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[RxDiscount]"
+                      name="RxDiscount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[QuantityDispensed]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[QuantityDispensed]"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].Columns[QuantityDispensed]"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DateOfServiceKey]"
+                      dataType="i4"
+                      name="DateOfServiceKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PharmacyKey]"
+                      dataType="i4"
+                      name="PharmacyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[EventKey]"
+                      dataType="i4"
+                      name="EventKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      name="DispensingFeeSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      name="IngredientCostSubmitted" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeePaid]"
+                      dataType="cy"
+                      name="DispensingFeePaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostPaid]"
+                      dataType="cy"
+                      name="IngredientCostPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[TotalAmountPaid]"
+                      dataType="cy"
+                      name="TotalAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[AmountofCopay]"
+                      dataType="cy"
+                      name="AmountofCopay" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      name="UsualandCustomaryCharge" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[TotalPrice]"
+                      dataType="cy"
+                      name="TotalPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PatientPayAmount]"
+                      dataType="cy"
+                      name="PatientPayAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[GrossAmountDue]"
+                      dataType="cy"
+                      name="GrossAmountDue" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[OtherAmount]"
+                      dataType="cy"
+                      name="OtherAmount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="FlatSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxRate]"
+                      dataType="numeric"
+                      name="PercentageSalesTaxRate"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      name="PercentageSalesTaxBasisPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      name="IncentiveAmountPaid" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[AWPUnitPrice]"
+                      dataType="numeric"
+                      name="AWPUnitPrice"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[CardinalPharmacyCost]"
+                      dataType="cy"
+                      name="CardinalPharmacyCost" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[APIPharmacyCost]"
+                      dataType="cy"
+                      name="APIPharmacyCost" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[UnitOfSale]"
+                      dataType="cy"
+                      name="UnitOfSale" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[TransactionCount]"
+                      dataType="ui1"
+                      name="TransactionCount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[RxDiscount]"
+                      dataType="cy"
+                      name="RxDiscount" />
+                    <externalMetadataColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output].ExternalColumns[QuantityDispensed]"
+                      dataType="numeric"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DateOfServiceKey]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DateOfServiceKey]"
+                      name="DateOfServiceKey" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PharmacyKey]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PharmacyKey]"
+                      name="PharmacyKey" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[EventKey]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[EventKey]"
+                      name="EventKey" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      name="DrugKey" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DispensingFeeSubmitted]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DispensingFeeSubmitted]"
+                      name="DispensingFeeSubmitted" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[IngredientCostSubmitted]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[IngredientCostSubmitted]"
+                      name="IngredientCostSubmitted" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DispensingFeePaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[DispensingFeePaid]"
+                      name="DispensingFeePaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[IngredientCostPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[IngredientCostPaid]"
+                      name="IngredientCostPaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[TotalAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[TotalAmountPaid]"
+                      name="TotalAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[AmountofCopay]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[AmountofCopay]"
+                      name="AmountofCopay" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[UsualandCustomaryCharge]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[UsualandCustomaryCharge]"
+                      name="UsualandCustomaryCharge" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[TotalPrice]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[TotalPrice]"
+                      name="TotalPrice" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PatientPayAmount]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PatientPayAmount]"
+                      name="PatientPayAmount" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[GrossAmountDue]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[GrossAmountDue]"
+                      name="GrossAmountDue" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[OtherAmount]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[OtherAmount]"
+                      name="OtherAmount" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[FlatSalesTaxAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[FlatSalesTaxAmountPaid]"
+                      name="FlatSalesTaxAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxAmountPaid]"
+                      name="PercentageSalesTaxAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxRate]"
+                      dataType="numeric"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxRate]"
+                      name="PercentageSalesTaxRate"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxBasisPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[PercentageSalesTaxBasisPaid]"
+                      name="PercentageSalesTaxBasisPaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[IncentiveAmountPaid]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[IncentiveAmountPaid]"
+                      name="IncentiveAmountPaid" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[AWPUnitPrice]"
+                      dataType="numeric"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[AWPUnitPrice]"
+                      name="AWPUnitPrice"
+                      precision="13"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[CardinalPharmacyCost]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[CardinalPharmacyCost]"
+                      name="CardinalPharmacyCost" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[APIPharmacyCost]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[APIPharmacyCost]"
+                      name="APIPharmacyCost" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[UnitOfSale]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[UnitOfSale]"
+                      name="UnitOfSale" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[TransactionCount]"
+                      dataType="ui1"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[TransactionCount]"
+                      name="TransactionCount" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[RxDiscount]"
+                      dataType="cy"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[RxDiscount]"
+                      name="RxDiscount" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[QuantityDispensed]"
+                      dataType="numeric"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[QuantityDispensed]"
+                      name="QuantityDispensed"
+                      precision="15"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load dboClaimFactRX30.Paths[OLE DB Source Output]"
+              endId="Package\Load dboClaimFactRX30\dbo.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load dboClaimFactRX30\Staging.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Load dboClaimFactRX30"
+          TopLeft="337,96" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load dboClaimFactRX30">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Load dboClaimFactRX30\Staging"
+          TopLeft="344,70" />
+        <NodeLayout
+          Size="97,42"
+          Id="Package\Load dboClaimFactRX30\dbo"
+          TopLeft="410,176" />
+        <EdgeLayout
+          Id="Package\Load dboClaimFactRX30.Paths[OLE DB Source Output]"
+          TopLeft="401,112">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="57.5,64"
+              Start="0,0"
+              End="57.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="53.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="53.5,32"
+                    Point2="57.5,32"
+                    Point3="57.5,36" />
+                  <mssgle:LineSegment
+                    End="57.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dboClaimFactRX30\Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load dboClaimFactRX30\dbo">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

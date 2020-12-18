@@ -1,0 +1,1396 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/2/2018 2:05:14 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{87716C57-DB5C-4605-BD85-CC6F6359CD54}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ClaimsDDS_FDS_StagingClaimFactFDS_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{E9369E62-9DDA-400A-8718-D85BAB76A603}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6F58315C-8294-4300-9435-4B3C97D86F64}"
+      DTS:ObjectName="AAPDW1.ClaimsDDS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ClaimsDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B3A8706C-9FB4-4FF5-9043-DB32A5B5FEA9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{345D0F0F-43CF-4EFC-84F7-1259D6E171AA}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDateKey">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{F8C1070D-47F5-4F01-A5C3-F91767EE66A4}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{CF44CBBB-7348-42CC-81CC-3AC22229761A}"
+        DTS:ObjectName="{CF44CBBB-7348-42CC-81CC-3AC22229761A}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Load StagingClaimfactFDS"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{11FC9931-8325-4AD2-BC3D-9A34A205E4D2}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load StagingClaimfactFDS"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Staging].[ClaimFactFDS]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateOfServiceKey]"
+                          cachedDataType="i4"
+                          cachedName="DateOfServiceKey"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateofServiceKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfServiceKey]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PharmacyKey]"
+                          cachedDataType="i4"
+                          cachedName="PharmacyKey"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PharmacyKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[PharmacyKey]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrugKey]"
+                          cachedDataType="i4"
+                          cachedName="DrugKey"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EventKey]"
+                          cachedDataType="i4"
+                          cachedName="EventKey"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventKey]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PrescribedRefills]"
+                          cachedDataType="i4"
+                          cachedName="PrescribedRefills"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PrescribedRefills]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[PrescribedRefills]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RefillNumber]"
+                          cachedDataType="i4"
+                          cachedName="RefillNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefillNumber]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefillNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TotalQuantity]"
+                          cachedDataType="numeric"
+                          cachedName="TotalQuantity"
+                          cachedPrecision="15"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalQuantity]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalQuantity]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ContractCost]"
+                          cachedDataType="cy"
+                          cachedName="ContractCost"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractCost]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractCost]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AWP]"
+                          cachedDataType="cy"
+                          cachedName="AWP"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AWP]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[AWP]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UandC]"
+                          cachedDataType="cy"
+                          cachedName="UandC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UandC]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[UandC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopayAmountSubmitted]"
+                          cachedDataType="cy"
+                          cachedName="CopayAmountSubmitted"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CopayAmountSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CopayAmountSubmitted]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IngredientCostSubmitted]"
+                          cachedDataType="cy"
+                          cachedName="IngredientCostSubmitted"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DispensingFeeSubmitted]"
+                          cachedDataType="cy"
+                          cachedName="DispensingFeeSubmitted"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeeSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncentiveFeeSubmitted]"
+                          cachedDataType="cy"
+                          cachedName="IncentiveFeeSubmitted"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveFeeSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncentiveFeeSubmitted]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SalesTaxSubmitted]"
+                          cachedDataType="cy"
+                          cachedName="SalesTaxSubmitted"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTaxSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesTaxSubmitted]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CopayAmountPaid]"
+                          cachedDataType="cy"
+                          cachedName="CopayAmountPaid"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CopayAmountPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CopayAmountPaid]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IngredientCostPaid]"
+                          cachedDataType="cy"
+                          cachedName="IngredientCostPaid"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DispensingFeePaid]"
+                          cachedDataType="cy"
+                          cachedName="DispensingFeePaid"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeePaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SalesTaxPaid]"
+                          cachedDataType="cy"
+                          cachedName="SalesTaxPaid"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTaxPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesTaxPaid]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IncentiveFeePaid]"
+                          cachedDataType="cy"
+                          cachedName="IncentiveFeePaid"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveFeePaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncentiveFeePaid]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ClaimAmountPaid]"
+                          cachedDataType="cy"
+                          cachedName="ClaimAmountPaid"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClaimAmountPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimAmountPaid]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[QuantityDispensed]"
+                          cachedDataType="numeric"
+                          cachedName="QuantityDispensed"
+                          cachedPrecision="10"
+                          cachedScale="3"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QuantityDispensed]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[QuantityDispensed]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DaysSupply]"
+                          cachedDataType="i4"
+                          cachedName="DaysSupply"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DaysSupply]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DaysSupply]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AdjustedContractCost]"
+                          cachedDataType="cy"
+                          cachedName="AdjustedContractCost"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AdjustedContractCost]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[AdjustedContractCost]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TransactionCount]"
+                          cachedDataType="ui1"
+                          cachedName="TransactionCount"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCount]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionCount]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateofServiceKey]"
+                          dataType="i4"
+                          name="DateofServiceKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PharmacyKey]"
+                          dataType="i4"
+                          name="PharmacyKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                          dataType="i4"
+                          name="DrugKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventKey]"
+                          dataType="i4"
+                          name="EventKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PrescribedRefills]"
+                          dataType="i4"
+                          name="PrescribedRefills" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RefillNumber]"
+                          dataType="i4"
+                          name="RefillNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TotalQuantity]"
+                          dataType="numeric"
+                          name="TotalQuantity"
+                          precision="15"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractCost]"
+                          dataType="cy"
+                          name="ContractCost" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AWP]"
+                          dataType="cy"
+                          name="AWP" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UandC]"
+                          dataType="cy"
+                          name="UandC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CopayAmountSubmitted]"
+                          dataType="cy"
+                          name="CopayAmountSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostSubmitted]"
+                          dataType="cy"
+                          name="IngredientCostSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeeSubmitted]"
+                          dataType="cy"
+                          name="DispensingFeeSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveFeeSubmitted]"
+                          dataType="cy"
+                          name="IncentiveFeeSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTaxSubmitted]"
+                          dataType="cy"
+                          name="SalesTaxSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CopayAmountPaid]"
+                          dataType="cy"
+                          name="CopayAmountPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IngredientCostPaid]"
+                          dataType="cy"
+                          name="IngredientCostPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DispensingFeePaid]"
+                          dataType="cy"
+                          name="DispensingFeePaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SalesTaxPaid]"
+                          dataType="cy"
+                          name="SalesTaxPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IncentiveFeePaid]"
+                          dataType="cy"
+                          name="IncentiveFeePaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ClaimAmountPaid]"
+                          dataType="cy"
+                          name="ClaimAmountPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QuantityDispensed]"
+                          dataType="numeric"
+                          name="QuantityDispensed"
+                          precision="10"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DaysSupply]"
+                          dataType="i4"
+                          name="DaysSupply" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AdjustedContractCost]"
+                          dataType="cy"
+                          name="AdjustedContractCost" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TransactionCount]"
+                          dataType="ui1"
+                          name="TransactionCount" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [Staging].[usp_ClaimFact_FDS_Load]
+
+	@DateKey = ?</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"@DateKey:Input",{345D0F0F-43CF-4EFC-84F7-1259D6E171AA};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfServiceKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateOfServiceKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateOfServiceKey]"
+                          name="DateOfServiceKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[PharmacyKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PharmacyKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[PharmacyKey]"
+                          name="PharmacyKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                          name="DrugKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventKey]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[EventKey]"
+                          name="EventKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[PrescribedRefills]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PrescribedRefills]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[PrescribedRefills]"
+                          name="PrescribedRefills"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefillNumber]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RefillNumber]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[RefillNumber]"
+                          name="RefillNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalQuantity]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalQuantity]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TotalQuantity]"
+                          name="TotalQuantity"
+                          precision="15"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractCost]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractCost]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractCost]"
+                          name="ContractCost"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[AWP]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AWP]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[AWP]"
+                          name="AWP"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[UandC]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UandC]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[UandC]"
+                          name="UandC"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CopayAmountSubmitted]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CopayAmountSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CopayAmountSubmitted]"
+                          name="CopayAmountSubmitted"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IngredientCostSubmitted]"
+                          name="IngredientCostSubmitted"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeeSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispensingFeeSubmitted]"
+                          name="DispensingFeeSubmitted"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncentiveFeeSubmitted]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncentiveFeeSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncentiveFeeSubmitted]"
+                          name="IncentiveFeeSubmitted"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesTaxSubmitted]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SalesTaxSubmitted]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesTaxSubmitted]"
+                          name="SalesTaxSubmitted"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CopayAmountPaid]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CopayAmountPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[CopayAmountPaid]"
+                          name="CopayAmountPaid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IngredientCostPaid]"
+                          name="IngredientCostPaid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeePaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DispensingFeePaid]"
+                          name="DispensingFeePaid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesTaxPaid]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SalesTaxPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[SalesTaxPaid]"
+                          name="SalesTaxPaid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncentiveFeePaid]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncentiveFeePaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[IncentiveFeePaid]"
+                          name="IncentiveFeePaid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimAmountPaid]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimAmountPaid]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[ClaimAmountPaid]"
+                          name="ClaimAmountPaid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[QuantityDispensed]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QuantityDispensed]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[QuantityDispensed]"
+                          name="QuantityDispensed"
+                          precision="10"
+                          scale="3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DaysSupply]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DaysSupply]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[DaysSupply]"
+                          name="DaysSupply"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[AdjustedContractCost]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AdjustedContractCost]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[AdjustedContractCost]"
+                          name="AdjustedContractCost"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionCount]"
+                          dataType="ui1"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionCount]"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].Columns[TransactionCount]"
+                          name="TransactionCount"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateOfServiceKey]"
+                          dataType="i4"
+                          name="DateOfServiceKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PharmacyKey]"
+                          dataType="i4"
+                          name="PharmacyKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                          dataType="i4"
+                          name="DrugKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EventKey]"
+                          dataType="i4"
+                          name="EventKey" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PrescribedRefills]"
+                          dataType="i4"
+                          name="PrescribedRefills" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RefillNumber]"
+                          dataType="i4"
+                          name="RefillNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TotalQuantity]"
+                          dataType="numeric"
+                          name="TotalQuantity"
+                          precision="15"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractCost]"
+                          dataType="cy"
+                          name="ContractCost" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AWP]"
+                          dataType="cy"
+                          name="AWP" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UandC]"
+                          dataType="cy"
+                          name="UandC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CopayAmountSubmitted]"
+                          dataType="cy"
+                          name="CopayAmountSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostSubmitted]"
+                          dataType="cy"
+                          name="IngredientCostSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeeSubmitted]"
+                          dataType="cy"
+                          name="DispensingFeeSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncentiveFeeSubmitted]"
+                          dataType="cy"
+                          name="IncentiveFeeSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SalesTaxSubmitted]"
+                          dataType="cy"
+                          name="SalesTaxSubmitted" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CopayAmountPaid]"
+                          dataType="cy"
+                          name="CopayAmountPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IngredientCostPaid]"
+                          dataType="cy"
+                          name="IngredientCostPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DispensingFeePaid]"
+                          dataType="cy"
+                          name="DispensingFeePaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SalesTaxPaid]"
+                          dataType="cy"
+                          name="SalesTaxPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IncentiveFeePaid]"
+                          dataType="cy"
+                          name="IncentiveFeePaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ClaimAmountPaid]"
+                          dataType="cy"
+                          name="ClaimAmountPaid" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[QuantityDispensed]"
+                          dataType="numeric"
+                          name="QuantityDispensed"
+                          precision="10"
+                          scale="3" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DaysSupply]"
+                          dataType="i4"
+                          name="DaysSupply" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[AdjustedContractCost]"
+                          dataType="cy"
+                          name="AdjustedContractCost" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[TransactionCount]"
+                          dataType="ui1"
+                          name="TransactionCount" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateOfServiceKey]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateOfServiceKey]"
+                          name="DateOfServiceKey" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PharmacyKey]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PharmacyKey]"
+                          name="PharmacyKey" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                          name="DrugKey" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventKey]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EventKey]"
+                          name="EventKey" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PrescribedRefills]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PrescribedRefills]"
+                          name="PrescribedRefills" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RefillNumber]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RefillNumber]"
+                          name="RefillNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalQuantity]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TotalQuantity]"
+                          name="TotalQuantity"
+                          precision="15"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractCost]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractCost]"
+                          name="ContractCost" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AWP]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AWP]"
+                          name="AWP" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UandC]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UandC]"
+                          name="UandC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CopayAmountSubmitted]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CopayAmountSubmitted]"
+                          name="CopayAmountSubmitted" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IngredientCostSubmitted]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IngredientCostSubmitted]"
+                          name="IngredientCostSubmitted" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DispensingFeeSubmitted]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DispensingFeeSubmitted]"
+                          name="DispensingFeeSubmitted" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncentiveFeeSubmitted]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncentiveFeeSubmitted]"
+                          name="IncentiveFeeSubmitted" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SalesTaxSubmitted]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SalesTaxSubmitted]"
+                          name="SalesTaxSubmitted" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CopayAmountPaid]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CopayAmountPaid]"
+                          name="CopayAmountPaid" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IngredientCostPaid]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IngredientCostPaid]"
+                          name="IngredientCostPaid" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DispensingFeePaid]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DispensingFeePaid]"
+                          name="DispensingFeePaid" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SalesTaxPaid]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SalesTaxPaid]"
+                          name="SalesTaxPaid" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncentiveFeePaid]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IncentiveFeePaid]"
+                          name="IncentiveFeePaid" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimAmountPaid]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ClaimAmountPaid]"
+                          name="ClaimAmountPaid" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QuantityDispensed]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[QuantityDispensed]"
+                          name="QuantityDispensed"
+                          precision="10"
+                          scale="3" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DaysSupply]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DaysSupply]"
+                          name="DaysSupply" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AdjustedContractCost]"
+                          dataType="cy"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[AdjustedContractCost]"
+                          name="AdjustedContractCost" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionCount]"
+                          dataType="ui1"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[TransactionCount]"
+                          name="TransactionCount" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Load StagingClaimfactFDS.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{19B79305-2CE5-44E4-B184-656E5E8D52FD}"
+          DTS:ObjectName="{19B79305-2CE5-44E4-B184-656E5E8D52FD}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varDateKey" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get DateKeys for Loop"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E1C584F4-0F8D-444F-83AA-3BF9CD26F7A0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get DateKeys for Loop"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get DateKeys for Loop\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[usp_FDS_GetDates]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get DateKeys for Loop\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ClaimsDDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get DateKeys for Loop\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get DateKeys for Loop\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get DateKeys for Loop\Recordset Destination.Inputs[Recordset Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      lineageId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get DateKeys for Loop.Paths[OLE DB Source Output]"
+              endId="Package\Get DateKeys for Loop\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get DateKeys for Loop\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C94177E8-CE11-4CFF-8C70-47B237E37CC0}"
+      DTS:From="Package\Get DateKeys for Loop"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185,42"
+          Id="Package\Get DateKeys for Loop"
+          TopLeft="383,52" />
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Foreach Loop Container\Load StagingClaimfactFDS"
+          TopLeft="14,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="221,102"
+          Size="221,146"
+          Id="Package\Foreach Loop Container"
+          TopLeft="453,249" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="475.5,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88,155"
+              Start="0,0"
+              End="88,147.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,73.5"
+                    Point2="0,77.5"
+                    Point3="4,77.5" />
+                  <mssgle:LineSegment
+                    End="84,77.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84,77.5"
+                    Point2="88,77.5"
+                    Point3="88,81.5" />
+                  <mssgle:LineSegment
+                    End="88,147.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Load StagingClaimfactFDS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination"
+          TopLeft="403,157" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source"
+          TopLeft="310,55" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Load StagingClaimfactFDS.Paths[OLE DB Source Output]"
+          TopLeft="385,97">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="103.5,60"
+              Start="0,0"
+              End="103.5,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
+                  <mssgle:LineSegment
+                    End="99.5,30" />
+                  <mssgle:CubicBezierSegment
+                    Point1="99.5,30"
+                    Point2="103.5,30"
+                    Point3="103.5,34" />
+                  <mssgle:LineSegment
+                    End="103.5,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Load StagingClaimfactFDS\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get DateKeys for Loop">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get DateKeys for Loop\OLE DB Source"
+          TopLeft="423,99" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get DateKeys for Loop\Recordset Destination"
+          TopLeft="540,216" />
+        <EdgeLayout
+          Id="Package\Get DateKeys for Loop.Paths[OLE DB Source Output]"
+          TopLeft="498,141">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="133,75"
+              Start="0,0"
+              End="133,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="129,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="129,37.5"
+                    Point2="133,37.5"
+                    Point3="133,41.5" />
+                  <mssgle:LineSegment
+                    End="133,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get DateKeys for Loop\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
