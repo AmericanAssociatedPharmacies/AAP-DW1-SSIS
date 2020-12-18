@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="aapadw1d.database.windows.net.AzureTest.sysadmin"
+  DTS:DTSID="{88ADA213-80B5-4807-8743-D14DB5B2158C}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=aapadw1d.database.windows.net;User ID=sysadmin;Initial Catalog=Intake;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Packet Size=32767;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAB2p+rjsWEkyFtv3gKspq8gAAAAACAAAAAAADZgAAwAAAABAAAACfKnkNya2be174NehJnDeSAAAAAASAAACgAAAAEAAAADEtRymELMqz2PlkQDP1Oz2QAAAAVWD5j6iWQbvjK1DlLEeOekeQWfH0qijMivg8rRRv+V6C+ZHyvReBMHPJctdPwRLEqvacRmVSYEsUiWhU75M8ym4JLit+UOEr/iP1kmqXjZK6TofuDLeLao4HOMfEyIP92mMMRwnTnkJDY6bQzBPsblaiHVjhoo4Ta+Kg/PzJoKR7uuWPcGqPlv85XFtsx1suFAAAAPcNvieCNGSKAOO9ArREBqNgs6zi</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

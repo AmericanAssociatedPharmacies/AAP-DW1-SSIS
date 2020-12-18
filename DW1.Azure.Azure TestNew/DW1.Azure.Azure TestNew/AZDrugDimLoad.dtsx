@@ -1,0 +1,1799 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/12/2020 8:45:15 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAPDW1"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{0E67AAF6-127E-4871-BB3C-A5441AE4DE31}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="AZDrugDimLoad"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{4EA82CF6-B803-40E9-9FBC-1EF8834B0D1E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[aapadw1d.database.windows.net.AzureTest.sysadmin]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9DFFBFD5-942B-4AB7-9C53-264C2B6DBA1C}"
+      DTS:ObjectName="aapadw1d.database.windows.net.AzureTest.sysadmin">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=aapadw1d.database.windows.net;User ID=sysadmin;Initial Catalog=Intake;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;Packet Size=32767;">
+          <DTS:Password
+            DTS:Name="Password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAB2p+rjsWEkyFtv3gKspq8gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADt06SsAbM8njYeg/ADJKtGAAAAAASAAACgAAAAEAAAAMK0JC+bxM4nzIaLJECO1CVAAAAADOb7LrTnLyrABNlCDebNhz6qW9qH7mGu5rdELvorr2rNCSH1H15s1V9UhaMfpq9//MzAPVwcBVWHtzOAr9274BQAAACfK/vbROh7s1yyHmA2vDSQlyHpcw</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.DrugMaster]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3756223C-A7B4-498C-A97C-FEC37C59925F}"
+      DTS:ObjectName="AAPDW1.DrugMaster">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=DrugMaster;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{870079C5-4638-435C-BED2-B955F0916B0A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\AZ AAPDW1D"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="AZ AAPDW1D"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DrugDim]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\AZ AAPDW1D.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[aapadw1d.database.windows.net.AzureTest.sysadmin]"
+                  connectionManagerRefId="Package.ConnectionManagers[aapadw1d.database.windows.net.AzureTest.sysadmin]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[DrugKey]"
+                      cachedDataType="i4"
+                      cachedName="DrugKey"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[GPI]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="14"
+                      cachedName="GPI"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[GPI]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[GPI]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[GPPC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="GPPC"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[GPPC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[GPPC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[DrugName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DrugName"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugName]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[Description]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[Manufacturer]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="30"
+                      cachedName="Manufacturer"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Manufacturer]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Manufacturer]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[DrugType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="DrugType"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugType]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugType]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[UnitofMeasure]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="UnitofMeasure"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[UnitofMeasure]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[UnitofMeasure]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[Form]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="4"
+                      cachedName="Form"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Form]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Form]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[PackageSize]"
+                      cachedDataType="numeric"
+                      cachedName="PackageSize"
+                      cachedPrecision="8"
+                      cachedScale="3"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[PackageSize]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[PackageSize]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsRX]"
+                      cachedDataType="i4"
+                      cachedName="IsRX"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsRX]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsRX]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsOTC]"
+                      cachedDataType="i4"
+                      cachedName="IsOTC"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsOTC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsOTC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[Strength]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="Strength"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Strength]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Strength]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[StrengthUnitMeasure]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="StrengthUnitMeasure"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[StrengthUnitMeasure]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[StrengthUnitMeasure]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[ControlledDrugClass]"
+                      cachedDataType="i4"
+                      cachedName="ControlledDrugClass"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[ControlledDrugClass]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[ControlledDrugClass]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[WACPackagePrice]"
+                      cachedDataType="numeric"
+                      cachedName="WACPackagePrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[WACPackagePrice]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[WACPackagePrice]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[WACPerDose]"
+                      cachedDataType="numeric"
+                      cachedName="WACPerDose"
+                      cachedPrecision="13"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[WACPerDose]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[WACPerDose]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[AWPPackagePrice]"
+                      cachedDataType="numeric"
+                      cachedName="AWPPackagePrice"
+                      cachedPrecision="10"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[AWPPackagePrice]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[AWPPackagePrice]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[AWPPerDose]"
+                      cachedDataType="numeric"
+                      cachedName="AWPPerDose"
+                      cachedPrecision="13"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[AWPPerDose]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[AWPPerDose]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsUnitDose]"
+                      cachedDataType="i4"
+                      cachedName="IsUnitDose"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsUnitDose]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsUnitDose]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[RowCreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowCreatedDate"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[RowCreatedDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[DrugTypeLongDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DrugTypeLongDescription"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugTypeLongDescription]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugTypeLongDescription]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[DrugTypeShortDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="DrugTypeShortDescription"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugTypeShortDescription]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugTypeShortDescription]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsGenericNonOTC]"
+                      cachedDataType="bool"
+                      cachedName="IsGenericNonOTC"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsGenericNonOTC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsGenericNonOTC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsBrandNonOTC]"
+                      cachedDataType="bool"
+                      cachedName="IsBrandNonOTC"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsBrandNonOTC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsBrandNonOTC]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[MultiSourceCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="5"
+                      cachedName="MultiSourceCode"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[MultiSourceCode]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[MultiSourceCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[MultiSourceCodeDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="MultiSourceCodeDescription"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[MultiSourceCodeDescription]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[MultiSourceCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsMultiSourceBrandNoGenerics]"
+                      cachedDataType="bool"
+                      cachedName="IsMultiSourceBrandNoGenerics"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsMultiSourceBrandNoGenerics]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsMultiSourceBrandNoGenerics]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsSingleSourceBrandNoGenerics]"
+                      cachedDataType="bool"
+                      cachedName="IsSingleSourceBrandNoGenerics"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsSingleSourceBrandNoGenerics]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsSingleSourceBrandNoGenerics]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsOriginalBrandWithGenerics]"
+                      cachedDataType="bool"
+                      cachedName="IsOriginalBrandWithGenerics"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsOriginalBrandWithGenerics]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsOriginalBrandWithGenerics]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsGeneric]"
+                      cachedDataType="bool"
+                      cachedName="IsGeneric"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsGeneric]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsGeneric]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[BrandNameCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="BrandNameCode"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[BrandNameCode]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[BrandNameCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[BrandNameCodeDescription]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="BrandNameCodeDescription"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[BrandNameCodeDescription]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[BrandNameCodeDescription]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[StartDateKey]"
+                      cachedDataType="i4"
+                      cachedName="StartDateKey"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[StartDateKey]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[StartDateKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[EndDateKey]"
+                      cachedDataType="i4"
+                      cachedName="EndDateKey"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[EndDateKey]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[EndDateKey]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[PackageQuantity]"
+                      cachedDataType="numeric"
+                      cachedName="PackageQuantity"
+                      cachedPrecision="37"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[PackageQuantity]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[PackageQuantity]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsCAHGeneric]"
+                      cachedDataType="bool"
+                      cachedName="IsCAHGeneric"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsCAHGeneric]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsCAHGeneric]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsAPITier1]"
+                      cachedDataType="bool"
+                      cachedName="IsAPITier1"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsAPITier1]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsAPITier1]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsAPITier2]"
+                      cachedDataType="bool"
+                      cachedName="IsAPITier2"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsAPITier2]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsAPITier2]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[APIGroupID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="APIGroupID"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[APIGroupID]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[APIGroupID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[RowUpdatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowUpdatedDate"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[RowUpdatedDate]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[RowUpdatedDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].Columns[IsSPX]"
+                      cachedDataType="bool"
+                      cachedName="IsSPX"
+                      externalMetadataColumnId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsSPX]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsSPX]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="GPI" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[GPPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="GPPC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DrugName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Manufacturer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Manufacturer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DrugType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="UnitofMeasure" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[PackageSize]"
+                      dataType="numeric"
+                      name="PackageSize"
+                      precision="8"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsRX]"
+                      dataType="i4"
+                      name="IsRX" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsOTC]"
+                      dataType="i4"
+                      name="IsOTC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Strength" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[StrengthUnitMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="StrengthUnitMeasure" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[ControlledDrugClass]"
+                      dataType="i4"
+                      name="ControlledDrugClass" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[WACPackagePrice]"
+                      dataType="numeric"
+                      name="WACPackagePrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[WACPerDose]"
+                      dataType="numeric"
+                      name="WACPerDose"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[AWPPackagePrice]"
+                      dataType="numeric"
+                      name="AWPPackagePrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[AWPPerDose]"
+                      dataType="numeric"
+                      name="AWPPerDose"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsUnitDose]"
+                      dataType="i4"
+                      name="IsUnitDose" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugTypeLongDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DrugTypeLongDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[DrugTypeShortDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DrugTypeShortDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsGenericNonOTC]"
+                      dataType="bool"
+                      name="IsGenericNonOTC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsBrandNonOTC]"
+                      dataType="bool"
+                      name="IsBrandNonOTC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[MultiSourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="MultiSourceCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[MultiSourceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="MultiSourceCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsMultiSourceBrandNoGenerics]"
+                      dataType="bool"
+                      name="IsMultiSourceBrandNoGenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsSingleSourceBrandNoGenerics]"
+                      dataType="bool"
+                      name="IsSingleSourceBrandNoGenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsOriginalBrandWithGenerics]"
+                      dataType="bool"
+                      name="IsOriginalBrandWithGenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsGeneric]"
+                      dataType="bool"
+                      name="IsGeneric" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[BrandNameCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="BrandNameCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[BrandNameCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BrandNameCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[StartDateKey]"
+                      dataType="i4"
+                      name="StartDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[EndDateKey]"
+                      dataType="i4"
+                      name="EndDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[PackageQuantity]"
+                      dataType="numeric"
+                      name="PackageQuantity"
+                      precision="37" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsCAHGeneric]"
+                      dataType="bool"
+                      name="IsCAHGeneric" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsAPITier1]"
+                      dataType="bool"
+                      name="IsAPITier1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsAPITier2]"
+                      dataType="bool"
+                      name="IsAPITier2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[APIGroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="APIGroupID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowUpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input].ExternalColumns[IsSPX]"
+                      dataType="bool"
+                      name="IsSPX" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\AZ AAPDW1D.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\AZ AAPDW1D.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\AZ AAPDW1D.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\AZ AAPDW1D.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\DW1"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="DW1"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DrugDim]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\DW1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.DrugMaster]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.DrugMaster]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      name="DrugKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="11"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[GPI]"
+                      length="14"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[GPI]"
+                      name="GPI"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[GPPC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[GPPC]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[GPPC]"
+                      name="GPPC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugName]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugName]"
+                      name="DrugName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="500"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Manufacturer]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Manufacturer]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Manufacturer]"
+                      name="Manufacturer"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugType]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugType]"
+                      name="DrugType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[UnitofMeasure]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[UnitofMeasure]"
+                      name="UnitofMeasure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      length="4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Form]"
+                      name="Form"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[PackageSize]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[PackageSize]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[PackageSize]"
+                      name="PackageSize"
+                      precision="8"
+                      scale="3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsRX]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsRX]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsRX]"
+                      name="IsRX"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsOTC]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsOTC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsOTC]"
+                      name="IsOTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Strength]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[Strength]"
+                      name="Strength"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[StrengthUnitMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[StrengthUnitMeasure]"
+                      length="11"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[StrengthUnitMeasure]"
+                      name="StrengthUnitMeasure"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[ControlledDrugClass]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[ControlledDrugClass]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[ControlledDrugClass]"
+                      name="ControlledDrugClass"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[WACPackagePrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[WACPackagePrice]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[WACPackagePrice]"
+                      name="WACPackagePrice"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[WACPerDose]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[WACPerDose]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[WACPerDose]"
+                      name="WACPerDose"
+                      precision="13"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[AWPPackagePrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[AWPPackagePrice]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[AWPPackagePrice]"
+                      name="AWPPackagePrice"
+                      precision="10"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[AWPPerDose]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[AWPPerDose]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[AWPPerDose]"
+                      name="AWPPerDose"
+                      precision="13"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsUnitDose]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsUnitDose]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsUnitDose]"
+                      name="IsUnitDose"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugTypeLongDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugTypeLongDescription]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugTypeLongDescription]"
+                      name="DrugTypeLongDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugTypeShortDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugTypeShortDescription]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[DrugTypeShortDescription]"
+                      name="DrugTypeShortDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsGenericNonOTC]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsGenericNonOTC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsGenericNonOTC]"
+                      name="IsGenericNonOTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsBrandNonOTC]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsBrandNonOTC]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsBrandNonOTC]"
+                      name="IsBrandNonOTC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[MultiSourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[MultiSourceCode]"
+                      length="5"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[MultiSourceCode]"
+                      name="MultiSourceCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[MultiSourceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[MultiSourceCodeDescription]"
+                      length="500"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[MultiSourceCodeDescription]"
+                      name="MultiSourceCodeDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsMultiSourceBrandNoGenerics]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsMultiSourceBrandNoGenerics]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsMultiSourceBrandNoGenerics]"
+                      name="IsMultiSourceBrandNoGenerics"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsSingleSourceBrandNoGenerics]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsSingleSourceBrandNoGenerics]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsSingleSourceBrandNoGenerics]"
+                      name="IsSingleSourceBrandNoGenerics"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsOriginalBrandWithGenerics]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsOriginalBrandWithGenerics]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsOriginalBrandWithGenerics]"
+                      name="IsOriginalBrandWithGenerics"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsGeneric]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsGeneric]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsGeneric]"
+                      name="IsGeneric"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[BrandNameCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[BrandNameCode]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[BrandNameCode]"
+                      name="BrandNameCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[BrandNameCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[BrandNameCodeDescription]"
+                      length="500"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[BrandNameCodeDescription]"
+                      name="BrandNameCodeDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[StartDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[StartDateKey]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[StartDateKey]"
+                      name="StartDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[EndDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[EndDateKey]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[EndDateKey]"
+                      name="EndDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[PackageQuantity]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[PackageQuantity]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[PackageQuantity]"
+                      name="PackageQuantity"
+                      precision="37"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsCAHGeneric]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsCAHGeneric]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsCAHGeneric]"
+                      name="IsCAHGeneric"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsAPITier1]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsAPITier1]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsAPITier1]"
+                      name="IsAPITier1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsAPITier2]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsAPITier2]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsAPITier2]"
+                      name="IsAPITier2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[APIGroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[APIGroupID]"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[APIGroupID]"
+                      name="APIGroupID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[RowUpdatedDate]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[RowUpdatedDate]"
+                      name="RowUpdatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsSPX]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsSPX]"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].Columns[IsSPX]"
+                      name="IsSPX"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      name="GPI" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[GPPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="GPPC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DrugName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Manufacturer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="Manufacturer" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="DrugType" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="UnitofMeasure" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      name="Form" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[PackageSize]"
+                      dataType="numeric"
+                      name="PackageSize"
+                      precision="8"
+                      scale="3" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsRX]"
+                      dataType="i4"
+                      name="IsRX" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsOTC]"
+                      dataType="i4"
+                      name="IsOTC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="Strength" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[StrengthUnitMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="StrengthUnitMeasure" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[ControlledDrugClass]"
+                      dataType="i4"
+                      name="ControlledDrugClass" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[WACPackagePrice]"
+                      dataType="numeric"
+                      name="WACPackagePrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[WACPerDose]"
+                      dataType="numeric"
+                      name="WACPerDose"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[AWPPackagePrice]"
+                      dataType="numeric"
+                      name="AWPPackagePrice"
+                      precision="10"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[AWPPerDose]"
+                      dataType="numeric"
+                      name="AWPPerDose"
+                      precision="13"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsUnitDose]"
+                      dataType="i4"
+                      name="IsUnitDose" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugTypeLongDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DrugTypeLongDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[DrugTypeShortDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="DrugTypeShortDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsGenericNonOTC]"
+                      dataType="bool"
+                      name="IsGenericNonOTC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsBrandNonOTC]"
+                      dataType="bool"
+                      name="IsBrandNonOTC" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[MultiSourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="MultiSourceCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[MultiSourceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="MultiSourceCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsMultiSourceBrandNoGenerics]"
+                      dataType="bool"
+                      name="IsMultiSourceBrandNoGenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsSingleSourceBrandNoGenerics]"
+                      dataType="bool"
+                      name="IsSingleSourceBrandNoGenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsOriginalBrandWithGenerics]"
+                      dataType="bool"
+                      name="IsOriginalBrandWithGenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsGeneric]"
+                      dataType="bool"
+                      name="IsGeneric" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[BrandNameCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="BrandNameCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[BrandNameCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="BrandNameCodeDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[StartDateKey]"
+                      dataType="i4"
+                      name="StartDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[EndDateKey]"
+                      dataType="i4"
+                      name="EndDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[PackageQuantity]"
+                      dataType="numeric"
+                      name="PackageQuantity"
+                      precision="37" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsCAHGeneric]"
+                      dataType="bool"
+                      name="IsCAHGeneric" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsAPITier1]"
+                      dataType="bool"
+                      name="IsAPITier1" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsAPITier2]"
+                      dataType="bool"
+                      name="IsAPITier2" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[APIGroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="APIGroupID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowUpdatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output].ExternalColumns[IsSPX]"
+                      dataType="bool"
+                      name="IsSPX" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      name="DrugKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[GPI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="14"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[GPI]"
+                      name="GPI" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[GPPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[GPPC]"
+                      name="GPPC" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugName]"
+                      name="DrugName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Manufacturer]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Manufacturer]"
+                      name="Manufacturer" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugType]"
+                      name="DrugType" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[UnitofMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[UnitofMeasure]"
+                      name="UnitofMeasure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      codePage="1252"
+                      dataType="str"
+                      length="4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Form]"
+                      name="Form" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[PackageSize]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[PackageSize]"
+                      name="PackageSize"
+                      precision="8"
+                      scale="3" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsRX]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsRX]"
+                      name="IsRX" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsOTC]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsOTC]"
+                      name="IsOTC" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[Strength]"
+                      name="Strength" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[StrengthUnitMeasure]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[StrengthUnitMeasure]"
+                      name="StrengthUnitMeasure" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[ControlledDrugClass]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[ControlledDrugClass]"
+                      name="ControlledDrugClass" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[WACPackagePrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[WACPackagePrice]"
+                      name="WACPackagePrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[WACPerDose]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[WACPerDose]"
+                      name="WACPerDose"
+                      precision="13"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[AWPPackagePrice]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[AWPPackagePrice]"
+                      name="AWPPackagePrice"
+                      precision="10"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[AWPPerDose]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[AWPPerDose]"
+                      name="AWPPerDose"
+                      precision="13"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsUnitDose]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsUnitDose]"
+                      name="IsUnitDose" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugTypeLongDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugTypeLongDescription]"
+                      name="DrugTypeLongDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugTypeShortDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[DrugTypeShortDescription]"
+                      name="DrugTypeShortDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsGenericNonOTC]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsGenericNonOTC]"
+                      name="IsGenericNonOTC" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsBrandNonOTC]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsBrandNonOTC]"
+                      name="IsBrandNonOTC" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[MultiSourceCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[MultiSourceCode]"
+                      name="MultiSourceCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[MultiSourceCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[MultiSourceCodeDescription]"
+                      name="MultiSourceCodeDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsMultiSourceBrandNoGenerics]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsMultiSourceBrandNoGenerics]"
+                      name="IsMultiSourceBrandNoGenerics" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsSingleSourceBrandNoGenerics]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsSingleSourceBrandNoGenerics]"
+                      name="IsSingleSourceBrandNoGenerics" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsOriginalBrandWithGenerics]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsOriginalBrandWithGenerics]"
+                      name="IsOriginalBrandWithGenerics" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsGeneric]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsGeneric]"
+                      name="IsGeneric" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[BrandNameCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[BrandNameCode]"
+                      name="BrandNameCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[BrandNameCodeDescription]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[BrandNameCodeDescription]"
+                      name="BrandNameCodeDescription" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[StartDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[StartDateKey]"
+                      name="StartDateKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[EndDateKey]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[EndDateKey]"
+                      name="EndDateKey" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[PackageQuantity]"
+                      dataType="numeric"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[PackageQuantity]"
+                      name="PackageQuantity"
+                      precision="37" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsCAHGeneric]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsCAHGeneric]"
+                      name="IsCAHGeneric" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsAPITier1]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsAPITier1]"
+                      name="IsAPITier1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsAPITier2]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsAPITier2]"
+                      name="IsAPITier2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[APIGroupID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[APIGroupID]"
+                      name="APIGroupID" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[RowUpdatedDate]"
+                      name="RowUpdatedDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsSPX]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[IsSPX]"
+                      name="IsSPX" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\AZ AAPDW1D.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\DW1.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task"
+          TopLeft="316,125" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task\AZ AAPDW1D"
+          TopLeft="396,235" />
+        <NodeLayout
+          Size="103,42"
+          Id="Package\Data Flow Task\DW1"
+          TopLeft="321,95" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="372.5,137">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="98.5,98"
+              Start="0,0"
+              End="98.5,90.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45"
+                    Point2="0,49"
+                    Point3="4,49" />
+                  <mssgle:LineSegment
+                    End="94.5,49" />
+                  <mssgle:CubicBezierSegment
+                    Point1="94.5,49"
+                    Point2="98.5,49"
+                    Point3="98.5,53" />
+                  <mssgle:LineSegment
+                    End="98.5,90.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\AZ AAPDW1D">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\DW1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
