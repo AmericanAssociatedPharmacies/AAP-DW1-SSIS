@@ -1,0 +1,1703 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/26/2017 8:51:27 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{142E38B0-8E99-4E74-ABE2-FBA27E2B2FA1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SalesETL_EventDimCAH_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="96"
+  DTS:VersionGUID="{7EF0BA30-1E0D-46FB-AAE9-EE10C0B2457A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{1AD1F433-CF86-449C-AB1E-A9067952DA7B}"
+      DTS:ObjectName="AAPDW1.SalesDDS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=32767;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.SalesDDS_RN1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{85D03651-F85F-4B1F-B51D-75B7A5906947}"
+      DTS:ObjectName="AAPDW1.SalesDDS_RN1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.SalesDDS_RN2]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1492554D-F5CA-487C-AA22-ED5EA63DE898}"
+      DTS:ObjectName="AAPDW1.SalesDDS_RN2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.SalesDDS_RN3]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2BE45DBA-3139-4E9D-8354-FCC4D93A53C0}"
+      DTS:ObjectName="AAPDW1.SalesDDS_RN3">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost_SSIS_DW1.SalesDDS_RN1]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{8F0D9DAF-A5C7-461E-A36D-2C8057BE831A}"
+      DTS:ObjectName="localhost_SSIS_DW1.SalesDDS_RN1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost_SSIS_DW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost_SSIS_DW1.SalesDDS_RN2]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{1799067B-23F1-4E6E-B913-B8D6CBB4A5F3}"
+      DTS:ObjectName="localhost_SSIS_DW1.SalesDDS_RN2">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost_SSIS_DW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost_SSIS_DW1.SalesDDS_RN3]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{90DCADC0-3CDA-4E01-85B0-4C992ED36898}"
+      DTS:ObjectName="localhost_SSIS_DW1.SalesDDS_RN3">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost_SSIS_DW1;Initial Catalog=SalesDDS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{14AC451A-25C2-479A-AFD0-B52AC93C0A2E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet1">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AF9A14DD-725E-4F0D-9CEF-DC5634E183CE}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet2">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6C2E7D4D-0B8B-4145-A16A-8B951D1EF059}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet3">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{802AB139-41E5-4CD3-A01A-92727043FF73}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDateKey1">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{340D6C8C-49EF-4853-B019-C2160322BE56}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDateKey2">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2E4797B5-5FE0-4610-88EE-2C9425E6923F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDateKey3">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get EventDim CAH Dates to Loop thru for Load"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{65A19E06-EDA2-4D3B-80DF-CBFB8CFF506F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get EventDim CAH Dates to Loop thru for Load"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [Staging].[usp_Get_EventDimCAH_Dates]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RN]"
+                      dataType="i4"
+                      name="RN" />
+                    <externalMetadataColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get EventDim CAH Dates to Loop thru for Load\RN1"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="RN1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get EventDim CAH Dates to Loop thru for Load\RN1.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get EventDim CAH Dates to Loop thru for Load\RN1.Inputs[Recordset Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      lineageId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get EventDim CAH Dates to Loop thru for Load.Paths[OLE DB Source Output]"
+              endId="Package\Get EventDim CAH Dates to Loop thru for Load\RN1.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Loop for RN1"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{892C64B1-CF8E-464E-A110-EC1B1591D647}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Loop for RN1">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{D677BEF6-F8EC-4700-AFA4-E4C7BE80155D}"
+        DTS:ObjectName="{D677BEF6-F8EC-4700-AFA4-E4C7BE80155D}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet1" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Loop for RN1\Load EventDimCAH 1"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{435F2B7A-DBAC-4BC8-A7AE-AF32A57086F6}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Load EventDimCAH 1"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[EventDimCAH]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                          cachedDataType="i4"
+                          cachedName="DateKey"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InvoiceNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="InvoiceNumber"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceNumber]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceNumber]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InvoiceLineNumber]"
+                          cachedDataType="i4"
+                          cachedName="InvoiceLineNumber"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceLineNumber]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceLineNumber]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InvoiceDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="InvoiceDate"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceDate]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceDate]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PMID]"
+                          cachedDataType="i4"
+                          cachedName="PMID"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[PMID]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DistributionCenter]"
+                          cachedDataType="i4"
+                          cachedName="DistributionCenter"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DistributionCenter]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistributionCenter]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NDC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="NDC"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UPC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="UPC"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UPC]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[UPC]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="ItemNumber"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemNumber]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemNumber]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemDescription]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="127"
+                          cachedName="ItemDescription"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescription]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDescription]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="ItemType"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemType]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemType]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OrderNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="OrderNumber"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[OrderNumber]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsBackupSource]"
+                          cachedDataType="bool"
+                          cachedName="IsBackupSource"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsBackupSource]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsBackupSource]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsTenSource]"
+                          cachedDataType="bool"
+                          cachedName="IsTenSource"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsTenSource]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTenSource]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsSourceWeekly]"
+                          cachedDataType="bool"
+                          cachedName="IsSourceWeekly"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSourceWeekly]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSourceWeekly]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsTopGenerics]"
+                          cachedDataType="bool"
+                          cachedName="IsTopGenerics"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsTopGenerics]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTopGenerics]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RowversionID]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowversionID"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowversionID]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CHPH_AAP_ID]"
+                          cachedDataType="i4"
+                          cachedName="CHPH_AAP_ID"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CHPH_AAP_ID]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CHPH_AAP_ID]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RowversionID_DB1]"
+                          cachedDataType="bytes"
+                          cachedLength="8"
+                          cachedName="RowversionID_DB1"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID_DB1]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowversionID_DB1]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CAHAccountNo]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="CAHAccountNo"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CAHAccountNo]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CAHAccountNo]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CAHType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="CAHType"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CAHType]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CAHType]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Brand]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="Brand"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Brand]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Brand]" />
+                        <inputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DEA]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="25"
+                          cachedName="DEA"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DEA]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DEA]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EventKey]"
+                          dataType="i4"
+                          name="EventKey" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                          dataType="i4"
+                          name="DateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="InvoiceNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceLineNumber]"
+                          dataType="i4"
+                          name="InvoiceLineNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          name="InvoiceDate" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                          dataType="i4"
+                          name="PMID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DistributionCenter]"
+                          dataType="i4"
+                          name="DistributionCenter" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="NDC" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UPC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="UPC" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="ItemNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          name="ItemDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="ItemType" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="OrderNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsBackupSource]"
+                          dataType="bool"
+                          name="IsBackupSource" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsTenSource]"
+                          dataType="bool"
+                          name="IsTenSource" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSourceWeekly]"
+                          dataType="bool"
+                          name="IsSourceWeekly" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsTopGenerics]"
+                          dataType="bool"
+                          name="IsTopGenerics" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowversionID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CHPH_AAP_ID]"
+                          dataType="i4"
+                          name="CHPH_AAP_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID_DB1]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowversionID_DB1" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowUpdatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowUpdatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CAHAccountNo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="CAHAccountNo" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[AccountName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="AccountName" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CAHType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="CAHType" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Brand]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="Brand" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DEA]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="DEA" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[usp_CAH_EventDim_Load]
+
+	@DateKey = ?</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"@DateKey:Input",{802AB139-41E5-4CD3-A01A-92727043FF73};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.SalesDDS]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                          name="DateKey"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InvoiceNumber]"
+                          length="15"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceNumber]"
+                          name="InvoiceNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceLineNumber]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineNumber]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceLineNumber]"
+                          name="InvoiceLineNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[InvoiceDate]"
+                          name="InvoiceDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[PMID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[PMID]"
+                          name="PMID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistributionCenter]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistributionCenter]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DistributionCenter]"
+                          name="DistributionCenter"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                          length="15"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                          name="NDC"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractDescription]"
+                          length="250"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractDescription]"
+                          name="ContractDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[UPC]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UPC]"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[UPC]"
+                          name="UPC"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemNumber]"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemNumber]"
+                          name="ItemNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemDescription]"
+                          length="127"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemDescription]"
+                          name="ItemDescription"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemType]"
+                          length="15"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ItemType]"
+                          name="ItemType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OrderNumber]"
+                          length="20"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[OrderNumber]"
+                          name="OrderNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsBackupSource]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsBackupSource]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsBackupSource]"
+                          name="IsBackupSource"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTenSource]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTenSource]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTenSource]"
+                          name="IsTenSource"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSourceWeekly]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSourceWeekly]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSourceWeekly]"
+                          name="IsSourceWeekly"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTopGenerics]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTopGenerics]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsTopGenerics]"
+                          name="IsTopGenerics"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowversionID]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowversionID]"
+                          length="8"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowversionID]"
+                          name="RowversionID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CHPH_AAP_ID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CHPH_AAP_ID]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CHPH_AAP_ID]"
+                          name="CHPH_AAP_ID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowversionID_DB1]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowversionID_DB1]"
+                          length="8"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowversionID_DB1]"
+                          name="RowversionID_DB1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowID]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[RowID]"
+                          name="RowID"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractNumber]"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ContractNumber]"
+                          name="ContractNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CAHAccountNo]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CAHAccountNo]"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CAHAccountNo]"
+                          name="CAHAccountNo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CAHType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CAHType]"
+                          length="1"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[CAHType]"
+                          name="CAHType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Brand]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Brand]"
+                          length="1"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[Brand]"
+                          name="Brand"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DEA]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DEA]"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DEA]"
+                          name="DEA"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                          dataType="i4"
+                          name="DateKey" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InvoiceNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="InvoiceNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineNumber]"
+                          dataType="i4"
+                          name="InvoiceLineNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          name="InvoiceDate" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                          dataType="i4"
+                          name="PMID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DistributionCenter]"
+                          dataType="i4"
+                          name="DistributionCenter" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="NDC" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="250"
+                          name="ContractDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UPC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="UPC" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="ItemNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="127"
+                          name="ItemDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ItemType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="ItemType" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="OrderNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsBackupSource]"
+                          dataType="bool"
+                          name="IsBackupSource" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTenSource]"
+                          dataType="bool"
+                          name="IsTenSource" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSourceWeekly]"
+                          dataType="bool"
+                          name="IsSourceWeekly" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsTopGenerics]"
+                          dataType="bool"
+                          name="IsTopGenerics" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowversionID]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowversionID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CHPH_AAP_ID]"
+                          dataType="i4"
+                          name="CHPH_AAP_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowversionID_DB1]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowversionID_DB1" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ContractNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="ContractNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CAHAccountNo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="CAHAccountNo" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CAHType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="CAHType" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Brand]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="Brand" />
+                        <externalMetadataColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DEA]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          name="DEA" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                          name="RowID" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                          name="DateKey" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InvoiceNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InvoiceNumber]"
+                          name="InvoiceNumber" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InvoiceLineNumber]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InvoiceLineNumber]"
+                          name="InvoiceLineNumber" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[InvoiceDate]"
+                          name="InvoiceDate" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                          name="PMID" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistributionCenter]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DistributionCenter]"
+                          name="DistributionCenter" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                          name="NDC" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractNumber]"
+                          name="ContractNumber" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="250"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ContractDescription]"
+                          name="ContractDescription" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UPC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UPC]"
+                          name="UPC" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemNumber]"
+                          name="ItemNumber" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="127"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemDescription]"
+                          name="ItemDescription" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ItemType]"
+                          name="ItemType" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OrderNumber]"
+                          name="OrderNumber" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsBackupSource]"
+                          dataType="bool"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsBackupSource]"
+                          name="IsBackupSource" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTenSource]"
+                          dataType="bool"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTenSource]"
+                          name="IsTenSource" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSourceWeekly]"
+                          dataType="bool"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSourceWeekly]"
+                          name="IsSourceWeekly" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTopGenerics]"
+                          dataType="bool"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsTopGenerics]"
+                          name="IsTopGenerics" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowversionID]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowversionID]"
+                          name="RowversionID" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CHPH_AAP_ID]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CHPH_AAP_ID]"
+                          name="CHPH_AAP_ID" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowversionID_DB1]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[RowversionID_DB1]"
+                          name="RowversionID_DB1" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CAHAccountNo]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CAHAccountNo]"
+                          name="CAHAccountNo" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CAHType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CAHType]"
+                          name="CAHType" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Brand]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Brand]"
+                          name="Brand" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DEA]"
+                          codePage="1252"
+                          dataType="str"
+                          length="25"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DEA]"
+                          name="DEA" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Loop for RN1\Load EventDimCAH 1.Paths[OLE DB Source Output]"
+                  endId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Loop for RN1\Update"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B46BE375-51E8-4284-B1D1-2AA7B87BD1AD}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1AD1F433-CF86-449C-AB1E-A9067952DA7B}"
+              SQLTask:SqlStatementSource="EXEC dbo.usp_EventDimCAH_Update&#xA;&#xA; @DateKey = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@DateKey"
+                SQLTask:DtsVariableName="User::varDateKey1"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Loop for RN1.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{7D5D85CD-4405-48C6-9FFD-C55019BC5D07}"
+          DTS:From="Package\Loop for RN1\Update"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Loop for RN1\Load EventDimCAH 1" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{14E7E2B2-9478-4A69-8A6A-F98DD2DFCAE2}"
+          DTS:ObjectName="{14E7E2B2-9478-4A69-8A6A-F98DD2DFCAE2}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varDateKey1" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{DC005606-A5E3-4110-9440-FE6B22660A56}"
+      DTS:From="Package\Get EventDim CAH Dates to Loop thru for Load"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Loop for RN1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="301,42"
+          Id="Package\Get EventDim CAH Dates to Loop thru for Load"
+          TopLeft="480,75" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Loop for RN1\Load EventDimCAH 1"
+          TopLeft="3.5,107.5" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Loop for RN1\Update"
+          TopLeft="38.5,5.5" />
+        <EdgeLayout
+          Id="Package\Loop for RN1.PrecedenceConstraints[Constraint]"
+          TopLeft="94,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="190,205"
+          Size="190,248"
+          Id="Package\Loop for RN1"
+          TopLeft="603,230" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="630.5,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67.5,113"
+              Start="0,0"
+              End="67.5,105.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,52.5"
+                    Point2="0,56.5"
+                    Point3="4,56.5" />
+                  <mssgle:LineSegment
+                    End="63.5,56.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="63.5,56.5"
+                    Point2="67.5,56.5"
+                    Point3="67.5,60.5" />
+                  <mssgle:LineSegment
+                    End="67.5,105.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get EventDim CAH Dates to Loop thru for Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source"
+          TopLeft="476,50" />
+        <NodeLayout
+          Size="99,42"
+          Id="Package\Get EventDim CAH Dates to Loop thru for Load\RN1"
+          TopLeft="491,213" />
+        <EdgeLayout
+          Id="Package\Get EventDim CAH Dates to Loop thru for Load.Paths[OLE DB Source Output]"
+          TopLeft="551,92">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.5,121"
+              Start="0,0"
+              End="-10.5,113.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,56.5"
+                    Point2="0,60.5"
+                    Point3="-4,60.5" />
+                  <mssgle:LineSegment
+                    End="-6.5,60.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.5,60.5"
+                    Point2="-10.5,60.5"
+                    Point3="-10.5,64.5" />
+                  <mssgle:LineSegment
+                    End="-10.5,113.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get EventDim CAH Dates to Loop thru for Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Loop for RN1\Load EventDimCAH 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source"
+          TopLeft="230,149" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination"
+          TopLeft="338,276" />
+        <EdgeLayout
+          Id="Package\Loop for RN1\Load EventDimCAH 1.Paths[OLE DB Source Output]"
+          TopLeft="305,191">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="118.5,85"
+              Start="0,0"
+              End="118.5,77.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,38.5"
+                    Point2="0,42.5"
+                    Point3="4,42.5" />
+                  <mssgle:LineSegment
+                    End="114.5,42.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="114.5,42.5"
+                    Point2="118.5,42.5"
+                    Point3="118.5,46.5" />
+                  <mssgle:LineSegment
+                    End="118.5,77.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Loop for RN1\Load EventDimCAH 1\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
