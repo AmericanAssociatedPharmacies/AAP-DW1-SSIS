@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/1/2017 1:46:54 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{2AA3ABF9-4334-4E30-A2B5-EDE1EE419E1A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ClaimsDDS_FDS_DeleteFile"
+  DTS:PackageType="5"
+  DTS:VersionBuild="128"
+  DTS:VersionGUID="{8EFEEB97-2BE7-473B-B64C-C0262C1B3ED8}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29739148-6553-4FC7-8AE7-5F199B858AFF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ftpPassword">
+      <DTS:VariableValue
+        DTS:DataType="8">GZ3xL5EB</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{40CD0AE7-F193-466A-BCE8-C34ABC3789D2}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ftpSite">
+      <DTS:VariableValue
+        DTS:DataType="8">mft.fdsrx.com</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9DB50549-11A4-4C70-9660-2F246736F832}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ftpUsername">
+      <DTS:VariableValue
+        DTS:DataType="8">mdmaap</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C6B9F3DE-0AB8-4AF8-9DF1-6D4AE62114A1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="localPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\FDS\Staging</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6E4E0150-95CB-4558-A95A-4E76F8FCE12C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="remoteFTPDirectory">
+      <DTS:VariableValue
+        DTS:DataType="8">/</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{79AA199F-72B6-465C-9138-D8257DA4F425}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="sshKey">
+      <DTS:VariableValue
+        DTS:DataType="8">ssh-rsa 2048 bc:d7:d1:07:84:eb:4e:77:48:c2:b6:07:c0:8b:7c:47</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A3E41219-D3D1-441D-9BB9-1B2D50C4B59E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varErrorLogDbName">
+      <DTS:VariableValue
+        DTS:DataType="8">ODSIntake</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B003396A-9F7A-42A2-A70E-9E24FA0AD7C7}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varErrorLogServer">
+      <DTS:VariableValue
+        DTS:DataType="8">AAPDW1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{12710647-F98C-4750-9788-76B5D4931BDA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileLogDbName">
+      <DTS:VariableValue
+        DTS:DataType="8">ODSIntake</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DC97C7A9-D932-4ABE-A925-FA0AB3D10E22}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileLogServer">
+      <DTS:VariableValue
+        DTS:DataType="8">AAPDW1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A8971F55-039C-472D-A1B1-5B4905AE49C3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varProcess">
+      <DTS:VariableValue
+        DTS:DataType="8">FDS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B5FB79D9-9804-429E-8B50-91323857C8DA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="winSCPLog">
+      <DTS:VariableValue
+        DTS:DataType="11">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F39DCDA7-0130-4014-B9A0-E2BD0C03FA96}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="winSCPLogPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\WINscp\WINscpLog.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B348B738-80AC-459E-BF3D-885351DDCF05}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="winSCPPath">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Program Files (x86)\WinSCP\winscp.exe</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute Process Task"
+      DTS:CreationName="Microsoft.ExecuteProcess"
+      DTS:Description="Execute Process Task"
+      DTS:DTSID="{db557e2e-31f1-4088-a940-527a46b7b80c}"
+      DTS:ExecutableType="Microsoft.ExecuteProcess"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute Process Task"
+      DTS:TaskContact="Execute Process Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="Arguments">"/ini=nul /command \"open sftp://" + @[User::ftpUsername]+":"+ @[User::ftpPassword]+"@"+ @[User::ftpSite]+" -hostkey=\"\""+ @[User::sshKey]+"\"\"\" \"rm " + @[User::remoteFTPDirectory]+"/*.zip\" \"exit\""</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="Executable">@[User::winSCPPath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <ExecuteProcessData
+          Executable="C:\Program Files (x86)\WinSCP\winscp.exe"
+          Arguments="/ini=nul /command &quot;open sftp://mdmaap:GZ3xL5EB@mft.fdsrx.com -hostkey=&quot;&quot;ssh-rsa 2048 bc:d7:d1:07:84:eb:4e:77:48:c2:b6:07:c0:8b:7c:47&quot;&quot;&quot; &quot;rm //*.zip&quot; &quot;exit&quot;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Execute Process Task"
+          TopLeft="507,58" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
