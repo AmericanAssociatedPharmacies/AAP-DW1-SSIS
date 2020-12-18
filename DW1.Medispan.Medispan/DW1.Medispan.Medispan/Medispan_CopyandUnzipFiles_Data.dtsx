@@ -1,0 +1,1714 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/15/2017 3:43:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{BD11B525-267F-4D0F-93E9-1595FB7C0F5A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Medispan_CopyandUnzipFiles_Data"
+  DTS:PackageType="5"
+  DTS:VersionBuild="37"
+  DTS:VersionGUID="{F0ED2E3C-F817-4131-B1B8-761E98FFC16B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{25DF349A-1537-445D-959F-DFB1E989EA3F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ABD27336-34D5-46E0-9BB1-72A163C29B3C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varArchiveLocation">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{85403C92-476C-4DEB-915C-2ECDB2882BBE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varCreateStagingDir">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CA363801-542F-49FC-B1BE-D4F96B51C182}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDeleteExtraFiles">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{276D230E-EB06-45F9-BAAC-025F562443EE}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDeleteStagingDir">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{CE926772-D736-451B-B4DD-4ACCB3E115A5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDW1CopyFileDestination">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{404FCE32-E469-4A17-A4B9-B2F386BD537D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varExtractDir">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BD60C1CE-0738-410A-9F79-65B4AA5BD109}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varInstallerExtractDir">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2FC79790-1872-47D5-9F72-6F820B5020D3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varInstallerUnzipLocation">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A265D58D-6B5A-4FF0-A717-5C85A6E34DD6}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varSourceLocation">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC0289C3-0202-42EF-8333-7E9FFAB98743}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varUnzipLocation">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{A9A39064-3FBB-4D4E-9A93-9E5A4609663C}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{AD40E830-88EB-449A-908B-00925C4176F8}"
+        DTS:ObjectName="{AD40E830-88EB-449A-908B-00925C4176F8}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\File operations on DW1"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:DelayValidation="True"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{417D7D53-065B-4358-ADFF-549D4B25C41F}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File operations on DW1">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\File operations on DW1\Unzip working file"
+              DTS:CreationName="Microsoft.ScriptTask"
+              DTS:DelayValidation="True"
+              DTS:Description="Script Task"
+              DTS:DTSID="{A8962759-414F-435B-8607-DBF63637D7DA}"
+              DTS:ExecutableType="Microsoft.ScriptTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Unzip working file"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <ScriptProject
+                  Name="ST_a2cad6f27f574277af1c152e32d1a3f6"
+                  VSTAMajorVersion="14"
+                  VSTAMinorVersion="0"
+                  Language="CSharp"
+                  ReadOnlyVariables="User::varExtractDir,User::varUnzipLocation">
+                  <ProjectItem
+                    Name="Properties\Resources.resx"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Settings.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_a2cad6f27f574277af1c152e32d1a3f6.Properties.Settings.get_Default():ST_a2cad6f27f574277af1c152e32d1a3f6.Properties.Sett" +
+    "ings")]
+
+namespace ST_a2cad6f27f574277af1c152e32d1a3f6.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="ScriptMain.cs"
+                    Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using System.IO.Compression;
+#endregion
+
+namespace ST_a2cad6f27f574277af1c152e32d1a3f6
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+
+            string strExtractDir;
+            string strUnzipLocation;
+
+            strExtractDir = Dts.Variables["varExtractDir"].Value.ToString();
+            strUnzipLocation = Dts.Variables["varUnzipLocation"].Value.ToString();
+            
+            //string zipPath = @"\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload\med-file2_0_0_wk_pdu-delimt_pricing_d_20170927.zip";
+            //string extractPath = @"\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload\";
+
+            //ZipFile.CreateFromDirectory(startPath, zipPath);
+
+            ZipFile.ExtractToDirectory(strUnzipLocation, strExtractDir);
+
+			Dts.TaskResult = (int)ScriptResults.Success;
+		}
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="ST_a2cad6f27f574277af1c152e32d1a3f6.csproj"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{07FC4AE8-80FF-4DA1-9822-E825A093A0BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_a2cad6f27f574277af1c152e32d1a3f6</RootNamespace>
+    <AssemblyName>ST_a2cad6f27f574277af1c152e32d1a3f6</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Project"
+                    Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ST_a2cad6f27f574277af1c152e32d1a3f6</msb:CodeName>
+		<msb:DisplayName>ST_a2cad6f27f574277af1c152e32d1a3f6</msb:DisplayName>
+		<msb:ProjectId>{4CFD022C-90D0-4010-85C3-7D2FD94F44B4}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_a2cad6f27f574277af1c152e32d1a3f6.csproj"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ScriptMain.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\AssemblyInfo.cs"
+                    Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_a2cad6f27f574277af1c152e32d1a3f6")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_a2cad6f27f574277af1c152e32d1a3f6")]
+[assembly: AssemblyCopyright("Copyright @  2017")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Settings.settings"
+                    Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_a2cad6f27f574277af1c152e32d1a3f6.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_a2cad6f27f574277af1c152e32d1a3f6.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_a2cad6f27f574277af1c152e32d1a3f6.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_a2cad6f27f574277af1c152e32d1a3f6.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_a2cad6f27f574277af1c152e32d1a3f6.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <BinaryItem
+                    Name="ST_a2cad6f27f574277af1c152e32d1a3f6.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAFGM3F8AAAAAAAAAAOAAIiALATAAABAAAAAIAAAAAAAAOi4A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAOgtAABPAAAAAEAAAGwEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAQA4AAAAgAAAAEAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAGwEAAAAQAAAAAYAAAASAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAc
+LgAAAAAAAEgAAAACAAUAFCEAABwMAAABAAAAAAAAADAtAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABMwAgBSAAAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAAoKAigQAAAKbxEAAApyHQAAcG8SAAAKbxMAAApvFAAACgYoFQAACgIoEAAAChZvFgAA
+CioeAigXAAAKKh4CKBgAAAoqrn4BAAAELR5yPwAAcNADAAACKBkAAApvGgAACnMbAAAKgAEAAAR+
+AQAABCoafgIAAAQqHgKAAgAABCoafgMAAAQqHgIoHAAACioucwgAAAaAAwAABCpCU0pCAQABAAAA
+AAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAADcAwAAI34AAEgEAACoBQAAI1N0cmluZ3MAAAAA8AkA
+ALQAAAAjVVMApAoAABAAAAAjR1VJRAAAALQKAABoAQAAI0Jsb2IAAAAAAAAAAgAAAVcdogEJAwAA
+APoBMwAWAAABAAAAHgAAAAUAAAAGAAAACQAAAAEAAAAcAAAAAgAAABAAAAABAAAAAgAAAAMAAAAE
+AAAAAQAAAAUAAAABAAAAAQAAAAAAfQMBAAAAAAAGAC0CfQQGALwCfQQGAHkBagQPAPEEAAAGAKYB
+KwQGABACKwQGAPEBKwQGAKMCKwQGAE0CKwQGAGYCKwQGAL0BKwQGANgB6gIKAIECLAMKAPgALAMG
+AM8DyAMGAFwBagQGAGQFyAMGAE0EnQQGAD0EFgQOACwBZwMOAI0BZwMOABQBAQQGAEEBfQQKAFUD
+LAMSADMFowASAG4AowAWAJsA6wMGAMMAyAMGAHcAyAMGAIoFKwQAAAAAJQAAAAAAAQABAAEAEADg
+AwEAOQABAAEAAAAQAKQEAAVFAAEAAwAAARAAPQUABVkAAwAHAAMBAABWBQAAPQAEAAoAEQDUA2wA
+EQDoAHAAEQBeAHQABgZNAHgAVoBGBXsAVoDIAHsAUCAAAAAAhgDmAwYAAQCuIAAAAACGGF0EBgAB
+ALYgAAAAAIMYXQQGAAEAviAAAAAAkwhJBH8AAQDqIAAAAACTCNAAhAABAPEgAAAAAJMI3ACJAAEA
++SAAAAAAlghrBY8AAgAAIQAAAACGGF0EBgACAAghAAAAAJEYYwSUAAIAAAABAOQCCQBdBAEAEQBd
+BAYAGQBdBAoAKQBdBBAAMQBdBBAAOQBdBBAAQQBdBBAASQBdBBAAUQBdBBAAWQBdBBAAYQBdBBAA
+aQBdBAYAgQBdBAYAqQBdBBUAuQBdBAYAcQBOBR8AwQAvBSQAyQClAykA0QDaAi8AiQAEAzMA2QCT
+BTcAwQB3BQEAcQBdBAYAiQBdBAYA4QCJAD0A4QCGBUQAkQBdBEkAsQBdBAYACAAUAGIACAAYAGcA
+KQBzAM8ALgALAKcALgATALAALgAbAM8ALgAjANgALgArAAEBLgAzAAEBLgA7AAEBLgBDANgALgBL
+AAcBLgBTAAEBLgBbAB4BQwBjAGcASQBzAM8AYQB7AGcAYwBrAGcAGwADAAEABAADAAAATQSYAAAA
+8ACdAAAAbwWiAAIABAADAAIABQAFAAEABgAFAAIABwAHAASAAAABAAAA6R14IwAAAAAAAAEAAAAE
+AAAAAAAAAAAAAABQAFUAAAAAAA0AAAAAAAAAAAAAAFkADQMAAAAABAAAAAAAAAAAAAAAUADIAwAA
+AAANAAAAAAAAAAAAAABZAC4AAAAAAAQAAAAAAAAAAAAAAFAArgMAAAAAAAAAAAEAAACuBAAABQAC
+AAAAAFNUX2EyY2FkNmYyN2Y1NzQyNzdhZjFjMTUyZTMyZDFhM2Y2ADxNb2R1bGU+AE1pY3Jvc29m
+dC5TcWxTZXJ2ZXIuTWFuYWdlZERUUwB2YWx1ZV9fAG1zY29ybGliAGRlZmF1bHRJbnN0YW5jZQBW
+YXJpYWJsZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBaaXBGaWxlAE1pY3Jv
+c29mdC5TcWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAVHlwZQBGYWlsdXJlAGdldF9DdWx0dXJlAHNldF9D
+dWx0dXJlAHJlc291cmNlQ3VsdHVyZQBWU1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UAQXBwbGlj
+YXRpb25TZXR0aW5nc0Jhc2UARWRpdG9yQnJvd3NhYmxlU3RhdGUAQ29tcGlsZXJHZW5lcmF0ZWRB
+dHRyaWJ1dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRl
+AEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5
+VHJhZGVtYXJrQXR0cmlidXRlAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZp
+Z3VyYXRpb25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlv
+blJlbGF4YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNv
+cHlyaWdodEF0dHJpYnV0ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1i
+bHlDb21wYW55QXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAGdldF9WYWx1
+ZQB2YWx1ZQBTeXN0ZW0uUnVudGltZS5WZXJzaW9uaW5nAFRvU3RyaW5nAE1pY3Jvc29mdC5TcWxT
+ZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNr
+AFNjcmlwdE9iamVjdE1vZGVsAFN5c3RlbS5Db21wb25lbnRNb2RlbABTVF9hMmNhZDZmMjdmNTc0
+Mjc3YWYxYzE1MmUzMmQxYTNmNi5kbGwAZ2V0X0l0ZW0AU3lzdGVtLklPLkNvbXByZXNzaW9uLkZp
+bGVTeXN0ZW0ARW51bQByZXNvdXJjZU1hbgBTY3JpcHRNYWluAFN5c3RlbS5JTy5Db21wcmVzc2lv
+bgBTeXN0ZW0uQ29uZmlndXJhdGlvbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVj
+dGlvbgBDdWx0dXJlSW5mbwBnZXRfUmVzb3VyY2VNYW5hZ2VyAC5jdG9yAC5jY3RvcgBTeXN0ZW0u
+RGlhZ25vc3RpY3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3Vy
+Y2VzAFNUX2EyY2FkNmYyN2Y1NzQyNzdhZjFjMTUyZTMyZDFhM2Y2LlByb3BlcnRpZXMuUmVzb3Vy
+Y2VzLnJlc291cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTVF9hMmNhZDZmMjdmNTc0Mjc3YWYxYzE1MmUz
+MmQxYTNmNi5Qcm9wZXJ0aWVzAGdldF9WYXJpYWJsZXMAU2V0dGluZ3MAU3VjY2VzcwBnZXRfRHRz
+AFNjcmlwdFJlc3VsdHMAT2JqZWN0AGdldF9EZWZhdWx0AHNldF9UYXNrUmVzdWx0AGdldF9Bc3Nl
+bWJseQBFeHRyYWN0VG9EaXJlY3RvcnkAAAAAG3YAYQByAEUAeAB0AHIAYQBjAHQARABpAHIAACF2
+AGEAcgBVAG4AegBpAHAATABvAGMAYQB0AGkAbwBuAABxUwBUAF8AYQAyAGMAYQBkADYAZgAyADcA
+ZgA1ADcANAAyADcANwBhAGYAMQBjADEANQAyAGUAMwAyAGQAMQBhADMAZgA2AC4AUAByAG8AcABl
+AHIAdABpAGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAAAAAACe+RgF3IsaQ6oYi7NsWz5fAAQgAQEI
+AyAAAQUgAQEREQQgAQEOBSABARFRAwcBDgQgABJhBCAAEmUFIAESaRwDIAAcAyAADgUAAgEODgYA
+ARJxEXUEIAASeQYgAgEOEnkIt3pcVhk04IkIiYRdzYCAzJEEAAAAAAQBAAAAAwYSSQMGEk0DBhIQ
+AgYIAwYRFAQAABJJBAAAEk0FAAEBEk0EAAASEAMAAAEECAASSQQIABJNBAgAEhAIAQAIAAAAAAAe
+AQABAFQCFldyYXBOb25FeGNlcHRpb25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUX2EyY2FkNmYyN2Y1
+NzQyNzdhZjFjMTUyZTMyZDFhM2Y2AAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMTcAAEkBABou
+TkVURnJhbWV3b3JrLFZlcnNpb249djQuNQEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBG
+cmFtZXdvcmsgNC41tAAAAM7K774BAAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVh
+ZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tl
+eVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VT
+ZXQCAAAAAAAAAAAAAABQQURQQURQtAAAABAuAAAAAAAAAAAAACouAAAAIAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAcLgAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
+AABIAAAAWEAAABAEAAAAAAAAAAAAABAENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
+AAAAAAC9BO/+AAABAAAAAQB4I+kdAAABAHgj6R0/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
+RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
+AG4AAAAAAAAAsARwAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAABMAwAAAQAwADAA
+MAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABh
+AG4AeQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4A
+AAAAAFMAVABfAGEAMgBjAGEAZAA2AGYAMgA3AGYANQA3ADQAMgA3ADcAYQBmADEAYwAxADUAMgBl
+ADMAMgBkADEAYQAzAGYANgAAADwADgABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAA
+LgA3ADYANQA3AC4AOQAwADgAMAAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBU
+AF8AYQAyAGMAYQBkADYAZgAyADcAZgA1ADcANAAyADcANwBhAGYAMQBjADEANQAyAGUAMwAyAGQA
+MQBhADMAZgA2AC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABD
+AG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAxADcAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEA
+ZABlAG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBt
+AGUAAABTAFQAXwBhADIAYwBhAGQANgBmADIANwBmADUANwA0ADIANwA3AGEAZgAxAGMAMQA1ADIA
+ZQAzADIAZAAxAGEAMwBmADYALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAA
+AAAAUwBUAF8AYQAyAGMAYQBkADYAZgAyADcAZgA1ADcANAAyADcANwBhAGYAMQBjADEANQAyAGUA
+MwAyAGQAMQBhADMAZgA2AAAAQAAOAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAu
+ADAALgA3ADYANQA3AC4AOQAwADgAMAAAAEQADgABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMA
+aQBvAG4AAAAxAC4AMAAuADcANgA1ADcALgA5ADAAOAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAAA8PgAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+                </ScriptProject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\File operations on FS1"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:DelayValidation="True"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{3DEB2D39-2E62-449B-9421-76BD57BB8765}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="File operations on FS1">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\File operations on FS1\Copy Zip file to Archive Folder on File Server"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{D3B5D55E-220E-466A-A9CD-DDE3C782BFC3}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Copy Zip file to Archive Folder on File Server"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::varSourceLocation"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="User::varArchiveLocation"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\File operations on FS1\Copy zip file to DW1"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{8F910DB5-D493-4EA6-9D92-1D63FBF3F075}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Copy zip file to DW1"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::varSourceLocation"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="User::varDW1CopyFileDestination"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\File operations on FS1\Delete Zip File on File Server"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{E0D1CD27-EF6B-49FE-9BC1-383AF28E91FE}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete Zip File on File Server"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="DeleteFile"
+                  TaskSourcePath="User::varSourceLocation"
+                  TaskIsSourceVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Foreach Loop Container\File operations on FS1.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{F11F5F74-7129-466E-AE93-D5AA5442140D}"
+              DTS:From="Package\Foreach Loop Container\File operations on FS1\Copy Zip file to Archive Folder on File Server"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\Foreach Loop Container\File operations on FS1\Copy zip file to DW1" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\Foreach Loop Container\File operations on FS1.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{0B0B7349-A099-4862-AD4C-A3F6AC43E6AB}"
+              DTS:From="Package\Foreach Loop Container\File operations on FS1\Copy zip file to DW1"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\Foreach Loop Container\File operations on FS1\Delete Zip File on File Server" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Foreach Loop Container"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:DelayValidation="True"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{1DC46E23-4636-4F31-837B-5C7620A55D09}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach Loop Container">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{14BF0885-1C72-4C08-8C82-1F52F84B5A29}"
+            DTS:ObjectName="{14BF0885-1C72-4C08-8C82-1F52F84B5A29}">
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload" />
+                <FEFEProperty
+                  FileSpec="*.*" />
+                <FEFEProperty
+                  FileNameRetrievalType="0" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\Foreach Loop Container\Delete all files on FS1 to cleanup"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{9FA3C51A-AEFA-4048-9CF8-696583F8BE19}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete all files on FS1 to cleanup"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="DeleteFile"
+                  TaskSourcePath="User::varDeleteExtraFiles"
+                  TaskIsSourceVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{5B78B761-8EE8-4327-8431-7F4D74805BF4}"
+              DTS:ObjectName="{5B78B761-8EE8-4327-8431-7F4D74805BF4}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::varDeleteExtraFiles" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Sequence Container"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:DelayValidation="True"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{00E7B07F-11EE-4B99-8016-9D35329FAA8D}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Sequence Container">
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Foreach Loop Container\Sequence Container\Delete Medispan Dir on DW1"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{4EF050A8-9CCE-4AA2-B7E2-984F71CE88AD}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete Medispan Dir on DW1"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="DeleteDirectory"
+                  TaskSourcePath="User::varDeleteStagingDir"
+                  TaskIsSourceVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{4397C01E-E65A-4415-B26B-7CC0C319249A}"
+          DTS:From="Package\Foreach Loop Container\File operations on FS1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\File operations on DW1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{50E9C218-95A5-437F-8EC6-95A75BD3190A}"
+          DTS:From="Package\Foreach Loop Container\Sequence Container"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Foreach Loop Container\File operations on FS1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{CF31D5C2-ECD2-4424-9B3B-AE503C457885}"
+          DTS:From="Package\Foreach Loop Container\File operations on DW1"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Foreach Loop Container\Foreach Loop Container" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{1B456571-3D5D-43AF-B67A-F83C0BB80EC5}"
+          DTS:ObjectName="{1B456571-3D5D-43AF-B67A-F83C0BB80EC5}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varSourceLocation" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D37E9E0E-5899-4189-B8FE-0FE37BC13662}"
+          DTS:ObjectName="{D37E9E0E-5899-4189-B8FE-0FE37BC13662}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::varArchiveLocation" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{00A9A6F8-AC0B-43DD-A219-980822871765}"
+          DTS:ObjectName="{00A9A6F8-AC0B-43DD-A219-980822871765}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::varExtractDir" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{1B0AD870-A1FD-495B-B5BF-753C2FD1C17F}"
+          DTS:ObjectName="{1B0AD870-A1FD-495B-B5BF-753C2FD1C17F}"
+          DTS:ValueIndex="3"
+          DTS:VariableName="User::varUnzipLocation" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{153C9CA3-0412-4164-9370-1D17618BD773}"
+          DTS:ObjectName="{153C9CA3-0412-4164-9370-1D17618BD773}"
+          DTS:ValueIndex="4"
+          DTS:VariableName="User::varDW1CopyFileDestination" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{F88448F6-80F1-4C2F-8BFA-065FB6955AC3}"
+          DTS:ObjectName="{F88448F6-80F1-4C2F-8BFA-065FB6955AC3}"
+          DTS:ValueIndex="5"
+          DTS:VariableName="User::varDeleteStagingDir" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Config Info"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A40BB9AA-AF9D-470B-A8BA-D8ED755D6922}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Config Info"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get Config Info\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC usp_Medispan_SFTP_File_ConfigInfo
+@Load = 1</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Config Info\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{8B95CDB5-CD5A-4433-86E7-B24A1975DA3F}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceLocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SourceLocation]"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceLocation]"
+                      name="SourceLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[ArchiveLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ArchiveLocation]"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[ArchiveLocation]"
+                      name="ArchiveLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[ExtractDir]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ExtractDir]"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[ExtractDir]"
+                      name="ExtractDir"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnzipLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UnzipLocation]"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnzipLocation]"
+                      name="UnzipLocation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[DW1CopyFileDestination]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DW1CopyFileDestination]"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[DW1CopyFileDestination]"
+                      name="DW1CopyFileDestination"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeleteStagingDir]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DeleteStagingDir]"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeleteStagingDir]"
+                      name="DeleteStagingDir"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SourceLocation]"
+                      dataType="wstr"
+                      length="500"
+                      name="SourceLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ArchiveLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ArchiveLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ExtractDir]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ExtractDir" />
+                    <externalMetadataColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UnzipLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UnzipLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DW1CopyFileDestination]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DW1CopyFileDestination" />
+                    <externalMetadataColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DeleteStagingDir]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DeleteStagingDir" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SourceLocation]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SourceLocation]"
+                      name="SourceLocation" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ArchiveLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ArchiveLocation]"
+                      name="ArchiveLocation" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ExtractDir]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ExtractDir]"
+                      name="ExtractDir" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UnzipLocation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UnzipLocation]"
+                      name="UnzipLocation" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DW1CopyFileDestination]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DW1CopyFileDestination]"
+                      name="DW1CopyFileDestination" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DeleteStagingDir]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DeleteStagingDir]"
+                      name="DeleteStagingDir" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Config Info\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[SourceLocation]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="SourceLocation"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceLocation]" />
+                    <inputColumn
+                      refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[ArchiveLocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ArchiveLocation"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[ArchiveLocation]" />
+                    <inputColumn
+                      refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[ExtractDir]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ExtractDir"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[ExtractDir]" />
+                    <inputColumn
+                      refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[UnzipLocation]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="UnzipLocation"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnzipLocation]" />
+                    <inputColumn
+                      refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[DW1CopyFileDestination]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DW1CopyFileDestination"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[DW1CopyFileDestination]" />
+                    <inputColumn
+                      refId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[DeleteStagingDir]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DeleteStagingDir"
+                      lineageId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[DeleteStagingDir]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get Config Info.Paths[OLE DB Source Output]"
+              endId="Package\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9D8CAA8A-135B-48A1-A202-CAFFF59AA341}"
+      DTS:From="Package\Get Config Info"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Foreach Loop Container\File operations on DW1\Unzip working file"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="174,103"
+          Size="174,146"
+          Id="Package\Foreach Loop Container\File operations on DW1"
+          TopLeft="603.5,18.5" />
+        <NodeLayout
+          Size="288,42"
+          Id="Package\Foreach Loop Container\File operations on FS1\Copy Zip file to Archive Folder on File Server"
+          TopLeft="54,24" />
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Foreach Loop Container\File operations on FS1\Copy zip file to DW1"
+          TopLeft="112,96" />
+        <NodeLayout
+          Size="214,42"
+          Id="Package\Foreach Loop Container\File operations on FS1\Delete Zip File on File Server"
+          TopLeft="81,185" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\File operations on FS1.PrecedenceConstraints[Constraint]"
+          TopLeft="198.75,66">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\File operations on FS1.PrecedenceConstraints[Constraint 1]"
+          TopLeft="199.5,138">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.5,47"
+              Start="0,0"
+              End="-11.5,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.5"
+                    Point2="0,23.5"
+                    Point3="-4,23.5" />
+                  <mssgle:LineSegment
+                    End="-7.5,23.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.5,23.5"
+                    Point2="-11.5,23.5"
+                    Point3="-11.5,27.5" />
+                  <mssgle:LineSegment
+                    End="-11.5,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="403,283"
+          Size="403,325"
+          Id="Package\Foreach Loop Container\File operations on FS1"
+          TopLeft="120.5,323.5" />
+        <NodeLayout
+          Size="233,42"
+          Id="Package\Foreach Loop Container\Foreach Loop Container\Delete all files on FS1 to cleanup"
+          TopLeft="36,33" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="274,131"
+          Size="274,173"
+          Id="Package\Foreach Loop Container\Foreach Loop Container"
+          TopLeft="612,339" />
+        <NodeLayout
+          Size="215,42"
+          Id="Package\Foreach Loop Container\Sequence Container\Delete Medispan Dir on DW1"
+          TopLeft="23,36.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="261,135"
+          Size="261,177"
+          Id="Package\Foreach Loop Container\Sequence Container"
+          TopLeft="93,15" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="387.611111111111,323.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="275.222222222222,-159"
+              Start="0,0"
+              End="275.222222222222,-151.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-74.9894782169135" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-74.9894782169135"
+                    Point2="0,-78.9894782169135"
+                    Point3="4,-78.9894782169135" />
+                  <mssgle:LineSegment
+                    End="271.222222222222,-78.9894782169135" />
+                  <mssgle:CubicBezierSegment
+                    Point1="271.222222222222,-78.9894782169135"
+                    Point2="275.222222222222,-78.9894782169135"
+                    Point3="275.222222222222,-82.9894782169135" />
+                  <mssgle:LineSegment
+                    End="275.222222222222,-151.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 1]"
+          TopLeft="223.666666666667,192.333333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="32.388888888889,131.166666666667"
+              Start="0,0"
+              End="32.388888888889,123.666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,74.3885224274407" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,74.3885224274407"
+                    Point2="0,78.3885224274407"
+                    Point3="4,78.3885224274407" />
+                  <mssgle:LineSegment
+                    End="28.388888888889,78.3885224274407" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.388888888889,78.3885224274407"
+                    Point2="32.388888888889,78.3885224274407"
+                    Point3="32.388888888889,82.3885224274407" />
+                  <mssgle:LineSegment
+                    End="32.388888888889,123.666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 2]"
+          TopLeft="718.166666666667,164.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30.8333333333334,174.5"
+              Start="0,0"
+              End="30.8333333333334,167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.7539863325741" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,66.7539863325741"
+                    Point2="0,70.7539863325741"
+                    Point3="4,70.7539863325741" />
+                  <mssgle:LineSegment
+                    End="26.8333333333334,70.7539863325741" />
+                  <mssgle:CubicBezierSegment
+                    Point1="26.8333333333334,70.7539863325741"
+                    Point2="30.8333333333334,70.7539863325741"
+                    Point3="30.8333333333334,74.7539863325741" />
+                  <mssgle:LineSegment
+                    End="30.8333333333334,167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="989,703"
+          Size="989,746"
+          Id="Package\Foreach Loop Container"
+          TopLeft="290,332" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Get Config Info"
+          TopLeft="626,204" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="701.333333333333,246">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.3333333333334,86"
+              Start="0,0"
+              End="83.3333333333334,78.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39"
+                    Point2="0,43"
+                    Point3="4,43" />
+                  <mssgle:LineSegment
+                    End="79.3333333333334,43" />
+                  <mssgle:CubicBezierSegment
+                    Point1="79.3333333333334,43"
+                    Point2="83.3333333333334,43"
+                    Point3="83.3333333333334,47" />
+                  <mssgle:LineSegment
+                    End="83.3333333333334,78.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get Config Info">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get Config Info\OLE DB Source"
+          TopLeft="340,54" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get Config Info\Recordset Destination"
+          TopLeft="456,193" />
+        <EdgeLayout
+          Id="Package\Get Config Info.Paths[OLE DB Source Output]"
+          TopLeft="415,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="132,97"
+              Start="0,0"
+              End="132,89.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,44.5"
+                    Point2="0,48.5"
+                    Point3="4,48.5" />
+                  <mssgle:LineSegment
+                    End="128,48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128,48.5"
+                    Point2="132,48.5"
+                    Point3="132,52.5" />
+                  <mssgle:LineSegment
+                    End="132,89.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Config Info\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

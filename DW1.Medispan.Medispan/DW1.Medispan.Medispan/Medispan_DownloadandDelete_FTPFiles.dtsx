@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/15/2017 1:55:56 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{FDF3D6F7-77B5-4611-AB83-6E5295E02540}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Medispan_DownloadandDelete_FTPFiles"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{693AD55B-A06F-4678-8D39-7F677A749592}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FTP Connection Manager]"
+      DTS:CreationName="FTP"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{FB014F65-A7E8-4787-A23C-95967044CA67}"
+      DTS:ObjectName="FTP Connection Manager">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::varFTPServer]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerPassword">@[User::varFTPPw]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerUserName">@[User::varFTPUserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="ftp.drugfacts.com:21">
+          <DTS:FtpConnection
+            DTS:ServerName="ftp.drugfacts.com"
+            DTS:ServerUserName="1407711049"
+            DTS:ChunkSize="1000">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAB2p+rjsWEkyFtv3gKspq8gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAB+y+X+bDWKInQnAbo04GCFAAAAAASAAACgAAAAEAAAAGrTYVTg4yrx8LwmAM/PX3QYAAAADGJt2TBTohunZmS2Dw6UXbBlXFGSb8+qFAAAACRHTgiKlR3xZrjKuCpLlcdwT5Xl</DTS:Property>
+          </DTS:FtpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2A020797-A55C-4CE2-B6BD-1F4F0448251F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFolderDestination">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{848F8D84-FDD6-49FC-9027-E236DFA44FC9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPDir">
+      <DTS:VariableValue
+        DTS:DataType="8">/Medispan/1407711049</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E89004A1-D3E5-4553-B1BB-7EC557401628}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPPw">
+      <DTS:VariableValue
+        DTS:DataType="8">frkqZyE2</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{896CCAF8-1082-42A2-BE2E-129CF7C2BC8E}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPRemotePath">
+      <DTS:VariableValue
+        DTS:DataType="8">/Medispan/1407711049/*.*</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{29B23B28-9123-406B-B48A-B0F764EF088F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPServer">
+      <DTS:VariableValue
+        DTS:DataType="8">ftp.drugfacts.com</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0D5B2387-907C-4F93-A2C4-50F460440EB3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPUserName">
+      <DTS:VariableValue
+        DTS:DataType="8">1407711049</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete files from FTP Server"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:DelayValidation="True"
+      DTS:Description="FTP Task"
+      DTS:DTSID="{CD19E378-DE9D-4856-A957-A9F7A304B17E}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete files from FTP Server"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2012; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FtpData
+          ConnectionName="{FB014F65-A7E8-4787-A23C-95967044CA67}"
+          TaskOperationType="DeleteRemote"
+          TaskIsRemotePathVar="True"
+          TaskRemotePath="User::varFTPRemotePath" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download files from Medispan FTP"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:DelayValidation="True"
+      DTS:Description="FTP Task"
+      DTS:DTSID="{B523CF93-758C-4627-80EC-6D02713DB820}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download files from Medispan FTP"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2012; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FtpData
+          ConnectionName="{FB014F65-A7E8-4787-A23C-95967044CA67}"
+          TaskOperationType="Receive"
+          TaskIsLocalPathVar="True"
+          TaskLocalPath="User::varFolderDestination"
+          TaskIsRemotePathVar="True"
+          TaskRemotePath="User::varFTPRemotePath" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{D4E8E78C-BCE3-450A-A224-3BB9FE57A85E}"
+      DTS:From="Package\Download files from Medispan FTP"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Delete files from FTP Server" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Delete files from FTP Server"
+          TopLeft="364,216" />
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Download files from Medispan FTP"
+          TopLeft="234,53" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="355,95">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="114.5,121"
+              Start="0,0"
+              End="114.5,113.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,56.5"
+                    Point2="0,60.5"
+                    Point3="4,60.5" />
+                  <mssgle:LineSegment
+                    End="110.5,60.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="110.5,60.5"
+                    Point2="114.5,60.5"
+                    Point3="114.5,64.5" />
+                  <mssgle:LineSegment
+                    End="114.5,113.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

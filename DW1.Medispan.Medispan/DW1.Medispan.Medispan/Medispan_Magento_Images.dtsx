@@ -1,0 +1,611 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/15/2019 1:55:03 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N149"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{D8E055F2-9998-4734-B3EB-41B9ECC4C89F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Medispan_Magento_Images"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{234C64AA-7FF8-4C17-8E45-3D6A44A678E5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9FCF5756-12DB-4173-9C58-7A9673DF1E18}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AC7D5993-EA9B-4D97-9534-865FF797AC26}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varWorkingDir] +  @[User::varDeleteFiles]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDeleteFiles">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1\g\IT Department\Medispan\Magento\Images\\\fs1\g\IT Department\Medispan\Magento\Images\\\fs1\g\IT Department\Medispan\Magento\Images\\\fs1\g\IT Department\Medispan\Magento\Images\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{02D9313F-BA30-4074-A250-D66AEAF75BEC}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDestination">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9876D783-84FA-4497-AABA-B7D96CEDB69C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varSource">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2E2131FF-DBA2-4D7A-ACB9-7E8176201BCA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varWorkingDir">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1\g\IT Department\Medispan\Magento\Images\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Copy zip file"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{012274AC-450F-4C43-8095-60C07813EE75}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Copy zip file">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Copy zip file\Foreach Loop Container"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:DelayValidation="True"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{E936EF9E-380B-473B-B046-E893F54DBDC0}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach Loop Container">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachADOEnumerator"
+            DTS:DTSID="{4D9652EC-6625-409B-857C-1A609028E4C2}"
+            DTS:ObjectName="{4D9652EC-6625-409B-857C-1A609028E4C2}">
+            <DTS:ObjectData>
+              <FEEADO
+                EnumType="EnumerateRowsInFirstTable"
+                VarName="User::ADORecordSet" />
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Copy zip file\Foreach Loop Container\Copy file"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{014A7642-CD68-4438-AEC0-4DD187FD61C1}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Copy file"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOverwriteDestFile="True"
+                  TaskSourcePath="User::varSource"
+                  TaskIsSourceVariable="True"
+                  TaskDestinationPath="User::varDestination"
+                  TaskIsDestinationVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{BA81E699-61C7-4F23-9A6A-D34F04BE216D}"
+              DTS:ObjectName="{BA81E699-61C7-4F23-9A6A-D34F04BE216D}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::varSource" />
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{D0E4DB88-978E-4D7F-9327-AB5F0C146BA5}"
+              DTS:ObjectName="{D0E4DB88-978E-4D7F-9327-AB5F0C146BA5}"
+              DTS:ValueIndex="1"
+              DTS:VariableName="User::varDestination" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Copy zip file\Get Config Info"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{3835230A-767F-46D4-9E39-160DEA78F4DE}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Config Info"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Copy zip file\Get Config Info\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC dbo.usp_MedispanImages_Magento_Config</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Copy zip file\Get Config Info\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="{8B95CDB5-CD5A-4433-86E7-B24A1975DA3F}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[AAPDW1.ODSIntake]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                          length="500"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]"
+                          name="Source"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[Destination]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Destination]"
+                          length="1000"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[Destination]"
+                          name="Destination"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Source" />
+                        <externalMetadataColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Destination]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          name="Destination" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Source]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Source]"
+                          name="Source" />
+                        <outputColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Destination]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Destination]"
+                          name="Destination" />
+                        <outputColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Copy zip file\Get Config Info\Recordset Destination"
+                  componentClassID="Microsoft.RecordsetDestination"
+                  contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+                  name="Recordset Destination">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the recordset."
+                      name="VariableName">User::ADORecordSet</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Copy zip file\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input]"
+                      hasSideEffects="true"
+                      name="Recordset Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Copy zip file\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[Source]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Source"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]" />
+                        <inputColumn
+                          refId="Package\Copy zip file\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input].Columns[Destination]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1000"
+                          cachedName="Destination"
+                          lineageId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output].Columns[Destination]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Copy zip file\Get Config Info.Paths[OLE DB Source Output]"
+                  endId="Package\Copy zip file\Get Config Info\Recordset Destination.Inputs[Recordset Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Copy zip file\Get Config Info\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Copy zip file.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{9E28CE67-3862-4F52-AE82-6AC4A90F63AB}"
+          DTS:From="Package\Copy zip file\Get Config Info"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Copy zip file\Foreach Loop Container" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete files"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:DelayValidation="True"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{4798FD61-0285-4C6E-988C-4E9DBAA5E32F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete files">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Delete files\Foreach Loop Container"
+          DTS:CreationName="STOCK:FOREACHLOOP"
+          DTS:DelayValidation="True"
+          DTS:Description="Foreach Loop Container"
+          DTS:DTSID="{55C6A4E0-4C42-4E22-9B59-8A713882BB46}"
+          DTS:ExecutableType="STOCK:FOREACHLOOP"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Foreach Loop Container">
+          <DTS:ForEachEnumerator
+            DTS:CreationName="Microsoft.ForEachFileEnumerator"
+            DTS:DTSID="{1EC2C14F-9F6D-4B5D-B85E-21B449C313B6}"
+            DTS:ObjectName="{1EC2C14F-9F6D-4B5D-B85E-21B449C313B6}">
+            <DTS:PropertyExpression
+              DTS:Name="Directory">@[User::varWorkingDir]</DTS:PropertyExpression>
+            <DTS:ObjectData>
+              <ForEachFileEnumeratorProperties>
+                <FEFEProperty
+                  Folder="\\fs1\g\IT Department\Medispan\Magento\Images\" />
+                <FEFEProperty
+                  FileSpec="*.*" />
+                <FEFEProperty
+                  FileNameRetrievalType="1" />
+                <FEFEProperty
+                  Recurse="0" />
+              </ForEachFileEnumeratorProperties>
+            </DTS:ObjectData>
+          </DTS:ForEachEnumerator>
+          <DTS:Variables />
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Delete files\Foreach Loop Container\Delete images files"
+              DTS:CreationName="Microsoft.FileSystemTask"
+              DTS:DelayValidation="True"
+              DTS:Description="File System Task"
+              DTS:DTSID="{1ACE4AD6-B6AC-453A-85CF-8EFE7C242757}"
+              DTS:ExecutableType="Microsoft.FileSystemTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Delete images files"
+              DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <FileSystemData
+                  TaskOperationType="DeleteFile"
+                  TaskSourcePath="User::varDeleteFiles"
+                  TaskIsSourceVariable="True" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:ForEachVariableMappings>
+            <DTS:ForEachVariableMapping
+              DTS:CreationName=""
+              DTS:DTSID="{E30F424E-B658-4612-82A5-4DC08D54DF40}"
+              DTS:ObjectName="{E30F424E-B658-4612-82A5-4DC08D54DF40}"
+              DTS:ValueIndex="0"
+              DTS:VariableName="User::varDeleteFiles" />
+          </DTS:ForEachVariableMappings>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{200DA124-8A21-4FC6-82A4-304E249D692A}"
+      DTS:From="Package\Delete files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Copy zip file" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Delete files\Foreach Loop Container\Delete images files"
+          TopLeft="49,29" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="240,124"
+          Size="240,167"
+          Id="Package\Delete files\Foreach Loop Container"
+          TopLeft="5.50000000000003,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="251,227"
+          Size="251,270"
+          Id="Package\Delete files"
+          TopLeft="105,95" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Copy zip file\Get Config Info"
+          TopLeft="40,5.5" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Copy zip file\Foreach Loop Container\Copy file"
+          TopLeft="24,31" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="220,140"
+          Size="220,183"
+          Id="Package\Copy zip file\Foreach Loop Container"
+          TopLeft="5.50000000000004,107.5" />
+        <EdgeLayout
+          Id="Package\Copy zip file.PrecedenceConstraints[Constraint]"
+          TopLeft="115.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="231,346"
+          Size="231,388"
+          Id="Package\Copy zip file"
+          TopLeft="464,87" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="356,230">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="108,51"
+              Start="0,0"
+              End="100.5,51">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="50,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="50,0"
+                    Point2="54,0"
+                    Point3="54,4" />
+                  <mssgle:LineSegment
+                    End="54,47" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54,47"
+                    Point2="54,51"
+                    Point3="58,51" />
+                  <mssgle:LineSegment
+                    End="100.5,51" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Copy zip file\Get Config Info">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Copy zip file\Get Config Info\OLE DB Source"
+          TopLeft="396,125" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Copy zip file\Get Config Info\Recordset Destination"
+          TopLeft="520,272" />
+        <EdgeLayout
+          Id="Package\Copy zip file\Get Config Info.Paths[OLE DB Source Output]"
+          TopLeft="471,167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="140,105"
+              Start="0,0"
+              End="140,97.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48.5"
+                    Point2="0,52.5"
+                    Point3="4,52.5" />
+                  <mssgle:LineSegment
+                    End="136,52.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="136,52.5"
+                    Point2="140,52.5"
+                    Point3="140,56.5" />
+                  <mssgle:LineSegment
+                    End="140,97.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Copy zip file\Get Config Info\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
