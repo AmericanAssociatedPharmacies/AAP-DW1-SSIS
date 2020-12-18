@@ -1,0 +1,960 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/15/2017 9:49:36 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{4CAE7BB5-AC9D-44D4-8CE4-F8CA9DECFE57}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="NADAC_LoadPricing_Staging"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{750CE4EF-45A1-430E-8214-7B99880F5781}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\xferData from ODSIntake to Pricing"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ab9ff137-a56e-4e38-b14a-c0128b834bd2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="xferData from ODSIntake to Pricing"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[NADAC]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{AD8F7EF5-264B-4D05-811B-820DF29F56D7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.Pricing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="13"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NADACPricePerUnit]"
+                      cachedDataType="numeric"
+                      cachedName="NADACPricePerUnit"
+                      cachedPrecision="10"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPricePerUnit]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPricePerUnit]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NADACPrice]"
+                      cachedDataType="cy"
+                      cachedName="NADACPrice"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPrice]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPrice]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PriceStartDateKey]"
+                      cachedDataType="i4"
+                      cachedName="PriceStartDateKey"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PriceStartDateKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[PriceStartDateKey]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PriceEndDateKey]"
+                      cachedDataType="i4"
+                      cachedName="PriceEndDateKey"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PriceEndDateKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[PriceEndDateKey]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrugKey]"
+                      cachedDataType="i4"
+                      cachedName="DrugKey"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PriceStartDateKey]"
+                      dataType="i4"
+                      name="PriceStartDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PriceEndDateKey]"
+                      dataType="i4"
+                      name="PriceEndDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPricePerUnit]"
+                      dataType="cy"
+                      name="NADACPricePerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPrice]"
+                      dataType="cy"
+                      name="NADACPrice" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\xferData from ODSIntake to Pricing\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [Staging].[usp_NADAC]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{F50053CC-048B-4FD9-9528-B947C0D0B0FE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACStartDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACStartDate]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACStartDate]"
+                      name="NADACStartDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="13"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPricePerUnit]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACPricePerUnit]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPricePerUnit]"
+                      name="NADACPricePerUnit"
+                      precision="10"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACPrice]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPrice]"
+                      name="NADACPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[PriceStartDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PriceStartDateKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[PriceStartDateKey]"
+                      name="PriceStartDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[PriceEndDateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PriceEndDateKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[PriceEndDateKey]"
+                      name="PriceEndDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      name="DrugKey"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACStartDate]"
+                      dataType="dbDate"
+                      name="NADACStartDate" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACPricePerUnit]"
+                      dataType="numeric"
+                      name="NADACPricePerUnit"
+                      precision="10"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACPrice]"
+                      dataType="cy"
+                      name="NADACPrice" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PriceStartDateKey]"
+                      dataType="i4"
+                      name="PriceStartDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PriceEndDateKey]"
+                      dataType="i4"
+                      name="PriceEndDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACStartDate]"
+                      dataType="dbDate"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACStartDate]"
+                      name="NADACStartDate" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="13"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACPricePerUnit]"
+                      dataType="numeric"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACPricePerUnit]"
+                      name="NADACPricePerUnit"
+                      precision="10"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACPrice]"
+                      dataType="cy"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACPrice]"
+                      name="NADACPrice" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PriceStartDateKey]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PriceStartDateKey]"
+                      name="PriceStartDateKey" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PriceEndDateKey]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PriceEndDateKey]"
+                      name="PriceEndDateKey" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      name="DrugKey" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\xferData from ODSIntake to Pricing.Paths[OLE DB Source Output]"
+              endId="Package\xferData from ODSIntake to Pricing\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\xferData from ODSIntake to Pricing\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\xferData from ODSIntake to Pricing_old"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{A62B6278-5E9E-43E1-8681-CBD50FA651ED}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="xferData from ODSIntake to Pricing_old"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[NADAC]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="{AD8F7EF5-264B-4D05-811B-820DF29F56D7}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.Pricing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DrugKey]"
+                      cachedDataType="i4"
+                      cachedName="DrugKey"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NADACPrice]"
+                      cachedDataType="cy"
+                      cachedName="NADACPrice"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPrice]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPrice]" />
+                    <inputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NADAC_Per_Unit]"
+                      cachedDataType="numeric"
+                      cachedName="NADAC_Per_Unit"
+                      cachedPrecision="10"
+                      cachedScale="5"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPricePerUnit]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADAC_Per_Unit]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPricePerUnit]"
+                      dataType="cy"
+                      name="NADACPricePerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NADACPrice]"
+                      dataType="cy"
+                      name="NADACPrice" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Staging.usp_NADAC</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{F50053CC-048B-4FD9-9528-B947C0D0B0FE}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[DrugKey]"
+                      name="DrugKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADAC_Per_Unit]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADAC_Per_Unit]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADAC_Per_Unit]"
+                      name="NADAC_Per_Unit"
+                      precision="10"
+                      scale="5"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACPrice]"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].Columns[NADACPrice]"
+                      name="NADACPrice"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DrugKey]"
+                      dataType="i4"
+                      name="DrugKey" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADAC_Per_Unit]"
+                      dataType="numeric"
+                      name="NADAC_Per_Unit"
+                      precision="10"
+                      scale="5" />
+                    <externalMetadataColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NADACPrice]"
+                      dataType="cy"
+                      name="NADACPrice" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DrugKey]"
+                      name="DrugKey" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADAC_Per_Unit]"
+                      dataType="numeric"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADAC_Per_Unit]"
+                      name="NADAC_Per_Unit"
+                      precision="10"
+                      scale="5" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACPrice]"
+                      dataType="cy"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NADACPrice]"
+                      name="NADACPrice" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\xferData from ODSIntake to Pricing_old.Paths[OLE DB Source Output]"
+              endId="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\xferData from ODSIntake to Pricing_old\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="266,42"
+          Id="Package\xferData from ODSIntake to Pricing_old"
+          TopLeft="415,116" />
+        <NodeLayout
+          Size="246,42"
+          Id="Package\xferData from ODSIntake to Pricing"
+          TopLeft="576,239" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\xferData from ODSIntake to Pricing_old">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination"
+          TopLeft="416,186" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\xferData from ODSIntake to Pricing_old\OLE DB Source"
+          TopLeft="330,52" />
+        <EdgeLayout
+          Id="Package\xferData from ODSIntake to Pricing_old.Paths[OLE DB Source Output]"
+          TopLeft="405,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.5,92"
+              Start="0,0"
+              End="96.5,84.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,42"
+                    Point2="0,46"
+                    Point3="4,46" />
+                  <mssgle:LineSegment
+                    End="92.5,46" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92.5,46"
+                    Point2="96.5,46"
+                    Point3="96.5,50" />
+                  <mssgle:LineSegment
+                    End="96.5,84.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\xferData from ODSIntake to Pricing_old\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\xferData from ODSIntake to Pricing_old\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\xferData from ODSIntake to Pricing">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\xferData from ODSIntake to Pricing\OLE DB Source"
+          TopLeft="467,134" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\xferData from ODSIntake to Pricing\OLE DB Destination"
+          TopLeft="557,267" />
+        <EdgeLayout
+          Id="Package\xferData from ODSIntake to Pricing.Paths[OLE DB Source Output]"
+          TopLeft="542,176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.5,91"
+              Start="0,0"
+              End="100.5,83.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41.5"
+                    Point2="0,45.5"
+                    Point3="4,45.5" />
+                  <mssgle:LineSegment
+                    End="96.5,45.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.5,45.5"
+                    Point2="100.5,45.5"
+                    Point3="100.5,49.5" />
+                  <mssgle:LineSegment
+                    End="100.5,83.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\xferData from ODSIntake to Pricing\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\xferData from ODSIntake to Pricing\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
