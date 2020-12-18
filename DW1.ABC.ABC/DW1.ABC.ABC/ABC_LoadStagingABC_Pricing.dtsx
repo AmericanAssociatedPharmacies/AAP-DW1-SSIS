@@ -1,0 +1,819 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/17/2017 1:40:24 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{677D97AF-65C8-4E4F-996D-680007341CC3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ABC_LoadStagingABC_Pricing"
+  DTS:PackageType="5"
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{FE70930D-3A27-4C43-A2AF-1A385B292FA1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.Pricing]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{618D4EC4-5E1D-4B14-9A2F-1933F2053F5E}"
+      DTS:ObjectName="AAPDW1.Pricing">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=Pricing;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Staging ABC on Pricing"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{734A838C-2256-4E3D-8985-D14919220332}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Staging ABC on Pricing"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Staging ABC on Pricing\dboABC in Pricing"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="dboABC in Pricing"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ABC]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].Columns[ABCItemNum]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ABCItemNum"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[ABCItemNum]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCItemNum]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].Columns[ABC_AWP]"
+                      cachedDataType="cy"
+                      cachedName="ABC_AWP"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[ABC_AWP]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABC_AWP]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].Columns[ABCInvoicePrice]"
+                      cachedDataType="cy"
+                      cachedName="ABCInvoicePrice"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[ABCInvoicePrice]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCInvoicePrice]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[ABCItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ABCItemNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[ABC_AWP]"
+                      dataType="cy"
+                      name="ABC_AWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input].ExternalColumns[ABCInvoicePrice]"
+                      dataType="cy"
+                      name="ABCInvoicePrice" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Staging ABC on Pricing\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Load Staging ABC on Pricing\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Load Staging ABC on Pricing\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Load Staging ABC on Pricing\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Load Staging ABC on Pricing\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Staging ABC on Pricing\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC Staging.usp_Load_Staging_ABC</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging ABC on Pricing\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ABCItemNum]"
+                      length="50"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCItemNum]"
+                      name="ABCItemNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="11"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABC_AWP]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ABC_AWP]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABC_AWP]"
+                      name="ABC_AWP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCInvoicePrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ABCInvoicePrice]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCInvoicePrice]"
+                      name="ABCInvoicePrice"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ABCItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ABCItemNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ABC_AWP]"
+                      dataType="cy"
+                      name="ABC_AWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ABCInvoicePrice]"
+                      dataType="cy"
+                      name="ABCInvoicePrice" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ABCItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ABCItemNum]"
+                      name="ABCItemNum" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ABC_AWP]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ABC_AWP]"
+                      name="ABC_AWP" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ABCInvoicePrice]"
+                      dataType="cy"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ABCInvoicePrice]"
+                      name="ABCInvoicePrice" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Staging ABC on Pricing\Staging in Pricing db"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Staging in Pricing db"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[ABC]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Pricing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].Columns[ABCItemNum]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ABCItemNum"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[ABCItemNum]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCItemNum]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].Columns[ABC_AWP]"
+                      cachedDataType="cy"
+                      cachedName="ABC_AWP"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[ABC_AWP]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABC_AWP]" />
+                    <inputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].Columns[ABCInvoicePrice]"
+                      cachedDataType="cy"
+                      cachedName="ABCInvoicePrice"
+                      externalMetadataColumnId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[ABCInvoicePrice]"
+                      lineageId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output].Columns[ABCInvoicePrice]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[ABCItemNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ABCItemNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="11"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[ABC_AWP]"
+                      dataType="cy"
+                      name="ABC_AWP" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[ABCInvoicePrice]"
+                      dataType="cy"
+                      name="ABCInvoicePrice" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID]"
+                      dataType="bytes"
+                      length="8"
+                      name="RowversionID" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Staging ABC on Pricing.Paths[Multicast Output 1]"
+              endId="Package\Load Staging ABC on Pricing\Staging in Pricing db.Inputs[OLE DB Destination Input]"
+              name="Multicast Output 1"
+              startId="Package\Load Staging ABC on Pricing\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Load Staging ABC on Pricing.Paths[Multicast Output 2]"
+              endId="Package\Load Staging ABC on Pricing\dboABC in Pricing.Inputs[OLE DB Destination Input]"
+              name="Multicast Output 2"
+              startId="Package\Load Staging ABC on Pricing\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Load Staging ABC on Pricing.Paths[OLE DB Source Output]"
+              endId="Package\Load Staging ABC on Pricing\Multicast.Inputs[Multicast Input 1]"
+              name="OLE DB Source Output"
+              startId="Package\Load Staging ABC on Pricing\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="212,42"
+          Id="Package\Load Staging ABC on Pricing"
+          TopLeft="304,132" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Staging ABC on Pricing">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Load Staging ABC on Pricing\Staging in Pricing db"
+          TopLeft="228,272" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\Load Staging ABC on Pricing\Multicast"
+          TopLeft="423,169" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Load Staging ABC on Pricing\dboABC in Pricing"
+          TopLeft="571,281" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Staging ABC on Pricing\OLE DB Source"
+          TopLeft="417,92" />
+        <EdgeLayout
+          Id="Package\Load Staging ABC on Pricing.Paths[OLE DB Source Output]"
+          TopLeft="492,134">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,35"
+              Start="0,0"
+              End="-9,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="-4,17.5" />
+                  <mssgle:LineSegment
+                    End="-5,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,17.5"
+                    Point2="-9,17.5"
+                    Point3="-9,21.5" />
+                  <mssgle:LineSegment
+                    End="-9,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Staging ABC on Pricing.Paths[Multicast Output 2]"
+          TopLeft="501.666666666667,211">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="150.333333333333,70"
+              Start="0,0"
+              End="150.333333333333,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5526315789474" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.5526315789474"
+                    Point2="0,28.5526315789474"
+                    Point3="4,28.5526315789474" />
+                  <mssgle:LineSegment
+                    End="146.333333333333,28.5526315789474" />
+                  <mssgle:CubicBezierSegment
+                    Point1="146.333333333333,28.5526315789474"
+                    Point2="150.333333333333,28.5526315789474"
+                    Point3="150.333333333333,32.5526315789474" />
+                  <mssgle:LineSegment
+                    End="150.333333333333,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Staging ABC on Pricing.Paths[Multicast Output 1]"
+          TopLeft="483,211">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-167,61"
+              Start="0,0"
+              End="-167,53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.5"
+                    Point2="0,30.5"
+                    Point3="-4,30.5" />
+                  <mssgle:LineSegment
+                    End="-163,30.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-163,30.5"
+                    Point2="-167,30.5"
+                    Point3="-167,34.5" />
+                  <mssgle:LineSegment
+                    End="-167,53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging ABC on Pricing\Staging in Pricing db">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging ABC on Pricing\dboABC in Pricing">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging ABC on Pricing\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
