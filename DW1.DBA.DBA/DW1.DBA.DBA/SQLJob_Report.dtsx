@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/5/2018 9:50:35 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{A895A8DD-4568-4995-A775-3EC1B6306B0A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SQLJob_Report"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{85E34D70-7408-4B51-B945-1BFC41A0BD4F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{34FFD5B8-F3F4-4DC3-A249-1A83C6C08EC8}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{856529CB-C0CC-4B1E-A849-32E895FA946E}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get Row Count"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{2CFFD7CA-89A6-41EF-9E20-A45A5B30F673}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Row Count"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{34FFD5B8-F3F4-4DC3-A249-1A83C6C08EC8}"
+          SQLTask:SqlStatementSource="EXEC dbo.uspSQLJobETL_WeeklyCount"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::varRowCount" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\No Report"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8160A27E-A441-4D0F-A4B4-A4EC89BC5B51}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="No Report"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{34FFD5B8-F3F4-4DC3-A249-1A83C6C08EC8}"
+          SQLTask:SqlStatementSource="EXEC dbo.usp_SQLJob_NoReport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send HTML Report"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6722D380-2126-4D06-AA93-0F024F1673C5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send HTML Report"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{34FFD5B8-F3F4-4DC3-A249-1A83C6C08EC8}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[usp_SQLJobReport]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3FE0E520-17B0-419F-B4E5-B10250185FFD}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::varRowCount] == 0"
+      DTS:From="Package\Get Row Count"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\No Report" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{BA0E1E4D-29F7-403E-9761-1EB1396B4767}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[User::varRowCount] &gt; 0"
+      DTS:From="Package\Get Row Count"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Send HTML Report" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get Row Count"
+          TopLeft="497,120" />
+        <NodeLayout
+          Size="127,42"
+          Id="Package\No Report"
+          TopLeft="363,246" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="548.333333333333,162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-121.833333333333,84"
+              Start="0,0"
+              End="-121.833333333333,76.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.131926121372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.131926121372"
+                    Point2="0,34.131926121372"
+                    Point3="-4,34.131926121372" />
+                  <mssgle:LineSegment
+                    End="-117.833333333333,34.131926121372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-117.833333333333,34.131926121372"
+                    Point2="-121.833333333333,34.131926121372"
+                    Point3="-121.833333333333,38.131926121372" />
+                  <mssgle:LineSegment
+                    End="-121.833333333333,76.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-68.9166666666667,39.131926121372,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Send HTML Report"
+          TopLeft="621,254" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="595.666666666667,162">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="108.833333333333,92"
+              Start="0,0"
+              End="108.833333333333,84.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.3825857519789" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.3825857519789"
+                    Point2="0,37.3825857519789"
+                    Point3="4,37.3825857519789" />
+                  <mssgle:LineSegment
+                    End="104.833333333333,37.3825857519789" />
+                  <mssgle:CubicBezierSegment
+                    Point1="104.833333333333,37.3825857519789"
+                    Point2="108.833333333333,37.3825857519789"
+                    Point3="108.833333333333,41.3825857519789" />
+                  <mssgle:LineSegment
+                    End="108.833333333333,84.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="46.4166666666667,42.3825857519789,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

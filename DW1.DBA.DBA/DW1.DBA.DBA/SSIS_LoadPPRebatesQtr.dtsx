@@ -1,0 +1,1685 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/30/2011 8:42:48 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="IT-JONIW"
+  DTS:CreatorName="PHOENIX02\jwilson"
+  DTS:DTSID="{2361F4C9-878A-4A02-B6BD-1CDEF134F72D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SSIS_LoadPPRebatesQtr"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{B918E363-283E-4C7A-BD4A-0E5FA7CFBCB7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{D7DBEA1B-8F1E-43D2-A0DC-B4B1DB905892}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\data\Rebates\PPQuarterlyRebates\pm_rebates_ppartner.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SMTP Connection Manager]"
+      DTS:CreationName="SMTP"
+      DTS:Description="SMTP Connection Manager"
+      DTS:DTSID="{D8C231DF-585F-4363-BB6D-2ADDE70412D2}"
+      DTS:ObjectName="SMTP Connection Manager">
+      <DTS:ObjectData>
+        <SmtpConnectionManager
+          ConnectionString="SmtpServer=192.168.20.61;UseWindowsAuthentication=True;EnableSsl=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[UDDW1\UDDW1.Reports]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4A105CC6-F8B8-4911-8609-3391C869B4BB}"
+      DTS:ObjectName="UDDW1\UDDW1.Reports">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=UDDW1\UDDW1;Initial Catalog=Reports;Provider=SQLNCLI11;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8121A3A3-F54C-4AF2-8AB7-3095BFC63A59}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="emailMessages">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{ED8A2687-F958-4F69-8A6C-74CCCD655285}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="errorMessages">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{59A11FDD-64A0-48DF-8919-CFF19F66C8BA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Period">
+      <DTS:VariableValue
+        DTS:DataType="8">2011Q3</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2870036F-BD98-43B2-8AC9-EF08A678FA0E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v9; (C) 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          engineThreads="5"
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Updates column values using expressions"
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[pmid]"
+                      cachedDataType="r8"
+                      cachedName="pmid"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[pmid]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[volumeamt]"
+                      cachedDataType="r8"
+                      cachedName="volumeamt"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[volumeamt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[rebateamt]"
+                      cachedDataType="r8"
+                      cachedName="rebateamt"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[rebateamt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[paymentamt]"
+                      cachedDataType="r8"
+                      cachedName="paymentamt"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[paymentamt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[eligible]"
+                      cachedDataType="r8"
+                      cachedName="eligible"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[eligible]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[affiliate]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="affiliate"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[affiliate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[Lastpayment]"
+                      cachedDataType="r8"
+                      cachedName="Lastpayment"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Lastpayment]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[PAID TO STORE]"
+                      cachedDataType="r8"
+                      cachedName="PAID TO STORE"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO STORE]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[PAID TO AFFILIATE]"
+                      cachedDataType="r8"
+                      cachedName="PAID TO AFFILIATE"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO AFFILIATE]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PMID]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PMID]"
+                      name="PMID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[pmid]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">pmid</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[VolumeAmt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[VolumeAmt]"
+                      name="VolumeAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[volumeamt]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">volumeamt</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[RebateAmt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[RebateAmt]"
+                      name="RebateAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[rebateamt]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">rebateamt</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaymentAmt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaymentAmt]"
+                      name="PaymentAmt"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[paymentamt]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">paymentamt</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Eligible]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Eligible]"
+                      name="Eligible"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[eligible]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">eligible</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Affiliate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Affiliate]"
+                      name="Affiliate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[affiliate]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">affiliate</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[LastPayment]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[LastPayment]"
+                      name="LastPayment"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Lastpayment]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">Lastpayment</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaidToStore]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaidToStore]"
+                      name="PaidToStore"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO STORE]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[PAID TO STORE]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaidToAffiliate]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaidToAffiliate]"
+                      name="PaidToAffiliate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO AFFILIATE]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">[PAID TO AFFILIATE]</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Period]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Period]"
+                      name="Period"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">@[User::Period]</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">@[User::Period]</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">pm_rebates_ppartner$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[pmid]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[pmid]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[pmid]"
+                      name="pmid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[volumeamt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[volumeamt]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[volumeamt]"
+                      name="volumeamt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[rebateamt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[rebateamt]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[rebateamt]"
+                      name="rebateamt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[paymentamt]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[paymentamt]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[paymentamt]"
+                      name="paymentamt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[eligible]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[eligible]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[eligible]"
+                      name="eligible"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[affiliate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[affiliate]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[affiliate]"
+                      name="affiliate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Lastpayment]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Lastpayment]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[Lastpayment]"
+                      name="Lastpayment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO STORE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[PAID TO STORE]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO STORE]"
+                      name="PAID TO STORE"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO AFFILIATE]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[PAID TO AFFILIATE]"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[PAID TO AFFILIATE]"
+                      name="PAID TO AFFILIATE"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[pmid]"
+                      dataType="r8"
+                      name="pmid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[volumeamt]"
+                      dataType="r8"
+                      name="volumeamt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[rebateamt]"
+                      dataType="r8"
+                      name="rebateamt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[paymentamt]"
+                      dataType="r8"
+                      name="paymentamt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[eligible]"
+                      dataType="r8"
+                      name="eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[affiliate]"
+                      dataType="wstr"
+                      length="255"
+                      name="affiliate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[Lastpayment]"
+                      dataType="r8"
+                      name="Lastpayment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[PAID TO STORE]"
+                      dataType="r8"
+                      name="PAID TO STORE" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[PAID TO AFFILIATE]"
+                      dataType="r8"
+                      name="PAID TO AFFILIATE" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[pmid]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[pmid]"
+                      name="pmid" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[volumeamt]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[volumeamt]"
+                      name="volumeamt" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[rebateamt]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[rebateamt]"
+                      name="rebateamt" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[paymentamt]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[paymentamt]"
+                      name="paymentamt" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[eligible]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[eligible]"
+                      name="eligible" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[affiliate]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[affiliate]"
+                      name="affiliate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Lastpayment]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[Lastpayment]"
+                      name="Lastpayment" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[PAID TO STORE]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[PAID TO STORE]"
+                      name="PAID TO STORE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[PAID TO AFFILIATE]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[PAID TO AFFILIATE]"
+                      name="PAID TO AFFILIATE" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation;Microsoft SqlServer v9; (C) 2005 Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[import_PPRebates]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destinaton. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[UDDW1\UDDW1.Reports]"
+                  connectionManagerRefId="Package.ConnectionManagers[UDDW1\UDDW1.Reports]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PMID]"
+                      cachedDataType="r8"
+                      cachedName="PMID"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PMID]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VolumeAmt]"
+                      cachedDataType="r8"
+                      cachedName="VolumeAmt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VolumeAmt]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[VolumeAmt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RebateAmt]"
+                      cachedDataType="r8"
+                      cachedName="RebateAmt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RebateAmt]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[RebateAmt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PaymentAmt]"
+                      cachedDataType="r8"
+                      cachedName="PaymentAmt"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaymentAmt]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaymentAmt]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Eligible]"
+                      cachedDataType="r8"
+                      cachedName="Eligible"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Eligible]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Eligible]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Affiliate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="255"
+                      cachedName="Affiliate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Affiliate]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Affiliate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastPayment]"
+                      cachedDataType="r8"
+                      cachedName="LastPayment"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastPayment]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[LastPayment]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PaidToStore]"
+                      cachedDataType="r8"
+                      cachedName="PaidToStore"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaidToStore]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaidToStore]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PaidToAffiliate]"
+                      cachedDataType="r8"
+                      cachedName="PaidToAffiliate"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaidToAffiliate]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[PaidToAffiliate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Period]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="Period"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Period]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Period]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Period]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Period" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      dataType="r8"
+                      name="PMID" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VolumeAmt]"
+                      dataType="r8"
+                      name="VolumeAmt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RebateAmt]"
+                      dataType="r8"
+                      name="RebateAmt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaymentAmt]"
+                      dataType="r8"
+                      name="PaymentAmt" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Eligible]"
+                      dataType="r8"
+                      name="Eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Affiliate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="255"
+                      name="Affiliate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastPayment]"
+                      dataType="r8"
+                      name="LastPayment" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaidToStore]"
+                      dataType="r8"
+                      name="PaidToStore" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaidToAffiliate]"
+                      dataType="r8"
+                      name="PaidToAffiliate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\Excel Source.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task Change -1 to 1"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{65195E43-BB64-4849-B91C-A3F3DD56ABFB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task Change -1 to 1"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{4A105CC6-F8B8-4911-8609-3391C869B4BB}"
+          SQLTask:SqlStatementSource=" update import_PPRebatess set Eligible = 1 where Eligible = -1;&#xA;  update import_PPRebates set Affiliate = '' where affiliate is null;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{C8D84BAB-4299-4823-9A13-48F51AC063AE}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="MessageSource">"PP Rebates Load Failed- Error is: " +  @[User::emailMessages]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{D8C231DF-585F-4363-BB6D-2ADDE70412D2}"
+          SendMailTask:From="jwilson@uniteddrugs.com"
+          SendMailTask:To="jwilson@uniteddrugs.com"
+          SendMailTask:Subject="Load failed for PP Rebates"
+          SendMailTask:MessageSource="PP Rebates Load Failed- Error is: " xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Send Mail Task 1"
+      DTS:CreationName="Microsoft.SendMailTask"
+      DTS:Description="Send Mail Task"
+      DTS:DTSID="{F7BE092D-F80B-49A2-95C3-198458EBA680}"
+      DTS:ExecutableType="Microsoft.SendMailTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Send Mail Task 1"
+      DTS:TaskContact="Send Mail Task; Microsoft Corporation; Microsoft SQL Server v9; © 2004 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:PropertyExpression
+        DTS:Name="MessageSource">"Update Import_PPRebates  Failed- Error is: " +  @[User::emailMessages]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <SendMailTask:SendMailTaskData
+          SendMailTask:SMTPServer="{D8C231DF-585F-4363-BB6D-2ADDE70412D2}"
+          SendMailTask:From="jwilson@uniteddrugs.com"
+          SendMailTask:To="jwilson@uniteddrugs.com"
+          SendMailTask:Subject="Update Import_PPRebates failed"
+          SendMailTask:MessageSource="Update Import_PPRebates  Failed- Error is: " xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{CDA52417-7CD2-4A9D-969D-0A2B881B5E67}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task Change -1 to 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{24E49853-B84B-4520-A4C8-166AFE4E9B48}"
+      DTS:From="Package\Data Flow Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Send Mail Task"
+      DTS:Value="1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{247FE46A-723D-405F-AEAC-7FFC7DBA4528}"
+      DTS:From="Package\Execute SQL Task Change -1 to 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Send Mail Task 1"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{B9961B42-0156-469D-8087-59B991985741}"
+      DTS:EventID="65535"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{1A5F337D-0248-40AA-848D-A1DB841E3118}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Script Task"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{FF6EC74C-87EE-4E39-98B9-D0536331657D}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ScriptTask_e8bc6bac793a468d9743b071bac062d3"
+              VSTAMajorVersion="14"
+              VSTAMinorVersion="0"
+              Language="VisualBasic"
+              ReadOnlyVariables="System::ErrorDescription,System::ErrorCode"
+              ReadWriteVariables="User::errorMessages">
+              <ProjectItem
+                Name="ScriptMain.vb"
+                Encoding="UTF8"><![CDATA[Imports System
+Imports System.Data
+Imports System.Math
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+
+    Public Sub Main()
+        Dim messages As Collections.ArrayList
+
+        Try
+            messages = CType(Dts.Variables("errorMessages").Value, Collections.ArrayList)
+        Catch ex As Exception
+            messages = New Collections.ArrayList()
+        End Try
+
+        messages.Add("--> " + Dts.Variables("ErrorDescription").Value.ToString() + " (errorcode: " + Dts.Variables("ErrorCode").Value.ToString() + ")")
+
+
+        Dts.Variables("errorMessages").Value = messages
+
+        Dts.TaskResult = ScriptResults.Success
+    End Sub
+
+End Class]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptTask_e8bc6bac793a468d9743b071bac062d3.vbproj"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4f377e29-3161-4767-abc9-8199c5148ff6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>My Project</AppDesignerFolder>
+    <RootNamespace>ScriptTask_e8bc6bac793a468d9743b071bac062d3</RootNamespace>
+    <AssemblyName>ScriptTask_e8bc6bac793a468d9743b071bac062d3</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+  </ItemGroup>
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptTask" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptTask" IconIndex=""></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Compile Include="ScriptMain.vb" />
+  </ItemGroup>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ScriptTask_e8bc6bac793a468d9743b071bac062d3</msb:CodeName>
+		<msb:DisplayName>ScriptTask_e8bc6bac793a468d9743b071bac062d3</msb:DisplayName>
+		<msb:ProjectId>{00D19113-6119-4067-A57F-3DF5E39206EB}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ScriptTask_e8bc6bac793a468d9743b071bac062d3.vbproj"/>
+		<msb:File Include="ScriptMain.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <BinaryItem
+                Name="ScriptTask_e8bc6bac793a468d9743b071bac062d3.dll">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
+AAAAAMYCWgaNAAEAuiEAAAAAxgIHAZIAAgDCIQAAAACDAGABOgECAM4hAAAAAMYCTQN0AAIA2CEA
+AAAAEQCVAD8BAgD4IQAAAAABAIEARwEDAAEiAAAAAAYYUQUGAAQADCIAAAAAAwjuAEoABABAIgAA
+AAAGGFEFBgAEAAAAAQCKBAAAAQD+AAAAAQD+AAkAUQUBABEAUQUGABkAUQUKACkAUQUQADEAUQUV
+AEEAUQUbAFkAUQUGAGEAUQUGAGkAUQUGAIEAUQUhAJEAUQUpAKEAUQUQAKkAUQUGALEAUQUpAEkA
+UQUGAFEAUQUGAAwAUQUGABQAUQUGABwAUQUGACQAUQUGAAwA7gBKABQA7gBKABwA7gBKACQA7gBK
+ALkAUQUGALkAiwZWAOEATAZbAOkAJQRgAPEAEANmAPkANwVqAMkAUQUGAPkAJQVwAHEATQN0AAEB
+oQZ4AMkA2wB+APEAGgODAOEAuQYBAAkBJAOIAHEAWgaNAHEABwGSAIkALgGWABkB3wCmAHEAUQUG
+ADQA0ga9ADwAEANKADwAGgPUADwAUQUGAAgAHAD1AAgAIAD6ACkAYwBrAi4ACwBoAS4AEwBxAS4A
+GwCQAS4AIwCZAUAAOwD6AEAAMwDhAUMAKwDqAUMAMwDhAUkAYwB8AmMAKwDqAWMAMwDhAWkAYwCQ
+AoAAOwD6AIMAQwD6AIMASwD6AIMAKwDqAYkAYwCdAqAAOwD6AKMAawD6AKMAcwADAsAAOwD6AMMA
+MwDhAcMAUwAJAuAAOwD6AOMAMwDhAeMAWwADAkABMwDhAUABOwD6AGABMwDhAWABOwD6AIABMwDh
+AYABOwD6AKABMwDhAaABOwD6AMABOwD6AOABOwD6AAACOwD6AAACMwDhASACOwD6AEACOwD6AEAC
+MwDhAU8AngCxAAQAAQAHAAUAAAAcBU8BAAB0BFQBAAAIBVkBAAChBV4BAADyAGMBAgAEAAMAAgAF
+AAUAAgAGAAcAAgAHAAkAAgARAAsALgA1ADwAQwCjALYAxQDMAASAAAAAAAAAAAAAAAAAAAAAACsA
+AAAEAAAAAAAAAAAAAADaALwAAAAAAAQAAAAAAAAAAAAAANoALgQAAAAACgAAAAAAAAAAAAAA4wDF
+AAAAAAANAAAAAAAAAAAAAADsAFsDAAAAAA0AAAAAAAAAAAAAAOwAYAAAAAAABgAEAAcABAAIAAUA
+AAAQAA4AfwAAABAAHQB/AAAAAAAfAH8AVQCsAFUAzwAAAAAAAENvbnRleHRWYWx1ZWAxAFRocmVh
+ZFNhZmVPYmplY3RQcm92aWRlcmAxAFNjcmlwdFRhc2tfZThiYzZiYWM3OTNhNDY4ZDk3NDNiMDcx
+YmFjMDYyZDMAPE1vZHVsZT4ATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAFQARGlzcG9z
+ZV9fSW5zdGFuY2VfXwBDcmVhdGVfX0luc3RhbmNlX18AdmFsdWVfXwBQcm9qZWN0RGF0YQBtc2Nv
+cmxpYgBNaWNyb3NvZnQuVmlzdWFsQmFzaWMAQWRkAENyZWF0ZUluc3RhbmNlAGdldF9HZXRJbnN0
+YW5jZQBpbnN0YW5jZQBHZXRIYXNoQ29kZQBWYXJpYWJsZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRU
+eXBlRnJvbUhhbmRsZQBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lAEdldFR5cGUARmFp
+bHVyZQBWU1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UAQXBwbGljYXRpb25CYXNlAEVkaXRvckJy
+b3dzYWJsZVN0YXRlAEhlbHBLZXl3b3JkQXR0cmlidXRlAEdlbmVyYXRlZENvZGVBdHRyaWJ1dGUA
+RGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQ29tVmlzaWJsZUF0
+dHJpYnV0ZQBTdGFuZGFyZE1vZHVsZUF0dHJpYnV0ZQBIaWRlTW9kdWxlTmFtZUF0dHJpYnV0ZQBU
+YXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUARGVidWdnZXJIaWRkZW5BdHRyaWJ1dGUATXlHcm91cENv
+bGxlY3Rpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBDTFNDb21w
+bGlhbnRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tFbnRyeVBvaW50QXR0cmlidXRlAFJ1bnRpbWVD
+b21wYXRpYmlsaXR5QXR0cmlidXRlAGdldF9WYWx1ZQBzZXRfVmFsdWUAR2V0T2JqZWN0VmFsdWUA
+U3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUb1N0cmluZwBNYXRoAE1pY3Jvc29mdC5TcWxTZXJ2
+ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5UYXNrcy5TY3JpcHRUYXNrAE1p
+Y3Jvc29mdC5WaXN1YWxCYXNpYy5NeVNlcnZpY2VzLkludGVybmFsAFNjcmlwdE9iamVjdE1vZGVs
+AFN5c3RlbS5Db21wb25lbnRNb2RlbABTY3JpcHRUYXNrX2U4YmM2YmFjNzkzYTQ2OGQ5NzQzYjA3
+MWJhYzA2MmQzLmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwu
+RGVzaWduAFNjcmlwdE1haW4AZ2V0X0FwcGxpY2F0aW9uAE15QXBwbGljYXRpb24ARXhjZXB0aW9u
+AG8AbV9BcHBPYmplY3RQcm92aWRlcgBtX1VzZXJPYmplY3RQcm92aWRlcgBtX0NvbXB1dGVyT2Jq
+ZWN0UHJvdmlkZXIAbV9NeVdlYlNlcnZpY2VzT2JqZWN0UHJvdmlkZXIAU3lzdGVtLkNvZGVEb20u
+Q29tcGlsZXIAZ2V0X1VzZXIAZ2V0X0NvbXB1dGVyAE15Q29tcHV0ZXIAQ2xlYXJQcm9qZWN0RXJy
+b3IAU2V0UHJvamVjdEVycm9yAEFjdGl2YXRvcgAuY3RvcgAuY2N0b3IAU3lzdGVtLkRpYWdub3N0
+aWNzAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5EZXZpY2VzAGdldF9XZWJTZXJ2aWNlcwBNeVdlYlNl
+cnZpY2VzAE1pY3Jvc29mdC5WaXN1YWxCYXNpYy5BcHBsaWNhdGlvblNlcnZpY2VzAFN5c3RlbS5S
+dW50aW1lLkludGVyb3BTZXJ2aWNlcwBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQ29tcGlsZXJTZXJ2
+aWNlcwBTeXN0ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAERlYnVnZ2luZ01vZGVzAGdldF9W
+YXJpYWJsZXMARXF1YWxzAFN5c3RlbS5Db2xsZWN0aW9ucwBSdW50aW1lSGVscGVycwBTdWNjZXNz
+AGdldF9EdHMAU2NyaXB0UmVzdWx0cwBDb25jYXQAT2JqZWN0AE15UHJvamVjdABzZXRfVGFza1Jl
+c3VsdABBcnJheUxpc3QAbV9Db250ZXh0AFNjcmlwdFRhc2tfZThiYzZiYWM3OTNhNDY4ZDk3NDNi
+MDcxYmFjMDYyZDMuTXkAAAAbZQByAHIAbwByAE0AZQBzAHMAYQBnAGUAcwAACS0ALQA+ACAAASFF
+AHIAcgBvAHIARABlAHMAYwByAGkAcAB0AGkAbwBuAAAbIAAoAGUAcgByAG8AcgBjAG8AZABlADoA
+IAAAE0UAcgByAG8AcgBDAG8AZABlAAADKQAAAAAAiodBFgr2aUyl0K7sWQkV9AAEIAEBCAMgAAEF
+IAEBEREEIAEBDgUgAgEODgUgAQERHQcgBAEODg4OBCABAQIGFRIcARIMBhUSHAESCAYVEhwBEj0G
+FRIcARIYBCAAEwAGBwISZRJpBCAAEnEEIAASdQUgARJ5HAMgABwFAAEBEmkDAAABAyAADgUAAQ4d
+DgQgAQgcBCABARwEAAEcHAQgAQIcAyAACAcAARJFEYCJBAcBHgACHgAFEAEAHgAECgEeAAQHARMA
+BhUSHAETAAcGFRJNARMABhUSTQETAAITAAQKARMABSABARMACLd6XFYZNOCJCLA/X38R1Qo6CImE
+Xc2AgMyRBAAAAAAEAQAAAAcGFRIcARIMBwYVEhwBEggHBhUSHAESPQcGFRIcARIYAgYIAwYRIAQA
+ABIMBAAAEggEAAASPQQAABIYBCAAEkUHEAEBHgAeAAcwAQEBEB4ABAgAEgwECAASCAQIABI9BAgA
+EhgEKAATAAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAABH
+AQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjABAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEC5O
+RVQgRnJhbWV3b3JrIDQIAQABAAAAAAAYAQAKTXlUZW1wbGF0ZQgxMS4wLjAuMAAABQEAAAAAYQEA
+NFN5c3RlbS5XZWIuU2VydmljZXMuUHJvdG9jb2xzLlNvYXBIdHRwQ2xpZW50UHJvdG9jb2wSQ3Jl
+YXRlX19JbnN0YW5jZV9fE0Rpc3Bvc2VfX0luc3RhbmNlX18AAAAQAQALTXkuQ29tcHV0ZXIAABMB
+AA5NeS5BcHBsaWNhdGlvbgAADAEAB015LlVzZXIAABMBAA5NeS5XZWJTZXJ2aWNlcwAAAAAATDMA
+AAAAAAAAAAAAZjMAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFgzAAAAAAAAAAAAAAAAX0NvckRs
+bE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAA
+SAAAAFhAAADUAgAAAAAAAAAAAADUAjQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAA
+AAAAvQTv/gAAAQAAAAAAAAAAAAAAAAAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
+AAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBu
+AAAAAAAAALAENAIAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAEAIAAAEAMAAwADAA
+MAAwADQAYgAwAAAALAACAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAACAAAAAw
+AAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADAALgAwAC4AMAAuADAAAACAADAAAQBJAG4A
+dABlAHIAbgBhAGwATgBhAG0AZQAAAFMAYwByAGkAcAB0AFQAYQBzAGsAXwBlADgAYgBjADYAYgBh
+AGMANwA5ADMAYQA0ADYAOABkADkANwA0ADMAYgAwADcAMQBiAGEAYwAwADYAMgBkADMALgBkAGwA
+bAAAACgAAgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAACAAAACIADAAAQBPAHIAaQBn
+AGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBjAHIAaQBwAHQAVABhAHMAawBfAGUAOABiAGMA
+NgBiAGEAYwA3ADkAMwBhADQANgA4AGQAOQA3ADQAMwBiADAANwAxAGIAYQBjADAANgAyAGQAMwAu
+AGQAbABsAAAANAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMAAuADAALgAwAC4A
+MAAAADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAwAC4AMAAuADAALgAw
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAHgzAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnPostExecute]"
+      DTS:CreationName="OnPostExecute"
+      DTS:DTSID="{98344557-22A4-4AF0-945D-62413FA7E72E}"
+      DTS:EventID="0"
+      DTS:EventName="OnPostExecute"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{57759442-DBCA-4766-A3B5-B042FA953912}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnPostExecute]\Script Task"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{D3BA38F9-B030-45A0-9639-12754DEDC1D6}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Script Task">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6"
+              VSTAMajorVersion="14"
+              VSTAMinorVersion="0"
+              Language="VisualBasic"
+              ReadOnlyVariables="User::errorMessages"
+              ReadWriteVariables="User::emailMessages">
+              <ProjectItem
+                Name="ScriptMain.vb"
+                Encoding="UTF8"><![CDATA[Imports System
+Imports System.Data
+Imports System.Math
+Imports Microsoft.SqlServer.Dts.Runtime
+
+<Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute> _
+<System.CLSCompliantAttribute(False)> _
+Partial Public Class ScriptMain
+	Inherits Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+
+	Enum ScriptResults
+		Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success
+		Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+	End Enum
+
+    Public Sub Main()
+        Dim errorDesc As String
+        Dim messages As Collections.ArrayList
+
+        Try
+            messages = CType(Dts.Variables("errorMessages").Value, Collections.ArrayList)
+        Catch ex As Exception
+            'If there is an exception - the object was never initialized, so there were no errors
+            Return
+        End Try
+
+        For Each errorDesc In messages
+            Dts.Variables("emailMessages").Value = Dts.Variables("emailMessages").Value.ToString + errorDesc + vbCrLf
+        Next
+
+        Dts.TaskResult = ScriptResults.Success
+    End Sub
+
+End Class]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6.vbproj"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{e2f4687b-2b67-4a7c-8ac7-e7158263b55f}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>My Project</AppDesignerFolder>
+    <RootNamespace>ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6</RootNamespace>
+    <AssemblyName>ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="My Project\" />
+  </ItemGroup>
+  <!-- Include the build rules for a VB project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptTask" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="vb" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptTask" IconIndex=""></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <ItemGroup>
+    <Compile Include="ScriptMain.vb" />
+  </ItemGroup>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:CodeName>ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6</msb:CodeName>
+		<msb:DisplayName>ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6</msb:DisplayName>
+		<msb:ProjectId>{A37DDF6A-BB50-42CB-AD1D-8676BFB5E5A4}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6.vbproj"/>
+		<msb:File Include="ScriptMain.vb"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <BinaryItem
+                Name="ScriptTask_0d648f06c58c4b85bc93bd0321cb00b6.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAKGB3F8AAAAAAAAAAOAAIiALAVAAABQAAAAGAAAAAAAAqjMA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAFgzAABPAAAAAEAAADADAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAsBMAAAAgAAAAFAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAADADAAAAQAAAAAQAAAAWAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACM
+MwAAAAAAAEgAAAACAAUATCIAAAwRAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKA8AAAoqHgIoEAAACiqmcxEAAAqAAQAABHMSAAAKgAIA
+AARzEwAACoADAAAEcxQAAAqABAAABCoufgEAAARvFQAACioufgIAAARvFgAACioufgMAAARvFwAA
+CioufgQAAARvGAAACioeAigZAAAKKgAAGzAEALgAAAABAAARAigaAAAKbxsAAApyAQAAcG8cAAAK
+bx0AAAp0GQAAAQveESUoHgAACgwoHwAACt2EAAAAAAdvIAAACg0rUAlvIQAACigiAAAKCgIoGgAA
+Cm8bAAAKch0AAHBvHAAACgIoGgAACm8bAAAKch0AAHBvHAAACm8dAAAKbyMAAAoGcjkAAHAoJAAA
+Cm8lAAAKCW8mAAAKLajeFAl1IwAAASwLCXUjAAABbycAAArcAigaAAAKFm8oAAAKKgEcAAAAAAAA
+IiIAERoAAAECADQAY5cAFAAAAAA2AgMoKQAACigqAAAKKh4CKCsAAAoqLtAGAAACKCwAAAoqHgIo
+IwAACioAABMwAQAUAAAAAgAAEQKMBQAAGy0IKAEAACsKKwICCgYqIgP+FQUAABsqHgIoLgAACioA
+AAATMAIAKAAAAAMAABECey8AAApvMAAACgoGjAgAABstEigCAAArCgJ7LwAACgZvMQAACgYqSgIo
+LgAACgJzMgAACn0vAAAKKgBCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAAA4BgAA
+I34AAKQGAABYBwAAI1N0cmluZ3MAAAAA/A0AAEAAAAAjVVMAPA4AABAAAAAjR1VJRAAAAEwOAADA
+AgAAI0Jsb2IAAAAAAAAAAgAAAVcdogkJDgAAAPoBMwAWAAABAAAAJgAAAAgAAAAIAAAAEgAAAAMA
+AAAyAAAAAgAAACoAAAADAAAAAgAAAAUAAAAFAAAACAAAAAEAAAAFAAAAAwAAAAMAAAACAAAAAAAF
+BAEAAAAAAAYAqgJHBgYAAgNHBgYA7QGIBQ8AZwYAAAYAXgJDAwoA1gH8BAoArAHvAwoAAQLvAw4A
+lAHXBQ4ALAWbBQYAdwKIBQ4ALgIgBg4ARgLFAAYA3gY+BA4AGAXXBQ4AjwLFAAYAawE+BAYAGgIB
+Bg4AAQCzAwoAwQFKBBIA4AKKAwYAygI+BBIAeAGKAwYAZgM+BAYACgeXBgYAkAQ+BAYAVwWXBgYA
+RQQ+BBIA3QOKAxYAegZIARYADwFIAQ4AsAAgBg4AiwYgBgYAXwM+BAYAGAE+BAYAqgZHBgYAJAE+
+BAYAcQU+BAAAAABXAAAAAAABAAEAAAAAAIIEJwclAAEAAQAAAAAAKgUnBykAAQACAAABEADlBicH
+OQABAAMAAQAAAGcEKwBdAAUACAAFAQAAyQUAADkABQAKAAUBAAAQAAAAOQAFABEAAgEAAMkGAABx
+AAYAEwAxAMUEDAExAJwEFAExALAEHAExAN4EJAEhAB0HygAGBqgALAFWgLkGLwFWgHABLwFQIAAA
+AAAGGHsFBgABAFggAAAAAAYYewUGAAEAYCAAAAAAERiBBXMAAQCKIAAAAAATCB0FMwEBAJYgAAAA
+ABMIcgQ4AQEAoiAAAAAAEwgUBT0BAQCuIAAAAAATCLkFQgEBALogAAAAAAYYewUGAAEAxCAAAAAA
+BgBtBAYAAQCkIQAAAADGAoQGmgABALIhAAAAAMYCAwGfAAIAuiEAAAAAgwBoAUcBAgDGIQAAAADG
+Al0DgQACANAhAAAAABEAlQBMAQIA8CEAAAAAAQCBAFQBAwD5IQAAAAAGGHsFBgAEAAQiAAAAAAMI
+6gBKAAQAOCIAAAAABhh7BQYABAAAAAEAmgQAAAEA+gAAAAEA+gAJAHsFAQARAHsFBgAZAHsFCgAp
+AHsFEAAxAHsFFQBBAHsFGwBZAHsFBgBhAHsFBgBpAHsFBgCBAHsFIQCRAHsFKQChAHsFEACpAHsF
+BgCxAHsFKQBJAHsFBgBRAHsFBgAMAHsFBgAUAHsFBgAcAHsFBgAkAHsFBgAMAOoASgAUAOoASgAc
+AOoASgAkAOoASgC5AHsFBgC5AMEGWQDpAHYGXgDxADUEYwD5ACADaQABAUcFbQABATUFcwDJAGMF
+dwDZAP4GaQAJAV0DfABxAF0DgQARAdcGhQD5ACoDjADZABQHkQAZAaQBBgDpAO8GAQAhATQDlQBx
+AIQGmgBxAAMBnwCJADYBowAxAdsAswBxAHsFBgA0AB0HygA8ACADSgA8ACoD4QA8AHsFBgAIABwA
+AgEIACAABwEpAGMAeAIuAAsAdQEuABMAfgEuABsAnQEuACMApgFAADsABwFAADMA7gFDACsA9wFD
+ADMA7gFJAGMAiQJjACsA9wFjADMA7gFpAGMAnQKAADsABwGDAEMABwGDAEsABwGDACsA9wGJAGMA
+qgKgADsABwGjAGsABwGjAHMAEALAADsABwHDADMA7gHDAFMAFgLgADsABwHjADMA7gHjAFsAEAJA
+ATMA7gFAATsABwFgATMA7gFgATsABwGAATMA7gGAATsABwGgATMA7gGgATsABwHAATsABwHgATsA
+BwEAAjsABwEAAjMA7gEgAjsABwFAAjsABwFAAjMA7gFPAKsAvgAEAAEABwAFAAAALAVcAQAAhARh
+AQAAGAVmAQAAywVrAQAA7gBwAQIABAADAAIABQAFAAIABgAHAAIABwAJAAIAEQALAC4ANQA8AEMA
+sADDANIA2QAEgAAAAAAAAAAAAAAAAAAAAAArAAAABAAAAAAAAAAAAAAA5wC8AAAAAAAEAAAAAAAA
+AAAAAADnAD4EAAAAAAoAAAAAAAAAAAAAAPAAxQAAAAAADQAAAAAAAAAAAAAA+QBrAwAAAAANAAAA
+AAAAAAAAAAD5AGAAAAAAAAYABAAHAAQACAAFAAAAEAAOAH8AAAAQAB0AfwAAAAAAHwB/AFsAuQBb
+ANwAAAAAAABDb250ZXh0VmFsdWVgMQBUaHJlYWRTYWZlT2JqZWN0UHJvdmlkZXJgMQBTY3JpcHRU
+YXNrXzBkNjQ4ZjA2YzU4YzRiODViYzkzYmQwMzIxY2IwMGI2ADxNb2R1bGU+AE1pY3Jvc29mdC5T
+cWxTZXJ2ZXIuTWFuYWdlZERUUwBUAERpc3Bvc2VfX0luc3RhbmNlX18AQ3JlYXRlX19JbnN0YW5j
+ZV9fAHZhbHVlX18AUHJvamVjdERhdGEAbXNjb3JsaWIATWljcm9zb2Z0LlZpc3VhbEJhc2ljAENy
+ZWF0ZUluc3RhbmNlAGdldF9HZXRJbnN0YW5jZQBpbnN0YW5jZQBHZXRIYXNoQ29kZQBWYXJpYWJs
+ZQBJRGlzcG9zYWJsZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBNaWNyb3Nv
+ZnQuU3FsU2VydmVyLkR0cy5SdW50aW1lAEdldFR5cGUARmFpbHVyZQBWU1RBUlRTY3JpcHRPYmpl
+Y3RNb2RlbEJhc2UAQXBwbGljYXRpb25CYXNlAERpc3Bvc2UARWRpdG9yQnJvd3NhYmxlU3RhdGUA
+SGVscEtleXdvcmRBdHRyaWJ1dGUAR2VuZXJhdGVkQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0
+cmlidXRlAEVkaXRvckJyb3dzYWJsZUF0dHJpYnV0ZQBDb21WaXNpYmxlQXR0cmlidXRlAFN0YW5k
+YXJkTW9kdWxlQXR0cmlidXRlAEhpZGVNb2R1bGVOYW1lQXR0cmlidXRlAFRhcmdldEZyYW1ld29y
+a0F0dHJpYnV0ZQBEZWJ1Z2dlckhpZGRlbkF0dHJpYnV0ZQBNeUdyb3VwQ29sbGVjdGlvbkF0dHJp
+YnV0ZQBDb21waWxhdGlvblJlbGF4YXRpb25zQXR0cmlidXRlAENMU0NvbXBsaWFudEF0dHJpYnV0
+ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAUnVudGltZUNvbXBhdGliaWxpdHlB
+dHRyaWJ1dGUAZ2V0X1ZhbHVlAHNldF9WYWx1ZQBHZXRPYmplY3RWYWx1ZQBTeXN0ZW0uUnVudGlt
+ZS5WZXJzaW9uaW5nAFRvU3RyaW5nAE1hdGgATWljcm9zb2Z0LlNxbFNlcnZlci5TY3JpcHRUYXNr
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlRhc2tzLlNjcmlwdFRhc2sATWljcm9zb2Z0LlZpc3Vh
+bEJhc2ljLk15U2VydmljZXMuSW50ZXJuYWwAU2NyaXB0T2JqZWN0TW9kZWwAU3lzdGVtLkNvbXBv
+bmVudE1vZGVsAFNjcmlwdFRhc2tfMGQ2NDhmMDZjNThjNGI4NWJjOTNiZDAzMjFjYjAwYjYuZGxs
+AGdldF9JdGVtAFN5c3RlbQBFbnVtAFN5c3RlbS5Db21wb25lbnRNb2RlbC5EZXNpZ24AU2NyaXB0
+TWFpbgBnZXRfQXBwbGljYXRpb24ATXlBcHBsaWNhdGlvbgBFeGNlcHRpb24AbwBtX0FwcE9iamVj
+dFByb3ZpZGVyAG1fVXNlck9iamVjdFByb3ZpZGVyAG1fQ29tcHV0ZXJPYmplY3RQcm92aWRlcgBt
+X015V2ViU2VydmljZXNPYmplY3RQcm92aWRlcgBTeXN0ZW0uQ29kZURvbS5Db21waWxlcgBnZXRf
+VXNlcgBnZXRfQ29tcHV0ZXIATXlDb21wdXRlcgBDbGVhclByb2plY3RFcnJvcgBTZXRQcm9qZWN0
+RXJyb3IASUVudW1lcmF0b3IAR2V0RW51bWVyYXRvcgBBY3RpdmF0b3IALmN0b3IALmNjdG9yAFN5
+c3RlbS5EaWFnbm9zdGljcwBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuRGV2aWNlcwBnZXRfV2ViU2Vy
+dmljZXMATXlXZWJTZXJ2aWNlcwBNaWNyb3NvZnQuVmlzdWFsQmFzaWMuQXBwbGljYXRpb25TZXJ2
+aWNlcwBTeXN0ZW0uUnVudGltZS5JbnRlcm9wU2VydmljZXMATWljcm9zb2Z0LlZpc3VhbEJhc2lj
+LkNvbXBpbGVyU2VydmljZXMAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBEZWJ1Z2dp
+bmdNb2RlcwBnZXRfVmFyaWFibGVzAEVxdWFscwBDb252ZXJzaW9ucwBTeXN0ZW0uQ29sbGVjdGlv
+bnMAUnVudGltZUhlbHBlcnMAU3VjY2VzcwBnZXRfRHRzAFNjcmlwdFJlc3VsdHMAQ29uY2F0AE9i
+amVjdABNeVByb2plY3QAc2V0X1Rhc2tSZXN1bHQAZ2V0X0N1cnJlbnQAQXJyYXlMaXN0AE1vdmVO
+ZXh0AG1fQ29udGV4dABTY3JpcHRUYXNrXzBkNjQ4ZjA2YzU4YzRiODViYzkzYmQwMzIxY2IwMGI2
+Lk15AAAAABtlAHIAcgBvAHIATQBlAHMAcwBhAGcAZQBzAAAbZQBtAGEAaQBsAE0AZQBzAHMAYQBn
+AGUAcwAABQ0ACgAAALXDDWsMnjpCq9w5miPhwQQABCABAQgDIAABBSABARERBCABAQ4FIAIBDg4F
+IAEBER0HIAQBDg4ODgQgAQECBhUSHAESDAYVEhwBEggGFRIcARI9BhUSHAESGAQgABMACQcEDhJl
+EmkSbQQgABJ1BCAAEnkFIAESfRwDIAAcBQABARJpAwAAAQQgABJtBAABDhwDIAAOBgADDg4ODgQg
+AQEcAyAAAgQAARwcBCABAhwDIAAIBwABEkURgJUEBwEeAAIeAAUQAQAeAAQKAR4ABAcBEwAGFRIc
+ARMABwYVEk0BEwAGFRJNARMAAhMABAoBEwAFIAEBEwAIt3pcVhk04IkIsD9ffxHVCjoIiYRdzYCA
+zJEEAAAAAAQBAAAABwYVEhwBEgwHBhUSHAESCAcGFRIcARI9BwYVEhwBEhgCBggDBhEgBAAAEgwE
+AAASCAQAABI9BAAAEhgEIAASRQcQAQEeAB4ABzABAQEQHgAECAASDAQIABIIBAgAEj0ECAASGAQo
+ABMACAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAQgBAAIAAAAAAEcBABou
+TkVURnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUQLk5FVCBG
+cmFtZXdvcmsgNAgBAAEAAAAAABgBAApNeVRlbXBsYXRlCDExLjAuMC4wAAAFAQAAAABhAQA0U3lz
+dGVtLldlYi5TZXJ2aWNlcy5Qcm90b2NvbHMuU29hcEh0dHBDbGllbnRQcm90b2NvbBJDcmVhdGVf
+X0luc3RhbmNlX18TRGlzcG9zZV9fSW5zdGFuY2VfXwAAABABAAtNeS5Db21wdXRlcgAAEwEADk15
+LkFwcGxpY2F0aW9uAAAMAQAHTXkuVXNlcgAAEwEADk15LldlYlNlcnZpY2VzAAAAAIAzAAAAAAAA
+AAAAAJozAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMMwAAAAAAAAAAAAAAAF9Db3JEbGxNYWlu
+AG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAA
+SAAAAFhAAADUAgAAAAAAAAAAAADUAjQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAA
+AAAAvQTv/gAAAQAAAAAAAAAAAAAAAAAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQA
+AAABAFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBu
+AAAAAAAAALAENAIAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAEAIAAAEAMAAwADAA
+MAAwADQAYgAwAAAALAACAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4AAAAAACAAAAAw
+AAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADAALgAwAC4AMAAuADAAAACAADAAAQBJAG4A
+dABlAHIAbgBhAGwATgBhAG0AZQAAAFMAYwByAGkAcAB0AFQAYQBzAGsAXwAwAGQANgA0ADgAZgAw
+ADYAYwA1ADgAYwA0AGIAOAA1AGIAYwA5ADMAYgBkADAAMwAyADEAYwBiADAAMABiADYALgBkAGwA
+bAAAACgAAgABAEwAZQBnAGEAbABDAG8AcAB5AHIAaQBnAGgAdAAAACAAAACIADAAAQBPAHIAaQBn
+AGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBjAHIAaQBwAHQAVABhAHMAawBfADAAZAA2ADQA
+OABmADAANgBjADUAOABjADQAYgA4ADUAYgBjADkAMwBiAGQAMAAzADIAMQBjAGIAMAAwAGIANgAu
+AGQAbABsAAAANAAIAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMAAuADAALgAwAC4A
+MAAAADgACAABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMAaQBvAG4AAAAwAC4AMAAuADAALgAw
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAAKwzAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:PackageVariables>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{F03E1CC6-D1A6-45D1-9BC5-AB92B1A6C33F}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{247FE46A-723D-405F-AEAC-7FFC7DBA4528}">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;PrecedenceConstraint xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:EvalOp&gt;Constraint&lt;/dwd:EvalOp&gt;&lt;/PrecedenceConstraint&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{DDC155DB-2861-4D5F-994E-EF92579471AB}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{24E49853-B84B-4520-A4C8-166AFE4E9B48}">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;PrecedenceConstraint xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:EvalOp&gt;Constraint&lt;/dwd:EvalOp&gt;&lt;/PrecedenceConstraint&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{9929362B-09E8-408D-8284-026CB787A3BA}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{2870036F-BD98-43B2-8AC9-EF08A678FA0E}">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;TaskHost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:DtsDataFlowDiagram&gt;&lt;dwd:BoundingTop&gt;1879&lt;/dwd:BoundingTop&gt;&lt;dwd:Layout&gt;&lt;dds&gt;&lt;diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="Microsoft.DataWarehouse.Layout.GraphLayout110" defaultlineroute="Microsoft.DataWarehouse.Layout.GraphLayout110" version="7" nextobject="15" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="0" scrolltop="0" gridx="150" gridy="150" marginx="1000" marginy="1000" zoom="100" x="28549" y="16907" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="1" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="0" backpictureclsid="{00000000-0000-0000-0000-000000000000}"&gt;&lt;font&gt;&lt;ddsxmlobjectstreamwrapper binary="01000000900144420100065461686f6d61" /&gt;&lt;/font&gt;&lt;mouseicon&gt;&lt;ddsxmlobjectstreamwrapper binary="6c74000000000000" /&gt;&lt;/mouseicon&gt;&lt;/diagram&gt;&lt;layoutmanager&gt;&lt;ddsxmlobj /&gt;&lt;/layoutmanager&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Excel Source" left="1746" top="1879" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="47" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Updates column values using expressions" left="1614" top="4154" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="2" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="MSDDS.Polyline" left="3014" top="2644" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="931" height="2010" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobj&gt;&lt;polyline endtypedst="3" endtypesrc="1" usercolor="32768" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" /&gt;&lt;/ddsxmlobj&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="125" vartype="8" /&gt;&lt;property name="Virtual" value="0" vartype="11" /&gt;&lt;property name="VisibleAP" value="0" vartype="3" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;connector lineroutestyle="Microsoft.DataWarehouse.Layout.GraphLayout110" sourceid="4" destid="5" sourceattachpoint="7" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="2" relatedid="0" virtual="0"&gt;&lt;point x="3545" y="3043" /&gt;&lt;point x="3545" y="3598" /&gt;&lt;point x="3413" y="3598" /&gt;&lt;point x="3413" y="4154" /&gt;&lt;/connector&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="OLE DB Destination" left="1508" top="6456" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="87" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="MSDDS.Polyline" left="2908" top="4919" logicalid="8" controlid="8" masterid="0" hint1="0" hint2="0" width="905" height="2037" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobj&gt;&lt;polyline endtypedst="3" endtypesrc="1" usercolor="32768" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" /&gt;&lt;/ddsxmlobj&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="124" vartype="8" /&gt;&lt;property name="Virtual" value="0" vartype="11" /&gt;&lt;property name="VisibleAP" value="0" vartype="3" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;connector lineroutestyle="Microsoft.DataWarehouse.Layout.GraphLayout110" sourceid="5" destid="7" sourceattachpoint="7" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="2" relatedid="0" virtual="0"&gt;&lt;point x="3413" y="5318" /&gt;&lt;point x="3413" y="5887" /&gt;&lt;point x="3307" y="5887" /&gt;&lt;point x="3307" y="6456" /&gt;&lt;/connector&gt;&lt;/ddscontrol&gt;&lt;/dds&gt;&lt;/dwd:Layout&gt;&lt;/dwd:DtsDataFlowDiagram&gt;&lt;dwd:DtsComponentDesignerPropertiesList&gt;&lt;dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:key xsi:type="xsd:string"&gt;106	DataSourceViewID&lt;/dwd:key&gt;&lt;/dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:key xsi:type="xsd:string"&gt;106	TableInfoObjectType&lt;/dwd:key&gt;&lt;dwd:value xsi:type="xsd:string"&gt;Table&lt;/dwd:value&gt;&lt;/dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:key xsi:type="xsd:string"&gt;1	DataSourceViewID&lt;/dwd:key&gt;&lt;/dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:DtsComponentDesignTimeProperty&gt;&lt;dwd:key xsi:type="xsd:string"&gt;1	TableInfoObjectType&lt;/dwd:key&gt;&lt;dwd:value xsi:type="xsd:string"&gt;Table&lt;/dwd:value&gt;&lt;/dwd:DtsComponentDesignTimeProperty&gt;&lt;/dwd:DtsComponentDesignerPropertiesList&gt;&lt;/TaskHost&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{0FCBED0B-7D3B-433E-AFB5-30CA97298880}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{2870036F-BD98-43B2-8AC9-EF08A678FA0E}-123">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;PipelinePath xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:SourceName&gt;Derived Column Output&lt;/dwd:SourceName&gt;&lt;dwd:DestinationName&gt;OLE DB Destination Input&lt;/dwd:DestinationName&gt;&lt;/PipelinePath&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{062A687C-2CD1-4575-A1D2-CBF9A2803E9D}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{2870036F-BD98-43B2-8AC9-EF08A678FA0E}-60">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;PipelinePath xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:SourceName&gt;Excel Source Output&lt;/dwd:SourceName&gt;&lt;dwd:DestinationName&gt;Derived Column Input&lt;/dwd:DestinationName&gt;&lt;/PipelinePath&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{39A2A083-C289-4026-92E1-FEF3D7DD8E65}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{98344557-22A4-4AF0-945D-62413FA7E72E}">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;DtsEventHandler xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:DtsEventHandlerDiagram&gt;&lt;dwd:BoundingTop&gt;7143&lt;/dwd:BoundingTop&gt;&lt;dwd:Layout&gt;&lt;dds&gt;&lt;diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="Microsoft.DataWarehouse.Layout.GraphLayout110" defaultlineroute="Microsoft.DataWarehouse.Layout.GraphLayout110" version="7" nextobject="4" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="0" scrolltop="0" gridx="150" gridy="150" marginx="1000" marginy="1000" zoom="100" x="28549" y="16351" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="1" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}"&gt;&lt;font&gt;&lt;ddsxmlobjectstreamwrapper binary="01010000900180380100065461686f6d61" /&gt;&lt;/font&gt;&lt;mouseicon&gt;&lt;ddsxmlobjectstreamwrapper binary="6c74000000000000" /&gt;&lt;/mouseicon&gt;&lt;/diagram&gt;&lt;layoutmanager&gt;&lt;ddsxmlobj /&gt;&lt;/layoutmanager&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Script Task" left="11827" top="7858" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package.EventHandlers[OnPostExecute]\Script Task" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;/dds&gt;&lt;/dwd:Layout&gt;&lt;/dwd:DtsEventHandlerDiagram&gt;&lt;/DtsEventHandler&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{666922BC-7288-446D-AD80-B10C447DC8B4}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{B9961B42-0156-469D-8087-59B991985741}">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;DtsEventHandler xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:DtsEventHandlerDiagram&gt;&lt;dwd:BoundingTop&gt;7143&lt;/dwd:BoundingTop&gt;&lt;dwd:Layout&gt;&lt;dds&gt;&lt;diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="Microsoft.DataWarehouse.Layout.GraphLayout110" defaultlineroute="Microsoft.DataWarehouse.Layout.GraphLayout110" version="7" nextobject="4" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="0" scrolltop="0" gridx="150" gridy="150" marginx="1000" marginy="1000" zoom="100" x="28549" y="16351" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="1" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}"&gt;&lt;font&gt;&lt;ddsxmlobjectstreamwrapper binary="01010000900180380100065461686f6d61" /&gt;&lt;/font&gt;&lt;mouseicon&gt;&lt;ddsxmlobjectstreamwrapper binary="6c74000000000000" /&gt;&lt;/mouseicon&gt;&lt;/diagram&gt;&lt;layoutmanager&gt;&lt;ddsxmlobj /&gt;&lt;/layoutmanager&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Script Task" left="7011" top="7858" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package.EventHandlers[OnError]\Script Task" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;/dds&gt;&lt;/dwd:Layout&gt;&lt;/dwd:DtsEventHandlerDiagram&gt;&lt;/DtsEventHandler&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{FB5B28E4-B954-4341-BD9F-DA7F6616607A}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="{CDA52417-7CD2-4A9D-969D-0A2B881B5E67}">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;PrecedenceConstraint xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:EvalOp&gt;Constraint&lt;/dwd:EvalOp&gt;&lt;/PrecedenceConstraint&gt;</DTS:Property>
+    </DTS:PackageVariable>
+    <DTS:PackageVariable
+      DTS:CreationName=""
+      DTS:DTSID="{E3414FF9-6778-4414-8BBB-A2E158A1871F}"
+      DTS:Namespace="dts-designer-1.0"
+      DTS:ObjectName="package-diagram">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="PackageVariableValue">&lt;Package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0"&gt;&lt;dwd:DtsControlFlowDiagram&gt;&lt;dwd:BoundingTop&gt;4471&lt;/dwd:BoundingTop&gt;&lt;dwd:Layout&gt;&lt;dds&gt;&lt;diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="Microsoft.DataWarehouse.Layout.GraphLayout110" defaultlineroute="Microsoft.DataWarehouse.Layout.GraphLayout110" version="7" nextobject="10" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="0" scrolltop="0" gridx="150" gridy="150" marginx="1000" marginy="1000" zoom="100" x="28549" y="17833" backcolor="15334399" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="1" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}"&gt;&lt;font&gt;&lt;ddsxmlobjectstreamwrapper binary="01010000900180380100065461686f6d61" /&gt;&lt;/font&gt;&lt;mouseicon&gt;&lt;ddsxmlobjectstreamwrapper binary="6c74000000000000" /&gt;&lt;/mouseicon&gt;&lt;/diagram&gt;&lt;layoutmanager&gt;&lt;ddsxmlobj /&gt;&lt;/layoutmanager&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Data Flow Task" left="3254" top="4471" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package\Data Flow Task" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Execute SQL Task" left="3360" top="6615" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package\Execute SQL Task Change -1 to 1" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="MSDDS.Polyline" left="4654" top="5236" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="905" height="1879" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobj&gt;&lt;polyline endtypedst="3" endtypesrc="1" usercolor="32768" linestyle="0" linerender="2" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" /&gt;&lt;/ddsxmlobj&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package.PrecedenceConstraints[Constraint]" vartype="8" /&gt;&lt;property name="Virtual" value="0" vartype="11" /&gt;&lt;property name="VisibleAP" value="0" vartype="3" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;connector lineroutestyle="Microsoft.DataWarehouse.Layout.GraphLayout110" sourceid="3" destid="4" sourceattachpoint="7" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="2" relatedid="0" virtual="0"&gt;&lt;point x="5053" y="5635" /&gt;&lt;point x="5053" y="6125" /&gt;&lt;point x="5159" y="6125" /&gt;&lt;point x="5159" y="6615" /&gt;&lt;/connector&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Send Mail Task" left="8599" top="4525" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package\Send Mail Task" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="MSDDS.Polyline" left="6453" top="4654" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="2446" height="853" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobj&gt;&lt;polyline endtypedst="3" endtypesrc="1" usercolor="255" linestyle="0" linerender="2" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" /&gt;&lt;/ddsxmlobj&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package.PrecedenceConstraints[Constraint 1]" vartype="8" /&gt;&lt;property name="Virtual" value="0" vartype="11" /&gt;&lt;property name="VisibleAP" value="0" vartype="3" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;connector lineroutestyle="Microsoft.DataWarehouse.Layout.GraphLayout110" sourceid="3" destid="6" sourceattachpoint="15" destattachpoint="14" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="2" relatedid="0" virtual="0"&gt;&lt;point x="6852" y="5053" /&gt;&lt;point x="7725" y="5053" /&gt;&lt;point x="7725" y="5107" /&gt;&lt;point x="8599" y="5107" /&gt;&lt;/connector&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.2" tooltip="Send Mail Task" left="8096" top="6744" logicalid="8" controlid="8" masterid="0" hint1="0" hint2="0" width="3598" height="1164" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobjectstreaminitwrapper binary="000800000e0e00008c040000" /&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package\Send Mail Task 1" vartype="8" /&gt;&lt;property name="ShowConnectorSource" value="0" vartype="2" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;shape groupshapeid="0" groupnode="0" /&gt;&lt;/ddscontrol&gt;&lt;ddscontrol controlprogid="MSDDS.Polyline" left="6559" top="6798" logicalid="9" controlid="9" masterid="0" hint1="0" hint2="0" width="1837" height="928" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0"&gt;&lt;control&gt;&lt;ddsxmlobj&gt;&lt;polyline endtypedst="3" endtypesrc="1" usercolor="255" linestyle="0" linerender="2" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" /&gt;&lt;/ddsxmlobj&gt;&lt;/control&gt;&lt;layoutobject&gt;&lt;ddsxmlobj&gt;&lt;property name="LogicalObject" value="Package.PrecedenceConstraints[Constraint 2]" vartype="8" /&gt;&lt;property name="Virtual" value="0" vartype="11" /&gt;&lt;property name="VisibleAP" value="0" vartype="3" /&gt;&lt;/ddsxmlobj&gt;&lt;/layoutobject&gt;&lt;connector lineroutestyle="Microsoft.DataWarehouse.Layout.GraphLayout110" sourceid="4" destid="8" sourceattachpoint="15" destattachpoint="14" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="2" relatedid="0" virtual="0"&gt;&lt;point x="6958" y="7197" /&gt;&lt;point x="7527" y="7197" /&gt;&lt;point x="7527" y="7326" /&gt;&lt;point x="8096" y="7326" /&gt;&lt;/connector&gt;&lt;/ddscontrol&gt;&lt;/dds&gt;&lt;/dwd:Layout&gt;&lt;/dwd:DtsControlFlowDiagram&gt;&lt;/Package&gt;</DTS:Property>
+    </DTS:PackageVariable>
+  </DTS:PackageVariables>
+</DTS:Executable>

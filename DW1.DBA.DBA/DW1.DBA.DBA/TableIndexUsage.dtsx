@@ -1,0 +1,1255 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/7/2019 12:23:39 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N149"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{12945FC6-28FE-4BE1-8D97-AB7F5BBB3E1A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="TableIndexUsage"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{6B48A239-ED0D-41AD-9636-A3094B2015A2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{97D29490-6B2B-4BC3-865A-14B984D8322C}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Loop]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{8CD62D99-9B38-4EB9-9E3A-29D9C5AC7EFE}"
+      DTS:ObjectName="Loop">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[User::varDbName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::varServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=API;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8BCDDF91-C62A-4ABE-9188-8D47E2E033A7}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C783485A-3FC1-48E9-87EC-3D642CCA27BF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDbName">
+      <DTS:VariableValue
+        DTS:DataType="8">API</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{774A5DEB-1472-47EA-AF1A-D3E1AE1904F5}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varServerName">
+      <DTS:VariableValue
+        DTS:DataType="8">DB1</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{1D0C8AD3-E0FB-4D91-A74D-4F67CD64A93F}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{952A41D3-62C8-4520-A090-36E78D4FA982}"
+        DTS:ObjectName="{952A41D3-62C8-4520-A090-36E78D4FA982}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Get Index Stats Usage"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7E093EFF-1C8A-4CBF-B519-E9AD0FF72B45}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Index Stats Usage"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Loop"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT dt.ServerName
+, dt.DbName
+, CONVERT(VARCHAR(100), OBJECT_NAME(dt.object_id)) AS ObjectName
+, CONVERT(VARCHAR(100), OBJECT_SCHEMA_NAME(dt.object_id)) AS SchemaName
+, dt.IndexName
+, dt.index_id
+, dt.IndexSizeKB
+, dt2.user_seeks
+, dt2.user_scans
+, dt2.user_lookups
+, dt2.user_updates
+, dt2.[last_user_seek]
+, dt2.last_user_scan
+, dt2.last_user_lookup
+, dt2.last_user_update
+--INTO ODSIntake.dbo.TableIndexUsage
+FROM(SELECT CONVERT(VARCHAR(100),@@SERVERNAME) AS ServerName
+	, CONVERT(VARCHAR(100), DB_NAME()) AS DbName
+	, i.object_id
+	, CONVERT(VARCHAR(100),ISNULL(i.[name], 'HEAP')) AS IndexName
+	, s.index_id
+		, (SUM(s.[used_page_count]) * 8) AS IndexSizeKB
+	FROM sys.dm_db_partition_stats AS s
+	INNER JOIN sys.indexes AS i ON s.[object_id] = i.[object_id]
+							AND s.[index_id] = i.[index_id]
+	GROUP BY i.object_id
+	, i.[name]
+	, s.index_id
+	) AS dt
+LEFT OUTER JOIN(SELECT object_id, index_id, user_seeks, user_scans, user_lookups, user_updates, [last_user_seek], last_user_scan, last_user_lookup, last_user_update
+				FROM sys.dm_db_index_usage_stats
+				WHERE database_id = DB_ID()
+					) AS dt2 ON dt.object_id = dt2.object_id
+								and dt.index_id = dt2.index_id
+WHERE OBJECT_SCHEMA_NAME(dt.object_id) &lt;&gt; 'sys'
+ORDER BY dt.object_id ASC
+, dt.IndexSizeKB DESC
+, dt.index_id ASC</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Loop]"
+                      connectionManagerRefId="Package.ConnectionManagers[Loop]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[DbName]"
+                          name="DbName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[ObjectName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[ObjectName]"
+                          name="ObjectName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[SchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[SchemaName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[SchemaName]"
+                          name="SchemaName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[IndexName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[IndexName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[IndexName]"
+                          name="IndexName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[index_id]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[index_id]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[index_id]"
+                          name="index_id"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[IndexSizeKB]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[IndexSizeKB]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[IndexSizeKB]"
+                          name="IndexSizeKB"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_seeks]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_seeks]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_seeks]"
+                          name="user_seeks"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_scans]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_scans]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_scans]"
+                          name="user_scans"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_lookups]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_lookups]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_lookups]"
+                          name="user_lookups"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_updates]"
+                          dataType="i8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_updates]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_updates]"
+                          name="user_updates"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_seek]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_seek]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_seek]"
+                          name="last_user_seek"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_scan]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_scan]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_scan]"
+                          name="last_user_scan"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_lookup]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_lookup]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_lookup]"
+                          name="last_user_lookup"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_update]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_update]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_update]"
+                          name="last_user_update"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[ServerName]"
+                          name="ServerName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="DbName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[SchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="SchemaName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[IndexName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="IndexName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[index_id]"
+                          dataType="i4"
+                          name="index_id" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[IndexSizeKB]"
+                          dataType="i8"
+                          name="IndexSizeKB" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_seeks]"
+                          dataType="i8"
+                          name="user_seeks" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_scans]"
+                          dataType="i8"
+                          name="user_scans" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_lookups]"
+                          dataType="i8"
+                          name="user_lookups" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[user_updates]"
+                          dataType="i8"
+                          name="user_updates" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_seek]"
+                          dataType="dbTimeStamp"
+                          name="last_user_seek" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_scan]"
+                          dataType="dbTimeStamp"
+                          name="last_user_scan" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_lookup]"
+                          dataType="dbTimeStamp"
+                          name="last_user_lookup" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[last_user_update]"
+                          dataType="dbTimeStamp"
+                          name="last_user_update" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ServerName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                          name="ServerName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                          name="DbName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ObjectName]"
+                          name="ObjectName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[SchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[SchemaName]"
+                          name="SchemaName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[IndexName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[IndexName]"
+                          name="IndexName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[index_id]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[index_id]"
+                          name="index_id" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[IndexSizeKB]"
+                          dataType="i8"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[IndexSizeKB]"
+                          name="IndexSizeKB" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_seeks]"
+                          dataType="i8"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_seeks]"
+                          name="user_seeks" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_scans]"
+                          dataType="i8"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_scans]"
+                          name="user_scans" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_lookups]"
+                          dataType="i8"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_lookups]"
+                          name="user_lookups" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_updates]"
+                          dataType="i8"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[user_updates]"
+                          name="user_updates" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_seek]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_seek]"
+                          name="last_user_seek" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_scan]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_scan]"
+                          name="last_user_scan" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_lookup]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_lookup]"
+                          name="last_user_lookup" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_update]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[last_user_update]"
+                          name="last_user_update" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="ODSIntake"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[TableIndexUsage]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[DbName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="DbName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[DbName]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[DbName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[ObjectName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ObjectName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[ObjectName]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[ObjectName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[SchemaName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="SchemaName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[SchemaName]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[SchemaName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[IndexName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="IndexName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[IndexName]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[IndexName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[index_id]"
+                          cachedDataType="i4"
+                          cachedName="index_id"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[index_id]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[index_id]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[IndexSizeKB]"
+                          cachedDataType="i8"
+                          cachedName="IndexSizeKB"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[IndexSizeKB]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[IndexSizeKB]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[user_seeks]"
+                          cachedDataType="i8"
+                          cachedName="user_seeks"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_seeks]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_seeks]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[user_scans]"
+                          cachedDataType="i8"
+                          cachedName="user_scans"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_scans]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_scans]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[user_lookups]"
+                          cachedDataType="i8"
+                          cachedName="user_lookups"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_lookups]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_lookups]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[user_updates]"
+                          cachedDataType="i8"
+                          cachedName="user_updates"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_updates]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[user_updates]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[last_user_seek]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="last_user_seek"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_seek]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_seek]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[last_user_scan]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="last_user_scan"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_scan]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_scan]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[last_user_lookup]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="last_user_lookup"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_lookup]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_lookup]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[last_user_update]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="last_user_update"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_update]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[last_user_update]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].Columns[ServerName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ServerName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[ServerName]"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output].Columns[ServerName]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ServerName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="DbName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[SchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="SchemaName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[IndexName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="IndexName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[index_id]"
+                          dataType="i4"
+                          name="index_id" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[IndexSizeKB]"
+                          dataType="i8"
+                          name="IndexSizeKB" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_seeks]"
+                          dataType="i8"
+                          name="user_seeks" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_scans]"
+                          dataType="i8"
+                          name="user_scans" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_lookups]"
+                          dataType="i8"
+                          name="user_lookups" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[user_updates]"
+                          dataType="i8"
+                          name="user_updates" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_seek]"
+                          dataType="dbTimeStamp"
+                          name="last_user_seek" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_scan]"
+                          dataType="dbTimeStamp"
+                          name="last_user_scan" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_lookup]"
+                          dataType="dbTimeStamp"
+                          name="last_user_lookup" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[last_user_update]"
+                          dataType="dbTimeStamp"
+                          name="last_user_update" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Get Index Stats Usage.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Get Index Stats Usage\Loop.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{E887550B-3E2D-492C-AD39-ABEAFD40ED33}"
+          DTS:ObjectName="{E887550B-3E2D-492C-AD39-ABEAFD40ED33}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varServerName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{147A9695-60E2-4BE9-B1A7-50D9554D77FB}"
+          DTS:ObjectName="{147A9695-60E2-4BE9-B1A7-50D9554D77FB}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::varDbName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Server and Db Name from ODSIntake on DW1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C4C65319-5ACA-4B4E-B651-266BC3513F76}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Server and Db Name from ODSIntake on DW1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT ServerName, DbName
+FROM dbo.ServerNameDbName_SSISLoop</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                      length="100"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]"
+                      name="ServerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                      length="100"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]"
+                      name="DbName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ServerName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DbName" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                      name="ServerName" />
+                    <outputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                      name="DbName" />
+                    <outputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Server and Db Name from ODSIntake on DW1\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Server and Db Name from ODSIntake on DW1\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\Recordset Destination.Inputs[Recordset Destination Input].Columns[ServerName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ServerName"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]" />
+                    <inputColumn
+                      refId="Package\Get Server and Db Name from ODSIntake on DW1\Recordset Destination.Inputs[Recordset Destination Input].Columns[DbName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DbName"
+                      lineageId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get Server and Db Name from ODSIntake on DW1.Paths[OLE DB Source Output]"
+              endId="Package\Get Server and Db Name from ODSIntake on DW1\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{990712BA-6643-455F-9529-86B0E157B841}"
+      DTS:From="Package\Get Server and Db Name from ODSIntake on DW1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="184,42"
+          Id="Package\Foreach Loop Container\Get Index Stats Usage"
+          TopLeft="27,44" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="269,165"
+          Size="269,208"
+          Id="Package\Foreach Loop Container"
+          TopLeft="514,340" />
+        <NodeLayout
+          Size="317,42"
+          Id="Package\Get Server and Db Name from ODSIntake on DW1"
+          TopLeft="471,191" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="629.5,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="19,107"
+              Start="0,0"
+              End="19,99.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.5"
+                    Point2="0,53.5"
+                    Point3="4,53.5" />
+                  <mssgle:LineSegment
+                    End="15,53.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15,53.5"
+                    Point2="19,53.5"
+                    Point3="19,57.5" />
+                  <mssgle:LineSegment
+                    End="19,99.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Get Index Stats Usage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake"
+          TopLeft="537,266" />
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Foreach Loop Container\Get Index Stats Usage\Loop"
+          TopLeft="450,106" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Get Index Stats Usage.Paths[OLE DB Source Output]"
+          TopLeft="501,148">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="101,118"
+              Start="0,0"
+              End="101,110.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,55"
+                    Point2="0,59"
+                    Point3="4,59" />
+                  <mssgle:LineSegment
+                    End="97,59" />
+                  <mssgle:CubicBezierSegment
+                    Point1="97,59"
+                    Point2="101,59"
+                    Point3="101,63" />
+                  <mssgle:LineSegment
+                    End="101,110.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Get Index Stats Usage\Loop">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Get Index Stats Usage\ODSIntake">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get Server and Db Name from ODSIntake on DW1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get Server and Db Name from ODSIntake on DW1\Recordset Destination"
+          TopLeft="542,236" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source"
+          TopLeft="466,127" />
+        <EdgeLayout
+          Id="Package\Get Server and Db Name from ODSIntake on DW1.Paths[OLE DB Source Output]"
+          TopLeft="541,169">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="92,67"
+              Start="0,0"
+              End="92,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.5"
+                    Point2="0,33.5"
+                    Point3="4,33.5" />
+                  <mssgle:LineSegment
+                    End="88,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="88,33.5"
+                    Point2="92,33.5"
+                    Point3="92,37.5" />
+                  <mssgle:LineSegment
+                    End="92,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Server and Db Name from ODSIntake on DW1\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

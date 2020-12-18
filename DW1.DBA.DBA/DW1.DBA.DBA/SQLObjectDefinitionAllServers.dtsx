@@ -1,0 +1,1047 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/20/2020 12:35:35 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N149"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{0A75EECC-4EB6-4D0A-B0F8-E9FEF030CFF3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SQLObjectDefinitionAllServers"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{036EBA10-BAA8-4191-974F-25D293603A68}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{8F0C8A53-F40B-4FA3-8BC5-80553CA165E1}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ServerLoop]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{c9bbae07-da54-485d-b7e5-efb96d506cf4}"
+      DTS:ObjectName="ServerLoop">
+      <DTS:PropertyExpression
+        DTS:Name="InitialCatalog">@[User::varDbName]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::varServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=API;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{83CA4C23-7C3B-4996-8815-8798B0CB8F4A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4EE79F32-A157-40EB-9E3B-D3C01FBBE2B1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varDbName">
+      <DTS:VariableValue
+        DTS:DataType="8">API</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A8C92190-FDBD-440C-B149-EEC00BDFF1EF}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varServerName">
+      <DTS:VariableValue
+        DTS:DataType="8">DB1</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{3D74F947-2692-4755-B8F3-7D578C79C83B}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{5C46EC7A-91AB-43E1-A7C1-95A97F87CE15}"
+        DTS:ObjectName="{5C46EC7A-91AB-43E1-A7C1-95A97F87CE15}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{E53AEF3C-A841-4CAD-811B-27FA32A872AF}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Loop Thru each Server and Each Database"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SQLObjectDefinition]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ServerName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ServerName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ServerName]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DbName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="DbName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DbName]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ObjectDefinition]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="ObjectDefinition"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectDefinition]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectDefinition]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ObjectSchemaName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ObjectSchemaName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectSchemaName]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectSchemaName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ObjectName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ObjectName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectName]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ObjectType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ObjectType"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectType]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectType]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ObjectTypeName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="100"
+                          cachedName="ObjectTypeName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectTypeName]"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectTypeName]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ServerName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="DbName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectDefinition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="ObjectDefinition" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectSchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectSchemaName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectType" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ObjectTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectTypeName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="OLE DB Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT CONVERT(VARCHAR(100), @@SERVERNAME) AS ServerName
+, CONVERT(VARCHAR(100),DB_NAME()) AS DbName
+, CONVERT(VARCHAR(8000),OBJECT_DEFINITION(ID)) AS ObjectDefinition
+, CONVERT(VARCHAR(100),OBJECT_SCHEMA_NAME(id)) AS ObjectSchemaName
+, CONVERT(VARCHAR(100),name) AS ObjectName
+, CONVERT(VARCHAR(100),type) AS ObjectType
+, CONVERT(VARCHAR(100),CASE
+						WHEN type = 'v' THEN 'VIEW'
+						WHEN type = 'p' THEN 'SPROC'
+						WHEN type = 'fn' THEN 'SCALAR FUNCTION'
+						WHEN type = 'tf' THEN 'TABLE FUNCTION'
+						END
+		) AS ObjectTypeName
+FROM sys.sysobjects
+WHERE type IN ('v','p','fn','tf')</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[ServerLoop]"
+                      connectionManagerRefId="Package.ConnectionManagers[ServerLoop]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]"
+                          name="ServerName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]"
+                          name="DbName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectDefinition]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectDefinition]"
+                          length="8000"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectDefinition]"
+                          name="ObjectDefinition"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectSchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectSchemaName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectSchemaName]"
+                          name="ObjectSchemaName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectName]"
+                          name="ObjectName"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectType]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectType]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectType]"
+                          name="ObjectType"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectTypeName]"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].Columns[ObjectTypeName]"
+                          name="ObjectTypeName"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ServerName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="DbName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectDefinition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="ObjectDefinition" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectSchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectSchemaName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectType" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ObjectTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          name="ObjectTypeName" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                          name="ServerName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                          name="DbName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectDefinition]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectDefinition]"
+                          name="ObjectDefinition" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectSchemaName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectSchemaName]"
+                          name="ObjectSchemaName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectName]"
+                          name="ObjectName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectType]"
+                          name="ObjectType" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectTypeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="100"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ObjectTypeName]"
+                          name="ObjectTypeName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Loop Thru each Server and Each Database.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{B80C2940-2568-41BE-A2D8-91B6C6385531}"
+          DTS:ObjectName="{B80C2940-2568-41BE-A2D8-91B6C6385531}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varServerName" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{EB3500FD-CE75-4354-9EC8-4769F2E74FCF}"
+          DTS:ObjectName="{EB3500FD-CE75-4354-9EC8-4769F2E74FCF}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::varDbName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get Server Name and Database Name"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:DelayValidation="True"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BFDA5035-E659-4001-82F1-4E66FAF8E527}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Server Name and Database Name"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get Server Name and Database Name\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[ServerNameDbName_SSISLoop]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get Server Name and Database Name\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                      length="100"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]"
+                      name="ServerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                      length="100"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]"
+                      name="DbName"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ServerName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DbName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DbName" />
+                    <externalMetadataColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[RowUpdatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowUpdatedDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ServerName]"
+                      name="ServerName" />
+                    <outputColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DbName]"
+                      name="DbName" />
+                    <outputColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get Server Name and Database Name\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get Server Name and Database Name\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get Server Name and Database Name\Recordset Destination.Inputs[Recordset Destination Input].Columns[ServerName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ServerName"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].Columns[ServerName]" />
+                    <inputColumn
+                      refId="Package\Get Server Name and Database Name\Recordset Destination.Inputs[Recordset Destination Input].Columns[DbName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DbName"
+                      lineageId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output].Columns[DbName]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get Server Name and Database Name.Paths[OLE DB Source Output]"
+              endId="Package\Get Server Name and Database Name\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get Server Name and Database Name\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A16FC600-4727-4310-B451-9E470E287043}"
+      DTS:From="Package\Get Server Name and Database Name"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="258,42"
+          Id="Package\Get Server Name and Database Name"
+          TopLeft="429,97" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Foreach Loop Container\Loop Thru each Server and Each Database"
+          TopLeft="72,6" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="357,103"
+          Size="357,146"
+          Id="Package\Foreach Loop Container"
+          TopLeft="432,204" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="558,139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="52.5,65"
+              Start="0,0"
+              End="52.5,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5"
+                    Point2="0,32.5"
+                    Point3="4,32.5" />
+                  <mssgle:LineSegment
+                    End="48.5,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="48.5,32.5"
+                    Point2="52.5,32.5"
+                    Point3="52.5,36.5" />
+                  <mssgle:LineSegment
+                    End="52.5,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Get Server Name and Database Name">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get Server Name and Database Name\OLE DB Source"
+          TopLeft="485,166" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get Server Name and Database Name\Recordset Destination"
+          TopLeft="483,272" />
+        <EdgeLayout
+          Id="Package\Get Server Name and Database Name.Paths[OLE DB Source Output]"
+          TopLeft="560,208">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="14,64"
+              Start="0,0"
+              End="14,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="10,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="10,32"
+                    Point2="14,32"
+                    Point3="14,36" />
+                  <mssgle:LineSegment
+                    End="14,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get Server Name and Database Name\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Loop Thru each Server and Each Database">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source"
+          TopLeft="472,116" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination"
+          TopLeft="490,319" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Loop Thru each Server and Each Database.Paths[OLE DB Source Output]"
+          TopLeft="547,158">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="28.5,161"
+              Start="0,0"
+              End="28.5,153.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,76.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,76.5"
+                    Point2="0,80.5"
+                    Point3="4,80.5" />
+                  <mssgle:LineSegment
+                    End="24.5,80.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.5,80.5"
+                    Point2="28.5,80.5"
+                    Point3="28.5,84.5" />
+                  <mssgle:LineSegment
+                    End="28.5,153.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Loop Thru each Server and Each Database\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
