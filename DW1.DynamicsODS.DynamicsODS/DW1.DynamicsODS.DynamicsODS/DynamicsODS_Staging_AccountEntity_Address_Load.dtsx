@@ -1,0 +1,2530 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2019 9:35:03 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{D30B838C-59A3-4F49-85C1-B8FE9BC8FB60}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DynamicsODS_Staging_AccountEntity_Address_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{6537F55C-4C82-44BA-93C7-10381AE61122}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6D9ACA1A-3D49-4AAD-BF48-7E0C45351215}"
+      DTS:ObjectName="AAPDW1.DynamicsODS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=DynamicsODS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9920E6C1-EB62-45A5-98CD-81D56A1056ED}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Address Account Entity"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E1DC3E21-EA26-4033-BB62-94542E96048B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Address Account Entity"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Address Account Entity\Staging Address DynamicsODS"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Staging Address DynamicsODS"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CRM_AccountEntity_Address]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[accountid]"
+                      cachedDataType="guid"
+                      cachedName="accountid"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[accountid]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_addressid]"
+                      cachedDataType="guid"
+                      cachedName="address1_addressid"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_addressid]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addressid]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_addresstypecode]"
+                      cachedDataType="i4"
+                      cachedName="address1_addresstypecode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_addresstypecode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addresstypecode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_addresstypecodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address1_addresstypecodename"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_addresstypecodename]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addresstypecodename]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_city]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="address1_city"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_city]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_city]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_composite]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="address1_composite"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_composite]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_composite]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_country]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="address1_country"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_country]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_country]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_county]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address1_county"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_county]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_county]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_fax]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address1_fax"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_fax]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_fax]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_freighttermscode]"
+                      cachedDataType="i4"
+                      cachedName="address1_freighttermscode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_freighttermscode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_freighttermscode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_freighttermscodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address1_freighttermscodename"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_freighttermscodename]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_freighttermscodename]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_latitude]"
+                      cachedDataType="r8"
+                      cachedName="address1_latitude"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_latitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_latitude]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_line1]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address1_line1"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_line1]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line1]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_line2]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address1_line2"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_line2]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line2]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_line3]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address1_line3"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_line3]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line3]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_longitude]"
+                      cachedDataType="r8"
+                      cachedName="address1_longitude"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_longitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_longitude]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_name]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="address1_name"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_name]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_name]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_postalcode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="address1_postalcode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_postalcode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_postalcode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_postofficebox]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="address1_postofficebox"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_postofficebox]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_postofficebox]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_primarycontactname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="address1_primarycontactname"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_primarycontactname]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_primarycontactname]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_shippingmethodcode]"
+                      cachedDataType="i4"
+                      cachedName="address1_shippingmethodcode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_shippingmethodcode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_shippingmethodcode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_shippingmethodcodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address1_shippingmethodcodename"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_shippingmethodcodename]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_shippingmethodcodename]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_stateorprovince]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address1_stateorprovince"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_stateorprovince]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_stateorprovince]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_telephone1]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address1_telephone1"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_telephone1]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone1]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_telephone2]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address1_telephone2"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_telephone2]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone2]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_telephone3]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address1_telephone3"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_telephone3]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone3]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_upszone]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="address1_upszone"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_upszone]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_upszone]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address1_utcoffset]"
+                      cachedDataType="i4"
+                      cachedName="address1_utcoffset"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_utcoffset]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_utcoffset]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_addressid]"
+                      cachedDataType="guid"
+                      cachedName="address2_addressid"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_addressid]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addressid]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_addresstypecode]"
+                      cachedDataType="i4"
+                      cachedName="address2_addresstypecode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_addresstypecode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addresstypecode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_addresstypecodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address2_addresstypecodename"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_addresstypecodename]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addresstypecodename]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_city]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="address2_city"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_city]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_city]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_country]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="address2_country"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_country]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_country]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_county]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address2_county"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_county]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_county]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_fax]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address2_fax"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_fax]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_fax]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_freighttermscode]"
+                      cachedDataType="i4"
+                      cachedName="address2_freighttermscode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_freighttermscode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_freighttermscode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_freighttermscodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address2_freighttermscodename"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_freighttermscodename]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_freighttermscodename]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_latitude]"
+                      cachedDataType="r8"
+                      cachedName="address2_latitude"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_latitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_latitude]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_line1]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address2_line1"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_line1]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line1]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_line2]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address2_line2"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_line2]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line2]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_line3]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address2_line3"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_line3]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line3]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_longitude]"
+                      cachedDataType="r8"
+                      cachedName="address2_longitude"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_longitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_longitude]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_name]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="address2_name"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_name]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_name]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_postalcode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="address2_postalcode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_postalcode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_postalcode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_postofficebox]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="address2_postofficebox"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_postofficebox]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_postofficebox]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_primarycontactname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="address2_primarycontactname"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_primarycontactname]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_primarycontactname]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_shippingmethodcode]"
+                      cachedDataType="i4"
+                      cachedName="address2_shippingmethodcode"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_shippingmethodcode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_shippingmethodcode]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_shippingmethodcodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="address2_shippingmethodcodename"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_shippingmethodcodename]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_shippingmethodcodename]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_stateorprovince]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address2_stateorprovince"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_stateorprovince]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_stateorprovince]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_telephone1]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address2_telephone1"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_telephone1]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone1]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_telephone2]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address2_telephone2"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_telephone2]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone2]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_telephone3]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="address2_telephone3"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_telephone3]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone3]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_upszone]"
+                      cachedDataType="wstr"
+                      cachedLength="4"
+                      cachedName="address2_upszone"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_upszone]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_upszone]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_utcoffset]"
+                      cachedDataType="i4"
+                      cachedName="address2_utcoffset"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_utcoffset]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_utcoffset]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_financialcity]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_financialcity"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialcity]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialcity]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_financialstate]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_financialstate"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstate]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstate]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_financialstreet1]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_financialstreet1"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstreet1]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet1]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_financialstreet2]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_financialstreet2"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstreet2]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet2]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_financialstreet3]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_financialstreet3"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstreet3]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet3]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_financialzip]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_financialzip"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialzip]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialzip]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[address2_composite]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="address2_composite"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_composite]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_composite]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[emailaddress1]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="emailaddress1"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[emailaddress1]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress1]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[emailaddress2]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="emailaddress2"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[emailaddress2]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress2]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[emailaddress3]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="emailaddress3"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[emailaddress3]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress3]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_address1_composite]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="new_address1_composite"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_address1_composite]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_address1_composite]" />
+                    <inputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_address2_composite]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="new_address2_composite"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_address2_composite]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_address2_composite]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_addressid]"
+                      dataType="guid"
+                      name="address1_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_addresstypecode]"
+                      dataType="i4"
+                      name="address1_addresstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_addresstypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_addresstypecodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="address1_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="address1_composite" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_country]"
+                      dataType="wstr"
+                      length="80"
+                      name="address1_country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_county]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_county" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_fax" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_freighttermscode]"
+                      dataType="i4"
+                      name="address1_freighttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_freighttermscodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_freighttermscodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_latitude]"
+                      dataType="r8"
+                      name="address1_latitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_line1]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_line2]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_line3]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_longitude]"
+                      dataType="r8"
+                      name="address1_longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="address1_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="address1_postalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      name="address1_postofficebox" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      name="address1_primarycontactname" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_shippingmethodcode]"
+                      dataType="i4"
+                      name="address1_shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_shippingmethodcodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_shippingmethodcodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_stateorprovince" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      name="address1_upszone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address1_utcoffset]"
+                      dataType="i4"
+                      name="address1_utcoffset" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_addressid]"
+                      dataType="guid"
+                      name="address2_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_addresstypecode]"
+                      dataType="i4"
+                      name="address2_addresstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_addresstypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_addresstypecodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="address2_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_country]"
+                      dataType="wstr"
+                      length="80"
+                      name="address2_country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_county]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_county" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_fax" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_freighttermscode]"
+                      dataType="i4"
+                      name="address2_freighttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_freighttermscodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_freighttermscodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_latitude]"
+                      dataType="r8"
+                      name="address2_latitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_line1]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_line2]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_line3]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_longitude]"
+                      dataType="r8"
+                      name="address2_longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="address2_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="address2_postalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      name="address2_postofficebox" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      name="address2_primarycontactname" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_shippingmethodcode]"
+                      dataType="i4"
+                      name="address2_shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_shippingmethodcodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_shippingmethodcodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_stateorprovince" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      name="address2_upszone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_utcoffset]"
+                      dataType="i4"
+                      name="address2_utcoffset" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialcity]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialcity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstate]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstreet1]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstreet2]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialstreet3]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_financialzip]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialzip" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[address2_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="address2_composite" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[emailaddress1]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[emailaddress2]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[emailaddress3]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_address1_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="new_address1_composite" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_address2_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="new_address2_composite" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Address Account Entity\Staging Address ODSIntake"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging Address ODSIntake"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CRM_AccountEntity_Address]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Address Account Entity\Staging Address ODSIntake.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[RowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[RowID]"
+                      name="RowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[accountid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[accountid]"
+                      name="accountid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addressid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_addressid]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addressid]"
+                      name="address1_addressid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addresstypecode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_addresstypecode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addresstypecode]"
+                      name="address1_addresstypecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addresstypecodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_addresstypecodename]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_addresstypecodename]"
+                      name="address1_addresstypecodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_city]"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_city]"
+                      name="address1_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_composite]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_composite]"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_composite]"
+                      name="address1_composite"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_country]"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_country]"
+                      name="address1_country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_county]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_county]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_county]"
+                      name="address1_county"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_fax]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_fax]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_fax]"
+                      name="address1_fax"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_freighttermscode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_freighttermscode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_freighttermscode]"
+                      name="address1_freighttermscode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_freighttermscodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_freighttermscodename]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_freighttermscodename]"
+                      name="address1_freighttermscodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_latitude]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_latitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_latitude]"
+                      name="address1_latitude"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_line1]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line1]"
+                      name="address1_line1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_line2]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line2]"
+                      name="address1_line2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_line3]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_line3]"
+                      name="address1_line3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_longitude]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_longitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_longitude]"
+                      name="address1_longitude"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_name]"
+                      length="200"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_name]"
+                      name="address1_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_postalcode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_postalcode]"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_postalcode]"
+                      name="address1_postalcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_postofficebox]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_postofficebox]"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_postofficebox]"
+                      name="address1_postofficebox"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_primarycontactname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_primarycontactname]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_primarycontactname]"
+                      name="address1_primarycontactname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_shippingmethodcode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_shippingmethodcode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_shippingmethodcode]"
+                      name="address1_shippingmethodcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_shippingmethodcodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_shippingmethodcodename]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_shippingmethodcodename]"
+                      name="address1_shippingmethodcodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_stateorprovince]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_stateorprovince]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_stateorprovince]"
+                      name="address1_stateorprovince"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_telephone1]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone1]"
+                      name="address1_telephone1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_telephone2]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone2]"
+                      name="address1_telephone2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_telephone3]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_telephone3]"
+                      name="address1_telephone3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_upszone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_upszone]"
+                      length="4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_upszone]"
+                      name="address1_upszone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_utcoffset]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_utcoffset]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address1_utcoffset]"
+                      name="address1_utcoffset"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addressid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_addressid]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addressid]"
+                      name="address2_addressid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addresstypecode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_addresstypecode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addresstypecode]"
+                      name="address2_addresstypecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addresstypecodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_addresstypecodename]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_addresstypecodename]"
+                      name="address2_addresstypecodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_city]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_city]"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_city]"
+                      name="address2_city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_country]"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_country]"
+                      name="address2_country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_county]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_county]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_county]"
+                      name="address2_county"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_fax]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_fax]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_fax]"
+                      name="address2_fax"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_freighttermscode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_freighttermscode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_freighttermscode]"
+                      name="address2_freighttermscode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_freighttermscodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_freighttermscodename]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_freighttermscodename]"
+                      name="address2_freighttermscodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_latitude]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_latitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_latitude]"
+                      name="address2_latitude"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_line1]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line1]"
+                      name="address2_line1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_line2]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line2]"
+                      name="address2_line2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_line3]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_line3]"
+                      name="address2_line3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_longitude]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_longitude]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_longitude]"
+                      name="address2_longitude"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_name]"
+                      length="200"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_name]"
+                      name="address2_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_postalcode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_postalcode]"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_postalcode]"
+                      name="address2_postalcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_postofficebox]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_postofficebox]"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_postofficebox]"
+                      name="address2_postofficebox"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_primarycontactname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_primarycontactname]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_primarycontactname]"
+                      name="address2_primarycontactname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_shippingmethodcode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_shippingmethodcode]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_shippingmethodcode]"
+                      name="address2_shippingmethodcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_shippingmethodcodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_shippingmethodcodename]"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_shippingmethodcodename]"
+                      name="address2_shippingmethodcodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_stateorprovince]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_stateorprovince]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_stateorprovince]"
+                      name="address2_stateorprovince"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_telephone1]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone1]"
+                      name="address2_telephone1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_telephone2]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone2]"
+                      name="address2_telephone2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_telephone3]"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_telephone3]"
+                      name="address2_telephone3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_upszone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_upszone]"
+                      length="4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_upszone]"
+                      name="address2_upszone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_utcoffset]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_utcoffset]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_utcoffset]"
+                      name="address2_utcoffset"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialcity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialcity]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialcity]"
+                      name="new_financialcity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstate]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstate]"
+                      name="new_financialstate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstreet1]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet1]"
+                      name="new_financialstreet1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstreet2]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet2]"
+                      name="new_financialstreet2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstreet3]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialstreet3]"
+                      name="new_financialstreet3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialzip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialzip]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_financialzip]"
+                      name="new_financialzip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_composite]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_composite]"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[address2_composite]"
+                      name="address2_composite"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress1]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[emailaddress1]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress1]"
+                      name="emailaddress1"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[emailaddress2]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress2]"
+                      name="emailaddress2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[emailaddress3]"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[emailaddress3]"
+                      name="emailaddress3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_address1_composite]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_address1_composite]"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_address1_composite]"
+                      name="new_address1_composite"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_address2_composite]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_address2_composite]"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].Columns[new_address2_composite]"
+                      name="new_address2_composite"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_addressid]"
+                      dataType="guid"
+                      name="address1_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_addresstypecode]"
+                      dataType="i4"
+                      name="address1_addresstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_addresstypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_addresstypecodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="address1_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="address1_composite" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_country]"
+                      dataType="wstr"
+                      length="80"
+                      name="address1_country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_county]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_county" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_fax" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_freighttermscode]"
+                      dataType="i4"
+                      name="address1_freighttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_freighttermscodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_freighttermscodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_latitude]"
+                      dataType="r8"
+                      name="address1_latitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_line1]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_line2]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_line3]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_longitude]"
+                      dataType="r8"
+                      name="address1_longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="address1_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="address1_postalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      name="address1_postofficebox" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      name="address1_primarycontactname" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_shippingmethodcode]"
+                      dataType="i4"
+                      name="address1_shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_shippingmethodcodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_shippingmethodcodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_stateorprovince" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      name="address1_upszone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address1_utcoffset]"
+                      dataType="i4"
+                      name="address1_utcoffset" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_addressid]"
+                      dataType="guid"
+                      name="address2_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_addresstypecode]"
+                      dataType="i4"
+                      name="address2_addresstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_addresstypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_addresstypecodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="address2_city" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_country]"
+                      dataType="wstr"
+                      length="80"
+                      name="address2_country" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_county]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_county" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_fax" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_freighttermscode]"
+                      dataType="i4"
+                      name="address2_freighttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_freighttermscodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_freighttermscodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_latitude]"
+                      dataType="r8"
+                      name="address2_latitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_line1]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_line2]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_line3]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_longitude]"
+                      dataType="r8"
+                      name="address2_longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="address2_name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="address2_postalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      name="address2_postofficebox" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      name="address2_primarycontactname" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_shippingmethodcode]"
+                      dataType="i4"
+                      name="address2_shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_shippingmethodcodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_shippingmethodcodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_stateorprovince" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      name="address2_upszone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_utcoffset]"
+                      dataType="i4"
+                      name="address2_utcoffset" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialcity]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialcity" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstate]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstreet1]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstreet2]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialstreet3]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_financialzip]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialzip" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[address2_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="address2_composite" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[emailaddress1]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress1" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[emailaddress2]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress2" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[emailaddress3]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress3" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_address1_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="new_address1_composite" />
+                    <externalMetadataColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_address2_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      name="new_address2_composite" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      name="RowID" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      dataType="guid"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      name="accountid" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_addressid]"
+                      dataType="guid"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_addressid]"
+                      name="address1_addressid" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_addresstypecode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_addresstypecode]"
+                      name="address1_addresstypecode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_addresstypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_addresstypecodename]"
+                      name="address1_addresstypecodename" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_city]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_city]"
+                      name="address1_city" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_composite]"
+                      name="address1_composite" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_country]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_country]"
+                      name="address1_country" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_county]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_county]"
+                      name="address1_county" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_fax]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_fax]"
+                      name="address1_fax" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_freighttermscode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_freighttermscode]"
+                      name="address1_freighttermscode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_freighttermscodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_freighttermscodename]"
+                      name="address1_freighttermscodename" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_latitude]"
+                      dataType="r8"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_latitude]"
+                      name="address1_latitude" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_line1]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_line1]"
+                      name="address1_line1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_line2]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_line2]"
+                      name="address1_line2" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_line3]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_line3]"
+                      name="address1_line3" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_longitude]"
+                      dataType="r8"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_longitude]"
+                      name="address1_longitude" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_name]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_name]"
+                      name="address1_name" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_postalcode]"
+                      name="address1_postalcode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_postofficebox]"
+                      name="address1_postofficebox" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_primarycontactname]"
+                      name="address1_primarycontactname" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_shippingmethodcode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_shippingmethodcode]"
+                      name="address1_shippingmethodcode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_shippingmethodcodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_shippingmethodcodename]"
+                      name="address1_shippingmethodcodename" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_stateorprovince]"
+                      name="address1_stateorprovince" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_telephone1]"
+                      name="address1_telephone1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_telephone2]"
+                      name="address1_telephone2" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_telephone3]"
+                      name="address1_telephone3" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_upszone]"
+                      name="address1_upszone" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_utcoffset]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address1_utcoffset]"
+                      name="address1_utcoffset" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_addressid]"
+                      dataType="guid"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_addressid]"
+                      name="address2_addressid" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_addresstypecode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_addresstypecode]"
+                      name="address2_addresstypecode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_addresstypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_addresstypecodename]"
+                      name="address2_addresstypecodename" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_city]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_city]"
+                      name="address2_city" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_country]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_country]"
+                      name="address2_country" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_county]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_county]"
+                      name="address2_county" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_fax]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_fax]"
+                      name="address2_fax" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_freighttermscode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_freighttermscode]"
+                      name="address2_freighttermscode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_freighttermscodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_freighttermscodename]"
+                      name="address2_freighttermscodename" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_latitude]"
+                      dataType="r8"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_latitude]"
+                      name="address2_latitude" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_line1]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_line1]"
+                      name="address2_line1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_line2]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_line2]"
+                      name="address2_line2" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_line3]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_line3]"
+                      name="address2_line3" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_longitude]"
+                      dataType="r8"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_longitude]"
+                      name="address2_longitude" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_name]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_name]"
+                      name="address2_name" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_postalcode]"
+                      name="address2_postalcode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_postofficebox]"
+                      name="address2_postofficebox" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_primarycontactname]"
+                      name="address2_primarycontactname" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_shippingmethodcode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_shippingmethodcode]"
+                      name="address2_shippingmethodcode" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_shippingmethodcodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_shippingmethodcodename]"
+                      name="address2_shippingmethodcodename" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_stateorprovince]"
+                      name="address2_stateorprovince" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_telephone1]"
+                      name="address2_telephone1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_telephone2]"
+                      name="address2_telephone2" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_telephone3]"
+                      name="address2_telephone3" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_upszone]"
+                      name="address2_upszone" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_utcoffset]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_utcoffset]"
+                      name="address2_utcoffset" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialcity]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialcity]"
+                      name="new_financialcity" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstate]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstate]"
+                      name="new_financialstate" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstreet1]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstreet1]"
+                      name="new_financialstreet1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstreet2]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstreet2]"
+                      name="new_financialstreet2" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstreet3]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialstreet3]"
+                      name="new_financialstreet3" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialzip]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_financialzip]"
+                      name="new_financialzip" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[address2_composite]"
+                      name="address2_composite" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[emailaddress1]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[emailaddress1]"
+                      name="emailaddress1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[emailaddress2]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[emailaddress2]"
+                      name="emailaddress2" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[emailaddress3]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[emailaddress3]"
+                      name="emailaddress3" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_address1_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_address1_composite]"
+                      name="new_address1_composite" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_address2_composite]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_address2_composite]"
+                      name="new_address2_composite" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Address Account Entity.Paths[OLE DB Source Output]"
+              endId="Package\Load Address Account Entity\Staging Address DynamicsODS.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Address Account Entity\Staging Address ODSIntake.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="213,42"
+          Id="Package\Load Address Account Entity"
+          TopLeft="285,103" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Address Account Entity">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Load Address Account Entity\Staging Address ODSIntake"
+          TopLeft="201,71" />
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Load Address Account Entity\Staging Address DynamicsODS"
+          TopLeft="318,190" />
+        <EdgeLayout
+          Id="Package\Load Address Account Entity.Paths[OLE DB Source Output]"
+          TopLeft="305.5,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="124.5,77"
+              Start="0,0"
+              End="124.5,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.5"
+                    Point2="0,38.5"
+                    Point3="4,38.5" />
+                  <mssgle:LineSegment
+                    End="120.5,38.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="120.5,38.5"
+                    Point2="124.5,38.5"
+                    Point3="124.5,42.5" />
+                  <mssgle:LineSegment
+                    End="124.5,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Address Account Entity\Staging Address DynamicsODS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Address Account Entity\Staging Address ODSIntake">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

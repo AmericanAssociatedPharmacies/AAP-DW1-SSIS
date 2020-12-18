@@ -1,0 +1,1390 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2019 9:35:03 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{68336D8C-297B-4F64-9634-403BC4A4B9C9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="DynamicsODS_Staging_AccountEntity_CAH_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="10"
+  DTS:VersionGUID="{73C78144-D58E-4D8E-91F2-C3FD159956F6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B636987B-2C40-4DC5-A827-A438CD06DB3C}"
+      DTS:ObjectName="AAPDW1.DynamicsODS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=DynamicsODS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{48C7F74F-9EFD-4C42-AB53-865657EE9763}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load CAH Account Entity"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{910674B3-B9B7-41B0-904C-C9D0A1DEBEC3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load CAH Account Entity"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Staging CAH DynamicsODS"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CRM_AccountEntity_CAH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[accountid]"
+                      cachedDataType="guid"
+                      cachedName="accountid"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[accountid]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_account]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cah_account"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_account]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_avg_volume]"
+                      cachedDataType="i4"
+                      cachedName="new_cah_avg_volume"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_avg_volume]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_avg_volume]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_cog]"
+                      cachedDataType="numeric"
+                      cachedName="new_cah_cog"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_cog]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_cog]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_dso]"
+                      cachedDataType="numeric"
+                      cachedName="new_cah_dso"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_dso]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_dso]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_potential_volume]"
+                      cachedDataType="i4"
+                      cachedName="new_cah_potential_volume"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_potential_volume]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_potential_volume]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_terms]"
+                      cachedDataType="i4"
+                      cachedName="new_cah_terms"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_terms]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_terms]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_termsname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cah_termsname"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_termsname]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_termsname]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvacontractdate]"
+                      cachedDataType="dbDate"
+                      cachedName="new_cahpvacontractdate"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvacontractdate]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvacontractdate]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvaeffdatenewagreement]"
+                      cachedDataType="dbDate"
+                      cachedName="new_cahpvaeffdatenewagreement"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvaeffdatenewagreement]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvaeffdatenewagreement]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvalastreview]"
+                      cachedDataType="dbDate"
+                      cachedName="new_cahpvalastreview"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvalastreview]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvalastreview]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvamatrix]"
+                      cachedDataType="i4"
+                      cachedName="new_cahpvamatrix"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvamatrix]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvamatrix]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvamatrixname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cahpvamatrixname"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvamatrixname]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvamatrixname]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvareviewtype]"
+                      cachedDataType="i4"
+                      cachedName="new_cahpvareviewtype"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvareviewtype]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvareviewtype]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvareviewtypename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cahpvareviewtypename"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvareviewtypename]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvareviewtypename]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvastatus]"
+                      cachedDataType="i4"
+                      cachedName="new_cahpvastatus"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvastatus]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvastatus]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvastatusname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cahpvastatusname"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvastatusname]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvastatusname]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvatermcode]"
+                      cachedDataType="i4"
+                      cachedName="new_cahpvatermcode"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermcode]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcode]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvatermcodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cahpvatermcodename"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermcodename]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcodename]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvatermcomment]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cahpvatermcomment"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermcomment]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcomment]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahpvatermdate]"
+                      cachedDataType="dbDate"
+                      cachedName="new_cahpvatermdate"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermdate]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermdate]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_account2]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cah_account2"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_account2]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account2]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cah_account3]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cah_account3"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_account3]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account3]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahcsosaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahcsosaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahcsosaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahcsosaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahposaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahposaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahposaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahposaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahstaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_cahstaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahstaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahstaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahdepositaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahdepositaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahdepositaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahdepositaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahdmeaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahdmeaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahdmeaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahdmeaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahotcaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahotcaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahotcaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahotcaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahspecialtyaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahspecialtyaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahspecialtyaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahspecialtyaccount]" />
+                    <inputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].Columns[new_cahcomboaccount]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_cahcomboaccount"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahcomboaccount]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahcomboaccount]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_avg_volume]"
+                      dataType="i4"
+                      name="new_cah_avg_volume" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_cog]"
+                      dataType="numeric"
+                      name="new_cah_cog"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_dso]"
+                      dataType="numeric"
+                      name="new_cah_dso"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_potential_volume]"
+                      dataType="i4"
+                      name="new_cah_potential_volume" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_terms]"
+                      dataType="i4"
+                      name="new_cah_terms" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_termsname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cah_termsname" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvacontractdate]"
+                      dataType="dbDate"
+                      name="new_cahpvacontractdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvaeffdatenewagreement]"
+                      dataType="dbDate"
+                      name="new_cahpvaeffdatenewagreement" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvalastreview]"
+                      dataType="dbDate"
+                      name="new_cahpvalastreview" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvamatrix]"
+                      dataType="i4"
+                      name="new_cahpvamatrix" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvamatrixname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvamatrixname" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvareviewtype]"
+                      dataType="i4"
+                      name="new_cahpvareviewtype" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvareviewtypename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvareviewtypename" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvastatus]"
+                      dataType="i4"
+                      name="new_cahpvastatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvastatusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvastatusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermcode]"
+                      dataType="i4"
+                      name="new_cahpvatermcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermcodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvatermcodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermcomment]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvatermcomment" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahpvatermdate]"
+                      dataType="dbDate"
+                      name="new_cahpvatermdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_account2]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account2" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cah_account3]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account3" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahcsosaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahcsosaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahposaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahposaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahstaccount]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahstaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahdepositaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahdepositaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahdmeaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahdmeaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahotcaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahotcaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahspecialtyaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahspecialtyaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input].ExternalColumns[new_cahcomboaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahcomboaccount" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load CAH Account Entity\Staging CAH ODSIntake"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging CAH ODSIntake"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CRM_AccountEntity_CAH]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[RowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[RowID]"
+                      name="RowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[accountid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[accountid]"
+                      name="accountid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_account]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account]"
+                      name="new_cah_account"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_avg_volume]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_avg_volume]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_avg_volume]"
+                      name="new_cah_avg_volume"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_cog]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_cog]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_cog]"
+                      name="new_cah_cog"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_dso]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_dso]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_dso]"
+                      name="new_cah_dso"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_potential_volume]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_potential_volume]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_potential_volume]"
+                      name="new_cah_potential_volume"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_terms]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_terms]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_terms]"
+                      name="new_cah_terms"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_termsname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_termsname]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_termsname]"
+                      name="new_cah_termsname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvacontractdate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvacontractdate]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvacontractdate]"
+                      name="new_cahpvacontractdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvaeffdatenewagreement]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvaeffdatenewagreement]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvaeffdatenewagreement]"
+                      name="new_cahpvaeffdatenewagreement"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvalastreview]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvalastreview]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvalastreview]"
+                      name="new_cahpvalastreview"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvamatrix]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvamatrix]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvamatrix]"
+                      name="new_cahpvamatrix"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvamatrixname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvamatrixname]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvamatrixname]"
+                      name="new_cahpvamatrixname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvareviewtype]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvareviewtype]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvareviewtype]"
+                      name="new_cahpvareviewtype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvareviewtypename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvareviewtypename]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvareviewtypename]"
+                      name="new_cahpvareviewtypename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvastatus]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvastatus]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvastatus]"
+                      name="new_cahpvastatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvastatusname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvastatusname]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvastatusname]"
+                      name="new_cahpvastatusname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermcode]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcode]"
+                      name="new_cahpvatermcode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermcodename]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcodename]"
+                      name="new_cahpvatermcodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcomment]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermcomment]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermcomment]"
+                      name="new_cahpvatermcomment"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermdate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermdate]"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahpvatermdate]"
+                      name="new_cahpvatermdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account2]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_account2]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account2]"
+                      name="new_cah_account2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account3]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_account3]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cah_account3]"
+                      name="new_cah_account3"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahcsosaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahcsosaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahcsosaccount]"
+                      name="new_cahcsosaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahposaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahposaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahposaccount]"
+                      name="new_cahposaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahstaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahstaccount]"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahstaccount]"
+                      name="new_cahstaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahdepositaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahdepositaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahdepositaccount]"
+                      name="new_cahdepositaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahdmeaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahdmeaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahdmeaccount]"
+                      name="new_cahdmeaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahotcaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahotcaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahotcaccount]"
+                      name="new_cahotcaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahspecialtyaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahspecialtyaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahspecialtyaccount]"
+                      name="new_cahspecialtyaccount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahcomboaccount]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahcomboaccount]"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].Columns[new_cahcomboaccount]"
+                      name="new_cahcomboaccount"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_avg_volume]"
+                      dataType="i4"
+                      name="new_cah_avg_volume" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_cog]"
+                      dataType="numeric"
+                      name="new_cah_cog"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_dso]"
+                      dataType="numeric"
+                      name="new_cah_dso"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_potential_volume]"
+                      dataType="i4"
+                      name="new_cah_potential_volume" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_terms]"
+                      dataType="i4"
+                      name="new_cah_terms" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_termsname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cah_termsname" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvacontractdate]"
+                      dataType="dbDate"
+                      name="new_cahpvacontractdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvaeffdatenewagreement]"
+                      dataType="dbDate"
+                      name="new_cahpvaeffdatenewagreement" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvalastreview]"
+                      dataType="dbDate"
+                      name="new_cahpvalastreview" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvamatrix]"
+                      dataType="i4"
+                      name="new_cahpvamatrix" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvamatrixname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvamatrixname" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvareviewtype]"
+                      dataType="i4"
+                      name="new_cahpvareviewtype" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvareviewtypename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvareviewtypename" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvastatus]"
+                      dataType="i4"
+                      name="new_cahpvastatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvastatusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvastatusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermcode]"
+                      dataType="i4"
+                      name="new_cahpvatermcode" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermcodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvatermcodename" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermcomment]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvatermcomment" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahpvatermdate]"
+                      dataType="dbDate"
+                      name="new_cahpvatermdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_account2]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account2" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cah_account3]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account3" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahcsosaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahcsosaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahposaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahposaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahstaccount]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahstaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahdepositaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahdepositaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahdmeaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahdmeaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahotcaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahotcaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahspecialtyaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahspecialtyaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output].ExternalColumns[new_cahcomboaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahcomboaccount" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      name="RowID" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      dataType="guid"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      name="accountid" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_account]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_account]"
+                      name="new_cah_account" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_avg_volume]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_avg_volume]"
+                      name="new_cah_avg_volume" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_cog]"
+                      dataType="numeric"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_cog]"
+                      name="new_cah_cog"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_dso]"
+                      dataType="numeric"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_dso]"
+                      name="new_cah_dso"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_potential_volume]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_potential_volume]"
+                      name="new_cah_potential_volume" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_terms]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_terms]"
+                      name="new_cah_terms" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_termsname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_termsname]"
+                      name="new_cah_termsname" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvacontractdate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvacontractdate]"
+                      name="new_cahpvacontractdate" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvaeffdatenewagreement]"
+                      dataType="dbDate"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvaeffdatenewagreement]"
+                      name="new_cahpvaeffdatenewagreement" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvalastreview]"
+                      dataType="dbDate"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvalastreview]"
+                      name="new_cahpvalastreview" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvamatrix]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvamatrix]"
+                      name="new_cahpvamatrix" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvamatrixname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvamatrixname]"
+                      name="new_cahpvamatrixname" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvareviewtype]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvareviewtype]"
+                      name="new_cahpvareviewtype" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvareviewtypename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvareviewtypename]"
+                      name="new_cahpvareviewtypename" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvastatus]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvastatus]"
+                      name="new_cahpvastatus" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvastatusname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvastatusname]"
+                      name="new_cahpvastatusname" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermcode]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermcode]"
+                      name="new_cahpvatermcode" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermcodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermcodename]"
+                      name="new_cahpvatermcodename" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermcomment]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermcomment]"
+                      name="new_cahpvatermcomment" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermdate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahpvatermdate]"
+                      name="new_cahpvatermdate" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_account2]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_account2]"
+                      name="new_cah_account2" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_account3]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cah_account3]"
+                      name="new_cah_account3" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahcsosaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahcsosaccount]"
+                      name="new_cahcsosaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahposaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahposaccount]"
+                      name="new_cahposaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahstaccount]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahstaccount]"
+                      name="new_cahstaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahdepositaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahdepositaccount]"
+                      name="new_cahdepositaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahdmeaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahdmeaccount]"
+                      name="new_cahdmeaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahotcaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahotcaccount]"
+                      name="new_cahotcaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahspecialtyaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahspecialtyaccount]"
+                      name="new_cahspecialtyaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahcomboaccount]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[new_cahcomboaccount]"
+                      name="new_cahcomboaccount" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load CAH Account Entity.Paths[OLE DB Source Output]"
+              endId="Package\Load CAH Account Entity\Staging CAH DynamicsODS.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load CAH Account Entity\Staging CAH ODSIntake.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="196,42"
+          Id="Package\Load CAH Account Entity"
+          TopLeft="285,103" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load CAH Account Entity">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Load CAH Account Entity\Staging CAH ODSIntake"
+          TopLeft="201,71" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\Load CAH Account Entity\Staging CAH DynamicsODS"
+          TopLeft="282,183" />
+        <EdgeLayout
+          Id="Package\Load CAH Account Entity.Paths[OLE DB Source Output]"
+          TopLeft="297,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="88.5,70"
+              Start="0,0"
+              End="88.5,62.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31"
+                    Point2="0,35"
+                    Point3="4,35" />
+                  <mssgle:LineSegment
+                    End="84.5,35" />
+                  <mssgle:CubicBezierSegment
+                    Point1="84.5,35"
+                    Point2="88.5,35"
+                    Point3="88.5,39" />
+                  <mssgle:LineSegment
+                    End="88.5,62.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CAH Account Entity\Staging CAH DynamicsODS">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load CAH Account Entity\Staging CAH ODSIntake">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
