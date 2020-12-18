@@ -1,0 +1,598 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/24/2018 12:54:01 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{EBCC3BCF-8AB2-49EC-95C0-90EDBCEFB989}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Dynamics_Staging_VendorAccts_PharmacyMaster_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{C955A48A-2E97-4CA5-A5AF-83BD465DA67E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.PharmacyMaster]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E9D788A0-5928-4D2E-9EF7-813388314DA8}"
+      DTS:ObjectName="AAPDW1.PharmacyMaster">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=PharmacyMaster;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Staging PM_VendorAccts"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{A8CE4F33-8A71-45F2-94A1-EA42F21DB1A9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Staging PM_VendorAccts"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Staging PM_VendorAccts\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[PM_VendorAccts]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.PharmacyMaster]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.PharmacyMaster]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PMID]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="PMID"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PMID]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VendorID]"
+                      cachedDataType="i4"
+                      cachedName="VendorID"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VendorID]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[VendorID]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsPrimary]"
+                      cachedDataType="i4"
+                      cachedName="IsPrimary"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isPrimary]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPrimary]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VendAcctNum]"
+                      cachedDataType="i4"
+                      cachedName="VendAcctNum"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VendAcctNum]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[VendAcctNum]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PVA]"
+                      cachedDataType="i4"
+                      cachedName="PVA"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PVA]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PVA]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PaymentTerms]"
+                      cachedDataType="i4"
+                      cachedName="PaymentTerms"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaymentTerms]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentTerms]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Source]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="3"
+                      cachedName="Source"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Source]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]" />
+                    <inputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PVAEffectiveDate]"
+                      cachedDataType="i4"
+                      cachedName="PVAEffectiveDate"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PVAEffectiveDate]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PVAEffectiveDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PMID]"
+                      dataType="i4"
+                      name="PMID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VendorID]"
+                      dataType="i4"
+                      name="VendorID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isPrimary]"
+                      dataType="i4"
+                      name="isPrimary" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VendAcctNum]"
+                      codePage="1252"
+                      dataType="str"
+                      length="32"
+                      name="VendAcctNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PVA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="30"
+                      name="PVA" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PaymentTerms]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="PaymentTerms" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Source" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PVAEffectiveDate]"
+                      dataType="dbTimeStamp"
+                      name="PVAEffectiveDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Created]"
+                      dataType="dbTimeStamp"
+                      name="Created" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Modified]"
+                      dataType="dbTimeStamp"
+                      name="Modified" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowVersion]"
+                      dataType="i4"
+                      name="RowVersion" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Staging PM_VendorAccts\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT PMID, VendorID, IsPrimary, [VendAcctNum], PVA, PaymentTerms, Source, PVAEffectiveDate
+FROM Staging.vw_VendorAccts
+--WHERE PMID IS NOT NULL</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.PharmacyMaster]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.PharmacyMaster]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PMID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                      length="100"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PMID]"
+                      name="PMID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[VendorID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VendorID]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[VendorID]"
+                      name="VendorID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPrimary]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPrimary]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPrimary]"
+                      name="IsPrimary"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[VendAcctNum]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VendAcctNum]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[VendAcctNum]"
+                      name="VendAcctNum"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PVA]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PVA]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PVA]"
+                      name="PVA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentTerms]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PaymentTerms]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PaymentTerms]"
+                      name="PaymentTerms"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                      length="3"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[Source]"
+                      name="Source"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PVAEffectiveDate]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PVAEffectiveDate]"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].Columns[PVAEffectiveDate]"
+                      name="PVAEffectiveDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PMID]"
+                      dataType="wstr"
+                      length="100"
+                      name="PMID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VendorID]"
+                      dataType="i4"
+                      name="VendorID" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPrimary]"
+                      dataType="i4"
+                      name="IsPrimary" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[VendAcctNum]"
+                      dataType="i4"
+                      name="VendAcctNum" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PVA]"
+                      dataType="i4"
+                      name="PVA" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PaymentTerms]"
+                      dataType="i4"
+                      name="PaymentTerms" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      name="Source" />
+                    <externalMetadataColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PVAEffectiveDate]"
+                      dataType="i4"
+                      name="PVAEffectiveDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PMID]"
+                      name="PMID" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VendorID]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VendorID]"
+                      name="VendorID" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPrimary]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPrimary]"
+                      name="IsPrimary" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VendAcctNum]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[VendAcctNum]"
+                      name="VendAcctNum" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PVA]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PVA]"
+                      name="PVA" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PaymentTerms]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PaymentTerms]"
+                      name="PaymentTerms" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Source]"
+                      codePage="1252"
+                      dataType="str"
+                      length="3"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Source]"
+                      name="Source" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PVAEffectiveDate]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PVAEffectiveDate]"
+                      name="PVAEffectiveDate" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Staging PM_VendorAccts.Paths[OLE DB Source Output]"
+              endId="Package\Load Staging PM_VendorAccts\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Staging PM_VendorAccts\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="221,42"
+          Id="Package\Load Staging PM_VendorAccts"
+          TopLeft="486,124" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Staging PM_VendorAccts">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Load Staging PM_VendorAccts\OLE DB Source"
+          TopLeft="400,140" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Load Staging PM_VendorAccts\OLE DB Destination"
+          TopLeft="465,265" />
+        <EdgeLayout
+          Id="Package\Load Staging PM_VendorAccts.Paths[OLE DB Source Output]"
+          TopLeft="475,182">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="75.5,83"
+              Start="0,0"
+              End="75.5,75.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.5"
+                    Point2="0,41.5"
+                    Point3="4,41.5" />
+                  <mssgle:LineSegment
+                    End="71.5,41.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="71.5,41.5"
+                    Point2="75.5,41.5"
+                    Point3="75.5,45.5" />
+                  <mssgle:LineSegment
+                    End="75.5,75.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging PM_VendorAccts\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Staging PM_VendorAccts\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

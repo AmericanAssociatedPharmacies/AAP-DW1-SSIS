@@ -1,0 +1,2153 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/4/2018 12:44:10 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{3231086D-E304-4D81-B2BF-9D7CC65DC2CC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Dynamics_AccountEntity_Update_GenericLoyaltyTrend"
+  DTS:PackageType="5"
+  DTS:VersionBuild="70"
+  DTS:VersionGUID="{F91848B9-842E-4B72-848A-3BD9097D3C06}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{C8678A72-8124-48CE-BDF3-13ACEC7B1A81}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:PropertyExpression
+        DTS:Name="ServerName">@[User::varServerName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.Reports]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{B79C48D4-ED2B-4239-B2B8-CAD6D2F18B3D}"
+      DTS:ObjectName="AAPDW1.Reports">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=Reports;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{48DF3523-BE1B-4722-9DCE-08D95B1BF348}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varServerName">
+      <DTS:VariableValue
+        DTS:DataType="8">AAPDW1</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Update CRM"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B5768ED0-AD84-4EF2-8DF1-474330ED12EC}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update CRM"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Update CRM\Dynamics CRM Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Populates Dynamics CRM destination entity.; COZYROC LLC; SSIS+; © 2006-2018 COZYROC LLC; All Rights Reserved; http://www.cozyroc.com/;0"
+              description="Populates Dynamics CRM destination entity."
+              name="Dynamics CRM Destination"
+              usesDispositions="true">
+              <properties>
+                <property
+                  dataType="System.Null"
+                  description="Populates Dynamics CRM destination entity."
+                  name="ComponentObject"
+                  typeConverter="NOTBROWSABLE" />
+                <property
+                  dataType="System.String"
+                  name="DtsComponentDesigner"
+                  typeConverter="NOTBROWSABLE">CozyRoc.SqlServer.SSIS.CrmDestinationDesigner, CozyRoc.SSISPlus.UI.2012, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=16cf490bb80c34ea</property>
+                <property
+                  dataType="System.String"
+                  description="Destination entity to load."
+                  expressionType="Notify"
+                  name="DestinationEntity"
+                  typeConverter="CozyRoc.SqlServer.SSIS.TableEditor, CozyRoc.SSISPlus.UI.2012, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=16cf490bb80c34ea">account</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies destination action type."
+                  name="Action"
+                  typeConverter="CozyRoc.SqlServer.SSIS.CrmDestination+ActionTypes, CozyRoc.SSISPlus.2012, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16cf490bb80c34ea">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies if missing object identifiers are ignored."
+                  name="IgnoreMissingIdentifier">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies if duplicate detection rules are active during create or update."
+                  name="DetectDuplicate">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of rows to be sent as a batch to the service."
+                  name="BatchSize">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how to handle multiple match records."
+                  name="MultipleMatch"
+                  typeConverter="CozyRoc.Dynamics.Crm.UpsertMulti, CozyRoc.SSISPlus.2012, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16cf490bb80c34ea">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies if unchanged attributes are ignored."
+                  name="IgnoreUnchanged">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies records matching criteria for Upsert action."
+                  name="UpsertMatch"
+                  typeConverter="CozyRoc.Dynamics.Crm.UpsertMatch, CozyRoc.SSISPlus.2012, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16cf490bb80c34ea">1</property>
+                <property
+                  dataType="System.String"
+                  description="Select alternate keys to match records for Upsert action."
+                  name="UpsertAlternateKeys"
+                  UITypeEditor="CozyRoc.SqlServer.SSIS.ListEditor, CozyRoc.SSISPlus.UI.2012, Version=1.0.0.0, Culture=Neutral, PublicKeyToken=16cf490bb80c34ea">accountid</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies to ignore columns containing NULL value."
+                  name="IgnoreNullValue">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">CozyRoc.SqlServer.SSIS.CrmDestination, CozyRoc.SSISPlus.2012, Version=1.0.0.0, Culture=neutral, PublicKeyToken=16cf490bb80c34ea</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Update CRM\Dynamics CRM Destination.Connections[DYNAMICS-CRM]"
+                  connectionManagerID="{376553AA-B203-4D40-9731-C05296DE4078}:invalid"
+                  connectionManagerRefId="{376553AA-B203-4D40-9731-C05296DE4078}:invalid"
+                  description="Dynamics CRM Connection"
+                  name="DYNAMICS-CRM" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Dynamics CRM Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].Columns[accountid]"
+                      cachedDataType="guid"
+                      cachedName="accountid"
+                      externalMetadataColumnId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[accountid]"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[accountid]" />
+                    <inputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].Columns[new_apigenericsytd]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="25"
+                      cachedName="new_apigenericsytd"
+                      externalMetadataColumnId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsytd]"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[new_apigenericsytd]" />
+                    <inputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].Columns[MaxPurchaseDate]"
+                      cachedDataType="dbDate"
+                      cachedName="MaxPurchaseDate"
+                      externalMetadataColumnId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apilastorder]"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[MaxPurchaseDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[accountcategorycode]"
+                      dataType="i4"
+                      name="accountcategorycode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[accountclassificationcode]"
+                      dataType="i4"
+                      name="accountclassificationcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[accountnumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="accountnumber" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[accountratingcode]"
+                      dataType="i4"
+                      name="accountratingcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_addressid]"
+                      dataType="guid"
+                      name="address1_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_addresstypecode]"
+                      dataType="i4"
+                      name="address1_addresstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="address1_city" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_country]"
+                      dataType="wstr"
+                      length="80"
+                      name="address1_country" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_county]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_county" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_fax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_freighttermscode]"
+                      dataType="i4"
+                      name="address1_freighttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_latitude]"
+                      dataType="r8"
+                      name="address1_latitude" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_line1]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_line2]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_line3]"
+                      dataType="wstr"
+                      length="250"
+                      name="address1_line3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_longitude]"
+                      dataType="r8"
+                      name="address1_longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="address1_name" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="address1_postalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      name="address1_postofficebox" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      name="address1_primarycontactname" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_shippingmethodcode]"
+                      dataType="i4"
+                      name="address1_shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_stateorprovince" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="address1_telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      name="address1_upszone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address1_utcoffset]"
+                      dataType="i4"
+                      name="address1_utcoffset" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_addressid]"
+                      dataType="guid"
+                      name="address2_addressid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_addresstypecode]"
+                      dataType="i4"
+                      name="address2_addresstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_city]"
+                      dataType="wstr"
+                      length="80"
+                      name="address2_city" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_country]"
+                      dataType="wstr"
+                      length="80"
+                      name="address2_country" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_county]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_county" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_fax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_freighttermscode]"
+                      dataType="i4"
+                      name="address2_freighttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_latitude]"
+                      dataType="r8"
+                      name="address2_latitude" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_line1]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_line2]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_line3]"
+                      dataType="wstr"
+                      length="250"
+                      name="address2_line3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_longitude]"
+                      dataType="r8"
+                      name="address2_longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_name]"
+                      dataType="wstr"
+                      length="200"
+                      name="address2_name" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_postalcode]"
+                      dataType="wstr"
+                      length="20"
+                      name="address2_postalcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_postofficebox]"
+                      dataType="wstr"
+                      length="20"
+                      name="address2_postofficebox" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_primarycontactname]"
+                      dataType="wstr"
+                      length="100"
+                      name="address2_primarycontactname" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_shippingmethodcode]"
+                      dataType="i4"
+                      name="address2_shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_stateorprovince]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_stateorprovince" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="address2_telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_upszone]"
+                      dataType="wstr"
+                      length="4"
+                      name="address2_upszone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[address2_utcoffset]"
+                      dataType="i4"
+                      name="address2_utcoffset" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[businesstypecode]"
+                      dataType="i4"
+                      name="businesstypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[creditlimit]"
+                      dataType="cy"
+                      name="creditlimit" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[creditonhold]"
+                      dataType="bool"
+                      name="creditonhold" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[customersizecode]"
+                      dataType="i4"
+                      name="customersizecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[customertypecode]"
+                      dataType="i4"
+                      name="customertypecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[defaultpricelevelid]"
+                      dataType="guid"
+                      name="defaultpricelevelid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[description]"
+                      dataType="nText"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotbulkemail]"
+                      dataType="bool"
+                      name="donotbulkemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotbulkpostalmail]"
+                      dataType="bool"
+                      name="donotbulkpostalmail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotemail]"
+                      dataType="bool"
+                      name="donotemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotfax]"
+                      dataType="bool"
+                      name="donotfax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotphone]"
+                      dataType="bool"
+                      name="donotphone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotpostalmail]"
+                      dataType="bool"
+                      name="donotpostalmail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[donotsendmm]"
+                      dataType="bool"
+                      name="donotsendmm" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[emailaddress1]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[emailaddress2]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[emailaddress3]"
+                      dataType="wstr"
+                      length="100"
+                      name="emailaddress3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[entityimage]"
+                      dataType="image"
+                      name="entityimage" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[fax]"
+                      dataType="wstr"
+                      length="50"
+                      name="fax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[followemail]"
+                      dataType="bool"
+                      name="followemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[ftpsiteurl]"
+                      dataType="wstr"
+                      length="200"
+                      name="ftpsiteurl" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[importsequencenumber]"
+                      dataType="i4"
+                      name="importsequencenumber" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[industrycode]"
+                      dataType="i4"
+                      name="industrycode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[lastonholdtime]"
+                      dataType="dbTimeStamp"
+                      name="lastonholdtime" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[marketcap]"
+                      dataType="cy"
+                      name="marketcap" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[marketingonly]"
+                      dataType="bool"
+                      name="marketingonly" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[name]"
+                      dataType="wstr"
+                      length="160"
+                      name="name" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_2019eligible]"
+                      dataType="bool"
+                      name="new_2019eligible" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aap_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_aap_account" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aap_effective_date]"
+                      dataType="dbDate"
+                      name="new_aap_effective_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aap_resignation_reason]"
+                      dataType="i4"
+                      name="new_aap_resignation_reason" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aapmembershiptype]"
+                      dataType="i4"
+                      name="new_aapmembershiptype" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aapparenttext]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_aapparenttext" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aapquit]"
+                      dataType="dbDate"
+                      name="new_aapquit" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aapstatus]"
+                      dataType="i4"
+                      name="new_aapstatus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aaptermnotice]"
+                      dataType="dbDate"
+                      name="new_aaptermnotice" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_account_subtype]"
+                      dataType="i4"
+                      name="new_account_subtype" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_affiliate]"
+                      dataType="i4"
+                      name="new_affiliate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_affiliateactive]"
+                      dataType="dbDate"
+                      name="new_affiliateactive" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_affiliateend]"
+                      dataType="dbDate"
+                      name="new_affiliateend" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_affiliategroup]"
+                      dataType="i4"
+                      name="new_affiliategroup" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_api_account" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_app_credit_date]"
+                      dataType="dbDate"
+                      name="new_api_app_credit_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_app_status]"
+                      dataType="i4"
+                      name="new_api_app_status" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_approved_date]"
+                      dataType="dbDate"
+                      name="new_api_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_csos_approved_date]"
+                      dataType="dbDate"
+                      name="new_api_csos_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_csos_declined_date]"
+                      dataType="dbDate"
+                      name="new_api_csos_declined_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_csos_installed_date]"
+                      dataType="dbDate"
+                      name="new_api_csos_installed_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_csos_profile_received_date]"
+                      dataType="dbDate"
+                      name="new_api_csos_profile_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_cutoff]"
+                      dataType="i4"
+                      name="new_api_cutoff" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_order_method]"
+                      dataType="i4"
+                      name="new_api_order_method" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_photos_received_date]"
+                      dataType="dbDate"
+                      name="new_api_photos_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_api_terms]"
+                      dataType="i4"
+                      name="new_api_terms" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiaccountactivation]"
+                      dataType="dbDate"
+                      name="new_apiaccountactivation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apialert]"
+                      dataType="i4"
+                      name="new_apialert" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apibrands]"
+                      dataType="i4"
+                      name="new_apibrands" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apicreditalert]"
+                      dataType="i4"
+                      name="new_apicreditalert" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apicreditlimit]"
+                      dataType="i4"
+                      name="new_apicreditlimit" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apicsosalert]"
+                      dataType="i4"
+                      name="new_apicsosalert" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apicsosstatus]"
+                      dataType="i4"
+                      name="new_apicsosstatus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apideactivation]"
+                      dataType="dbDate"
+                      name="new_apideactivation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apidefaultshipping]"
+                      dataType="i4"
+                      name="new_apidefaultshipping" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apifirstorder]"
+                      dataType="dbDate"
+                      name="new_apifirstorder" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apifreight]"
+                      dataType="i4"
+                      name="new_apifreight" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenerics]"
+                      dataType="i4"
+                      name="new_apigenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsq1]"
+                      dataType="decimal"
+                      name="new_apigenericsq1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsq2]"
+                      dataType="decimal"
+                      name="new_apigenericsq2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsq3]"
+                      dataType="decimal"
+                      name="new_apigenericsq3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsq4]"
+                      dataType="decimal"
+                      name="new_apigenericsq4" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsrecommendation]"
+                      dataType="i4"
+                      name="new_apigenericsrecommendation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsupdatefrequency]"
+                      dataType="i4"
+                      name="new_apigenericsupdatefrequency" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apigenericsytd]"
+                      dataType="decimal"
+                      name="new_apigenericsytd" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiinactivedate]"
+                      dataType="dbDate"
+                      name="new_apiinactivedate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apilastorder]"
+                      dataType="dbDate"
+                      name="new_apilastorder" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apimot]"
+                      dataType="i4"
+                      name="new_apimot" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apinumberreactivations]"
+                      dataType="wstr"
+                      length="2"
+                      name="new_apinumberreactivations" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apioriginalactivation]"
+                      dataType="dbDate"
+                      name="new_apioriginalactivation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiotcs]"
+                      dataType="i4"
+                      name="new_apiotcs" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiparent]"
+                      dataType="guid"
+                      name="new_apiparent" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apipaymentmethod]"
+                      dataType="i4"
+                      name="new_apipaymentmethod" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apipaymentmethodprofileform]"
+                      dataType="i4"
+                      name="new_apipaymentmethodprofileform" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apipriority]"
+                      dataType="i4"
+                      name="new_apipriority" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apipurchasegoal]"
+                      dataType="wstr"
+                      length="200"
+                      name="new_apipurchasegoal" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apipurchasesdaterange]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apipurchasesdaterange" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiquestionniare]"
+                      dataType="i4"
+                      name="new_apiquestionniare" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiquitdate]"
+                      dataType="dbDate"
+                      name="new_apiquitdate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apirecommendationdate]"
+                      dataType="dbDate"
+                      name="new_apirecommendationdate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apirefrigerated]"
+                      dataType="bool"
+                      name="new_apirefrigerated" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apistatus]"
+                      dataType="i4"
+                      name="new_apistatus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apitotals]"
+                      dataType="i4"
+                      name="new_apitotals" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_apiwarehouse]"
+                      dataType="i4"
+                      name="new_apiwarehouse" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_aplicor]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_aplicor" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_applicationfeedate]"
+                      dataType="dbDate"
+                      name="new_applicationfeedate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_applicationreceived]"
+                      dataType="dbDate"
+                      name="new_applicationreceived" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_at_risk]"
+                      dataType="i4"
+                      name="new_at_risk" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_authorized_voter]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_authorized_voter" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_authorizedsignature]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_authorizedsignature" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_automation]"
+                      dataType="i4"
+                      name="new_automation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_averagevolume]"
+                      dataType="i4"
+                      name="new_averagevolume" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_businessclass]"
+                      dataType="i4"
+                      name="new_businessclass" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_businessestablished]"
+                      dataType="dbDate"
+                      name="new_businessestablished" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_account2]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_account3]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cah_account3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_avg_volume]"
+                      dataType="i4"
+                      name="new_cah_avg_volume" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_cog]"
+                      dataType="decimal"
+                      name="new_cah_cog" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_dso]"
+                      dataType="decimal"
+                      name="new_cah_dso" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_potential_volume]"
+                      dataType="i4"
+                      name="new_cah_potential_volume" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cah_terms]"
+                      dataType="i4"
+                      name="new_cah_terms" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahcomboaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahcomboaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahcsosaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahcsosaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahdc]"
+                      dataType="wstr"
+                      length="2"
+                      name="new_cahdc" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahdepositaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahdepositaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahdmeaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahdmeaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahgroup]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahgroup" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahorderminfee]"
+                      dataType="dbDate"
+                      name="new_cahorderminfee" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahotcaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahotcaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahposaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahposaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvacontractdate]"
+                      dataType="dbDate"
+                      name="new_cahpvacontractdate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvaeffdatenewagreement]"
+                      dataType="dbDate"
+                      name="new_cahpvaeffdatenewagreement" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvalastreview]"
+                      dataType="dbDate"
+                      name="new_cahpvalastreview" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvamatrix]"
+                      dataType="i4"
+                      name="new_cahpvamatrix" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvareviewtype]"
+                      dataType="i4"
+                      name="new_cahpvareviewtype" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvastatus]"
+                      dataType="i4"
+                      name="new_cahpvastatus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvatermcode]"
+                      dataType="i4"
+                      name="new_cahpvatermcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvatermcomment]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_cahpvatermcomment" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahpvatermdate]"
+                      dataType="dbDate"
+                      name="new_cahpvatermdate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahspecialtyaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahspecialtyaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_cahstaccount]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_cahstaccount" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_categorynew]"
+                      dataType="i4"
+                      name="new_categorynew" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_combinedvolume]"
+                      dataType="i4"
+                      name="new_combinedvolume" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_computer_software]"
+                      dataType="i4"
+                      name="new_computer_software" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conference2015]"
+                      dataType="i4"
+                      name="new_conference2015" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conference2016]"
+                      dataType="i4"
+                      name="new_conference2016" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conference2017]"
+                      dataType="i4"
+                      name="new_conference2017" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conference2018]"
+                      dataType="i4"
+                      name="new_conference2018" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conference2019]"
+                      dataType="i4"
+                      name="new_conference2019" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conference2020]"
+                      dataType="i4"
+                      name="new_conference2020" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conferencecanceldate]"
+                      dataType="dbDate"
+                      name="new_conferencecanceldate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_conferenceregdate]"
+                      dataType="dbDate"
+                      name="new_conferenceregdate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_controlledsubstancesprofile]"
+                      dataType="i4"
+                      name="new_controlledsubstancesprofile" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_copyphysicaltofinancial]"
+                      dataType="bool"
+                      name="new_copyphysicaltofinancial" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_copyphysicaltomailing]"
+                      dataType="bool"
+                      name="new_copyphysicaltomailing" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_copytomarketingemail]"
+                      dataType="bool"
+                      name="new_copytomarketingemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_corporatename]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_corporatename" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_county]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_county" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_creditreportauth]"
+                      dataType="i4"
+                      name="new_creditreportauth" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_currentaffiliate]"
+                      dataType="guid"
+                      name="new_currentaffiliate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_dea]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_dea" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_deaexpiration]"
+                      dataType="dbDate"
+                      name="new_deaexpiration" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_deahinissue]"
+                      dataType="dbDate"
+                      name="new_deahinissue" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_deapharmacyname]"
+                      dataType="wstr"
+                      length="50"
+                      name="new_deapharmacyname" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_diversionce]"
+                      dataType="dbDate"
+                      name="new_diversionce" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_docusignsender]"
+                      dataType="i4"
+                      name="new_docusignsender" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_docusignsenderemail]"
+                      dataType="i4"
+                      name="new_docusignsenderemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_dunbradstreetno]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_dunbradstreetno" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_edi_activation_date]"
+                      dataType="dbDate"
+                      name="new_edi_activation_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_edi_app_received_date]"
+                      dataType="dbDate"
+                      name="new_edi_app_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_edi_approved_date]"
+                      dataType="dbDate"
+                      name="new_edi_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_edialias]"
+                      dataType="wstr"
+                      length="6"
+                      name="new_edialias" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_ediftp832tier2]"
+                      dataType="bool"
+                      name="new_ediftp832tier2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_ediftp832tier2start]"
+                      dataType="dbDate"
+                      name="new_ediftp832tier2start" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_fed_tax]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_fed_tax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_fee_paid]"
+                      dataType="i4"
+                      name="new_fee_paid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_financialcity]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialcity" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_financialstate]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_financialstreet1]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_financialstreet2]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_financialstreet3]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialstreet3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_financialzip]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_financialzip" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_gcr]"
+                      dataType="decimal"
+                      name="new_gcr" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_group]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_group" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_groupaap]"
+                      dataType="i4"
+                      name="new_groupaap" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_groupalliance]"
+                      dataType="i4"
+                      name="new_groupalliance" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_groupapi]"
+                      dataType="i4"
+                      name="new_groupapi" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_groupcah]"
+                      dataType="i4"
+                      name="new_groupcah" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_heyrman]"
+                      dataType="i4"
+                      name="new_heyrman" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_historicalrecord]"
+                      dataType="bool"
+                      name="new_historicalrecord" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_hours_saturday_close]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_hours_saturday_close" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_hours_saturday_open]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_hours_saturday_open" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_hours_sunday_close]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_hours_sunday_close" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_hours_sunday_open]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_hours_sunday_open" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_hours_weekdays_close]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_hours_weekdays_close" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_hours_weekdays_open]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_hours_weekdays_open" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_iatvtitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_iatvtitle" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_incorporationstate]"
+                      dataType="wstr"
+                      length="2"
+                      name="new_incorporationstate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_industrysupportfund]"
+                      dataType="i4"
+                      name="new_industrysupportfund" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_magentoflight]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_magentoflight" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_magiclink]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_magiclink" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_managedcarenetwork]"
+                      dataType="i4"
+                      name="new_managedcarenetwork" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_marketingemail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_marketingemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_marketinglevel]"
+                      dataType="i4"
+                      name="new_marketinglevel" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_mc_affiliation]"
+                      dataType="i4"
+                      name="new_mc_affiliation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_mc_effective_date]"
+                      dataType="dbDate"
+                      name="new_mc_effective_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_mc_network]"
+                      dataType="i4"
+                      name="new_mc_network" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_mc_termination_date]"
+                      dataType="dbDate"
+                      name="new_mc_termination_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_memb_received_date]"
+                      dataType="dbDate"
+                      name="new_memb_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_membershipowner]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_membershipowner" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_membersupportrep]"
+                      dataType="guid"
+                      name="new_membersupportrep" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_mobiledevice]"
+                      dataType="i4"
+                      name="new_mobiledevice" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_ncpaid]"
+                      dataType="wstr"
+                      length="8"
+                      name="new_ncpaid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_ncpdp]"
+                      dataType="wstr"
+                      length="7"
+                      name="new_ncpdp" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_npi]"
+                      dataType="wstr"
+                      length="11"
+                      name="new_npi" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_orderingcontact]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_orderingcontact" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_orderingcontactlookup]"
+                      dataType="guid"
+                      name="new_orderingcontactlookup" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_org_type]"
+                      dataType="i4"
+                      name="new_org_type" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_ownershipchange]"
+                      dataType="i4"
+                      name="new_ownershipchange" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_ownertype]"
+                      dataType="i4"
+                      name="new_ownertype" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_parentaccounttext]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_parentaccounttext" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_personalguaranty]"
+                      dataType="i4"
+                      name="new_personalguaranty" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacist]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_pharmacist" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacistlicense]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_pharmacistlicense" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacistlicenseexpiration]"
+                      dataType="dbDate"
+                      name="new_pharmacistlicenseexpiration" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyowner]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_pharmacyowner" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyowneremail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_pharmacyowneremail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyownerfax]"
+                      dataType="wstr"
+                      length="12"
+                      name="new_pharmacyownerfax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyownerlookup]"
+                      dataType="guid"
+                      name="new_pharmacyownerlookup" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyownermobilephone]"
+                      dataType="wstr"
+                      length="12"
+                      name="new_pharmacyownermobilephone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyownerphone]"
+                      dataType="wstr"
+                      length="12"
+                      name="new_pharmacyownerphone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacyownertitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_pharmacyownertitle" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pharmacysystem]"
+                      dataType="i4"
+                      name="new_pharmacysystem" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_planogram]"
+                      dataType="i4"
+                      name="new_planogram" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_planogramquit]"
+                      dataType="dbDate"
+                      name="new_planogramquit" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_planogramstart]"
+                      dataType="dbDate"
+                      name="new_planogramstart" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_pmid]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_pmid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_powerofattorney]"
+                      dataType="i4"
+                      name="new_powerofattorney" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_previousaapmember]"
+                      dataType="guid"
+                      name="new_previousaapmember" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_previousgroupalliance]"
+                      dataType="i4"
+                      name="new_previousgroupalliance" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_previousprimarywholesaler]"
+                      dataType="i4"
+                      name="new_previousprimarywholesaler" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_previouswholesaler]"
+                      dataType="i4"
+                      name="new_previouswholesaler" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_previouswholesaleraccountno]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_previouswholesaleraccountno" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_primaryattestation]"
+                      dataType="dbDate"
+                      name="new_primaryattestation" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_primarycontact]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_primarycontact" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_primarywholesaleraccountno]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_primarywholesaleraccountno" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_primarywholesalernew]"
+                      dataType="i4"
+                      name="new_primarywholesalernew" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampactivationdate]"
+                      dataType="dbDate"
+                      name="new_profitampactivationdate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampactivationfa]"
+                      dataType="dbDate"
+                      name="new_profitampactivationfa" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampapplicationemail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampapplicationname]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationname" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampapplicationreceived]"
+                      dataType="dbDate"
+                      name="new_profitampapplicationreceived" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampapplicationtitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationtitle" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampbilling]"
+                      dataType="dbDate"
+                      name="new_profitampbilling" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampfee]"
+                      dataType="decimal"
+                      name="new_profitampfee" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitamplevel]"
+                      dataType="i4"
+                      name="new_profitamplevel" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampnoticefa]"
+                      dataType="dbDate"
+                      name="new_profitampnoticefa" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampnoticema]"
+                      dataType="dbDate"
+                      name="new_profitampnoticema" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampreceivedfa]"
+                      dataType="dbDate"
+                      name="new_profitampreceivedfa" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampsenderemail]"
+                      dataType="i4"
+                      name="new_profitampsenderemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampsent]"
+                      dataType="dbDate"
+                      name="new_profitampsent" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampsentfa]"
+                      dataType="dbDate"
+                      name="new_profitampsentfa" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitamptermination]"
+                      dataType="dbDate"
+                      name="new_profitamptermination" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampterminationfa]"
+                      dataType="dbDate"
+                      name="new_profitampterminationfa" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_profitampupgrade]"
+                      dataType="i4"
+                      name="new_profitampupgrade" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_rebatepaymentmethod]"
+                      dataType="i4"
+                      name="new_rebatepaymentmethod" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referralincentivedate]"
+                      dataType="dbDate"
+                      name="new_referralincentivedate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referralincentivepaid]"
+                      dataType="dbDate"
+                      name="new_referralincentivepaid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referralincentivestatus]"
+                      dataType="i4"
+                      name="new_referralincentivestatus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referralstatus]"
+                      dataType="i4"
+                      name="new_referralstatus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referralsubmissiondate]"
+                      dataType="dbDate"
+                      name="new_referralsubmissiondate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referringpharmacy]"
+                      dataType="guid"
+                      name="new_referringpharmacy" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_referringpharmacyemail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_referringpharmacyemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_scantoss_activation_date]"
+                      dataType="dbDate"
+                      name="new_scantoss_activation_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_scantoss_app_received_date]"
+                      dataType="dbDate"
+                      name="new_scantoss_app_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_scantoss_eligible_date]"
+                      dataType="dbDate"
+                      name="new_scantoss_eligible_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_scantoss_status]"
+                      dataType="i4"
+                      name="new_scantoss_status" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_scantoss_version]"
+                      dataType="i4"
+                      name="new_scantoss_version" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_secondaryphone]"
+                      dataType="wstr"
+                      length="50"
+                      name="new_secondaryphone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_sendapplicationemail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_sendapplicationemail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_sendapplicationname]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_sendapplicationname" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_sendapplicationtitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_sendapplicationtitle" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_smobileinstalldate]"
+                      dataType="dbDate"
+                      name="new_smobileinstalldate" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_softwareliabilitywaiver]"
+                      dataType="dbDate"
+                      name="new_softwareliabilitywaiver" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_specialty]"
+                      dataType="i4"
+                      name="new_specialty" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_startup]"
+                      dataType="i4"
+                      name="new_startup" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_state_lic]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_state_lic" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_state_lic_exp_date]"
+                      dataType="dbDate"
+                      name="new_state_lic_exp_date" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_state_tax]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_state_tax" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_statecslicense]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_statecslicense" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_statecslicenseexpiration]"
+                      dataType="dbDate"
+                      name="new_statecslicenseexpiration" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stbrandsmartplus]"
+                      dataType="i4"
+                      name="new_stbrandsmartplus" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stcloud]"
+                      dataType="bool"
+                      name="new_stcloud" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stcloudworkstations]"
+                      dataType="wstr"
+                      length="3"
+                      name="new_stcloudworkstations" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stmobile]"
+                      dataType="bool"
+                      name="new_stmobile" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stpvamode]"
+                      dataType="bool"
+                      name="new_stpvamode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stpvamodemaxbrand]"
+                      dataType="i4"
+                      name="new_stpvamodemaxbrand" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_stpvamodemaxgeneric]"
+                      dataType="i4"
+                      name="new_stpvamodemaxgeneric" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_sttier2]"
+                      dataType="bool"
+                      name="new_sttier2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_territories]"
+                      dataType="i4"
+                      name="new_territories" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_territory]"
+                      dataType="i4"
+                      name="new_territory" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_territorymanager]"
+                      dataType="i4"
+                      name="new_territorymanager" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_territorymanageremail]"
+                      dataType="i4"
+                      name="new_territorymanageremail" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_triggerapionboarding]"
+                      dataType="bool"
+                      name="new_triggerapionboarding" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_tristateapiid]"
+                      dataType="wstr"
+                      length="10"
+                      name="new_tristateapiid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_tristateapiselect]"
+                      dataType="bool"
+                      name="new_tristateapiselect" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_tristateapiselectend]"
+                      dataType="dbDate"
+                      name="new_tristateapiselectend" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_tristateapiselectstart]"
+                      dataType="dbDate"
+                      name="new_tristateapiselectstart" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_typeprevious]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_typeprevious" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_vai]"
+                      dataType="wstr"
+                      length="7"
+                      name="new_vai" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_wholesaler]"
+                      dataType="i4"
+                      name="new_wholesaler" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[new_zone]"
+                      dataType="i4"
+                      name="new_zone" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[numberofemployees]"
+                      dataType="i4"
+                      name="numberofemployees" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[originatingleadid]"
+                      dataType="guid"
+                      name="originatingleadid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[overriddencreatedon]"
+                      dataType="dbDate"
+                      name="overriddencreatedon" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[ownerid]"
+                      dataType="guid"
+                      name="ownerid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="250"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[ownershipcode]"
+                      dataType="i4"
+                      name="ownershipcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[parentaccountid]"
+                      dataType="guid"
+                      name="parentaccountid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[participatesinworkflow]"
+                      dataType="bool"
+                      name="participatesinworkflow" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[paymenttermscode]"
+                      dataType="i4"
+                      name="paymenttermscode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[preferredappointmentdaycode]"
+                      dataType="i4"
+                      name="preferredappointmentdaycode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[preferredappointmenttimecode]"
+                      dataType="i4"
+                      name="preferredappointmenttimecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[preferredcontactmethodcode]"
+                      dataType="i4"
+                      name="preferredcontactmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[preferredequipmentid]"
+                      dataType="guid"
+                      name="preferredequipmentid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[preferredserviceid]"
+                      dataType="guid"
+                      name="preferredserviceid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[preferredsystemuserid]"
+                      dataType="guid"
+                      name="preferredsystemuserid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[primarycontactid]"
+                      dataType="guid"
+                      name="primarycontactid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[primarysatoriid]"
+                      dataType="wstr"
+                      length="200"
+                      name="primarysatoriid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[primarytwitterid]"
+                      dataType="wstr"
+                      length="128"
+                      name="primarytwitterid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[processid]"
+                      dataType="guid"
+                      name="processid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[revenue]"
+                      dataType="cy"
+                      name="revenue" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[sharesoutstanding]"
+                      dataType="i4"
+                      name="sharesoutstanding" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[shippingmethodcode]"
+                      dataType="i4"
+                      name="shippingmethodcode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[sic]"
+                      dataType="wstr"
+                      length="20"
+                      name="sic" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[slaid]"
+                      dataType="guid"
+                      name="slaid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[stageid]"
+                      dataType="guid"
+                      name="stageid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[stockexchange]"
+                      dataType="wstr"
+                      length="20"
+                      name="stockexchange" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[teamsfollowed]"
+                      dataType="i4"
+                      name="teamsfollowed" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[telephone1]"
+                      dataType="wstr"
+                      length="50"
+                      name="telephone1" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[telephone2]"
+                      dataType="wstr"
+                      length="50"
+                      name="telephone2" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[telephone3]"
+                      dataType="wstr"
+                      length="50"
+                      name="telephone3" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[territorycode]"
+                      dataType="i4"
+                      name="territorycode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[territoryid]"
+                      dataType="guid"
+                      name="territoryid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[tickersymbol]"
+                      dataType="wstr"
+                      length="10"
+                      name="tickersymbol" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      name="timezoneruleversionnumber" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[transactioncurrencyid]"
+                      dataType="guid"
+                      name="transactioncurrencyid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[traversedpath]"
+                      dataType="wstr"
+                      length="1250"
+                      name="traversedpath" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      name="utcconversiontimezonecode" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[websiteurl]"
+                      dataType="wstr"
+                      length="200"
+                      name="websiteurl" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input].ExternalColumns[yominame]"
+                      dataType="wstr"
+                      length="160"
+                      name="yominame" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Dynamics CRM Destination Error Output"
+                  synchronousInputId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[Id]"
+                      dataType="guid"
+                      lineageId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[ErrorDescription]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Update CRM\Dynamics CRM Destination.Outputs[Dynamics CRM Destination Error Output].Columns[ErrorDescription]"
+                      name="ErrorDescription" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Update CRM\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC dbo.usp_GenericLoyaltyTrend_Upload_CRM</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Update CRM\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.Reports]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.Reports]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[accountid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[accountid]"
+                      name="accountid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[new_apigenericsytd]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsytd]"
+                      length="25"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[new_apigenericsytd]"
+                      name="new_apigenericsytd"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[MaxPurchaseDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MaxPurchaseDate]"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].Columns[MaxPurchaseDate]"
+                      name="MaxPurchaseDate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsytd]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="new_apigenericsytd" />
+                    <externalMetadataColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MaxPurchaseDate]"
+                      dataType="dbDate"
+                      name="MaxPurchaseDate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      dataType="guid"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      name="accountid" />
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[new_apigenericsytd]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[new_apigenericsytd]"
+                      name="new_apigenericsytd" />
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MaxPurchaseDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MaxPurchaseDate]"
+                      name="MaxPurchaseDate" />
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Update CRM.Paths[OLE DB Source Output]"
+              endId="Package\Update CRM\Dynamics CRM Destination.Inputs[Dynamics CRM Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Update CRM\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Update CRM"
+          TopLeft="340,120" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Update CRM">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="205,42"
+          Id="Package\Update CRM\Dynamics CRM Destination"
+          TopLeft="422,250" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Update CRM\OLE DB Source"
+          TopLeft="289,129" />
+        <EdgeLayout
+          Id="Package\Update CRM.Paths[OLE DB Source Output]"
+          TopLeft="364,171">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="160.5,79"
+              Start="0,0"
+              End="160.5,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.5"
+                    Point2="0,39.5"
+                    Point3="4,39.5" />
+                  <mssgle:LineSegment
+                    End="156.5,39.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="156.5,39.5"
+                    Point2="160.5,39.5"
+                    Point3="160.5,43.5" />
+                  <mssgle:LineSegment
+                    End="160.5,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Update CRM\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

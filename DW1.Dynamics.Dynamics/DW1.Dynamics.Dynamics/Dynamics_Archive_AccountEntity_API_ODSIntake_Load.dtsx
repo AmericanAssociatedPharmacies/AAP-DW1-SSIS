@@ -1,0 +1,2387 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2019 9:35:03 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{9006DB03-192B-4C99-80E8-FB4DA7CCBCF6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Dynamics_Archive_AccountEntity_API_ODSIntake_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{43FF29C1-411E-48C7-9004-4E1A8CF02B5E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0CC99EBA-B587-4162-AD07-640EF25D033F}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load API Account Entity"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2BFC2A88-F6F3-4F91-B098-36DA6DDB290E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load API Account Entity"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load API Account Entity\Archive API"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Archive API"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Archive].[CRM_AccountEntity_API]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load API Account Entity\Archive API.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[accountid]"
+                      cachedDataType="guid"
+                      cachedName="accountid"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[accountid]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_account]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_api_account"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_account]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_account]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_app_credit_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_app_credit_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_app_credit_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_credit_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_app_status]"
+                      cachedDataType="i4"
+                      cachedName="new_api_app_status"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_app_status]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_status]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_app_statusname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_api_app_statusname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_app_statusname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_statusname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_approved_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_approved_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_approved_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_approved_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_csos_approved_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_csos_approved_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_approved_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_approved_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_csos_declined_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_csos_declined_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_declined_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_declined_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_csos_installed_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_csos_installed_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_installed_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_installed_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_csos_profile_received_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_csos_profile_received_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_profile_received_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_profile_received_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_cutoff]"
+                      cachedDataType="i4"
+                      cachedName="new_api_cutoff"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_cutoff]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_cutoff]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_cutoffname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_api_cutoffname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_cutoffname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_cutoffname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_order_method]"
+                      cachedDataType="i4"
+                      cachedName="new_api_order_method"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_order_method]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_order_method]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_order_methodname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_api_order_methodname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_order_methodname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_order_methodname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_photos_received_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_api_photos_received_date"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_photos_received_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_photos_received_date]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_terms]"
+                      cachedDataType="i4"
+                      cachedName="new_api_terms"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_terms]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_terms]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_api_termsname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_api_termsname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_termsname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_termsname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiaccountactivation]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="new_apiaccountactivation"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiaccountactivation]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiaccountactivation]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apialert]"
+                      cachedDataType="i4"
+                      cachedName="new_apialert"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apialert]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apialert]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apialertname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apialertname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apialertname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apialertname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apibrands]"
+                      cachedDataType="i4"
+                      cachedName="new_apibrands"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apibrands]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apibrands]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicreditalert]"
+                      cachedDataType="i4"
+                      cachedName="new_apicreditalert"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicreditalert]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditalert]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicreditalertname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apicreditalertname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicreditalertname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditalertname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicreditlimit]"
+                      cachedDataType="i4"
+                      cachedName="new_apicreditlimit"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicreditlimit]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditlimit]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicsosalert]"
+                      cachedDataType="i4"
+                      cachedName="new_apicsosalert"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosalert]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosalert]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicsosalertname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apicsosalertname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosalertname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosalertname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicsosstatus]"
+                      cachedDataType="i4"
+                      cachedName="new_apicsosstatus"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosstatus]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosstatus]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apicsosstatusname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apicsosstatusname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosstatusname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosstatusname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apifreight]"
+                      cachedDataType="i4"
+                      cachedName="new_apifreight"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apifreight]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifreight]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apifreightname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apifreightname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apifreightname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifreightname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenerics]"
+                      cachedDataType="i4"
+                      cachedName="new_apigenerics"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenerics]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenerics]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apimot]"
+                      cachedDataType="i4"
+                      cachedName="new_apimot"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apimot]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apimot]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apimotname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apimotname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apimotname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apimotname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiotcs]"
+                      cachedDataType="i4"
+                      cachedName="new_apiotcs"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiotcs]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiotcs]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipaymentmethod]"
+                      cachedDataType="i4"
+                      cachedName="new_apipaymentmethod"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethod]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethod]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipaymentmethodname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apipaymentmethodname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethodname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiquestionniare]"
+                      cachedDataType="i4"
+                      cachedName="new_apiquestionniare"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiquestionniare]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiquestionniare]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiquestionniarename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apiquestionniarename"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiquestionniarename]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiquestionniarename]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apirefrigerated]"
+                      cachedDataType="bool"
+                      cachedName="new_apirefrigerated"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apirefrigerated]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirefrigerated]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apirefrigeratedname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apirefrigeratedname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apirefrigeratedname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirefrigeratedname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apistatus]"
+                      cachedDataType="i4"
+                      cachedName="new_apistatus"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apistatus]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apistatus]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apistatusname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apistatusname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apistatusname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apistatusname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apitotals]"
+                      cachedDataType="i4"
+                      cachedName="new_apitotals"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apitotals]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apitotals]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiwarehouse]"
+                      cachedDataType="i4"
+                      cachedName="new_apiwarehouse"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiwarehouse]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiwarehouse]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiwarehousename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apiwarehousename"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiwarehousename]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiwarehousename]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apidefaultshipping]"
+                      cachedDataType="i4"
+                      cachedName="new_apidefaultshipping"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apidefaultshipping]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apidefaultshipping]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apidefaultshippingname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apidefaultshippingname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apidefaultshippingname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apidefaultshippingname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apifirstorder]"
+                      cachedDataType="dbDate"
+                      cachedName="new_apifirstorder"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apifirstorder]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifirstorder]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenericsq1]"
+                      cachedDataType="numeric"
+                      cachedName="new_apigenericsq1"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq1]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq1]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenericsq2]"
+                      cachedDataType="numeric"
+                      cachedName="new_apigenericsq2"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq2]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq2]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenericsq3]"
+                      cachedDataType="numeric"
+                      cachedName="new_apigenericsq3"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq3]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq3]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenericsq4]"
+                      cachedDataType="numeric"
+                      cachedName="new_apigenericsq4"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq4]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq4]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenericsrecommendation]"
+                      cachedDataType="i4"
+                      cachedName="new_apigenericsrecommendation"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsrecommendation]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsrecommendation]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apigenericsytd]"
+                      cachedDataType="cy"
+                      cachedName="new_apigenericsytd"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsytd]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsytd]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiparent]"
+                      cachedDataType="guid"
+                      cachedName="new_apiparent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparent]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparent]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiparentname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_apiparentname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparentname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiparentno]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="new_apiparentno"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparentno]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentno]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apiparentyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_apiparentyominame"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparentyominame]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentyominame]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipaymentmethodprofileform]"
+                      cachedDataType="i4"
+                      cachedName="new_apipaymentmethodprofileform"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethodprofileform]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodprofileform]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipaymentmethodprofileformname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apipaymentmethodprofileformname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethodprofileformname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodprofileformname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipriority]"
+                      cachedDataType="i4"
+                      cachedName="new_apipriority"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipriority]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipriority]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipriorityname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_apipriorityname"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipriorityname]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipriorityname]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipurchasegoal]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="new_apipurchasegoal"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipurchasegoal]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipurchasegoal]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apipurchasesdaterange]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_apipurchasesdaterange"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipurchasesdaterange]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipurchasesdaterange]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[new_apirecommendationdate]"
+                      cachedDataType="dbDate"
+                      cachedName="new_apirecommendationdate"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apirecommendationdate]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirecommendationdate]" />
+                    <inputColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].Columns[RowCreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowCreatedDate"
+                      externalMetadataColumnId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[StagingRowCreatedDate]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[RowCreatedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_api_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_app_credit_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_app_credit_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_app_status]"
+                      dataType="i4"
+                      name="new_api_app_status" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_app_statusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_app_statusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_approved_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_approved_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_declined_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_declined_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_installed_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_installed_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_csos_profile_received_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_profile_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_cutoff]"
+                      dataType="i4"
+                      name="new_api_cutoff" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_cutoffname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_cutoffname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_order_method]"
+                      dataType="i4"
+                      name="new_api_order_method" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_order_methodname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_order_methodname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_photos_received_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_photos_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_terms]"
+                      dataType="i4"
+                      name="new_api_terms" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_api_termsname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_termsname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiaccountactivation]"
+                      dataType="dbTimeStamp"
+                      name="new_apiaccountactivation" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apialert]"
+                      dataType="i4"
+                      name="new_apialert" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apialertname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apialertname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apibrands]"
+                      dataType="i4"
+                      name="new_apibrands" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicreditalert]"
+                      dataType="i4"
+                      name="new_apicreditalert" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicreditalertname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apicreditalertname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicreditlimit]"
+                      dataType="i4"
+                      name="new_apicreditlimit" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosalert]"
+                      dataType="i4"
+                      name="new_apicsosalert" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosalertname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apicsosalertname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosstatus]"
+                      dataType="i4"
+                      name="new_apicsosstatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apicsosstatusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apicsosstatusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apifreight]"
+                      dataType="i4"
+                      name="new_apifreight" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apifreightname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apifreightname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenerics]"
+                      dataType="i4"
+                      name="new_apigenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apimot]"
+                      dataType="i4"
+                      name="new_apimot" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apimotname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apimotname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiotcs]"
+                      dataType="i4"
+                      name="new_apiotcs" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethod]"
+                      dataType="i4"
+                      name="new_apipaymentmethod" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethodname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apipaymentmethodname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiquestionniare]"
+                      dataType="i4"
+                      name="new_apiquestionniare" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiquestionniarename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apiquestionniarename" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apirefrigerated]"
+                      dataType="bool"
+                      name="new_apirefrigerated" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apirefrigeratedname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apirefrigeratedname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apistatus]"
+                      dataType="i4"
+                      name="new_apistatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apistatusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apistatusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apitotals]"
+                      dataType="i4"
+                      name="new_apitotals" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiwarehouse]"
+                      dataType="i4"
+                      name="new_apiwarehouse" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiwarehousename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apiwarehousename" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apidefaultshipping]"
+                      dataType="i4"
+                      name="new_apidefaultshipping" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apidefaultshippingname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apidefaultshippingname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apifirstorder]"
+                      dataType="dbDate"
+                      name="new_apifirstorder" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq1]"
+                      dataType="numeric"
+                      name="new_apigenericsq1"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq2]"
+                      dataType="numeric"
+                      name="new_apigenericsq2"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq3]"
+                      dataType="numeric"
+                      name="new_apigenericsq3"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsq4]"
+                      dataType="numeric"
+                      name="new_apigenericsq4"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsrecommendation]"
+                      dataType="i4"
+                      name="new_apigenericsrecommendation" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apigenericsytd]"
+                      dataType="cy"
+                      name="new_apigenericsytd" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparent]"
+                      dataType="guid"
+                      name="new_apiparent" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparentname]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apiparentname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparentno]"
+                      dataType="wstr"
+                      length="4000"
+                      name="new_apiparentno" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apiparentyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apiparentyominame" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethodprofileform]"
+                      dataType="i4"
+                      name="new_apipaymentmethodprofileform" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipaymentmethodprofileformname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apipaymentmethodprofileformname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipriority]"
+                      dataType="i4"
+                      name="new_apipriority" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipriorityname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apipriorityname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipurchasegoal]"
+                      dataType="wstr"
+                      length="200"
+                      name="new_apipurchasegoal" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apipurchasesdaterange]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apipurchasesdaterange" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[new_apirecommendationdate]"
+                      dataType="dbDate"
+                      name="new_apirecommendationdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input].ExternalColumns[StagingRowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="StagingRowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load API Account Entity\Archive API.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Archive API.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Archive API.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Archive API.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Archive API.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load API Account Entity\Staging API"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging API"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CRM_AccountEntity_API]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load API Account Entity\Staging API.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[RowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[RowID]"
+                      name="RowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[accountid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[accountid]"
+                      name="accountid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_account]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_account]"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_account]"
+                      name="new_api_account"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_credit_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_app_credit_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_credit_date]"
+                      name="new_api_app_credit_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_status]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_app_status]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_status]"
+                      name="new_api_app_status"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_statusname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_app_statusname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_app_statusname]"
+                      name="new_api_app_statusname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_approved_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_approved_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_approved_date]"
+                      name="new_api_approved_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_approved_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_approved_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_approved_date]"
+                      name="new_api_csos_approved_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_declined_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_declined_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_declined_date]"
+                      name="new_api_csos_declined_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_installed_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_installed_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_installed_date]"
+                      name="new_api_csos_installed_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_profile_received_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_profile_received_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_csos_profile_received_date]"
+                      name="new_api_csos_profile_received_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_cutoff]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_cutoff]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_cutoff]"
+                      name="new_api_cutoff"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_cutoffname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_cutoffname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_cutoffname]"
+                      name="new_api_cutoffname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_order_method]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_order_method]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_order_method]"
+                      name="new_api_order_method"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_order_methodname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_order_methodname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_order_methodname]"
+                      name="new_api_order_methodname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_photos_received_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_photos_received_date]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_photos_received_date]"
+                      name="new_api_photos_received_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_terms]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_terms]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_terms]"
+                      name="new_api_terms"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_termsname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_termsname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_api_termsname]"
+                      name="new_api_termsname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiaccountactivation]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiaccountactivation]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiaccountactivation]"
+                      name="new_apiaccountactivation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apialert]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apialert]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apialert]"
+                      name="new_apialert"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apialertname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apialertname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apialertname]"
+                      name="new_apialertname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apibrands]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apibrands]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apibrands]"
+                      name="new_apibrands"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditalert]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicreditalert]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditalert]"
+                      name="new_apicreditalert"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditalertname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicreditalertname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditalertname]"
+                      name="new_apicreditalertname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditlimit]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicreditlimit]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicreditlimit]"
+                      name="new_apicreditlimit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosalert]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosalert]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosalert]"
+                      name="new_apicsosalert"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosalertname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosalertname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosalertname]"
+                      name="new_apicsosalertname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosstatus]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosstatus]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosstatus]"
+                      name="new_apicsosstatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosstatusname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosstatusname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apicsosstatusname]"
+                      name="new_apicsosstatusname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifreight]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apifreight]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifreight]"
+                      name="new_apifreight"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifreightname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apifreightname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifreightname]"
+                      name="new_apifreightname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenerics]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenerics]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenerics]"
+                      name="new_apigenerics"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apimot]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apimot]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apimot]"
+                      name="new_apimot"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apimotname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apimotname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apimotname]"
+                      name="new_apimotname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiotcs]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiotcs]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiotcs]"
+                      name="new_apiotcs"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethod]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethod]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethod]"
+                      name="new_apipaymentmethod"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethodname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodname]"
+                      name="new_apipaymentmethodname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiquestionniare]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiquestionniare]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiquestionniare]"
+                      name="new_apiquestionniare"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiquestionniarename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiquestionniarename]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiquestionniarename]"
+                      name="new_apiquestionniarename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirefrigerated]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apirefrigerated]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirefrigerated]"
+                      name="new_apirefrigerated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirefrigeratedname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apirefrigeratedname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirefrigeratedname]"
+                      name="new_apirefrigeratedname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apistatus]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apistatus]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apistatus]"
+                      name="new_apistatus"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apistatusname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apistatusname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apistatusname]"
+                      name="new_apistatusname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apitotals]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apitotals]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apitotals]"
+                      name="new_apitotals"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiwarehouse]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiwarehouse]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiwarehouse]"
+                      name="new_apiwarehouse"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiwarehousename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiwarehousename]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiwarehousename]"
+                      name="new_apiwarehousename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apidefaultshipping]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apidefaultshipping]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apidefaultshipping]"
+                      name="new_apidefaultshipping"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apidefaultshippingname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apidefaultshippingname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apidefaultshippingname]"
+                      name="new_apidefaultshippingname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifirstorder]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apifirstorder]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apifirstorder]"
+                      name="new_apifirstorder"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq1]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq1]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq1]"
+                      name="new_apigenericsq1"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq2]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq2]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq2]"
+                      name="new_apigenericsq2"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq3]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq3]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq3]"
+                      name="new_apigenericsq3"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq4]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq4]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsq4]"
+                      name="new_apigenericsq4"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsrecommendation]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsrecommendation]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsrecommendation]"
+                      name="new_apigenericsrecommendation"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsytd]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsytd]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apigenericsytd]"
+                      name="new_apigenericsytd"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparent]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparent]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparent]"
+                      name="new_apiparent"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparentname]"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentname]"
+                      name="new_apiparentname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentno]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparentno]"
+                      length="4000"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentno]"
+                      name="new_apiparentno"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparentyominame]"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apiparentyominame]"
+                      name="new_apiparentyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodprofileform]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethodprofileform]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodprofileform]"
+                      name="new_apipaymentmethodprofileform"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodprofileformname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethodprofileformname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipaymentmethodprofileformname]"
+                      name="new_apipaymentmethodprofileformname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipriority]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipriority]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipriority]"
+                      name="new_apipriority"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipriorityname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipriorityname]"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipriorityname]"
+                      name="new_apipriorityname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipurchasegoal]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipurchasegoal]"
+                      length="200"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipurchasegoal]"
+                      name="new_apipurchasegoal"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipurchasesdaterange]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipurchasesdaterange]"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apipurchasesdaterange]"
+                      name="new_apipurchasesdaterange"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirecommendationdate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apirecommendationdate]"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].Columns[new_apirecommendationdate]"
+                      name="new_apirecommendationdate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_account]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_api_account" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_app_credit_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_app_credit_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_app_status]"
+                      dataType="i4"
+                      name="new_api_app_status" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_app_statusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_app_statusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_approved_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_approved_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_approved_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_declined_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_declined_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_installed_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_installed_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_csos_profile_received_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_csos_profile_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_cutoff]"
+                      dataType="i4"
+                      name="new_api_cutoff" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_cutoffname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_cutoffname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_order_method]"
+                      dataType="i4"
+                      name="new_api_order_method" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_order_methodname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_order_methodname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_photos_received_date]"
+                      dataType="dbTimeStamp"
+                      name="new_api_photos_received_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_terms]"
+                      dataType="i4"
+                      name="new_api_terms" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_api_termsname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_api_termsname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiaccountactivation]"
+                      dataType="dbTimeStamp"
+                      name="new_apiaccountactivation" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apialert]"
+                      dataType="i4"
+                      name="new_apialert" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apialertname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apialertname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apibrands]"
+                      dataType="i4"
+                      name="new_apibrands" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicreditalert]"
+                      dataType="i4"
+                      name="new_apicreditalert" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicreditalertname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apicreditalertname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicreditlimit]"
+                      dataType="i4"
+                      name="new_apicreditlimit" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosalert]"
+                      dataType="i4"
+                      name="new_apicsosalert" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosalertname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apicsosalertname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosstatus]"
+                      dataType="i4"
+                      name="new_apicsosstatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apicsosstatusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apicsosstatusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apifreight]"
+                      dataType="i4"
+                      name="new_apifreight" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apifreightname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apifreightname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenerics]"
+                      dataType="i4"
+                      name="new_apigenerics" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apimot]"
+                      dataType="i4"
+                      name="new_apimot" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apimotname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apimotname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiotcs]"
+                      dataType="i4"
+                      name="new_apiotcs" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethod]"
+                      dataType="i4"
+                      name="new_apipaymentmethod" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethodname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apipaymentmethodname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiquestionniare]"
+                      dataType="i4"
+                      name="new_apiquestionniare" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiquestionniarename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apiquestionniarename" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apirefrigerated]"
+                      dataType="bool"
+                      name="new_apirefrigerated" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apirefrigeratedname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apirefrigeratedname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apistatus]"
+                      dataType="i4"
+                      name="new_apistatus" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apistatusname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apistatusname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apitotals]"
+                      dataType="i4"
+                      name="new_apitotals" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiwarehouse]"
+                      dataType="i4"
+                      name="new_apiwarehouse" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiwarehousename]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apiwarehousename" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apidefaultshipping]"
+                      dataType="i4"
+                      name="new_apidefaultshipping" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apidefaultshippingname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apidefaultshippingname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apifirstorder]"
+                      dataType="dbDate"
+                      name="new_apifirstorder" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq1]"
+                      dataType="numeric"
+                      name="new_apigenericsq1"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq2]"
+                      dataType="numeric"
+                      name="new_apigenericsq2"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq3]"
+                      dataType="numeric"
+                      name="new_apigenericsq3"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsq4]"
+                      dataType="numeric"
+                      name="new_apigenericsq4"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsrecommendation]"
+                      dataType="i4"
+                      name="new_apigenericsrecommendation" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apigenericsytd]"
+                      dataType="cy"
+                      name="new_apigenericsytd" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparent]"
+                      dataType="guid"
+                      name="new_apiparent" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparentname]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apiparentname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparentno]"
+                      dataType="wstr"
+                      length="4000"
+                      name="new_apiparentno" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apiparentyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apiparentyominame" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethodprofileform]"
+                      dataType="i4"
+                      name="new_apipaymentmethodprofileform" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipaymentmethodprofileformname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apipaymentmethodprofileformname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipriority]"
+                      dataType="i4"
+                      name="new_apipriority" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipriorityname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_apipriorityname" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipurchasegoal]"
+                      dataType="wstr"
+                      length="200"
+                      name="new_apipurchasegoal" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apipurchasesdaterange]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_apipurchasesdaterange" />
+                    <externalMetadataColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output].ExternalColumns[new_apirecommendationdate]"
+                      dataType="dbDate"
+                      name="new_apirecommendationdate" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      name="RowID" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      dataType="guid"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      name="accountid" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_account]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_account]"
+                      name="new_api_account" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_app_credit_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_app_credit_date]"
+                      name="new_api_app_credit_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_app_status]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_app_status]"
+                      name="new_api_app_status" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_app_statusname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_app_statusname]"
+                      name="new_api_app_statusname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_approved_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_approved_date]"
+                      name="new_api_approved_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_approved_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_approved_date]"
+                      name="new_api_csos_approved_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_declined_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_declined_date]"
+                      name="new_api_csos_declined_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_installed_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_installed_date]"
+                      name="new_api_csos_installed_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_profile_received_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_csos_profile_received_date]"
+                      name="new_api_csos_profile_received_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_cutoff]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_cutoff]"
+                      name="new_api_cutoff" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_cutoffname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_cutoffname]"
+                      name="new_api_cutoffname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_order_method]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_order_method]"
+                      name="new_api_order_method" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_order_methodname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_order_methodname]"
+                      name="new_api_order_methodname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_photos_received_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_photos_received_date]"
+                      name="new_api_photos_received_date" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_terms]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_terms]"
+                      name="new_api_terms" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_termsname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_api_termsname]"
+                      name="new_api_termsname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiaccountactivation]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiaccountactivation]"
+                      name="new_apiaccountactivation" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apialert]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apialert]"
+                      name="new_apialert" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apialertname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apialertname]"
+                      name="new_apialertname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apibrands]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apibrands]"
+                      name="new_apibrands" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicreditalert]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicreditalert]"
+                      name="new_apicreditalert" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicreditalertname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicreditalertname]"
+                      name="new_apicreditalertname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicreditlimit]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicreditlimit]"
+                      name="new_apicreditlimit" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosalert]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosalert]"
+                      name="new_apicsosalert" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosalertname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosalertname]"
+                      name="new_apicsosalertname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosstatus]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosstatus]"
+                      name="new_apicsosstatus" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosstatusname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apicsosstatusname]"
+                      name="new_apicsosstatusname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apifreight]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apifreight]"
+                      name="new_apifreight" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apifreightname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apifreightname]"
+                      name="new_apifreightname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenerics]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenerics]"
+                      name="new_apigenerics" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apimot]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apimot]"
+                      name="new_apimot" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apimotname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apimotname]"
+                      name="new_apimotname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiotcs]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiotcs]"
+                      name="new_apiotcs" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethod]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethod]"
+                      name="new_apipaymentmethod" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethodname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethodname]"
+                      name="new_apipaymentmethodname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiquestionniare]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiquestionniare]"
+                      name="new_apiquestionniare" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiquestionniarename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiquestionniarename]"
+                      name="new_apiquestionniarename" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apirefrigerated]"
+                      dataType="bool"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apirefrigerated]"
+                      name="new_apirefrigerated" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apirefrigeratedname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apirefrigeratedname]"
+                      name="new_apirefrigeratedname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apistatus]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apistatus]"
+                      name="new_apistatus" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apistatusname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apistatusname]"
+                      name="new_apistatusname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apitotals]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apitotals]"
+                      name="new_apitotals" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiwarehouse]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiwarehouse]"
+                      name="new_apiwarehouse" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiwarehousename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiwarehousename]"
+                      name="new_apiwarehousename" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apidefaultshipping]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apidefaultshipping]"
+                      name="new_apidefaultshipping" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apidefaultshippingname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apidefaultshippingname]"
+                      name="new_apidefaultshippingname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apifirstorder]"
+                      dataType="dbDate"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apifirstorder]"
+                      name="new_apifirstorder" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq1]"
+                      dataType="numeric"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq1]"
+                      name="new_apigenericsq1"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq2]"
+                      dataType="numeric"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq2]"
+                      name="new_apigenericsq2"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq3]"
+                      dataType="numeric"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq3]"
+                      name="new_apigenericsq3"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq4]"
+                      dataType="numeric"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsq4]"
+                      name="new_apigenericsq4"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsrecommendation]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsrecommendation]"
+                      name="new_apigenericsrecommendation" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsytd]"
+                      dataType="cy"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apigenericsytd]"
+                      name="new_apigenericsytd" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparent]"
+                      dataType="guid"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparent]"
+                      name="new_apiparent" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparentname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparentname]"
+                      name="new_apiparentname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparentno]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparentno]"
+                      name="new_apiparentno" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparentyominame]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apiparentyominame]"
+                      name="new_apiparentyominame" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethodprofileform]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethodprofileform]"
+                      name="new_apipaymentmethodprofileform" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethodprofileformname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipaymentmethodprofileformname]"
+                      name="new_apipaymentmethodprofileformname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipriority]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipriority]"
+                      name="new_apipriority" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipriorityname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipriorityname]"
+                      name="new_apipriorityname" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipurchasegoal]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipurchasegoal]"
+                      name="new_apipurchasegoal" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipurchasesdaterange]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apipurchasesdaterange]"
+                      name="new_apipurchasesdaterange" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apirecommendationdate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[new_apirecommendationdate]"
+                      name="new_apirecommendationdate" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load API Account Entity.Paths[OLE DB Source Output]"
+              endId="Package\Load API Account Entity\Archive API.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load API Account Entity\Staging API.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="192,42"
+          Id="Package\Load API Account Entity"
+          TopLeft="285,103" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load API Account Entity">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="134,42"
+          Id="Package\Load API Account Entity\Staging API"
+          TopLeft="201,71" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Load API Account Entity\Archive API"
+          TopLeft="282,161" />
+        <EdgeLayout
+          Id="Package\Load API Account Entity.Paths[OLE DB Source Output]"
+          TopLeft="268,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="80.5,48"
+              Start="0,0"
+              End="80.5,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20"
+                    Point2="0,24"
+                    Point3="4,24" />
+                  <mssgle:LineSegment
+                    End="76.5,24" />
+                  <mssgle:CubicBezierSegment
+                    Point1="76.5,24"
+                    Point2="80.5,24"
+                    Point3="80.5,28" />
+                  <mssgle:LineSegment
+                    End="80.5,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load API Account Entity\Archive API">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load API Account Entity\Staging API">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

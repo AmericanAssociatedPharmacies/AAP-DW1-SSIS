@@ -1,0 +1,788 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/16/2019 9:35:03 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{115E2B6B-5080-46AF-A148-2EA158C9EE0C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Dynamics_Archive_AccountEntity_ProfitAmp_ODSIntake_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{C8E361F1-8D09-4F1D-A818-DD33DECDB682}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{A86A7302-4F69-46C1-946B-524FB9FC860B}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load ProfitAmp Account Entity"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{1C87CCB9-92DD-4BD4-BBDE-E414C00BDFF2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load ProfitAmp Account Entity"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Archive ProfitAmp"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Archive].[CRM_AccountEntity_ProfitAmp]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[accountid]"
+                      cachedDataType="guid"
+                      cachedName="accountid"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[accountid]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampactivationdate]"
+                      cachedDataType="dbDate"
+                      cachedName="new_profitampactivationdate"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampactivationdate]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampactivationdate]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampapplicationemail]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_profitampapplicationemail"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationemail]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationemail]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampapplicationname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_profitampapplicationname"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationname]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationname]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampapplicationreceived]"
+                      cachedDataType="dbDate"
+                      cachedName="new_profitampapplicationreceived"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationreceived]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationreceived]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampapplicationtitle]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="new_profitampapplicationtitle"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationtitle]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationtitle]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitamplevel]"
+                      cachedDataType="i4"
+                      cachedName="new_profitamplevel"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitamplevel]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamplevel]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitamplevelname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_profitamplevelname"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitamplevelname]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamplevelname]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampsenderemail]"
+                      cachedDataType="i4"
+                      cachedName="new_profitampsenderemail"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampsenderemail]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsenderemail]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampsenderemailname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="new_profitampsenderemailname"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampsenderemailname]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsenderemailname]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitampsent]"
+                      cachedDataType="dbDate"
+                      cachedName="new_profitampsent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampsent]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsent]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[new_profitamptermination]"
+                      cachedDataType="dbDate"
+                      cachedName="new_profitamptermination"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitamptermination]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamptermination]" />
+                    <inputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].Columns[RowCreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowCreatedDate"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[StagingRowCreatedDate]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[RowCreatedDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampactivationdate]"
+                      dataType="dbDate"
+                      name="new_profitampactivationdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationemail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationemail" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationname]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationname" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationreceived]"
+                      dataType="dbDate"
+                      name="new_profitampapplicationreceived" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampapplicationtitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationtitle" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitamplevel]"
+                      dataType="i4"
+                      name="new_profitamplevel" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitamplevelname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_profitamplevelname" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampsenderemail]"
+                      dataType="i4"
+                      name="new_profitampsenderemail" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampsenderemailname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_profitampsenderemailname" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitampsent]"
+                      dataType="dbDate"
+                      name="new_profitampsent" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[new_profitamptermination]"
+                      dataType="dbDate"
+                      name="new_profitamptermination" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input].ExternalColumns[StagingRowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="StagingRowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging ProfitAmp"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CRM_AccountEntity_ProfitAmp]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[RowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[RowID]"
+                      name="RowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[accountid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[accountid]"
+                      name="accountid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampactivationdate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampactivationdate]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampactivationdate]"
+                      name="new_profitampactivationdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationemail]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationemail]"
+                      length="100"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationemail]"
+                      name="new_profitampapplicationemail"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationname]"
+                      length="100"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationname]"
+                      name="new_profitampapplicationname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationreceived]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationreceived]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationreceived]"
+                      name="new_profitampapplicationreceived"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationtitle]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationtitle]"
+                      length="100"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampapplicationtitle]"
+                      name="new_profitampapplicationtitle"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamplevel]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitamplevel]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamplevel]"
+                      name="new_profitamplevel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamplevelname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitamplevelname]"
+                      length="250"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamplevelname]"
+                      name="new_profitamplevelname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsenderemail]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampsenderemail]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsenderemail]"
+                      name="new_profitampsenderemail"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsenderemailname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampsenderemailname]"
+                      length="250"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsenderemailname]"
+                      name="new_profitampsenderemailname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsent]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampsent]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitampsent]"
+                      name="new_profitampsent"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamptermination]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitamptermination]"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].Columns[new_profitamptermination]"
+                      name="new_profitamptermination"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[accountid]"
+                      dataType="guid"
+                      name="accountid" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampactivationdate]"
+                      dataType="dbDate"
+                      name="new_profitampactivationdate" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationemail]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationemail" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationname]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationname" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationreceived]"
+                      dataType="dbDate"
+                      name="new_profitampapplicationreceived" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampapplicationtitle]"
+                      dataType="wstr"
+                      length="100"
+                      name="new_profitampapplicationtitle" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitamplevel]"
+                      dataType="i4"
+                      name="new_profitamplevel" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitamplevelname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_profitamplevelname" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampsenderemail]"
+                      dataType="i4"
+                      name="new_profitampsenderemail" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampsenderemailname]"
+                      dataType="wstr"
+                      length="250"
+                      name="new_profitampsenderemailname" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitampsent]"
+                      dataType="dbDate"
+                      name="new_profitampsent" />
+                    <externalMetadataColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output].ExternalColumns[new_profitamptermination]"
+                      dataType="dbDate"
+                      name="new_profitamptermination" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[RowID]"
+                      name="RowID" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      dataType="guid"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[accountid]"
+                      name="accountid" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampactivationdate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampactivationdate]"
+                      name="new_profitampactivationdate" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationemail]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationemail]"
+                      name="new_profitampapplicationemail" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationname]"
+                      name="new_profitampapplicationname" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationreceived]"
+                      dataType="dbDate"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationreceived]"
+                      name="new_profitampapplicationreceived" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationtitle]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampapplicationtitle]"
+                      name="new_profitampapplicationtitle" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitamplevel]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitamplevel]"
+                      name="new_profitamplevel" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitamplevelname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitamplevelname]"
+                      name="new_profitamplevelname" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampsenderemail]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampsenderemail]"
+                      name="new_profitampsenderemail" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampsenderemailname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampsenderemailname]"
+                      name="new_profitampsenderemailname" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampsent]"
+                      dataType="dbDate"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitampsent]"
+                      name="new_profitampsent" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitamptermination]"
+                      dataType="dbDate"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[new_profitamptermination]"
+                      name="new_profitamptermination" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load ProfitAmp Account Entity.Paths[OLE DB Source Output]"
+              endId="Package\Load ProfitAmp Account Entity\Archive ProfitAmp.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load ProfitAmp Account Entity\Staging ProfitAmp.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="222,42"
+          Id="Package\Load ProfitAmp Account Entity"
+          TopLeft="285,103" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load ProfitAmp Account Entity">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="164,42"
+          Id="Package\Load ProfitAmp Account Entity\Staging ProfitAmp"
+          TopLeft="201,71" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Load ProfitAmp Account Entity\Archive ProfitAmp"
+          TopLeft="306,222" />
+        <EdgeLayout
+          Id="Package\Load ProfitAmp Account Entity.Paths[OLE DB Source Output]"
+          TopLeft="283,113">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="104.5,109"
+              Start="0,0"
+              End="104.5,101.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.5"
+                    Point2="0,54.5"
+                    Point3="4,54.5" />
+                  <mssgle:LineSegment
+                    End="100.5,54.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="100.5,54.5"
+                    Point2="104.5,54.5"
+                    Point3="104.5,58.5" />
+                  <mssgle:LineSegment
+                    End="104.5,101.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load ProfitAmp Account Entity\Staging ProfitAmp">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load ProfitAmp Account Entity\Archive ProfitAmp">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

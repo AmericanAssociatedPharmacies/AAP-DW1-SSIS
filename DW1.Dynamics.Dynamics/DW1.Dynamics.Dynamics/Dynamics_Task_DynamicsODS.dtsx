@@ -1,0 +1,2552 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/30/2018 3:25:08 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{E574DF90-73F5-45EA-8D05-8142CA0E6AD7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Dynamics_Task_DynamicsODS"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{B49D5300-21F9-410E-AE5B-6170EFB8AAA2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{96561401-D839-4188-A8A8-79BE3E511FCF}"
+      DTS:ObjectName="AAPDW1.DynamicsODS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=DynamicsODS;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CRM_Task Load"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{554B8ABE-E3C7-4201-8406-511760099DC3}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CRM_Task Load"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CRM_Task Load\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CRM_Task]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CRM_Task Load\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[activityadditionalparams]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="activityadditionalparams"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activityadditionalparams]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activityadditionalparams]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[activityid]"
+                      cachedDataType="guid"
+                      cachedName="activityid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activityid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activityid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[activitytypecode]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="activitytypecode"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activitytypecode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activitytypecode]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[activitytypecodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="activitytypecodename"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activitytypecodename]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activitytypecodename]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[actualdurationminutes]"
+                      cachedDataType="i4"
+                      cachedName="actualdurationminutes"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actualdurationminutes]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualdurationminutes]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[actualend]"
+                      cachedDataType="dbDate"
+                      cachedName="actualend"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actualend]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualend]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[actualstart]"
+                      cachedDataType="dbDate"
+                      cachedName="actualstart"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actualstart]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualstart]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[category]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="category"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[category]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdby]"
+                      cachedDataType="guid"
+                      cachedName="createdby"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdby]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdbyname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="createdbyname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdbyname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdbyname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdbyyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="createdbyyominame"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdbyyominame]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdbyyominame]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdon]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="createdon"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdon]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdon]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdonbehalfby]"
+                      cachedDataType="guid"
+                      cachedName="createdonbehalfby"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdonbehalfby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfby]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdonbehalfbyname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="createdonbehalfbyname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdonbehalfbyname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfbyname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[createdonbehalfbyyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="createdonbehalfbyyominame"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdonbehalfbyyominame]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfbyyominame]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[crmtaskassigneduniqueid]"
+                      cachedDataType="guid"
+                      cachedName="crmtaskassigneduniqueid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crmtaskassigneduniqueid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[crmtaskassigneduniqueid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[description]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="description"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[description]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[exchangerate]"
+                      cachedDataType="numeric"
+                      cachedName="exchangerate"
+                      cachedPrecision="28"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[exchangerate]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[exchangerate]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[importsequencenumber]"
+                      cachedDataType="i4"
+                      cachedName="importsequencenumber"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[importsequencenumber]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[importsequencenumber]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[isbilled]"
+                      cachedDataType="bool"
+                      cachedName="isbilled"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isbilled]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbilled]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[isbilledname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="isbilledname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isbilledname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbilledname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[isregularactivity]"
+                      cachedDataType="bool"
+                      cachedName="isregularactivity"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isregularactivity]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isregularactivity]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[isregularactivityname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="isregularactivityname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isregularactivityname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isregularactivityname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[isworkflowcreated]"
+                      cachedDataType="bool"
+                      cachedName="isworkflowcreated"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isworkflowcreated]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isworkflowcreated]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[isworkflowcreatedname]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="isworkflowcreatedname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isworkflowcreatedname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isworkflowcreatedname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[lastonholdtime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="lastonholdtime"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastonholdtime]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[lastonholdtime]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedby]"
+                      cachedDataType="guid"
+                      cachedName="modifiedby"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedby]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedbyname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="modifiedbyname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedbyname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedbyname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedbyyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="modifiedbyyominame"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedbyyominame]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedbyyominame]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedon]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="modifiedon"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedon]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedon]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedonbehalfby]"
+                      cachedDataType="guid"
+                      cachedName="modifiedonbehalfby"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedonbehalfby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfby]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedonbehalfbyname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="modifiedonbehalfbyname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedonbehalfbyname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfbyname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[modifiedonbehalfbyyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="modifiedonbehalfbyyominame"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedonbehalfbyyominame]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfbyyominame]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[onholdtime]"
+                      cachedDataType="i4"
+                      cachedName="onholdtime"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[onholdtime]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[onholdtime]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[overriddencreatedon]"
+                      cachedDataType="dbDate"
+                      cachedName="overriddencreatedon"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[overriddencreatedon]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ownerid]"
+                      cachedDataType="guid"
+                      cachedName="ownerid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ownerid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[owneridname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="owneridname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owneridname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[owneridtype]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="owneridtype"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owneridtype]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridtype]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[owneridyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="owneridyominame"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owneridyominame]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridyominame]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[owningbusinessunit]"
+                      cachedDataType="guid"
+                      cachedName="owningbusinessunit"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owningbusinessunit]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owningbusinessunit]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[owningteam]"
+                      cachedDataType="guid"
+                      cachedName="owningteam"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owningteam]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owningteam]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[owninguser]"
+                      cachedDataType="guid"
+                      cachedName="owninguser"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owninguser]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owninguser]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[percentcomplete]"
+                      cachedDataType="i4"
+                      cachedName="percentcomplete"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[percentcomplete]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[percentcomplete]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[prioritycode]"
+                      cachedDataType="i4"
+                      cachedName="prioritycode"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[prioritycode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[prioritycode]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[prioritycodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="prioritycodename"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[prioritycodename]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[prioritycodename]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[processid]"
+                      cachedDataType="guid"
+                      cachedName="processid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[processid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[processid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[regardingobjectid]"
+                      cachedDataType="guid"
+                      cachedName="regardingobjectid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjectid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[regardingobjectidname]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="regardingobjectidname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjectidname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectidname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[regardingobjectidyominame]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="regardingobjectidyominame"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjectidyominame]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectidyominame]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[regardingobjecttypecode]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="regardingobjecttypecode"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjecttypecode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjecttypecode]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[scheduleddurationminutes]"
+                      cachedDataType="i4"
+                      cachedName="scheduleddurationminutes"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduleddurationminutes]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduleddurationminutes]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[scheduledend]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="scheduledend"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduledend]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduledend]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[scheduledstart]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="scheduledstart"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduledstart]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduledstart]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[serviceid]"
+                      cachedDataType="guid"
+                      cachedName="serviceid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[serviceid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[serviceid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[slaid]"
+                      cachedDataType="guid"
+                      cachedName="slaid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slaid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slaid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[slainvokedid]"
+                      cachedDataType="guid"
+                      cachedName="slainvokedid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slainvokedid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slainvokedid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[slainvokedidname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="slainvokedidname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slainvokedidname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slainvokedidname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[slaname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="slaname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slaname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slaname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[sortdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="sortdate"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sortdate]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[sortdate]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[stageid]"
+                      cachedDataType="guid"
+                      cachedName="stageid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[stageid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[stageid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[statecode]"
+                      cachedDataType="i4"
+                      cachedName="statecode"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statecode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecode]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[statecodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="statecodename"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statecodename]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecodename]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[statuscode]"
+                      cachedDataType="i4"
+                      cachedName="statuscode"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statuscode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscode]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[statuscodename]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="statuscodename"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statuscodename]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscodename]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[subcategory]"
+                      cachedDataType="wstr"
+                      cachedLength="250"
+                      cachedName="subcategory"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[subcategory]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[subcategory]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[subject]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="subject"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[subject]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[subject]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[timezoneruleversionnumber]"
+                      cachedDataType="i4"
+                      cachedName="timezoneruleversionnumber"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[timezoneruleversionnumber]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[timezoneruleversionnumber]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[transactioncurrencyid]"
+                      cachedDataType="guid"
+                      cachedName="transactioncurrencyid"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyid]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[transactioncurrencyidname]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="transactioncurrencyidname"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyidname]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyidname]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[traversedpath]"
+                      cachedDataType="wstr"
+                      cachedLength="1250"
+                      cachedName="traversedpath"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[traversedpath]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[traversedpath]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[utcconversiontimezonecode]"
+                      cachedDataType="i4"
+                      cachedName="utcconversiontimezonecode"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[utcconversiontimezonecode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[utcconversiontimezonecode]" />
+                    <inputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[versionnumber]"
+                      cachedDataType="i8"
+                      cachedName="versionnumber"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[versionnumber]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[versionnumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activityadditionalparams]"
+                      dataType="wstr"
+                      length="4000"
+                      name="activityadditionalparams" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activityid]"
+                      dataType="guid"
+                      name="activityid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activitytypecode]"
+                      dataType="wstr"
+                      length="250"
+                      name="activitytypecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[activitytypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="activitytypecodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actualdurationminutes]"
+                      dataType="i4"
+                      name="actualdurationminutes" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actualend]"
+                      dataType="dbDate"
+                      name="actualend" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[actualstart]"
+                      dataType="dbDate"
+                      name="actualstart" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="250"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdby]"
+                      dataType="guid"
+                      name="createdby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdon]"
+                      dataType="dbTimeStamp"
+                      name="createdon" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdonbehalfby]"
+                      dataType="guid"
+                      name="createdonbehalfby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdonbehalfbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdonbehalfbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[createdonbehalfbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdonbehalfbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[crmtaskassigneduniqueid]"
+                      dataType="guid"
+                      name="crmtaskassigneduniqueid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="4000"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[exchangerate]"
+                      dataType="numeric"
+                      name="exchangerate"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[importsequencenumber]"
+                      dataType="i4"
+                      name="importsequencenumber" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isbilled]"
+                      dataType="bool"
+                      name="isbilled" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isbilledname]"
+                      dataType="wstr"
+                      length="250"
+                      name="isbilledname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isregularactivity]"
+                      dataType="bool"
+                      name="isregularactivity" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isregularactivityname]"
+                      dataType="wstr"
+                      length="250"
+                      name="isregularactivityname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isworkflowcreated]"
+                      dataType="bool"
+                      name="isworkflowcreated" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[isworkflowcreatedname]"
+                      dataType="wstr"
+                      length="250"
+                      name="isworkflowcreatedname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[lastonholdtime]"
+                      dataType="dbTimeStamp"
+                      name="lastonholdtime" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedby]"
+                      dataType="guid"
+                      name="modifiedby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedon]"
+                      dataType="dbTimeStamp"
+                      name="modifiedon" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedonbehalfby]"
+                      dataType="guid"
+                      name="modifiedonbehalfby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedonbehalfbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedonbehalfbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[modifiedonbehalfbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedonbehalfbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[onholdtime]"
+                      dataType="i4"
+                      name="onholdtime" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[overriddencreatedon]"
+                      dataType="dbDate"
+                      name="overriddencreatedon" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                      dataType="guid"
+                      name="ownerid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owneridname]"
+                      dataType="wstr"
+                      length="100"
+                      name="owneridname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="250"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owneridyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="owneridyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owningbusinessunit]"
+                      dataType="guid"
+                      name="owningbusinessunit" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owningteam]"
+                      dataType="guid"
+                      name="owningteam" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[owninguser]"
+                      dataType="guid"
+                      name="owninguser" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[percentcomplete]"
+                      dataType="i4"
+                      name="percentcomplete" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[prioritycode]"
+                      dataType="i4"
+                      name="prioritycode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[prioritycodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="prioritycodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[processid]"
+                      dataType="guid"
+                      name="processid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjectid]"
+                      dataType="guid"
+                      name="regardingobjectid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjectidname]"
+                      dataType="wstr"
+                      length="4000"
+                      name="regardingobjectidname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjectidyominame]"
+                      dataType="wstr"
+                      length="4000"
+                      name="regardingobjectidyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[regardingobjecttypecode]"
+                      dataType="wstr"
+                      length="250"
+                      name="regardingobjecttypecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduleddurationminutes]"
+                      dataType="i4"
+                      name="scheduleddurationminutes" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduledend]"
+                      dataType="dbTimeStamp"
+                      name="scheduledend" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduledstart]"
+                      dataType="dbTimeStamp"
+                      name="scheduledstart" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[serviceid]"
+                      dataType="guid"
+                      name="serviceid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slaid]"
+                      dataType="guid"
+                      name="slaid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slainvokedid]"
+                      dataType="guid"
+                      name="slainvokedid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slainvokedidname]"
+                      dataType="wstr"
+                      length="100"
+                      name="slainvokedidname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[slaname]"
+                      dataType="wstr"
+                      length="100"
+                      name="slaname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sortdate]"
+                      dataType="dbTimeStamp"
+                      name="sortdate" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[stageid]"
+                      dataType="guid"
+                      name="stageid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="statecodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[statuscodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="statuscodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[subcategory]"
+                      dataType="wstr"
+                      length="250"
+                      name="subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[subject]"
+                      dataType="wstr"
+                      length="200"
+                      name="subject" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      name="timezoneruleversionnumber" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyid]"
+                      dataType="guid"
+                      name="transactioncurrencyid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyidname]"
+                      dataType="wstr"
+                      length="100"
+                      name="transactioncurrencyidname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[traversedpath]"
+                      dataType="wstr"
+                      length="1250"
+                      name="traversedpath" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      name="utcconversiontimezonecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[versionnumber]"
+                      dataType="i8"
+                      name="versionnumber" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CRM_Task Load\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CRM_Task Load\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC dbo.usp_Dynamics_Task_Load</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CRM_Task Load\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.DynamicsODS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activityadditionalparams]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activityadditionalparams]"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activityadditionalparams]"
+                      name="activityadditionalparams"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activityid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activityid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activityid]"
+                      name="activityid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activitytypecode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activitytypecode]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activitytypecode]"
+                      name="activitytypecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activitytypecodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activitytypecodename]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[activitytypecodename]"
+                      name="activitytypecodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualdurationminutes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actualdurationminutes]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualdurationminutes]"
+                      name="actualdurationminutes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualend]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actualend]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualend]"
+                      name="actualend"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualstart]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actualstart]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[actualstart]"
+                      name="actualstart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[category]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[category]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[category]"
+                      name="category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdby]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdby]"
+                      name="createdby"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdbyname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdbyname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdbyname]"
+                      name="createdbyname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdbyyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdbyyominame]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdbyyominame]"
+                      name="createdbyyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdon]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdon]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdon]"
+                      name="createdon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfby]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdonbehalfby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfby]"
+                      name="createdonbehalfby"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfbyname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdonbehalfbyname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfbyname]"
+                      name="createdonbehalfbyname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfbyyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdonbehalfbyyominame]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[createdonbehalfbyyominame]"
+                      name="createdonbehalfbyyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[crmtaskassigneduniqueid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crmtaskassigneduniqueid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[crmtaskassigneduniqueid]"
+                      name="crmtaskassigneduniqueid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[description]"
+                      name="description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[exchangerate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[exchangerate]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[exchangerate]"
+                      name="exchangerate"
+                      precision="28"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[importsequencenumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[importsequencenumber]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[importsequencenumber]"
+                      name="importsequencenumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbilled]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isbilled]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbilled]"
+                      name="isbilled"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbilledname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isbilledname]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isbilledname]"
+                      name="isbilledname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isregularactivity]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isregularactivity]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isregularactivity]"
+                      name="isregularactivity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isregularactivityname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isregularactivityname]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isregularactivityname]"
+                      name="isregularactivityname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isworkflowcreated]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isworkflowcreated]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isworkflowcreated]"
+                      name="isworkflowcreated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isworkflowcreatedname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isworkflowcreatedname]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[isworkflowcreatedname]"
+                      name="isworkflowcreatedname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[lastonholdtime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lastonholdtime]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[lastonholdtime]"
+                      name="lastonholdtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedby]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedby]"
+                      name="modifiedby"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedbyname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedbyname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedbyname]"
+                      name="modifiedbyname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedbyyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedbyyominame]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedbyyominame]"
+                      name="modifiedbyyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedon]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedon]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedon]"
+                      name="modifiedon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfby]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedonbehalfby]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfby]"
+                      name="modifiedonbehalfby"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfbyname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedonbehalfbyname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfbyname]"
+                      name="modifiedonbehalfbyname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfbyyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedonbehalfbyyominame]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifiedonbehalfbyyominame]"
+                      name="modifiedonbehalfbyyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[onholdtime]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[onholdtime]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[onholdtime]"
+                      name="onholdtime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                      name="overriddencreatedon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ownerid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ownerid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[ownerid]"
+                      name="ownerid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridname]"
+                      name="owneridname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridtype]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridtype]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridtype]"
+                      name="owneridtype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridyominame]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owneridyominame]"
+                      name="owneridyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owningbusinessunit]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owningbusinessunit]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owningbusinessunit]"
+                      name="owningbusinessunit"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owningteam]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owningteam]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owningteam]"
+                      name="owningteam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owninguser]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owninguser]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[owninguser]"
+                      name="owninguser"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[percentcomplete]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[percentcomplete]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[percentcomplete]"
+                      name="percentcomplete"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[prioritycode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[prioritycode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[prioritycode]"
+                      name="prioritycode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[prioritycodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[prioritycodename]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[prioritycodename]"
+                      name="prioritycodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[processid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[processid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[processid]"
+                      name="processid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjectid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectid]"
+                      name="regardingobjectid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectidname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjectidname]"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectidname]"
+                      name="regardingobjectidname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectidyominame]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjectidyominame]"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjectidyominame]"
+                      name="regardingobjectidyominame"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjecttypecode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjecttypecode]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[regardingobjecttypecode]"
+                      name="regardingobjecttypecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduleddurationminutes]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[scheduleddurationminutes]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduleddurationminutes]"
+                      name="scheduleddurationminutes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduledend]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[scheduledend]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduledend]"
+                      name="scheduledend"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduledstart]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[scheduledstart]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[scheduledstart]"
+                      name="scheduledstart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[serviceid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[serviceid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[serviceid]"
+                      name="serviceid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slaid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slaid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slaid]"
+                      name="slaid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slainvokedid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slainvokedid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slainvokedid]"
+                      name="slainvokedid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slainvokedidname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slainvokedidname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slainvokedidname]"
+                      name="slainvokedidname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slaname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slaname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[slaname]"
+                      name="slaname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[sortdate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sortdate]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[sortdate]"
+                      name="sortdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[stageid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[stageid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[stageid]"
+                      name="stageid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statecode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecode]"
+                      name="statecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statecodename]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statecodename]"
+                      name="statecodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statuscode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscode]"
+                      name="statuscode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscodename]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statuscodename]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[statuscodename]"
+                      name="statuscodename"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[subcategory]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[subcategory]"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[subcategory]"
+                      name="subcategory"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[subject]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[subject]"
+                      length="200"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[subject]"
+                      name="subject"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[timezoneruleversionnumber]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[timezoneruleversionnumber]"
+                      name="timezoneruleversionnumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyid]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[transactioncurrencyid]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyid]"
+                      name="transactioncurrencyid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyidname]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[transactioncurrencyidname]"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyidname]"
+                      name="transactioncurrencyidname"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[traversedpath]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[traversedpath]"
+                      length="1250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[traversedpath]"
+                      name="traversedpath"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[utcconversiontimezonecode]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[utcconversiontimezonecode]"
+                      name="utcconversiontimezonecode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[versionnumber]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[versionnumber]"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].Columns[versionnumber]"
+                      name="versionnumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activityadditionalparams]"
+                      dataType="wstr"
+                      length="4000"
+                      name="activityadditionalparams" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activityid]"
+                      dataType="guid"
+                      name="activityid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activitytypecode]"
+                      dataType="wstr"
+                      length="250"
+                      name="activitytypecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[activitytypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="activitytypecodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actualdurationminutes]"
+                      dataType="i4"
+                      name="actualdurationminutes" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actualend]"
+                      dataType="dbDate"
+                      name="actualend" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[actualstart]"
+                      dataType="dbDate"
+                      name="actualstart" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[category]"
+                      dataType="wstr"
+                      length="250"
+                      name="category" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdby]"
+                      dataType="guid"
+                      name="createdby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdon]"
+                      dataType="dbTimeStamp"
+                      name="createdon" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdonbehalfby]"
+                      dataType="guid"
+                      name="createdonbehalfby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdonbehalfbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdonbehalfbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[createdonbehalfbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="createdonbehalfbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[crmtaskassigneduniqueid]"
+                      dataType="guid"
+                      name="crmtaskassigneduniqueid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[description]"
+                      dataType="wstr"
+                      length="4000"
+                      name="description" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[exchangerate]"
+                      dataType="numeric"
+                      name="exchangerate"
+                      precision="28" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[importsequencenumber]"
+                      dataType="i4"
+                      name="importsequencenumber" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isbilled]"
+                      dataType="bool"
+                      name="isbilled" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isbilledname]"
+                      dataType="wstr"
+                      length="250"
+                      name="isbilledname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isregularactivity]"
+                      dataType="bool"
+                      name="isregularactivity" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isregularactivityname]"
+                      dataType="wstr"
+                      length="250"
+                      name="isregularactivityname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isworkflowcreated]"
+                      dataType="bool"
+                      name="isworkflowcreated" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[isworkflowcreatedname]"
+                      dataType="wstr"
+                      length="250"
+                      name="isworkflowcreatedname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[lastonholdtime]"
+                      dataType="dbTimeStamp"
+                      name="lastonholdtime" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedby]"
+                      dataType="guid"
+                      name="modifiedby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedon]"
+                      dataType="dbTimeStamp"
+                      name="modifiedon" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedonbehalfby]"
+                      dataType="guid"
+                      name="modifiedonbehalfby" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedonbehalfbyname]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedonbehalfbyname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifiedonbehalfbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="modifiedonbehalfbyyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[onholdtime]"
+                      dataType="i4"
+                      name="onholdtime" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                      dataType="dbDate"
+                      name="overriddencreatedon" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ownerid]"
+                      dataType="guid"
+                      name="ownerid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridname]"
+                      dataType="wstr"
+                      length="100"
+                      name="owneridname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridtype]"
+                      dataType="wstr"
+                      length="250"
+                      name="owneridtype" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owneridyominame]"
+                      dataType="wstr"
+                      length="100"
+                      name="owneridyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owningbusinessunit]"
+                      dataType="guid"
+                      name="owningbusinessunit" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owningteam]"
+                      dataType="guid"
+                      name="owningteam" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[owninguser]"
+                      dataType="guid"
+                      name="owninguser" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[percentcomplete]"
+                      dataType="i4"
+                      name="percentcomplete" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[prioritycode]"
+                      dataType="i4"
+                      name="prioritycode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[prioritycodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="prioritycodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[processid]"
+                      dataType="guid"
+                      name="processid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjectid]"
+                      dataType="guid"
+                      name="regardingobjectid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjectidname]"
+                      dataType="wstr"
+                      length="4000"
+                      name="regardingobjectidname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjectidyominame]"
+                      dataType="wstr"
+                      length="4000"
+                      name="regardingobjectidyominame" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[regardingobjecttypecode]"
+                      dataType="wstr"
+                      length="250"
+                      name="regardingobjecttypecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[scheduleddurationminutes]"
+                      dataType="i4"
+                      name="scheduleddurationminutes" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[scheduledend]"
+                      dataType="dbTimeStamp"
+                      name="scheduledend" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[scheduledstart]"
+                      dataType="dbTimeStamp"
+                      name="scheduledstart" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[serviceid]"
+                      dataType="guid"
+                      name="serviceid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slaid]"
+                      dataType="guid"
+                      name="slaid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slainvokedid]"
+                      dataType="guid"
+                      name="slainvokedid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slainvokedidname]"
+                      dataType="wstr"
+                      length="100"
+                      name="slainvokedidname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[slaname]"
+                      dataType="wstr"
+                      length="100"
+                      name="slaname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[sortdate]"
+                      dataType="dbTimeStamp"
+                      name="sortdate" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[stageid]"
+                      dataType="guid"
+                      name="stageid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statecode]"
+                      dataType="i4"
+                      name="statecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statecodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="statecodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statuscode]"
+                      dataType="i4"
+                      name="statuscode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[statuscodename]"
+                      dataType="wstr"
+                      length="250"
+                      name="statuscodename" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[subcategory]"
+                      dataType="wstr"
+                      length="250"
+                      name="subcategory" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[subject]"
+                      dataType="wstr"
+                      length="200"
+                      name="subject" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      name="timezoneruleversionnumber" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[transactioncurrencyid]"
+                      dataType="guid"
+                      name="transactioncurrencyid" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[transactioncurrencyidname]"
+                      dataType="wstr"
+                      length="100"
+                      name="transactioncurrencyidname" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[traversedpath]"
+                      dataType="wstr"
+                      length="1250"
+                      name="traversedpath" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      name="utcconversiontimezonecode" />
+                    <externalMetadataColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[versionnumber]"
+                      dataType="i8"
+                      name="versionnumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[DateKey]"
+                      name="DateKey" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activityadditionalparams]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activityadditionalparams]"
+                      name="activityadditionalparams" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activityid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activityid]"
+                      name="activityid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activitytypecode]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activitytypecode]"
+                      name="activitytypecode" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activitytypecodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[activitytypecodename]"
+                      name="activitytypecodename" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actualdurationminutes]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actualdurationminutes]"
+                      name="actualdurationminutes" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actualend]"
+                      dataType="dbDate"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actualend]"
+                      name="actualend" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actualstart]"
+                      dataType="dbDate"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[actualstart]"
+                      name="actualstart" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[category]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[category]"
+                      name="category" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdby]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdby]"
+                      name="createdby" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdbyname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdbyname]"
+                      name="createdbyname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdbyyominame]"
+                      name="createdbyyominame" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdon]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdon]"
+                      name="createdon" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdonbehalfby]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdonbehalfby]"
+                      name="createdonbehalfby" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdonbehalfbyname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdonbehalfbyname]"
+                      name="createdonbehalfbyname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdonbehalfbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[createdonbehalfbyyominame]"
+                      name="createdonbehalfbyyominame" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crmtaskassigneduniqueid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[crmtaskassigneduniqueid]"
+                      name="crmtaskassigneduniqueid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[description]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[description]"
+                      name="description" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[exchangerate]"
+                      dataType="numeric"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[exchangerate]"
+                      name="exchangerate"
+                      precision="28" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[importsequencenumber]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[importsequencenumber]"
+                      name="importsequencenumber" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isbilled]"
+                      dataType="bool"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isbilled]"
+                      name="isbilled" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isbilledname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isbilledname]"
+                      name="isbilledname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isregularactivity]"
+                      dataType="bool"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isregularactivity]"
+                      name="isregularactivity" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isregularactivityname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isregularactivityname]"
+                      name="isregularactivityname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isworkflowcreated]"
+                      dataType="bool"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isworkflowcreated]"
+                      name="isworkflowcreated" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isworkflowcreatedname]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[isworkflowcreatedname]"
+                      name="isworkflowcreatedname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lastonholdtime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[lastonholdtime]"
+                      name="lastonholdtime" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedby]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedby]"
+                      name="modifiedby" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedbyname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedbyname]"
+                      name="modifiedbyname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedbyyominame]"
+                      name="modifiedbyyominame" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedon]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedon]"
+                      name="modifiedon" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedonbehalfby]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedonbehalfby]"
+                      name="modifiedonbehalfby" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedonbehalfbyname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedonbehalfbyname]"
+                      name="modifiedonbehalfbyname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedonbehalfbyyominame]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifiedonbehalfbyyominame]"
+                      name="modifiedonbehalfbyyominame" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[onholdtime]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[onholdtime]"
+                      name="onholdtime" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                      dataType="dbDate"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                      name="overriddencreatedon" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ownerid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ownerid]"
+                      name="ownerid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridname]"
+                      name="owneridname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridtype]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridtype]"
+                      name="owneridtype" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridyominame]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owneridyominame]"
+                      name="owneridyominame" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owningbusinessunit]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owningbusinessunit]"
+                      name="owningbusinessunit" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owningteam]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owningteam]"
+                      name="owningteam" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owninguser]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[owninguser]"
+                      name="owninguser" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[percentcomplete]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[percentcomplete]"
+                      name="percentcomplete" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[prioritycode]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[prioritycode]"
+                      name="prioritycode" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[prioritycodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[prioritycodename]"
+                      name="prioritycodename" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[processid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[processid]"
+                      name="processid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjectid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjectid]"
+                      name="regardingobjectid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjectidname]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjectidname]"
+                      name="regardingobjectidname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjectidyominame]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjectidyominame]"
+                      name="regardingobjectidyominame" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjecttypecode]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[regardingobjecttypecode]"
+                      name="regardingobjecttypecode" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[scheduleddurationminutes]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[scheduleddurationminutes]"
+                      name="scheduleddurationminutes" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[scheduledend]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[scheduledend]"
+                      name="scheduledend" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[scheduledstart]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[scheduledstart]"
+                      name="scheduledstart" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[serviceid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[serviceid]"
+                      name="serviceid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slaid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slaid]"
+                      name="slaid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slainvokedid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slainvokedid]"
+                      name="slainvokedid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slainvokedidname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slainvokedidname]"
+                      name="slainvokedidname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slaname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[slaname]"
+                      name="slaname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sortdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[sortdate]"
+                      name="sortdate" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[stageid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[stageid]"
+                      name="stageid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statecode]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statecode]"
+                      name="statecode" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statecodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statecodename]"
+                      name="statecodename" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statuscode]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statuscode]"
+                      name="statuscode" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statuscodename]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[statuscodename]"
+                      name="statuscodename" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[subcategory]"
+                      dataType="wstr"
+                      length="250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[subcategory]"
+                      name="subcategory" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[subject]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[subject]"
+                      name="subject" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[timezoneruleversionnumber]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[timezoneruleversionnumber]"
+                      name="timezoneruleversionnumber" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[transactioncurrencyid]"
+                      dataType="guid"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[transactioncurrencyid]"
+                      name="transactioncurrencyid" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[transactioncurrencyidname]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[transactioncurrencyidname]"
+                      name="transactioncurrencyidname" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[traversedpath]"
+                      dataType="wstr"
+                      length="1250"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[traversedpath]"
+                      name="traversedpath" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[utcconversiontimezonecode]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[utcconversiontimezonecode]"
+                      name="utcconversiontimezonecode" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[versionnumber]"
+                      dataType="i8"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[versionnumber]"
+                      name="versionnumber" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CRM_Task Load.Paths[OLE DB Source Output]"
+              endId="Package\CRM_Task Load\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\CRM_Task Load\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\CRM_Task Load"
+          TopLeft="393,111" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CRM_Task Load">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\CRM_Task Load\OLE DB Source"
+          TopLeft="236,104" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\CRM_Task Load\OLE DB Destination"
+          TopLeft="298,221" />
+        <EdgeLayout
+          Id="Package\CRM_Task Load.Paths[OLE DB Source Output]"
+          TopLeft="311,146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="72.5,75"
+              Start="0,0"
+              End="72.5,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="68.5,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="68.5,37.5"
+                    Point2="72.5,37.5"
+                    Point3="72.5,41.5" />
+                  <mssgle:LineSegment
+                    End="72.5,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CRM_Task Load\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CRM_Task Load\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
