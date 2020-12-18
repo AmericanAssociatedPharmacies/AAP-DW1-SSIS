@@ -1,0 +1,905 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/25/2019 9:01:50 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N097"
+  DTS:CreatorName="AAP\yhaile"
+  DTS:DTSID="{B55ABBDA-059B-4F6A-B3BE-6F9335F437C2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="APIOrder_DB1_DW1_Old"
+  DTS:PackageType="5"
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{CF7057BA-9C76-4C57-82C7-DD8CD9B2F2B6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.API]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D93E5995-99EC-4D20-8328-E1D2309837AF}"
+      DTS:ObjectName="AAPDW1.API">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=API;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=32767;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DB1.API]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CD68466A-144B-458E-8A3E-9469A3BB95A6}"
+      DTS:ObjectName="DB1.API">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DB1;Initial Catalog=API;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Packet Size=32767;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{475DB22D-6132-4946-B80C-CA51449D64A1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{85C34313-C623-49AF-A838-06C55C6ADF4A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varMaxRowversionID">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{3BA32A5C-0B82-4A8A-893A-088813035BFE}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{D21B356C-0D33-446B-8BD0-1C55CC3A0A40}"
+        DTS:ObjectName="{D21B356C-0D33-446B-8BD0-1C55CC3A0A40}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{25E209AA-DEA5-42D9-953B-B0366C353E89}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Xfer data from DB1 to DW1"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="DB1"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[APIOrder]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC dbo.usp_APIOrder
+
+	@MAXRowversionID = ?</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping">"@MAXRowversionID:Input",{85C34313-C623-49AF-A838-06C55C6ADF4A};</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DB1.API]"
+                      connectionManagerRefId="Package.ConnectionManagers[DB1.API]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[OrderNumber]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[OrderNumber]"
+                          name="OrderNumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[API_Item_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[API_Item_Number]"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[API_Item_Number]"
+                          name="API_Item_Number"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Quantity]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Quantity]"
+                          name="Quantity"
+                          precision="18"
+                          scale="2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[OrderDate]"
+                          name="OrderDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[ItemDesc]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[ItemDesc]"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[ItemDesc]"
+                          name="ItemDesc"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[RowVersionID]"
+                          dataType="bytes"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowVersionID]"
+                          length="8"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[RowVersionID]"
+                          name="RowVersionID"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="OrderNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[API_Item_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="API_Item_Number" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                          dataType="numeric"
+                          name="Quantity"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[OrderDate]"
+                          dataType="dbDate"
+                          name="OrderDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[ItemDesc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ItemDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].ExternalColumns[RowVersionID]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowVersionID" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[OrderNumber]"
+                          name="OrderNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[API_Item_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[API_Item_Number]"
+                          name="API_Item_Number" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                          dataType="numeric"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                          name="Quantity"
+                          precision="18"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                          dataType="dbDate"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[OrderDate]"
+                          name="OrderDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ItemDesc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ItemDesc]"
+                          name="ItemDesc" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[RowVersionID]"
+                          dataType="bytes"
+                          length="8"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[RowVersionID]"
+                          name="RowVersionID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="DW1"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Staging].[APIOrder]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">true</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.API]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.API]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[OrderNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="OrderNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[OrderNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[API_Item_Number]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="API_Item_Number"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[API_Item_Number]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[API_Item_Number]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                          cachedDataType="numeric"
+                          cachedName="Quantity"
+                          cachedPrecision="18"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[OrderDate]"
+                          cachedDataType="dbDate"
+                          cachedName="OrderDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[OrderDate]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[OrderDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].Columns[ItemDesc]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ItemDesc"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ItemDesc]"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output].Columns[ItemDesc]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="OrderNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[API_Item_Number]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="API_Item_Number" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                          dataType="numeric"
+                          name="Quantity"
+                          precision="18"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[OrderDate]"
+                          dataType="dbDate"
+                          name="OrderDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[ItemDesc]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ItemDesc" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input].ExternalColumns[RowversionID]"
+                          dataType="bytes"
+                          length="8"
+                          name="RowversionID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Xfer data from DB1 to DW1.Paths[OLE DB Source Output]"
+                  endId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1.Inputs[OLE DB Destination Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{A5B171E3-CF18-493F-B7D0-347BE843CAEB}"
+          DTS:ObjectName="{A5B171E3-CF18-493F-B7D0-347BE843CAEB}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varMaxRowversionID" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get MAX RowversionID from DW1"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{476178BD-3BE3-4395-852C-A3D6C4AF38B6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get MAX RowversionID from DW1"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get MAX RowversionID from DW1\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC dbo.usp_APIOrder_GetMaxRowVersionID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.API]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.API]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[MaxRowverionsID]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MaxRowverionsID]"
+                      length="50"
+                      lineageId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[MaxRowverionsID]"
+                      name="MaxRowverionsID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[MaxRowverionsID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MaxRowverionsID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MaxRowverionsID]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[MaxRowverionsID]"
+                      name="MaxRowverionsID" />
+                    <outputColumn
+                      refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get MAX RowversionID from DW1\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get MAX RowversionID from DW1\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get MAX RowversionID from DW1\Recordset Destination.Inputs[Recordset Destination Input].Columns[MaxRowverionsID]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MaxRowverionsID"
+                      lineageId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output].Columns[MaxRowverionsID]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get MAX RowversionID from DW1.Paths[OLE DB Source Output]"
+              endId="Package\Get MAX RowversionID from DW1\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get MAX RowversionID from DW1\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C0E99934-EEB9-4471-B0D6-0A342C5903F8}"
+      DTS:From="Package\Get MAX RowversionID from DW1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Foreach Loop Container\Xfer data from DB1 to DW1"
+          TopLeft="22.5,20" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="246,118"
+          Size="246,161"
+          Id="Package\Foreach Loop Container"
+          TopLeft="492,150" />
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Get MAX RowversionID from DW1"
+          TopLeft="414,35" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="533.5,77">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="81.5,73"
+              Start="0,0"
+              End="81.5,65.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.5"
+                    Point2="0,36.5"
+                    Point3="4,36.5" />
+                  <mssgle:LineSegment
+                    End="77.5,36.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="77.5,36.5"
+                    Point2="81.5,36.5"
+                    Point3="81.5,40.5" />
+                  <mssgle:LineSegment
+                    End="81.5,65.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Xfer data from DB1 to DW1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="102,42"
+          Id="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1"
+          TopLeft="534,266" />
+        <NodeLayout
+          Size="98,42"
+          Id="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1"
+          TopLeft="535,137" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Xfer data from DB1 to DW1.Paths[OLE DB Source Output]"
+          TopLeft="584.5,179">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,87"
+              Start="0,0"
+              End="0,79.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,79.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DB1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Xfer data from DB1 to DW1\DW1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get MAX RowversionID from DW1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get MAX RowversionID from DW1\Recordset Destination"
+          TopLeft="405,199" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get MAX RowversionID from DW1\OLE DB Source"
+          TopLeft="324,99" />
+        <EdgeLayout
+          Id="Package\Get MAX RowversionID from DW1.Paths[OLE DB Source Output]"
+          TopLeft="399,141">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="97,58"
+              Start="0,0"
+              End="97,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25"
+                    Point2="0,29"
+                    Point3="4,29" />
+                  <mssgle:LineSegment
+                    End="93,29" />
+                  <mssgle:CubicBezierSegment
+                    Point1="93,29"
+                    Point2="97,29"
+                    Point3="97,33" />
+                  <mssgle:LineSegment
+                    End="97,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get MAX RowversionID from DW1\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
