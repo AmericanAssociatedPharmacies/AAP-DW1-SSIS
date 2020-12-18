@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{159641D6-6404-4A2A-AE62-294DE0FE8301}") = "DW1.DynamicsODS.Test", "DW1.DynamicsODS.Test\DW1.DynamicsODS.Test.dtproj", "{0CD0F569-657F-4C15-A7DB-ED0F1D3A90FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CD0F569-657F-4C15-A7DB-ED0F1D3A90FE}.Development|Default.ActiveCfg = Development
+		{0CD0F569-657F-4C15-A7DB-ED0F1D3A90FE}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

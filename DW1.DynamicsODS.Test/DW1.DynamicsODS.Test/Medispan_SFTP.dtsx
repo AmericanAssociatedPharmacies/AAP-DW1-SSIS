@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/11/2019 10:03:03 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAPSEDWARDS"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{E2F5854F-846B-466D-A886-D345C7B53A02}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Medispan_SFTP"
+  DTS:PackageType="5"
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{079254FF-DF38-4ECD-8C94-E5D2AB354BA2}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FTP Connection Manager]"
+      DTS:CreationName="FTP"
+      DTS:DTSID="{E4917C85-21DD-4749-816E-956285F65013}"
+      DTS:ObjectName="FTP Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="ftp.drugfacts.com:21">
+          <DTS:FtpConnection
+            DTS:ServerName="ftp.drugfacts.com"
+            DTS:ServerUserName="1407711049"
+            DTS:ChunkSize="1000"
+            DTS:TimeOut="180">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAB2p+rjsWEkyFtv3gKspq8gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAABw3Vh0kYFaSmVFYP2yB1NuAAAAAASAAACgAAAAEAAAAJ1pKid1gihwza6ioIJhV5EYAAAAwoiKU1SpNEsnfsbdYvhgxJCPmLCr7/sdFAAAAMuuRgflPActlY3NhXx1YNRksWol</DTS:Property>
+          </DTS:FtpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8DAF6205-93F6-432E-BC28-9CD9CA5DF3B8}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFolderDestination">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\Medispan\FTPDownload\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EB60E881-3542-46D9-A26E-D416B905F371}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPFileNameAndExtension">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{15B60502-9E58-46A4-AFE7-F3555E97CFBA}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::varFTPWorkingDir] +  @[User::varFTPFileNameAndExtension]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPRemoteFile">
+      <DTS:VariableValue
+        DTS:DataType="8">/Medispan/1407711049/</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{24B39D9C-B452-4644-8E88-15B20E3898E1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPRemotePath">
+      <DTS:VariableValue
+        DTS:DataType="8">/Medispan/1407711049/*.*</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DCD01942-68F7-47D2-B4B8-D8631A0D8B03}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPWorkingDir">
+      <DTS:VariableValue
+        DTS:DataType="8">/Medispan/1407711049/</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables />
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147,42"
+          Id="{33BCBE64-6590-46FE-9467-F413B61DA5DF}"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="194,42"
+          Id="{D5BE6585-CD79-4503-86F9-F5958A9AE037}"
+          TopLeft="5.5,87" />
+        <EdgeLayout
+          Id="{7EC6BA6D-930D-4838-930A-90F09CCB5F70}"
+          TopLeft="79,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23.5,39.5"
+              Start="0,0"
+              End="23.5,32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.75"
+                    Point2="0,19.75"
+                    Point3="4,19.75" />
+                  <mssgle:LineSegment
+                    End="19.5,19.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.5,19.75"
+                    Point2="23.5,19.75"
+                    Point3="23.5,23.75" />
+                  <mssgle:LineSegment
+                    End="23.5,32" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="204,182"
+          Size="204,225"
+          Id="{7601D0DF-AF48-48AA-9272-A80A6FB6F9A9}"
+          TopLeft="408,146" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
