@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/31/2018 9:34:39 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{355EBBBD-8DDC-4C9E-96EA-F81537BF2AFB}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CHAAPImport_DownloadFTP"
+  DTS:PackageType="5"
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{AFAEAEDF-E6E7-4FAB-800B-70BAA107A2AE}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CAH]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{C200AB72-BDC4-423B-BC06-D44AB7A5543B}"
+      DTS:ObjectName="CAH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\CAH" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CHAAPImport]"
+      DTS:CreationName="FILE"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{5A09047F-F4EA-412B-AD24-E5C6F485BBE9}"
+      DTS:ObjectName="CHAAPImport">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::varLocalPath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="\\\\fs1.aap.local\\Server\\IT Department\\Cardinal\\CHAAPImport" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FTP5]"
+      DTS:CreationName="FTP"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{EB99FF02-73DE-46ED-A782-D1399BD070EA}"
+      DTS:ObjectName="FTP5">
+      <DTS:PropertyExpression
+        DTS:Name="ServerPassword">@[User::varFTPpw]</DTS:PropertyExpression>
+      <DTS:PropertyExpression
+        DTS:Name="ServerUserName">@[User::varFTPUserName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="ftp5.rxaap.com:21">
+          <DTS:FtpConnection
+            DTS:ServerName="ftp5.rxaap.com"
+            DTS:ServerUserName="cardinal2"
+            DTS:ChunkSize="1000"
+            DTS:TimeOut="120">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAB2p+rjsWEkyFtv3gKspq8gAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAdOsTiAeXxGZ0x34SM056JAAAAAASAAACgAAAAEAAAAGoMW84vfX1bIAjiHpXOA6cYAAAAs1NNoowE+av86y6MfU3L9OPXrRJuZyHLFAAAAOr3lqIKMxVrGynBHFQJALL0vz6g</DTS:Property>
+          </DTS:FtpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[\\fs1.aap.local\Server\IT Department\Cardinal\CHAAPImport]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{D74027E3-AB79-4145-9F8B-F13F47E9449D}"
+      DTS:ObjectName="\\fs1.aap.local\Server\IT Department\Cardinal\CHAAPImport">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="\\fs1.aap.local\Server\IT Department\Cardinal\CHAAPImport\" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{17EE5212-D9F2-4A30-8092-837468F21841}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPpw">
+      <DTS:VariableValue
+        DTS:DataType="8">udi54693</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3F179DF1-EA21-4EFA-90D2-461FB03AAA2B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFTPUserName">
+      <DTS:VariableValue
+        DTS:DataType="8">cardinal2</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E7B173CD-DF27-4418-9AC3-7EA7C9631DB1}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varLocalPath">
+      <DTS:VariableValue
+        DTS:DataType="8">\\\\fs1.aap.local\\Server\\IT Department\\Cardinal\\CHAAPImport</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B496260F-13FA-4109-A8F2-776FE1E39063}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varRemotePath">
+      <DTS:VariableValue
+        DTS:DataType="8">/cardinal2/*.txt</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete files"
+      DTS:CreationName="SSIS.ReplacementTask"
+      DTS:Description="File Transfer Task"
+      DTS:Disabled="True"
+      DTS:DTSID="{CDD1A7F9-7E04-4EFC-9D43-AB82AB76C2A1}"
+      DTS:ExecutableType="SSIS.ReplacementTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete files"
+      DTS:TaskContact="File Transfer Task; COZYROC LLC; SSIS+; © 2006-2018 COZYROC LLC; All Rights Reserved; http://www.cozyroc.com/;">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileTransferData
+          Connection="{7755C483-5A07-4C6D-8F78-176B8B7A4006}"
+          StopOnFailure="True"
+          Action="RemoveRemoteFiles"
+          IsLocalVariable="False"
+          Local=""
+          IsRemoteVariable="False"
+          Remote="/cardinal2/*.txt"
+          OverwriteExisting="False"
+          Result=""
+          ExtendedRemoteFileInfo="True"
+          IsRemoteWildcard="True"
+          NoFilesFail="True"
+          IncludeSubfolders="False"
+          IsFilterVariable="False"
+          Filter=""
+          RemotePathSeparator="/" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download files from FTP Server"
+      DTS:CreationName="SSIS.ReplacementTask"
+      DTS:Description="File Transfer Task"
+      DTS:DTSID="{ACE7021C-19CE-4713-B5C7-350728A56247}"
+      DTS:ExecutableType="SSIS.ReplacementTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download files from FTP Server"
+      DTS:TaskContact="File Transfer Task; COZYROC LLC; SSIS+; © 2006-2018 COZYROC LLC; All Rights Reserved; http://www.cozyroc.com/;">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileTransferData
+          Connection="{7755C483-5A07-4C6D-8F78-176B8B7A4006}"
+          StopOnFailure="True"
+          Action="ReceiveFiles"
+          IsLocalVariable="False"
+          Local="{D74027E3-AB79-4145-9F8B-F13F47E9449D}"
+          IsRemoteVariable="False"
+          Remote="/cardinal2/*.txt"
+          OverwriteExisting="True"
+          Result=""
+          ExtendedRemoteFileInfo="True"
+          IsRemoteWildcard="True"
+          NoFilesFail="True"
+          IncludeSubfolders="False"
+          IsFilterVariable="False"
+          Filter=""
+          RemotePathSeparator="/" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{73276ECA-1D56-42D8-8B30-D730180B2E25}"
+      DTS:From="Package\Download files from FTP Server"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Delete files" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Delete files"
+          TopLeft="867,271" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="956.5,236">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-8,35"
+              Start="0,0"
+              End="-8,27.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5"
+                    Point2="0,17.5"
+                    Point3="-4,17.5" />
+                  <mssgle:LineSegment
+                    End="-4,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-4,17.5"
+                    Point2="-8,17.5"
+                    Point3="-8,21.5" />
+                  <mssgle:LineSegment
+                    End="-8,27.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="227,42"
+          Id="Package\Download files from FTP Server"
+          TopLeft="843,194" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

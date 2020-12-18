@@ -1,0 +1,3748 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/12/2017 9:53:23 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAP-N202"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{E947DDDD-7071-4C9A-AA6C-D763620FE49E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CHAAP_ODSIntake_FileLoad"
+  DTS:PackageType="5"
+  DTS:VersionBuild="101"
+  DTS:VersionGUID="{3758231D-B80B-4D1B-BBF5-A0A392008497}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{13378472-D104-4046-8C18-BB01509BEC8A}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{52204AC1-87BE-4DF5-8A15-6A7CCEB60D27}"
+      DTS:ObjectName="varFileDir">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">\\db1\c$\Rx30\Staging\</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{55E3CE57-A929-433C-92BF-FDF3081D6BA8}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ADORecordSet">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BA705F98-10DA-4329-9BA2-75D83E581BC4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varFileDir">
+      <DTS:VariableValue
+        DTS:DataType="8">\\fs1.aap.local\Server\IT Department\Cardinal\CHAAPImport</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F3E0F25E-55CC-493E-B2A0-5175D3E4AE75}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="varStagingFile">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:DelayValidation="True"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{19F1AF18-3E6F-4B47-8724-34949C8D8D8D}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{A68A985B-18A2-4CD6-9BBB-76D9E737266C}"
+        DTS:ObjectName="{A68A985B-18A2-4CD6-9BBB-76D9E737266C}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::ADORecordSet" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Delete file"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:DelayValidation="True"
+          DTS:Description="File System Task"
+          DTS:DTSID="{B4448687-37DF-4AA4-845C-E042777FAA4E}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete file"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteFile"
+              TaskSourcePath="User::varStagingFile"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Parse and load file"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{812D0F87-B28D-4F44-9E62-39B51E9A3F4E}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Parse and load file"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Parse and load file\ErrorOut"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="ErrorOut"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Error].[ErrorOutput]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].Columns[ErrorDateTime]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ErrorDateTime"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDateTime]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorDateTime]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].Columns[FQNFileName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1000"
+                          cachedName="FQNFileName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[FQNFileName]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[FQNFileName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].Columns[FileErrorRowNumber]"
+                          cachedDataType="i4"
+                          cachedName="FileErrorRowNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[FileErrorRowNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[FileErrorRowNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].Columns[ErrorData]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="ErrorData"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[ErrorData]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorData]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].Columns[ErrorDescription]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="8000"
+                          cachedName="ErrorDescription"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDescription]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorDescription]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDateTime]"
+                          dataType="dbTimeStamp"
+                          name="ErrorDateTime" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[FQNFileName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          name="FQNFileName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[FileErrorRowNumber]"
+                          dataType="i4"
+                          name="FileErrorRowNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[ErrorData]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="ErrorData" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[ErrorDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          name="ErrorDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Staging].[CHAAPImport]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FileRowID]"
+                          cachedDataType="i4"
+                          cachedName="FileRowID"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[FileRowID]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="DC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DC]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[DC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="CustomerName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CustomerName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CustomerNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="CustomerNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CustomerNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ItemNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Store]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Store"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Store]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Store]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NDC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="NDC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[NDC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemType]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="ItemType"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemType]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemType]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ItemDescr]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ItemDescr"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescr]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemDescr]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GenericName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="GenericName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GenericName]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[GenericName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TradeName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="TradeName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TradeName]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[TradeName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InvDate]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="InvDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvDate]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InvoiceNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="InvoiceNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvoiceNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Type]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Type"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Type]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OrderQty]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="OrderQty"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[OrderQty]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ShipQty]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ShipQty"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipQty]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ShipQty]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UnitCost]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="UnitCost"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitCost]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[UnitCost]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ExtCost]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ExtCost"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExtCost]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ExtCost]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CorpAWP]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="CorpAWP"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CorpAWP]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CorpAWP]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[WAC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="WAC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WAC]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[WAC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VendorName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="VendorName"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VendorName]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[VendorName]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[UPC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="UPC"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UPC]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[UPC]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ContractFlag]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ContractFlag"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractFlag]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContractFlag]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Brand]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Brand"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Brand]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Brand]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GenericCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="GenericCode"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GenericCode]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[GenericCode]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Strength]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Strength"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Strength]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Strength]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ShortCode]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ShortCode"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShortCode]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ShortCode]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Encoding]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="Encoding"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Encoding]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Encoding]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ContractNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ContractNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContractNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ContrDescr]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="ContrDescr"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContrDescr]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContrDescr]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OrderNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="OrderNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[OrderNumber]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FileProcessed]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1000"
+                          cachedName="FileProcessed"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[FileProcessed]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DEA]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="DEA"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DEA]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[DEA]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[InvoiceLineNumber]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="500"
+                          cachedName="InvoiceLineNumber"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceLineNumber]"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvoiceLineNumber]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                          dataType="i4"
+                          name="RowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                          dataType="i4"
+                          name="FileRowID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="DC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="CustomerName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CustomerNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="CustomerNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ItemNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Store]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Store" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="NDC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ItemType" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescr]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ItemDescr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GenericName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="GenericName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TradeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="TradeName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="InvDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="InvoiceNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Type" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="OrderQty" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShipQty]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ShipQty" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UnitCost]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="UnitCost" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ExtCost]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ExtCost" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CorpAWP]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="CorpAWP" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WAC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="WAC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[VendorName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="VendorName" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UPC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="UPC" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractFlag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ContractFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Brand]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Brand" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[GenericCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="GenericCode" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Strength]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Strength" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ShortCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ShortCode" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Encoding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="Encoding" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContractNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ContractNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ContrDescr]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="ContrDescr" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="OrderNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="RowCreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ROWVERSIONID]"
+                          dataType="bytes"
+                          length="8"
+                          name="ROWVERSIONID" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          name="FileProcessed" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DEA]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="DEA" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceLineNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          name="InvoiceLineNumber" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;8"
+                  description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+                  name="ParseFlatFile"
+                  version="10">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Stores the source code of the component"
+                      isArray="true"
+                      name="SourceCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="30">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public CHAAPImportOutBuffer CHAAPImportOutBuffer;
+
+    public ErrorOutBuffer ErrorOutBuffer;
+
+    public virtual void FinishOutputs()
+    {
+    }
+
+    private void MarkOutputsFinished()
+    {
+
+        if (null != CHAAPImportOutBuffer)
+        {
+            CHAAPImportOutBuffer.SetEndOfRowset();
+            CHAAPImportOutBuffer = null;
+        }
+
+        if (null != ErrorOutBuffer)
+        {
+            ErrorOutBuffer.SetEndOfRowset();
+            ErrorOutBuffer = null;
+        }
+
+    }
+
+    public override void PrimeOutput(int Outputs, int[] OutputIDs, PipelineBuffer[] Buffers, OutputNameMap OutputMap)
+    {
+       for(int Idx = 0; Idx < Outputs; Idx++)
+       {
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"CHAAPImportOut"))
+            {
+                CHAAPImportOutBuffer = new CHAAPImportOutBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+            if(OutputIDs[Idx] == GetOutputID(OutputMap, @"ErrorOut"))
+            {
+                ErrorOutBuffer = new ErrorOutBuffer(Buffers[Idx], GetColumnIndexes(OutputIDs[Idx]), OutputMap);
+            }
+        }
+
+        CreateNewOutputRows();
+
+        FinishOutputs();
+        MarkOutputsFinished();
+
+    }
+
+    public virtual void CreateNewOutputRows()
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public String varStagingFile
+    {
+        get
+        {
+            return (String)(ParentComponent.ReadOnlyVariables["varStagingFile"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.IO;
+using System.Text.RegularExpressions;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+
+    enum col
+    {
+        DC = 0,
+        CustomerName,
+        CustomerNumber,
+        ItemNumber,
+        Store,
+        NDC,
+        ItemType,
+        ItemDescr,
+        GenericName,
+        TradeName,
+        InvDate,
+        InvoiceNumber,
+        Type,
+        OrderQty,
+        ShipQty,
+        UnitCost,
+        ExtCost,
+        CorpAWP,
+        WAC,
+        VendorName,
+        UPC,
+        ContractFlag,
+        Brand,
+        GenericCode,
+        Strength,
+        ShortCode,
+        Encoding,
+        ContractNumber,
+        ContrDescr,
+        OrderNumber,
+        DEA,
+        InvoiceLineNumber,
+       
+
+        MaxCols
+    };
+
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        /*
+          Add your code here for preprocessing or remove if not needed
+        */
+    }
+
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        /*
+          Add your code here for postprocessing or remove if not needed
+          You can set read/write variables here, for example:
+          Variables.MyIntVar = 100
+        */
+    }
+
+
+    private string left(string inString, int inInt)
+    {
+        inString = inString.Trim();
+
+        if (inInt > inString.Length)
+            inInt = inString.Length;
+
+        return inString.Substring(0, inInt);
+    }
+
+    private void WriteError(DateTime dt, string fn, Int32 rc, string ErrRow, string ErrDesc)
+    {
+
+        ErrorOutBuffer.AddRow();
+        ErrorOutBuffer.ErrorDateTime = dt;
+        ErrorOutBuffer.FQNFileName = fn;
+        ErrorOutBuffer.FileErrorRowNumber = rc;
+        ErrorOutBuffer.ErrorData = ErrRow;
+        ErrorOutBuffer.ErrorDescription = ErrDesc;
+
+    }
+
+    private bool NonPrintableChars(string inp)
+    {
+        //Regex reg = new Regex("[^A-Za-z0-9_]");
+        Regex reg = new Regex("[\x00-\x1f]");
+        return (reg.IsMatch(inp));
+    }
+
+
+
+    public override void CreateNewOutputRows()
+    {
+        //    /*
+        //      Add rows by calling the AddRow method on the member variable named "<Output Name>Buffer".
+        //      For example, call MyOutputBuffer.AddRow() if your output was named "MyOutput".
+        //    */
+
+        string inpFileNameAndPath = Variables.varStagingFile.ToString();
+        string inp;
+        string[] x;
+        char[] delimiterChars = {';'};
+        int MinCols = ((int)col.MaxCols) - 1;
+        Int32 RowCount = -1;
+        Int32 FileRowID = 0;
+        string strfiledir;
+
+        strfiledir = inpFileNameAndPath.ToString();
+        
+        using (StreamReader sr = new StreamReader(inpFileNameAndPath))
+        { 
+            while ((inp = sr.ReadLine()) != null)
+
+            try
+            {
+                
+                {
+                    RowCount++;
+                    FileRowID++;
+
+                    //Get rid of double and greater white spaces
+                    //inp = inp.Replace("  ", " ").Replace("   ", " ").Trim().ToString();
+
+                    // Split the inp into the array;
+                    x = inp.Split(delimiterChars);
+
+                    // Check for errors.
+
+                    // Non-printable characters
+                    if (NonPrintableChars(inp.Replace("\t", "")) == true)
+                    {
+                        DateTime ErrorFileDate = DateTime.Now;
+
+                        WriteError(ErrorFileDate, inpFileNameAndPath, RowCount, inp, "Nonprintable data found in the row.");
+                        continue;
+                    }
+
+
+                    // Too few columns
+                    if (x.GetLength(0) < MinCols)
+                    {
+                        DateTime ErrorFileDate = DateTime.Now;
+
+                        WriteError(ErrorFileDate, inpFileNameAndPath, RowCount, inp, "Not enough columns in row");
+                        continue;
+                    }
+
+                    //int DateKey = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+
+                    {
+                        //This will skip over the column name row
+                        if (RowCount > 0)
+                        {
+
+                            // Map this to our output variables.
+                            CHAAPImportOutBuffer.AddRow();
+
+                            CHAAPImportOutBuffer.FileRowID = FileRowID;
+                            CHAAPImportOutBuffer.DC = left(x[(int)col.DC].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.CustomerName = left(x[(int)col.CustomerName].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.CustomerNumber = left(x[(int)col.CustomerNumber].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ItemNumber = left(x[(int)col.ItemNumber].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.Store = left(x[(int)col.Store].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.NDC = left(x[(int)col.NDC].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ItemType = left(x[(int)col.ItemType].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ItemDescr = left(x[(int)col.ItemDescr].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.GenericName = left(x[(int)col.GenericName].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.TradeName = left(x[(int)col.TradeName].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.InvDate = left(x[(int)col.InvDate].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.InvoiceNumber = left(x[(int)col.InvoiceNumber].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.Type = left(x[(int)col.Type].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.OrderQty = left(x[(int)col.OrderQty].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ShipQty = left(x[(int)col.ShipQty].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.UnitCost = left(x[(int)col.UnitCost].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ExtCost = left(x[(int)col.ExtCost].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.CorpAWP = left(x[(int)col.CorpAWP].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.WAC = left(x[(int)col.WAC].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.VendorName = left(x[(int)col.VendorName].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.UPC = left(x[(int)col.UPC].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ContractFlag = left(x[(int)col.ContractFlag].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.Brand = left(x[(int)col.Brand].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.GenericCode = left(x[(int)col.GenericCode].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.Strength = left(x[(int)col.Strength].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ShortCode = left(x[(int)col.ShortCode].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.Encoding = left(x[(int)col.Encoding].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ContractNumber = left(x[(int)col.ContractNumber].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.ContrDescr = left(x[(int)col.ContrDescr].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.OrderNumber = left(x[(int)col.OrderNumber].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.DEA = left(x[(int)col.DEA].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.InvoiceLineNumber = left(x[(int)col.InvoiceLineNumber].Replace("  ", " ").Replace("   ", " ").Trim().ToString(), 500);
+                            CHAAPImportOutBuffer.FileProcessed = strfiledir.ToString();
+                            CHAAPImportOutBuffer.RowCreatedDate = DateTime.Now;
+                            
+
+                        }
+
+                    }
+                }
+                
+            }
+          
+            catch (Exception ex)
+
+                    {
+
+                      DateTime  ErrorFileDate = DateTime.Now;
+                
+                        WriteError(ErrorFileDate, inpFileNameAndPath, FileRowID, inp, ex.ToString());
+                        continue;                    
+                    
+                    
+                    }
+            }
+
+    }
+}
+
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class CHAAPImportOutBuffer: ScriptBuffer
+
+{
+    public CHAAPImportOutBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public Int32 FileRowID
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool FileRowID_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String DC
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool DC_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String CustomerName
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool CustomerName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String CustomerNumber
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool CustomerNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ItemNumber
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool ItemNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String Store
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool Store_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String NDC
+    {
+        set
+        {
+            this[6] = value;
+        }
+    }
+    public bool NDC_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(6);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ItemType
+    {
+        set
+        {
+            this[7] = value;
+        }
+    }
+    public bool ItemType_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(7);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ItemDescr
+    {
+        set
+        {
+            this[8] = value;
+        }
+    }
+    public bool ItemDescr_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(8);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String GenericName
+    {
+        set
+        {
+            this[9] = value;
+        }
+    }
+    public bool GenericName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(9);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String TradeName
+    {
+        set
+        {
+            this[10] = value;
+        }
+    }
+    public bool TradeName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(10);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String InvDate
+    {
+        set
+        {
+            this[11] = value;
+        }
+    }
+    public bool InvDate_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(11);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String InvoiceNumber
+    {
+        set
+        {
+            this[12] = value;
+        }
+    }
+    public bool InvoiceNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(12);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String Type
+    {
+        set
+        {
+            this[13] = value;
+        }
+    }
+    public bool Type_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(13);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String OrderQty
+    {
+        set
+        {
+            this[14] = value;
+        }
+    }
+    public bool OrderQty_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(14);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ShipQty
+    {
+        set
+        {
+            this[15] = value;
+        }
+    }
+    public bool ShipQty_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(15);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String UnitCost
+    {
+        set
+        {
+            this[16] = value;
+        }
+    }
+    public bool UnitCost_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(16);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ExtCost
+    {
+        set
+        {
+            this[17] = value;
+        }
+    }
+    public bool ExtCost_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(17);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String CorpAWP
+    {
+        set
+        {
+            this[18] = value;
+        }
+    }
+    public bool CorpAWP_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(18);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String WAC
+    {
+        set
+        {
+            this[19] = value;
+        }
+    }
+    public bool WAC_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(19);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String VendorName
+    {
+        set
+        {
+            this[20] = value;
+        }
+    }
+    public bool VendorName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(20);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String UPC
+    {
+        set
+        {
+            this[21] = value;
+        }
+    }
+    public bool UPC_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(21);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ContractFlag
+    {
+        set
+        {
+            this[22] = value;
+        }
+    }
+    public bool ContractFlag_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(22);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String Brand
+    {
+        set
+        {
+            this[23] = value;
+        }
+    }
+    public bool Brand_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(23);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String GenericCode
+    {
+        set
+        {
+            this[24] = value;
+        }
+    }
+    public bool GenericCode_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(24);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String Strength
+    {
+        set
+        {
+            this[25] = value;
+        }
+    }
+    public bool Strength_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(25);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ShortCode
+    {
+        set
+        {
+            this[26] = value;
+        }
+    }
+    public bool ShortCode_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(26);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String Encoding
+    {
+        set
+        {
+            this[27] = value;
+        }
+    }
+    public bool Encoding_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(27);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ContractNumber
+    {
+        set
+        {
+            this[28] = value;
+        }
+    }
+    public bool ContractNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(28);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ContrDescr
+    {
+        set
+        {
+            this[29] = value;
+        }
+    }
+    public bool ContrDescr_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(29);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String OrderNumber
+    {
+        set
+        {
+            this[30] = value;
+        }
+    }
+    public bool OrderNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(30);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String FileProcessed
+    {
+        set
+        {
+            this[31] = value;
+        }
+    }
+    public bool FileProcessed_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(31);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public DateTime RowCreatedDate
+    {
+        set
+        {
+            this[32] = value;
+        }
+    }
+    public bool RowCreatedDate_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(32);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String DEA
+    {
+        set
+        {
+            this[33] = value;
+        }
+    }
+    public bool DEA_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(33);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String InvoiceLineNumber
+    {
+        set
+        {
+            this[34] = value;
+        }
+    }
+    public bool InvoiceLineNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(34);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+
+public class ErrorOutBuffer: ScriptBuffer
+
+{
+    public ErrorOutBuffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public DateTime ErrorDateTime
+    {
+        set
+        {
+            this[0] = value;
+        }
+    }
+    public bool ErrorDateTime_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(0);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String FQNFileName
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool FQNFileName_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 FileErrorRowNumber
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool FileErrorRowNumber_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ErrorData
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool ErrorData_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public String ErrorDescription
+    {
+        set
+        {
+            this[4] = value;
+        }
+    }
+    public bool ErrorDescription_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(4);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public DateTime RowCreatedDate
+    {
+        set
+        {
+            this[5] = value;
+        }
+    }
+    public bool RowCreatedDate_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(5);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public void AddRow()
+    {
+        base.AddRow();
+    }
+
+    new public void SetEndOfRowset()
+    {
+        base.SetEndOfRowset();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_0bf11d85736748cc88c918f84be77cc9.Properties.Settings.get_Default():SC_0bf11d85736748cc88c918f84be77cc9.Properties.Sett" +
+    "ings")]
+
+namespace SC_0bf11d85736748cc88c918f84be77cc9.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_0bf11d85736748cc88c918f84be77cc9.csproj]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CDFD559B-3F9E-41CC-9DA7-3DF2DB7E84C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_0bf11d85736748cc88c918f84be77cc9</RootNamespace>
+    <AssemblyName>SC_0bf11d85736748cc88c918f84be77cc9</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=13.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" />
+        <Host Name="ScriptComponent" IconIndex="0" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC130</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Project]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="3.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>SC_0bf11d85736748cc88c918f84be77cc9</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>SC_0bf11d85736748cc88c918f84be77cc9</msb:DisplayName>
+		<msb:ProjectId>{B8D60173-8497-481D-9638-4082EFBCFF9A}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_0bf11d85736748cc88c918f84be77cc9.csproj"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_0bf11d85736748cc88c918f84be77cc9")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_0bf11d85736748cc88c918f84be77cc9")]
+[assembly: AssemblyCopyright("Copyright @  2017")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_0bf11d85736748cc88c918f84be77cc9.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_0bf11d85736748cc88c918f84be77cc9.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_0bf11d85736748cc88c918f84be77cc9.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_0bf11d85736748cc88c918f84be77cc9.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_0bf11d85736748cc88c918f84be77cc9.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Stores the binary representation of the component"
+                      isArray="true"
+                      name="BinaryCode"
+                      state="cdata">
+                      <arrayElements
+                        arrayElementCount="2">
+                        <arrayElement
+                          dataType="System.String"><![CDATA[SC_0bf11d85736748cc88c918f84be77cc9.dll]]></arrayElement>
+                        <arrayElement
+                          dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAAR63F8AAAAAAAAAAOAAIiALATAAADgAAAAIAAAAAAAAmlcA
+AAAgAAAAYAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACgAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAEhXAABPAAAAAGAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAIAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAoDcAAAAgAAAAOAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAYAAAAAYAAAA6AAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAIAAAAACAAAAQAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAB8
+VwAAAAAAAEgAAAACAAUAKDEAAGglAAABAAAAAAAAAJBWAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKBAAAAoqHgIoEQAACiqKA28SAAAKEAEEA28TAAAKMQgD
+bxMAAAoQAgMWBG8UAAAKKgATMAIASgAAAAAAAAACewQAAARvXwAABgJ7BAAABANvUwAABgJ7BAAA
+BARvVQAABgJ7BAAABAVvVwAABgJ7BAAABA4Eb1kAAAYCewQAAAQOBW9bAAAGKkZyAQAAcHMVAAAK
+A28WAAAKKhswBgBkCQAAAQAAEQJ7AgAABG9pAAAGbxcAAAoKF40gAAABJRYfO50NHx8TBBUTBRYT
+BgZvFwAAChMHBnMYAAAKEwg4CwkAAAARBRdYEwURBhdYEwYHCW8ZAAAKDAIHcg0AAHByEQAAcG8a
+AAAKKAUAAAYsHSgbAAAKEwkCEQkGEQUHchMAAHAoBAAABt3BCAAACBZvHAAAChEELx0oGwAAChMK
+AhEKBhEFB3JbAABwKAQAAAbdmQgAABEFFj5xCAAAAnsDAAAEb08AAAYCewMAAAQRBm8JAAAGAnsD
+AAAEAggWmnKPAABwcpUAAHBvGgAACnKZAABwcpUAAHBvGgAACm8SAAAKbxcAAAog9AEAACgDAAAG
+bwsAAAYCewMAAAQCCBeaco8AAHBylQAAcG8aAAAKcpkAAHBylQAAcG8aAAAKbxIAAApvFwAACiD0
+AQAAKAMAAAZvDQAABgJ7AwAABAIIGJpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAA
+Cm8XAAAKIPQBAAAoAwAABm8PAAAGAnsDAAAEAggZmnKPAABwcpUAAHBvGgAACnKZAABwcpUAAHBv
+GgAACm8SAAAKbxcAAAog9AEAACgDAAAGbxEAAAYCewMAAAQCCBqaco8AAHBylQAAcG8aAAAKcpkA
+AHBylQAAcG8aAAAKbxIAAApvFwAACiD0AQAAKAMAAAZvEwAABgJ7AwAABAIIG5pyjwAAcHKVAABw
+bxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8VAAAGAnsDAAAEAggcmnKP
+AABwcpUAAHBvGgAACnKZAABwcpUAAHBvGgAACm8SAAAKbxcAAAog9AEAACgDAAAGbxcAAAYCewMA
+AAQCCB2aco8AAHBylQAAcG8aAAAKcpkAAHBylQAAcG8aAAAKbxIAAApvFwAACiD0AQAAKAMAAAZv
+GQAABgJ7AwAABAIIHppyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQB
+AAAoAwAABm8bAAAGAnsDAAAEAggfCZpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAA
+Cm8XAAAKIPQBAAAoAwAABm8dAAAGAnsDAAAEAggfCppyjwAAcHKVAABwbxoAAApymQAAcHKVAABw
+bxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8fAAAGAnsDAAAEAggfC5pyjwAAcHKVAABwbxoAAApy
+mQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8hAAAGAnsDAAAEAggfDJpyjwAAcHKV
+AABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8jAAAGAnsDAAAEAggf
+DZpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8lAAAG
+AnsDAAAEAggfDppyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAo
+AwAABm8nAAAGAnsDAAAEAggfD5pyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8X
+AAAKIPQBAAAoAwAABm8pAAAGAnsDAAAEAggfEJpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoA
+AApvEgAACm8XAAAKIPQBAAAoAwAABm8rAAAGAnsDAAAEAggfEZpyjwAAcHKVAABwbxoAAApymQAA
+cHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8tAAAGAnsDAAAEAggfEppyjwAAcHKVAABw
+bxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8vAAAGAnsDAAAEAggfE5py
+jwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8xAAAGAnsD
+AAAEAggfFJpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAA
+Bm8zAAAGAnsDAAAEAggfFZpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAK
+IPQBAAAoAwAABm81AAAGAnsDAAAEAggfFppyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApv
+EgAACm8XAAAKIPQBAAAoAwAABm83AAAGAnsDAAAEAggfF5pyjwAAcHKVAABwbxoAAApymQAAcHKV
+AABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm85AAAGAnsDAAAEAggfGJpyjwAAcHKVAABwbxoA
+AApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm87AAAGAnsDAAAEAggfGZpyjwAA
+cHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm89AAAGAnsDAAAE
+AggfGppyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm8/
+AAAGAnsDAAAEAggfG5pyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQB
+AAAoAwAABm9BAAAGAnsDAAAEAggfHJpyjwAAcHKVAABwbxoAAApymQAAcHKVAABwbxoAAApvEgAA
+Cm8XAAAKIPQBAAAoAwAABm9DAAAGAnsDAAAEAggfHZpyjwAAcHKVAABwbxoAAApymQAAcHKVAABw
+bxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm9FAAAGAnsDAAAEAggfHppyjwAAcHKVAABwbxoAAApy
+mQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm9LAAAGAnsDAAAEAggfH5pyjwAAcHKV
+AABwbxoAAApymQAAcHKVAABwbxoAAApvEgAACm8XAAAKIPQBAAAoAwAABm9NAAAGAnsDAAAEEQdv
+FwAACm9HAAAGAnsDAAAEKBsAAApvSQAABt4eEwsoGwAAChMMAhEMBhEGBxELbxcAAAooBAAABt4A
+EQhvHQAACiULOuf2///eDBEILAcRCG8eAAAK3CpBNAAAAAAAAD0AAADsCAAAKQkAAB4AAAAQAAAB
+AgAAADcAAAAgCQAAVwkAAAwAAAAAAAAAHgIoYgAABioqAgMEBSgfAAAKKjoCFgOMJAAAASggAAAK
+KloDLAgCFighAAAKKnKhAABwcyIAAAp6JgIXAyggAAAKKloDLAgCFyghAAAKKnKhAABwcyIAAAp6
+JgIYAyggAAAKKloDLAgCGCghAAAKKnKhAABwcyIAAAp6JgIZAyggAAAKKloDLAgCGSghAAAKKnKh
+AABwcyIAAAp6JgIaAyggAAAKKloDLAgCGighAAAKKnKhAABwcyIAAAp6JgIbAyggAAAKKloDLAgC
+GyghAAAKKnKhAABwcyIAAAp6JgIcAyggAAAKKloDLAgCHCghAAAKKnKhAABwcyIAAAp6JgIdAygg
+AAAKKloDLAgCHSghAAAKKnKhAABwcyIAAAp6JgIeAyggAAAKKloDLAgCHighAAAKKnKhAABwcyIA
+AAp6KgIfCQMoIAAACipeAywJAh8JKCEAAAoqcqEAAHBzIgAACnoqAh8KAyggAAAKKl4DLAkCHwoo
+IQAACipyoQAAcHMiAAAKeioCHwsDKCAAAAoqXgMsCQIfCyghAAAKKnKhAABwcyIAAAp6KgIfDAMo
+IAAACipeAywJAh8MKCEAAAoqcqEAAHBzIgAACnoqAh8NAyggAAAKKl4DLAkCHw0oIQAACipyoQAA
+cHMiAAAKeioCHw4DKCAAAAoqXgMsCQIfDighAAAKKnKhAABwcyIAAAp6KgIfDwMoIAAACipeAywJ
+Ah8PKCEAAAoqcqEAAHBzIgAACnoqAh8QAyggAAAKKl4DLAkCHxAoIQAACipyoQAAcHMiAAAKeioC
+HxEDKCAAAAoqXgMsCQIfESghAAAKKnKhAABwcyIAAAp6KgIfEgMoIAAACipeAywJAh8SKCEAAAoq
+cqEAAHBzIgAACnoqAh8TAyggAAAKKl4DLAkCHxMoIQAACipyoQAAcHMiAAAKeioCHxQDKCAAAAoq
+XgMsCQIfFCghAAAKKnKhAABwcyIAAAp6KgIfFQMoIAAACipeAywJAh8VKCEAAAoqcqEAAHBzIgAA
+CnoqAh8WAyggAAAKKl4DLAkCHxYoIQAACipyoQAAcHMiAAAKeioCHxcDKCAAAAoqXgMsCQIfFygh
+AAAKKnKhAABwcyIAAAp6KgIfGAMoIAAACipeAywJAh8YKCEAAAoqcqEAAHBzIgAACnoqAh8ZAygg
+AAAKKl4DLAkCHxkoIQAACipyoQAAcHMiAAAKeioCHxoDKCAAAAoqXgMsCQIfGighAAAKKnKhAABw
+cyIAAAp6KgIfGwMoIAAACipeAywJAh8bKCEAAAoqcqEAAHBzIgAACnoqAh8cAyggAAAKKl4DLAkC
+HxwoIQAACipyoQAAcHMiAAAKeioCHx0DKCAAAAoqXgMsCQIfHSghAAAKKnKhAABwcyIAAAp6KgIf
+HgMoIAAACipeAywJAh8eKCEAAAoqcqEAAHBzIgAACnoqAh8fAyggAAAKKl4DLAkCHx8oIQAACipy
+oQAAcHMiAAAKej4CHyADjA4AAAEoIAAACipeAywJAh8gKCEAAAoqcqEAAHBzIgAACnoqAh8hAygg
+AAAKKl4DLAkCHyEoIQAACipyoQAAcHMiAAAKeioCHyIDKCAAAAoqXgMsCQIfIighAAAKKnKhAABw
+cyIAAAp6HgIoIwAACioeAigkAAAKKh4CKCUAAAoqOgIWA4wOAAABKCAAAAoqOgIYA4wkAAABKCAA
+AAoqOgIbA4wOAAABKCAAAAoqfgIoJgAACgICc2cAAAZ9AQAABAICc2gAAAZ9AgAABCoGKtYCewMA
+AAQsEgJ7AwAABG9QAAAGAhR9AwAABAJ7BAAABCwSAnsEAAAEb2AAAAYCFH0EAAAEKgAAABMwBQBz
+AAAAAgAAERYKK1gEBpQOBHI+AQBwKCcAAAozGQIFBpoCBAaUKCgAAAoOBHMIAAAGfQMAAAQEBpQO
+BHJcAQBwKCcAAAozGQIFBpoCBAaUKCgAAAoOBHNSAAAGfQQAAAQGF1gKBgMypAJvZgAABgJvYwAA
+BgIoZAAABio6AigpAAAKAgN9BQAABCo6AigpAAAKAgN9BgAABCqWAnsGAAAEbyoAAApybgEAcG8r
+AAAKKCwAAApvLQAACnQeAAABKh4CKCkAAAoqrn4HAAAELR5yjAEAcNAIAAACKC4AAApvLwAACnMw
+AAAKgAcAAAR+BwAABCoafggAAAQqHgKACAAABCoafgkAAAQqHgIoMQAACiouc28AAAaACQAABCoA
+AABCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAACEEgAAI34AAPASAACwDQAAI1N0
+cmluZ3MAAAAAoCAAAAACAAAjVVMAoCIAABAAAAAjR1VJRAAAALAiAAC4AgAAI0Jsb2IAAAAAAAAA
+AgAAAVcdogEJAwAAAPoBMwAWAAABAAAALAAAAAoAAAArAAAAcAAAAGcAAAAxAAAAIQAAABAAAAAC
+AAAABQAAAFYAAABXAAAAAQAAAAUAAAABAAAAAQAAAAAADAUBAAAAAAAGAKkD9QoGAD0E9QoGAPUC
+4goPAGkLAAAGACID+ggGAIwD+ggGAG0D+ggGACQE+ggGAMkD+ggGAOID+ggGADkD+ggGAFQDlgQK
+AP0DAAIGAO4BpQgGACwKrgAGABwJpQgGALEIpQgKAFMKAAIOAEQKAAIKAEcJAAIKAK4MAAIGAFoM
+pQgGANgC4goGAIgKFQsGADsJ5QgSAKgC9gQSAAkD9gQSAGkC0AgGAL0C9QoGALsEpQgSAHsN8wsG
+AIYJpQgGAIENpQgGADkKrgAGAFQBpQgGADoApQgGAAwJpQgWABEAmAoWAAEAmApXADUNAAAWACIA
+mAoGADICpQgGAGABpQgGAIsN+ggAAAAAZAAAAAAAAQABAAEAEADFCAAAFAABAAEAAQAQAG8KAABJ
+AAEACAABABAAYAoAAEkAAQBSAAEAEACQDAAAVQABAGIAAQAQABIMAABZAAUAZwABABAAswsAAFkA
+BgBoAAAAEAAcC3gLWQAHAGoAAAEQAOILeAtxAAkAbgADAQAAjwgAAEUACgBxAAYAEgxpAQYAswtt
+AQYAbwpxAQYAYAp1AQEAngx5AQEAngx5AREAtgh9AREAWQKBAREAJgGFAQYGxACJAVaAiQCMAVaA
+yQGMAVaA8wmMAVaA1AmMAVaAOwKMAVaAgQCMAVaALgKMAVaAjwmMAVaAmwGMAVaAqwGMAVaAoAKM
+AVaArAmMAVaAMgKMAVaApA2MAVaAmA2MAVaA3wyMAVaA7AyMAVaAvACMAVaAeQCMAVaA2gGMAVaA
+kACMAVaAfASMAVaAGAGMAVaAOgGMAVaA7QSMAVaASgGMAVaAjQSMAVaABgqMAVaAnQmMAVaA4wmM
+AVaAcQCMAVaAvgmMAVaA6wuMAVAgAAAAAMYAWwQGAAEAWCAAAAAAxgBmBAYAAQBgIAAAAACBAHMM
+kAEBAIQgAAAAAIEAwAqWAQMA2iAAAAAAgQAeDCkACADsIAAAAADGAEYMBgAJAJAqAAAAAIYYywoG
+AAkAmCoAAAAAhhjLClwACQCjKgAAAACGCKAAAQAMALIqAAAAAIYIfgWgAQ0AySoAAAAAhgiFABAA
+DgDTKgAAAACGCGEFoAEPAOoqAAAAAIYIxQEQABAA9CoAAAAAhghUBqABEQALKwAAAACGCO8JEAAS
+ABUrAAAAAIYI5wegARMALCsAAAAAhgjQCRAAFAA2KwAAAACGCLoHoAEVAE0rAAAAAIYINwIQABYA
+VysAAAAAhgi/BqABFwBuKwAAAACGCH0AEAAYAHgrAAAAAIYIUgWgARkAjysAAAAAhggqAhAAGgCZ
+KwAAAACGCKsGoAEbALArAAAAAIYIiwkQABwAuisAAAAAhghZB6ABHQDRKwAAAACGCJcBEAAeANwr
+AAAAAIYIEQagAR8A9CsAAAAAhginARAAIAD/KwAAAACGCCgGoAEhABcsAAAAAIYInAIQACIAIiwA
+AAAAhgjqBqABIwA6LAAAAACGCKgJEAAkAEUsAAAAAIYIhAegASUAXSwAAAAAhgghAhAAJgBoLAAA
+AACGCJsGoAEnAIAsAAAAAIYIoA0QACgAiywAAAAAhghzCKABKQCjLAAAAACGCJQNEAAqAK4sAAAA
+AIYIYAigASsAxiwAAAAAhgjbDBAALADRLAAAAACGCDkIoAEtAOksAAAAAIYI6AwQAC4A9CwAAAAA
+hghNCKABLwAMLQAAAACGCLgAEAAwABctAAAAAIYIkwWgATEALy0AAAAAhgh1ABAAMgA6LQAAAACG
+CEMFoAEzAFItAAAAAIYI1gEQADQAXS0AAAAAhghsBqABNQB1LQAAAACGCIwAEAA2AIAtAAAAAIYI
+bwWgATcAmC0AAAAAhgh4BBAAOACjLQAAAACGCP0GoAE5ALstAAAAAIYIFAEQADoAxi0AAAAAhgjU
+BaABOwDeLQAAAACGCDYBEAA8AOktAAAAAIYI5QWgAT0AAS4AAAAAhgjpBBAAPgAMLgAAAACGCCkH
+oAE/ACQuAAAAAIYIRgEQAEAALy4AAAAAhgj8BaABQQBHLgAAAACGCIkEEABCAFIuAAAAAIYIFQeg
+AUMAai4AAAAAhggCChAARAB1LgAAAACGCAEIoAFFAI0uAAAAAIYImQkQAEYAmC4AAAAAhghuB6AB
+RwCwLgAAAACGCN8JEABIALsuAAAAAIYI0AegAUkA0y4AAAAAhggCARAASgDeLgAAAACGCLsFoAFL
+APYuAAAAAIYIiQKlAUwABi8AAAAAhgjQBqABTQAeLwAAAACGCG0AEABOACkvAAAAAIYINAWgAU8A
+QS8AAAAAhgi6CRAAUABMLwAAAACGCJ0HoAFRAGQvAAAAAIYAbQ0GAFIAbC8AAAAAhgBkDAYAUgB0
+LwAAAACGAGcMbABSAJgqAAAAAIYYywpcAFIAfC8AAAAAhgjlAaUBVQCyKgAAAACGCIIGoAFWAMkq
+AAAAAIYItQEQAFcA0yoAAAAAhgg9BqABWACLLwAAAACGCBUKAQBZAPQqAAAAAIYIGwigAVoACysA
+AAAAhgjMABAAWwAVKwAAAACGCKYFoAFcACwrAAAAAIYIJgkQAF0ANisAAAAAhgg9B6ABXgCaLwAA
+AACGCIkCpQFfAFcrAAAAAIYI0AagAWAAZC8AAAAAhgBtDQYAYQBsLwAAAACGAGQMBgBhAHQvAAAA
+AIYAZwxsAGEAqS8AAAAAhhjLCgYAYQDJLwAAAADGATgMBgBhAMsvAAAAAIEA7gAGAGEABDAAAAAA
+xgAVDasBYQDJLwAAAADGAUYMBgBlAIMwAAAAAIYYywq3AWUAkjAAAAAAhhjLCrcBZgChMAAAAACG
+CIQBGwBnAMcwAAAAAIMYywoGAGcAzzAAAAAAkwiECr0BZwD7MAAAAACTCEECwgFnAAIxAAAAAJMI
+TQLHAWcACjEAAAAAlgh+DM0BaAARMQAAAACGGMsKBgBoABkxAAAAAJEY0QrSAWgAAAABALAEAAAC
+AIoMAAABAGEMAAACAMIIAAADAOMAAAAEAHQNAAAFAOYAAAABAIIJAAABAH0KAAACAL0LAAADAFUJ
+AAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAAB
+AHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIE
+AAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAAB
+AHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIE
+AAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAAB
+AHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIE
+AAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAAB
+AHIEAAABAHIEAAABAHIEAAABAHIEAAABAH0KAAACAL0LAAADAFUJAAABAHIEAAABAHIEAAABAHIE
+AAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAABAHIEAAAB
+AD4MAAACANgKAAADADAMAAAEAFUJAAABALQMAAABALQMAAABAHIECQDLCgEAEQDLCgYAGQDLCgoA
+KQDLChAAMQDLChAAOQDLChAAQQDLChAASQDLChAAUQDLChAAWQDLChAAYQDLChAAaQDLCgYAuQDL
+CgYA2QDLChUA6QDLCgYAqQBbBAYAqQBmBAYA8QCsCBsA8QDUBB8A8QDCBCMA+QDLChAA+QDMBCkA
+sQC5BBsAeQDLChAA8QB4DEUA8QAeAUwAcQBlDVIACQHfBFcAEQH3ARsAGQGBAgYAkQDLClwAkQCc
+CGYAkQCHCAEAKQHLChAAkQBtDQYAkQBkDAYAkQBnDGwAqQDLCgYAqQCUAHQAqQDRC3sAsQDLCgYA
+qQCnC4EAMQGTCIcAqQBQDY4AOQEhDZQAUQFyAZsAUQGHDaQAwQDLCqoA4QDLCgYACAAsAMQACAAw
+AMkACAA0AM4ACAA4ANMACAA8ANgACABAAN0ACABEAOIACABIAOcACABMAOwACABQAPEACABUAPYA
+CABYAPsACABcAAABCABgAAUBCABkAAoBCABoAA8BCABsABQBCABwABkBCAB0AB4BCAB4ACMBCAB8
+ACgBCACAAC0BCACEADIBCACIADcBCACMADwBCACQAEEBCACUAEYBCACYAEsBCACcAFABCACgAFUB
+CACkAFoBCACoAF8BCACsAGQBLgALAPYBLgATAP8BLgAbAB4CLgAjACcCLgArAFACLgAzAFACLgA7
+AFACLgBDACcCLgBLAFYCLgBTAFACLgBbAG0CQwBjAMkAAwFrAMkAIQF7AMkAiQpzAB4CqQpzAB4C
+LgBwAAMAAQAEAEcABwBTAAgAVAAJAFYAAACkANYBAACCBdoBAACJAN4BAABlBdoBAADJAd4BAABY
+BtoBAADzCd4BAADrB9oBAADUCd4BAAC+B9oBAAA7At4BAADDBtoBAACBAN4BAABWBdoBAAAuAt4B
+AACvBtoBAACPCd4BAABdB9oBAACbAd4BAAAVBtoBAACrAd4BAAAsBtoBAACgAt4BAADuBtoBAACs
+Cd4BAACIB9oBAAAyAt4BAACzBtoBAACkDd4BAAB3CNoBAACYDd4BAABkCNoBAADfDN4BAAA9CNoB
+AADsDN4BAABRCNoBAAC8AN4BAACXBdoBAAB5AN4BAABHBdoBAADaAd4BAABwBtoBAACQAN4BAABz
+BdoBAAB8BN4BAAABB9oBAAAYAd4BAADYBdoBAAA6Ad4BAADpBdoBAADtBN4BAAAtB9oBAABKAd4B
+AAAABtoBAACNBN4BAAAZB9oBAAAGCt4BAAAFCNoBAACdCd4BAAByB9oBAADjCd4BAADUB9oBAAAG
+Ad4BAAC/BdoBAACNAuIBAADUBtoBAABxAN4BAAA4BdoBAAC+Cd4BAAChB9oBAADpAeIBAACGBtoB
+AAC5Ad4BAABBBtoBAAAZCtYBAAAfCNoBAADQAN4BAACqBdoBAAAqCd4BAABBB9oBAACNAuIBAADU
+BtoBAACIAd4BAACICucBAABhAuwBAACCDPEBAQAJAAMAAQAKAAUAAQALAAcAAQAMAAkAAQANAAsA
+AQAOAA0AAQAPAA8AAQAQABEAAQARABMAAQASABUAAQATABcAAQAUABkAAQAVABsAAQAWAB0AAQAX
+AB8AAQAYACEAAQAZACMAAQAaACUAAQAbACcAAQAcACkAAQAdACsAAQAeAC0AAQAfAC8AAQAgADEA
+AQAhADMAAQAiADUAAQAjADcAAQAkADkAAQAlADsAAQAmAD0AAQAnAD8AAQAoAEEAAQApAEMAAQAq
+AEUAAQArAEcAAQAsAEkAAQAtAEsAAQAuAE0AAQAvAE8AAQAwAFEAAQAxAFMAAQAyAFUAAQAzAFcA
+AQA0AFkAAQA1AFsAAQA2AF0AAQA3AF8AAQA4AGEAAQA5AGMAAQA6AGUAAQA7AGcAAQA8AGkAAQA9
+AGsAAQA+AG0AAQA/AG8AAQBAAHEAAQBBAHMAAQBCAHUAAQBDAHcAAQBEAHkAAQBFAHsAAQBGAH0A
+AQBHAH8AAQBIAIEAAQBJAIMAAQBKAIUAAQBLAIcAAQBMAIkAAQBNAIsAAQBOAI0AAQBTAI8AAQBU
+AJEAAQBVAJMAAQBWAJUAAQBXAJcAAQBYAJkAAQBZAJsAAQBaAJ0AAQBbAJ8AAQBcAKEAAQBdAKMA
+AQBeAKUAAgBpAKcAAgBrAKkAAgBsAKsAAQBtAKsAAgBuAK0ABIAAAAEAAAAAAAAAAAAAAAAAQAAA
+AAQAAAAAAAAAAAAAALIA2gAAAAAADQAAAAAAAAAAAAAAuwC+DAAAAAANAAAAAAAAAAAAAAC7APQM
+AAAAAAQAAAAAAAAAAAAAALIApQgAAAAADQAAAAAAAAAAAAAAuwBfCQAAAAAAAAAAAQAAACYLAAAK
+AAIAAAAASURUU1ZhcmlhYmxlMTAwAElEVFNWYXJpYWJsZXMxMDAASURUU0V2YWx1YXRvckNvbnRl
+eHQxMDAASW50MzIAU0NfMGJmMTFkODU3MzY3NDhjYzg4YzkxOGY4NGJlNzdjYzkAPE1vZHVsZT4A
+c2V0X0RFQQBzZXRfV0FDAHNldF9OREMAc2V0X0RDAHNldF9VUEMAR2V0T3V0cHV0SUQAc2V0X0Zp
+bGVSb3dJRABTeXN0ZW0uSU8Ac2V0X0NvcnBBV1AAdmFsdWVfXwBzZXRfRXJyb3JEYXRhAG1zY29y
+bGliAHJjAEVyckRlc2MATWFya091dHB1dHNGaW5pc2hlZABzZXRfRmlsZVByb2Nlc3NlZABzZXRf
+QnJhbmQAUmVwbGFjZQBkZWZhdWx0SW5zdGFuY2UAc2V0X0dlbmVyaWNDb2RlAHNldF9TaG9ydENv
+ZGUASURpc3Bvc2FibGUAUnVudGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUAZ2V0X3Zh
+clN0YWdpbmdGaWxlAHNldF9HZW5lcmljTmFtZQBzZXRfVHJhZGVOYW1lAHNldF9GUU5GaWxlTmFt
+ZQBzZXRfQ3VzdG9tZXJOYW1lAHNldF9WZW5kb3JOYW1lAHNldF9FcnJvckRhdGVUaW1lAFJlYWRM
+aW5lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lAHNldF9UeXBlAHNldF9JdGVtVHlw
+ZQBzZXRfU3RvcmUAZ2V0X0N1bHR1cmUAc2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJlAEFwcGxp
+Y2F0aW9uU2V0dGluZ3NCYXNlAERpc3Bvc2UAc2V0X1Jvd0NyZWF0ZWREYXRlAHNldF9JbnZEYXRl
+AEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2Vy
+Tm9uVXNlckNvZGVBdHRyaWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVB
+dHRyaWJ1dGUAQXNzZW1ibHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0
+ZQBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRl
+AEFzc2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJp
+YnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUA
+U1NJU1NjcmlwdENvbXBvbmVudEVudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0
+cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAFByZUV4ZWN1dGUAUG9zdEV4ZWN1
+dGUAdmFsdWUAc2V0X0NvbnRyYWN0RmxhZwBzZXRfRW5jb2RpbmcAU3lzdGVtLlJ1bnRpbWUuVmVy
+c2lvbmluZwBpblN0cmluZwBUb1N0cmluZwBTdWJzdHJpbmcASXNNYXRjaABnZXRfTGVuZ3RoAEdl
+dExlbmd0aABzZXRfU3RyZW5ndGgAU3lzdGVtLkNvbXBvbmVudE1vZGVsAFNDXzBiZjExZDg1NzM2
+NzQ4Y2M4OGM5MThmODRiZTc3Y2M5LmRsbABzZXRfREVBX0lzTnVsbABzZXRfV0FDX0lzTnVsbABz
+ZXRfTkRDX0lzTnVsbABzZXRfRENfSXNOdWxsAHNldF9VUENfSXNOdWxsAHNldF9GaWxlUm93SURf
+SXNOdWxsAHNldF9Db3JwQVdQX0lzTnVsbABzZXRfRXJyb3JEYXRhX0lzTnVsbABzZXRfRmlsZVBy
+b2Nlc3NlZF9Jc051bGwAc2V0X0JyYW5kX0lzTnVsbABzZXRfR2VuZXJpY0NvZGVfSXNOdWxsAHNl
+dF9TaG9ydENvZGVfSXNOdWxsAHNldF9HZW5lcmljTmFtZV9Jc051bGwAc2V0X1RyYWRlTmFtZV9J
+c051bGwAc2V0X0ZRTkZpbGVOYW1lX0lzTnVsbABzZXRfQ3VzdG9tZXJOYW1lX0lzTnVsbABzZXRf
+VmVuZG9yTmFtZV9Jc051bGwAc2V0X0Vycm9yRGF0ZVRpbWVfSXNOdWxsAHNldF9UeXBlX0lzTnVs
+bABzZXRfSXRlbVR5cGVfSXNOdWxsAHNldF9TdG9yZV9Jc051bGwAc2V0X1Jvd0NyZWF0ZWREYXRl
+X0lzTnVsbABzZXRfSW52RGF0ZV9Jc051bGwAc2V0X0NvbnRyYWN0RmxhZ19Jc051bGwAc2V0X0Vu
+Y29kaW5nX0lzTnVsbABzZXRfU3RyZW5ndGhfSXNOdWxsAHNldF9FcnJvckRlc2NyaXB0aW9uX0lz
+TnVsbABzZXRfSXRlbURlc2NyX0lzTnVsbABzZXRfQ29udHJEZXNjcl9Jc051bGwAc2V0X0ludm9p
+Y2VOdW1iZXJfSXNOdWxsAHNldF9JbnZvaWNlTGluZU51bWJlcl9Jc051bGwAc2V0X0l0ZW1OdW1i
+ZXJfSXNOdWxsAHNldF9PcmRlck51bWJlcl9Jc051bGwAc2V0X0N1c3RvbWVyTnVtYmVyX0lzTnVs
+bABzZXRfQ29udHJhY3ROdW1iZXJfSXNOdWxsAHNldF9GaWxlRXJyb3JSb3dOdW1iZXJfSXNOdWxs
+AHNldF9Vbml0Q29zdF9Jc051bGwAc2V0X0V4dENvc3RfSXNOdWxsAHNldF9TaGlwUXR5X0lzTnVs
+bABzZXRfT3JkZXJRdHlfSXNOdWxsAFNldE51bGwAY29sAGdldF9JdGVtAHNldF9JdGVtAFN5c3Rl
+bQBUcmltAEVudW0AcmVzb3VyY2VNYW4AZm4AU2NyaXB0TWFpbgBTeXN0ZW0uQ29uZmlndXJhdGlv
+bgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBJbnZhbGlkT3BlcmF0aW9u
+RXhjZXB0aW9uAHNldF9FcnJvckRlc2NyaXB0aW9uAEN1bHR1cmVJbmZvAE91dHB1dE5hbWVNYXAA
+T3V0cHV0TWFwAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRFRTUnVudGltZVdyYXAAaW5wAENoYXIAc2V0
+X0l0ZW1EZXNjcgBzZXRfQ29udHJEZXNjcgBzZXRfSW52b2ljZU51bWJlcgBzZXRfSW52b2ljZUxp
+bmVOdW1iZXIAc2V0X0l0ZW1OdW1iZXIAc2V0X09yZGVyTnVtYmVyAHNldF9DdXN0b21lck51bWJl
+cgBzZXRfQ29udHJhY3ROdW1iZXIAc2V0X0ZpbGVFcnJvclJvd051bWJlcgBTdHJlYW1SZWFkZXIA
+VGV4dFJlYWRlcgBQaXBlbGluZUJ1ZmZlcgBTY3JpcHRCdWZmZXIARXJyb3JPdXRCdWZmZXIAQ0hB
+QVBJbXBvcnRPdXRCdWZmZXIAZ2V0X1Jlc291cmNlTWFuYWdlcgBNaWNyb3NvZnQuU3FsU2VydmVy
+LkR0cy5SdW50aW1lLldyYXBwZXIAV3JpdGVFcnJvcgAuY3RvcgAuY2N0b3IAT3V0cHV0SURzAFN5
+c3RlbS5EaWFnbm9zdGljcwBTeXN0ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5S
+ZXNvdXJjZXMAU0NfMGJmMTFkODU3MzY3NDhjYzg4YzkxOGY4NGJlNzdjYzkuUHJvcGVydGllcy5S
+ZXNvdXJjZXMucmVzb3VyY2VzAERlYnVnZ2luZ01vZGVzAFNDXzBiZjExZDg1NzM2NzQ4Y2M4OGM5
+MThmODRiZTc3Y2M5LlByb3BlcnRpZXMAZ2V0X1JlYWRPbmx5VmFyaWFibGVzAEJ1ZmZlckNvbHVt
+bkluZGV4ZXMAR2V0Q29sdW1uSW5kZXhlcwBTZXR0aW5ncwBNYXhDb2xzAFN5c3RlbS5UZXh0LlJl
+Z3VsYXJFeHByZXNzaW9ucwBDb25uZWN0aW9ucwBOb25QcmludGFibGVDaGFycwBCdWZmZXJzAEZp
+bmlzaE91dHB1dHMAQ3JlYXRlTmV3T3V0cHV0Um93cwBPYmplY3QAZHQAU2V0RW5kT2ZSb3dzZXQA
+bGVmdABTcGxpdABnZXRfRGVmYXVsdABpbkludABVc2VyQ29tcG9uZW50AFBhcmVudENvbXBvbmVu
+dABTY3JpcHRDb21wb25lbnQATWljcm9zb2Z0LlNxbFNlcnZlci5UeFNjcmlwdABzZXRfVW5pdENv
+c3QAc2V0X0V4dENvc3QATWljcm9zb2Z0LlNxbFNlcnZlci5QaXBlbGluZUhvc3QAUHJpbWVPdXRw
+dXQAR2V0VmFsdWVXaXRoQ29udGV4dABTY3JpcHRDb21wb25lbnRFdmFsQ29udGV4dABnZXRfRXZh
+bHVhdG9yQ29udGV4dABnZXRfTm93AEFkZFJvdwBFcnJSb3cAUmVnZXgAQXJyYXkAZ2V0X0Fzc2Vt
+Ymx5AHNldF9TaGlwUXR5AHNldF9PcmRlclF0eQAAAAAAC1sAAAAtAB8AXQABAwkAAAEAR04AbwBu
+AHAAcgBpAG4AdABhAGIAbABlACAAZABhAHQAYQAgAGYAbwB1AG4AZAAgAGkAbgAgAHQAaABlACAA
+cgBvAHcALgAAM04AbwB0ACAAZQBuAG8AdQBnAGgAIABjAG8AbAB1AG0AbgBzACAAaQBuACAAcgBv
+AHcAAAUgACAAAAMgAAAHIAAgACAAAICbSQBzAE4AdQBsAGwAIABwAHIAbwBwAGUAcgB0AHkAIABj
+AGEAbgBuAG8AdAAgAGIAZQAgAHMAZQB0ACAAdABvACAARgBhAGwAcwBlAC4AIABBAHMAcwBpAGcA
+bgAgAGEAIAB2AGEAbAB1AGUAIAB0AG8AIAB0AGgAZQAgAGMAbwBsAHUAbQBuACAAaQBuAHMAdABl
+AGEAZAAuAAAdQwBIAEEAQQBQAEkAbQBwAG8AcgB0AE8AdQB0AAARRQByAHIAbwByAE8AdQB0AAAd
+dgBhAHIAUwB0AGEAZwBpAG4AZwBGAGkAbABlAABxUwBDAF8AMABiAGYAMQAxAGQAOAA1ADcAMwA2
+ADcANAA4AGMAYwA4ADgAYwA5ADEAOABmADgANABiAGUANwA3AGMAYwA5AC4AUAByAG8AcABlAHIA
+dABpAGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAAAAAI5rf/Vb3NtIuXALjh/7ZdcABCABAQgDIAAB
+BSABARERBCABAQ4FIAEBEWkDIAAOAyAACAUgAg4ICAQgAQIOFgcNDg4dDh0DCAgIDhI9ETkRORJB
+ETkGIAEdDh0DBSACDg4OBAAAETkEIAEICAkgAwESTR0IElEFIAIBCBwDIAACAwcBCAYAAggSUQ4F
+IAEdCAgFIAASgJkGIAESgJ0cBQAAEoChBiABHBKApQgAARKAqRGArQUgABKAsQcgAgEOEoCxCLd6
+XFYZNOCJCImEXc2AgMyRBAAAAAAEAQAAAAQCAAAABAMAAAAEBAAAAAQFAAAABAYAAAAEBwAAAAQI
+AAAABAkAAAAECgAAAAQLAAAABAwAAAAEDQAAAAQOAAAABA8AAAAEEAAAAAQRAAAABBIAAAAEEwAA
+AAQUAAAABBUAAAAEFgAAAAQXAAAABBgAAAAEGQAAAAQaAAAABBsAAAAEHAAAAAQdAAAABB4AAAAE
+HwAAAAQgAAAAAwYSGAMGEhwDBhIMAwYSEAMGElUDBhJhAwYSZQMGEiQCBggDBhEoBSACDg4ICSAF
+ARE5DggODgQgAQECBSABARE5CyAEAQgdCB0STRJRBSABARJVBAAAEmEEAAASZQUAAQESZQQAABIk
+AwAAAQMoAAgDKAACAygADgQoABE5BAgAEmEECAASZQQIABIkCAEACAAAAAAAHgEAAQBUAhZXcmFw
+Tm9uRXhjZXB0aW9uVGhyb3dzAQgBAAIAAAAAACgBACNTQ18wYmYxMWQ4NTczNjc0OGNjODhjOTE4
+Zjg0YmU3N2NjOQAABQEAAAAAFgEAEUNvcHlyaWdodCBAICAyMDE3AABHAQAaLk5FVEZyYW1ld29y
+ayxWZXJzaW9uPXY0LjABAFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEC5ORVQgRnJhbWV3b3JrIDQA
+AAC0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29y
+bGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3
+YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAA
+AAAAAFBBRFBBRFC0AAAAcFcAAAAAAAAAAAAAilcAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHxX
+AAAAAAAAAAAAAAAAX0NvckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAQAAAAGAAAgAAAAAAA
+AAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAAAFhgAADsAwAAAAAAAAAA
+AADsAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAAvQTv/gAAAQAAAAEAAAAA
+AAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAABAFYAYQByAEYAaQBsAGUA
+SQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAAAAAAALAETAMAAAEAUwB0
+AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAAMAAwADQAYgAwAAAAGgABAAEA
+QwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkATgBhAG0AZQAAAAAAAAAA
+AHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABTAEMAXwAwAGIAZgAxADEA
+ZAA4ADUANwAzADYANwA0ADgAYwBjADgAOABjADkAMQA4AGYAOAA0AGIAZQA3ADcAYwBjADkAAAAw
+AAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAuADAAAABwACgAAQBJAG4A
+dABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfADAAYgBmADEAMQBkADgANQA3ADMANgA3ADQAOABj
+AGMAOAA4AGMAOQAxADgAZgA4ADQAYgBlADcANwBjAGMAOQAuAGQAbABsAAAASAASAAEATABlAGcA
+YQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAAMQA3
+AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4ACgAAQBPAHIA
+aQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBDAF8AMABiAGYAMQAxAGQAOAA1ADcAMwA2
+ADcANAA4AGMAYwA4ADgAYwA5ADEAOABmADgANABiAGUANwA3AGMAYwA5AC4AZABsAGwAAABoACQA
+AQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAQwBfADAAYgBmADEAMQBkADgANQA3ADMANgA3
+ADQAOABjAGMAOAA4AGMAOQAxADgAZgA4ADQAYgBlADcANwBjAGMAOQAAADQACAABAFAAcgBvAGQA
+dQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgAAQBBAHMAcwBlAG0AYgBs
+AHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAMAAAAnDcAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
+                      </arrayElements>
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                      name="VSTAProjectName"
+                      typeConverter="NOTBROWSABLE">SC_0bf11d85736748cc88c918f84be77cc9</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the programming language used by the script."
+                      name="ScriptLanguage"
+                      typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read-only variables."
+                      name="ReadOnlyVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">User::varStagingFile</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies a comma-separated list of read/write variables."
+                      name="ReadWriteVariables"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg"></property>
+                    <property
+                      dataType="System.String"
+                      description="List of breakpoints present on the script."
+                      isArray="true"
+                      name="BreakpointCollection"
+                      typeConverter="NOTBROWSABLE">
+                      <arrayElements
+                        arrayElementCount="0" />
+                    </property>
+                    <property
+                      dataType="System.String"
+                      description="Checksum to match component metedata against compiled codes."
+                      name="MetadataChecksum"
+                      typeConverter="NOTBROWSABLE">d103ea0da46b5f19b3ddf1694a092d2d</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                    <property
+                      dataType="System.String"
+                      description="Checksum to match component metedata against compiled codes."
+                      name="MetadataShaChecksum"
+                      typeConverter="NOTBROWSABLE">6f32e33e6d23de04f37a89b765ca4bcaae1ebdcb</property>
+                  </properties>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut]"
+                      hasSideEffects="true"
+                      name="CHAAPImportOut">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[FileRowID]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[FileRowID]"
+                          name="FileRowID" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[DC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[DC]"
+                          name="DC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CustomerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CustomerName]"
+                          name="CustomerName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CustomerNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CustomerNumber]"
+                          name="CustomerNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemNumber]"
+                          name="ItemNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Store]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Store]"
+                          name="Store" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[NDC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[NDC]"
+                          name="NDC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemType]"
+                          name="ItemType" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemDescr]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ItemDescr]"
+                          name="ItemDescr" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[GenericName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[GenericName]"
+                          name="GenericName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[TradeName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[TradeName]"
+                          name="TradeName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvDate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvDate]"
+                          name="InvDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvoiceNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvoiceNumber]"
+                          name="InvoiceNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Type]"
+                          name="Type" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[OrderQty]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[OrderQty]"
+                          name="OrderQty" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ShipQty]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ShipQty]"
+                          name="ShipQty" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[UnitCost]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[UnitCost]"
+                          name="UnitCost" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ExtCost]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ExtCost]"
+                          name="ExtCost" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CorpAWP]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[CorpAWP]"
+                          name="CorpAWP" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[WAC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[WAC]"
+                          name="WAC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[VendorName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[VendorName]"
+                          name="VendorName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[UPC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[UPC]"
+                          name="UPC" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContractFlag]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContractFlag]"
+                          name="ContractFlag" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Brand]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Brand]"
+                          name="Brand" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[GenericCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[GenericCode]"
+                          name="GenericCode" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Strength]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Strength]"
+                          name="Strength" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ShortCode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ShortCode]"
+                          name="ShortCode" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Encoding]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[Encoding]"
+                          name="Encoding" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContractNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContractNumber]"
+                          name="ContractNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContrDescr]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[ContrDescr]"
+                          name="ContrDescr" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[OrderNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[OrderNumber]"
+                          name="OrderNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[FileProcessed]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[FileProcessed]"
+                          name="FileProcessed" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[RowCreatedDate]"
+                          name="RowCreatedDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[DEA]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[DEA]"
+                          name="DEA" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvoiceLineNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="500"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut].Columns[InvoiceLineNumber]"
+                          name="InvoiceLineNumber" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut]"
+                      hasSideEffects="true"
+                      name="ErrorOut">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorDateTime]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorDateTime]"
+                          name="ErrorDateTime" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[FQNFileName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1000"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[FQNFileName]"
+                          name="FQNFileName" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[FileErrorRowNumber]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[FileErrorRowNumber]"
+                          name="FileErrorRowNumber" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorData]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorData]"
+                          name="ErrorData" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8000"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[ErrorDescription]"
+                          name="ErrorDescription" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[RowCreatedDate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut].Columns[RowCreatedDate]"
+                          name="RowCreatedDate" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Parse and load file.Paths[CHAAPImportOut]"
+                  endId="Package\Foreach Loop Container\Parse and load file\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="CHAAPImportOut"
+                  startId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[CHAAPImportOut]" />
+                <path
+                  refId="Package\Foreach Loop Container\Parse and load file.Paths[ErrorOut]"
+                  endId="Package\Foreach Loop Container\Parse and load file\ErrorOut.Inputs[OLE DB Destination Input]"
+                  name="ErrorOut"
+                  startId="Package\Foreach Loop Container\Parse and load file\ParseFlatFile.Outputs[ErrorOut]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D5B42DDD-E587-4180-8479-1F0E92477CB9}"
+          DTS:From="Package\Foreach Loop Container\Parse and load file"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Delete file" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{A3C3C256-53DF-48BB-9C46-296D7CDE920B}"
+          DTS:ObjectName="{A3C3C256-53DF-48BB-9C46-296D7CDE920B}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::varStagingFile" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get file Names for Loop"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{B28100B5-26FA-4B6A-ADE2-E6CC2BFD39A1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get file Names for Loop"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Get file Names for Loop\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[usp_GetCHAAPImportConfigInfo]
+
+	@FileDir = ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"@FileDir:Input",{BA705F98-10DA-4329-9BA2-75D83E581BC4};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Get file Names for Loop\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceLocation]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SourceLocation]"
+                      length="500"
+                      lineageId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceLocation]"
+                      name="SourceLocation"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SourceLocation]"
+                      dataType="wstr"
+                      length="500"
+                      name="SourceLocation" />
+                    <externalMetadataColumn
+                      refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ArchiveLocation]"
+                      dataType="wstr"
+                      length="1009"
+                      name="ArchiveLocation" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SourceLocation]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SourceLocation]"
+                      name="SourceLocation" />
+                    <outputColumn
+                      refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Get file Names for Loop\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::ADORecordSet</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Get file Names for Loop\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Get file Names for Loop\Recordset Destination.Inputs[Recordset Destination Input].Columns[SourceLocation]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="SourceLocation"
+                      lineageId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output].Columns[SourceLocation]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Get file Names for Loop.Paths[OLE DB Source Output]"
+              endId="Package\Get file Names for Loop\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Get file Names for Loop\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{7E9F5E01-417D-408C-A4B2-923BDB89AC76}"
+      DTS:From="Package\Get file Names for Loop"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="126,42"
+          Id="Package\Foreach Loop Container\Delete file"
+          TopLeft="37,101" />
+        <NodeLayout
+          Size="166,42"
+          Id="Package\Foreach Loop Container\Parse and load file"
+          TopLeft="12.5,20.5" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="97.75,62.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.5"
+              Start="0,0"
+              End="0,31">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="240,199"
+          Size="240,242"
+          Id="Package\Foreach Loop Container"
+          TopLeft="256,105" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Get file Names for Loop"
+          TopLeft="285,16" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="378,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47"
+              Start="0,0"
+              End="0,39.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Parse and load file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Foreach Loop Container\Parse and load file\OLE DB Destination"
+          TopLeft="551,188" />
+        <NodeLayout
+          Size="119,42"
+          Id="Package\Foreach Loop Container\Parse and load file\ErrorOut"
+          TopLeft="269,163" />
+        <NodeLayout
+          Size="138,42"
+          Id="Package\Foreach Loop Container\Parse and load file\ParseFlatFile"
+          TopLeft="404,68" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Parse and load file.Paths[ErrorOut]"
+          TopLeft="473,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-144.5,53"
+              Start="0,0"
+              End="-144.5,45.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.5"
+                    Point2="0,26.5"
+                    Point3="-4,26.5" />
+                  <mssgle:LineSegment
+                    End="-140.5,26.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-140.5,26.5"
+                    Point2="-144.5,26.5"
+                    Point3="-144.5,30.5" />
+                  <mssgle:LineSegment
+                    End="-144.5,45.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-91.79638671875,31.5,39.0927734375,9.5732421875"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Parse and load file.Paths[CHAAPImportOut]"
+          TopLeft="494.666666666667,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="141.833333333333,78"
+              Start="0,0"
+              End="141.833333333333,70.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.7363896848138" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.7363896848138"
+                    Point2="0,31.7363896848138"
+                    Point3="4,31.7363896848138" />
+                  <mssgle:LineSegment
+                    End="137.833333333333,31.7363896848138" />
+                  <mssgle:CubicBezierSegment
+                    Point1="137.833333333333,31.7363896848138"
+                    Point2="141.833333333333,31.7363896848138"
+                    Point3="141.833333333333,35.7363896848138" />
+                  <mssgle:LineSegment
+                    End="141.833333333333,70.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="31.9327604166665,36.7363896848138,77.9678125,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Parse and load file\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Parse and load file\ErrorOut">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Get file Names for Loop">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Get file Names for Loop\OLE DB Source"
+          TopLeft="271,62" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Get file Names for Loop\Recordset Destination"
+          TopLeft="323.5,165.5" />
+        <EdgeLayout
+          Id="Package\Get file Names for Loop.Paths[OLE DB Source Output]"
+          TopLeft="346,104">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68.5,61.5"
+              Start="0,0"
+              End="68.5,54">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.75"
+                    Point2="0,30.75"
+                    Point3="4,30.75" />
+                  <mssgle:LineSegment
+                    End="64.5,30.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="64.5,30.75"
+                    Point2="68.5,30.75"
+                    Point3="68.5,34.75" />
+                  <mssgle:LineSegment
+                    End="68.5,54" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Get file Names for Loop\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

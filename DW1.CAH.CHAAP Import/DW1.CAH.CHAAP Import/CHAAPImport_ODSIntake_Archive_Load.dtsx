@@ -1,0 +1,1700 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/2/2019 7:33:27 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="AAPSEDWARDS"
+  DTS:CreatorName="AAP\sedwards"
+  DTS:DTSID="{63C06D46-FC83-4483-8F26-186D73694605}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="CHAAPImport_ODSIntake_Archive_Load"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{002D062A-3F7D-405E-BA70-9526C20659DA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D38E96B8-01AD-4236-85B4-5222266E6E36}"
+      DTS:ObjectName="AAPDW1.ODSIntake">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=AAPDW1;Initial Catalog=ODSIntake;Provider=SQLNCLI11.1;Integrated Security=SSPI;Packet Size=32767;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Xfer from Staging to Archive table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{EED125F4-2CAA-4886-B6E9-B1457C78C1B7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Xfer from Staging to Archive table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Xfer from Staging to Archive table\Archive"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Archive"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Archive].[CHAAPImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Xfer from Staging to Archive table\Archive.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[FileRowID]"
+                      cachedDataType="i4"
+                      cachedName="FileRowID"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[FileRowID]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[DC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DC"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DC]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[DC]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[CustomerName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CustomerName"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CustomerName]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[CustomerNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CustomerNumber"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CustomerNumber]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CustomerNumber]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ItemNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ItemNumber"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ItemNumber]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemNumber]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[Store]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Store"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Store]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Store]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[NDC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="NDC"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[NDC]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ItemType]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ItemType"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ItemType]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemType]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ItemDescr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ItemDescr"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescr]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemDescr]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[GenericName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GenericName"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GenericName]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[GenericName]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[TradeName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="TradeName"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[TradeName]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[TradeName]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[InvDate]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="InvDate"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[InvDate]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvDate]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[InvoiceNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="InvoiceNumber"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceNumber]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvoiceNumber]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[Type]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Type"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Type]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[OrderQty]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="OrderQty"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[OrderQty]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ShipQty]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ShipQty"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ShipQty]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ShipQty]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[UnitCost]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="UnitCost"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[UnitCost]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[UnitCost]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ExtCost]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ExtCost"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ExtCost]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ExtCost]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[CorpAWP]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="CorpAWP"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CorpAWP]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CorpAWP]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[WAC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="WAC"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[WAC]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[WAC]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[VendorName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="VendorName"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[VendorName]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[VendorName]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[UPC]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="UPC"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[UPC]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[UPC]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ContractFlag]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ContractFlag"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ContractFlag]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContractFlag]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[Brand]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Brand"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Brand]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Brand]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[GenericCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="GenericCode"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GenericCode]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[GenericCode]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[Strength]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Strength"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Strength]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Strength]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ShortCode]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ShortCode"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ShortCode]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ShortCode]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[Encoding]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="Encoding"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Encoding]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Encoding]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ContractNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ContractNumber"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ContractNumber]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContractNumber]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ContrDescr]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="ContrDescr"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ContrDescr]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContrDescr]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[OrderNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="OrderNumber"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[OrderNumber]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[ROWVERSIONID]"
+                      cachedDataType="bytes"
+                      cachedLength="8"
+                      cachedName="ROWVERSIONID"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ROWVERSIONID]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ROWVERSIONID]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[RowCreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="RowCreatedDate"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[StagingRowCreatedDate]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[RowCreatedDate]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[FileProcessed]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="FileProcessed"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[FileProcessed]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[DEA]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="DEA"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DEA]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[DEA]" />
+                    <inputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].Columns[InvoiceLineNumber]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="500"
+                      cachedName="InvoiceLineNumber"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceLineNumber]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvoiceLineNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileRowID]"
+                      dataType="i4"
+                      name="FileRowID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CustomerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CustomerNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CustomerNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ItemNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Store" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ItemType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ItemType" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ItemDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ItemDescr" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GenericName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GenericName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[TradeName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TradeName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[InvDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="InvDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="InvoiceNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[OrderQty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ShipQty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ShipQty" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[UnitCost]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ExtCost]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ExtCost" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[CorpAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CorpAWP" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[WAC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="WAC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[VendorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="VendorName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[UPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UPC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ContractFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ContractFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Brand]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Brand" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[GenericCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GenericCode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Strength" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ShortCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ShortCode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[Encoding]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Encoding" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ContractNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ContractNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ContrDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ContrDescr" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[OrderNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[StagingRowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="StagingRowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[ROWVERSIONID]"
+                      dataType="bytes"
+                      length="8"
+                      name="ROWVERSIONID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[DEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DEA" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input].ExternalColumns[InvoiceLineNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="InvoiceLineNumber" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Xfer from Staging to Archive table\Archive.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from Staging to Archive table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from Staging to Archive table\Archive.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Xfer from Staging to Archive table\Staging"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Staging"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Staging].[CHAAPImport]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Xfer from Staging to Archive table\Staging.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  connectionManagerRefId="Package.ConnectionManagers[AAPDW1.ODSIntake]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[FileRowID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileRowID]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[FileRowID]"
+                      name="FileRowID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[DC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DC]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[DC]"
+                      name="DC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CustomerName]"
+                      name="CustomerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CustomerNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CustomerNumber]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CustomerNumber]"
+                      name="CustomerNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ItemNumber]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemNumber]"
+                      name="ItemNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Store]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Store]"
+                      name="Store"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[NDC]"
+                      name="NDC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemType]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ItemType]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemType]"
+                      name="ItemType"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ItemDescr]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ItemDescr]"
+                      name="ItemDescr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[GenericName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GenericName]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[GenericName]"
+                      name="GenericName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[TradeName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[TradeName]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[TradeName]"
+                      name="TradeName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[InvDate]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvDate]"
+                      name="InvDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvoiceNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[InvoiceNumber]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvoiceNumber]"
+                      name="InvoiceNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Type]"
+                      name="Type"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[OrderQty]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[OrderQty]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[OrderQty]"
+                      name="OrderQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ShipQty]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ShipQty]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ShipQty]"
+                      name="ShipQty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[UnitCost]"
+                      name="UnitCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ExtCost]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ExtCost]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ExtCost]"
+                      name="ExtCost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CorpAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CorpAWP]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[CorpAWP]"
+                      name="CorpAWP"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[WAC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[WAC]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[WAC]"
+                      name="WAC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[VendorName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[VendorName]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[VendorName]"
+                      name="VendorName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[UPC]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[UPC]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[UPC]"
+                      name="UPC"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContractFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ContractFlag]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContractFlag]"
+                      name="ContractFlag"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Brand]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Brand]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Brand]"
+                      name="Brand"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[GenericCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GenericCode]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[GenericCode]"
+                      name="GenericCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Strength]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Strength]"
+                      name="Strength"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ShortCode]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ShortCode]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ShortCode]"
+                      name="ShortCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Encoding]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Encoding]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[Encoding]"
+                      name="Encoding"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContractNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ContractNumber]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContractNumber]"
+                      name="ContractNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContrDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ContrDescr]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ContrDescr]"
+                      name="ContrDescr"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[OrderNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[OrderNumber]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[OrderNumber]"
+                      name="OrderNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ROWVERSIONID]"
+                      dataType="bytes"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ROWVERSIONID]"
+                      length="8"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[ROWVERSIONID]"
+                      name="ROWVERSIONID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      length="1000"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[FileProcessed]"
+                      name="FileProcessed"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[DEA]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DEA]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[DEA]"
+                      name="DEA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvoiceLineNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineNumber]"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].Columns[InvoiceLineNumber]"
+                      name="InvoiceLineNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowID]"
+                      dataType="i4"
+                      name="RowID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileRowID]"
+                      dataType="i4"
+                      name="FileRowID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CustomerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CustomerName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CustomerNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CustomerNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ItemNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Store" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="NDC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ItemType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ItemType" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ItemDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ItemDescr" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GenericName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GenericName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[TradeName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="TradeName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[InvDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="InvDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[InvoiceNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="InvoiceNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Type" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[OrderQty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OrderQty" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ShipQty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ShipQty" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[UnitCost]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UnitCost" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ExtCost]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ExtCost" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[CorpAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="CorpAWP" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[WAC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="WAC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[VendorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="VendorName" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[UPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="UPC" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ContractFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ContractFlag" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Brand]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Brand" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[GenericCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="GenericCode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Strength" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ShortCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ShortCode" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[Encoding]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="Encoding" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ContractNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ContractNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ContrDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="ContrDescr" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[OrderNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="OrderNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="RowCreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[ROWVERSIONID]"
+                      dataType="bytes"
+                      length="8"
+                      name="ROWVERSIONID" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="FileProcessed" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[DEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="DEA" />
+                    <externalMetadataColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output].ExternalColumns[InvoiceLineNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      name="InvoiceLineNumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[FileRowID]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[FileRowID]"
+                      name="FileRowID" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[DC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[DC]"
+                      name="DC" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[CustomerName]"
+                      name="CustomerName" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[CustomerNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[CustomerNumber]"
+                      name="CustomerNumber" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ItemNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ItemNumber]"
+                      name="ItemNumber" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Store]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Store]"
+                      name="Store" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[NDC]"
+                      name="NDC" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ItemType]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ItemType]"
+                      name="ItemType" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ItemDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ItemDescr]"
+                      name="ItemDescr" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[GenericName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[GenericName]"
+                      name="GenericName" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[TradeName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[TradeName]"
+                      name="TradeName" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[InvDate]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[InvDate]"
+                      name="InvDate" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[InvoiceNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[InvoiceNumber]"
+                      name="InvoiceNumber" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Type]"
+                      name="Type" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[OrderQty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[OrderQty]"
+                      name="OrderQty" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ShipQty]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ShipQty]"
+                      name="ShipQty" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[UnitCost]"
+                      name="UnitCost" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ExtCost]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ExtCost]"
+                      name="ExtCost" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[CorpAWP]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[CorpAWP]"
+                      name="CorpAWP" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[WAC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[WAC]"
+                      name="WAC" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[VendorName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[VendorName]"
+                      name="VendorName" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[UPC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[UPC]"
+                      name="UPC" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ContractFlag]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ContractFlag]"
+                      name="ContractFlag" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Brand]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Brand]"
+                      name="Brand" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[GenericCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[GenericCode]"
+                      name="GenericCode" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Strength]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Strength]"
+                      name="Strength" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ShortCode]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ShortCode]"
+                      name="ShortCode" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Encoding]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[Encoding]"
+                      name="Encoding" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ContractNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ContractNumber]"
+                      name="ContractNumber" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ContrDescr]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ContrDescr]"
+                      name="ContrDescr" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[OrderNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[OrderNumber]"
+                      name="OrderNumber" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ROWVERSIONID]"
+                      dataType="bytes"
+                      length="8"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ROWVERSIONID]"
+                      name="ROWVERSIONID" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[DEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[DEA]"
+                      name="DEA" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[InvoiceLineNumber]"
+                      codePage="1252"
+                      dataType="str"
+                      length="500"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[InvoiceLineNumber]"
+                      name="InvoiceLineNumber" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[FileProcessed]"
+                      name="FileProcessed" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Error Output].Columns[RowCreatedDate]"
+                      name="RowCreatedDate" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Xfer from Staging to Archive table.Paths[OLE DB Source Output]"
+              endId="Package\Xfer from Staging to Archive table\Archive.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Xfer from Staging to Archive table\Staging.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Xfer from Staging to Archive table"
+          TopLeft="496,167" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Xfer from Staging to Archive table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="114,42"
+          Id="Package\Xfer from Staging to Archive table\Staging"
+          TopLeft="470,161" />
+        <NodeLayout
+          Size="113,42"
+          Id="Package\Xfer from Staging to Archive table\Archive"
+          TopLeft="609,293" />
+        <EdgeLayout
+          Id="Package\Xfer from Staging to Archive table.Paths[OLE DB Source Output]"
+          TopLeft="527,203">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="138.5,90"
+              Start="0,0"
+              End="138.5,82.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,41"
+                    Point2="0,45"
+                    Point3="4,45" />
+                  <mssgle:LineSegment
+                    End="134.5,45" />
+                  <mssgle:CubicBezierSegment
+                    Point1="134.5,45"
+                    Point2="138.5,45"
+                    Point3="138.5,49" />
+                  <mssgle:LineSegment
+                    End="138.5,82.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Xfer from Staging to Archive table\Archive">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Xfer from Staging to Archive table\Staging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
